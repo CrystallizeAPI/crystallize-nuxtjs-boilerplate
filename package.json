@@ -10,6 +10,7 @@
     "start": "nuxt start"
   },
   "dependencies": {
+    "@nuxt/http": "^0.5.12",
     "nuxt": "^2.14.5"
   },
   "devDependencies": {

@@ -1,5 +1,9 @@
 export default {
   mode: 'universal',
+  components: true,
+  // server: {
+  //   port: 8000, // default: 3000
+  // },
   /*
    ** Headers of the page
    */
@@ -31,7 +35,7 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: [],
+  modules: [ '@nuxt/http', ],
   /*
    ** Build configuration
    */
