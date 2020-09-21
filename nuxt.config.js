@@ -1,9 +1,9 @@
 export default {
   mode: 'universal',
   components: true,
-  // server: {
-  //   port: 8000, // default: 3000
-  // },
+  server: {
+    port: 8000, // default: 3000
+  },
   /*
    ** Headers of the page
    */
