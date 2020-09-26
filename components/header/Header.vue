@@ -1,17 +1,46 @@
 <template>
-  <header class="header">
-
+  <header class="outer">
+    <NuxtLink to="/">
+      <div class="logo">
+        <img src="/shop-logo.svg" alt="" />
+      </div>
+    </NuxtLink>
+    <nav class="nav">
+      <ul class="nav-list">
+        <li class="nav-list-item">
+          <a>
+            shop
+          </a>
+        </li>  
+        <li class="nav-list-item">
+          <a>
+            magazine
+          </a>
+        </li>  
+        <li class="nav-list-item">
+          <a>
+            stories
+          </a>
+        </li>  
+        <li class="nav-list-item">
+          <a>
+            about
+          </a>
+        </li>  
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <NuxtLink to="/" >
+        <a class="link">Login</a>
+      </NuxtLink>
+    </div>
+    <BasketButton />
+    <BurgerButton active="false" />
   </header>
 </template>
 
 <style scoped>
-:root {
-  --color-text-sub: red;
-  --color-text-main: blue;
-  --color-main-background: green;
-}
-
-.header {
+.outer {
   text-align: center;
   padding: 20px 75px;
   max-width: 1600px;
@@ -73,41 +102,7 @@
 
 .nav-list-item a:hover {
   text-decoration: underline;
-}
-
-.basket {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 45px;
-  height: 45px;
-  padding: 0;
-  border-radius: 5px;
-  justify-self: flex-end;
-}
-
-.basket img,
-.basket svg {
-  width: 40px;
-}
-
-.basket:hover,
-.basket:active {
-  background: rgba(0, 0, 0, 0.05);
-}
-
-.basket svg path {
-  stroke: var(--color-text-sub);
-}
-
-.basket-quantity {
-  position: absolute;
-  font-weight: 500;
-  font-size: 14px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -25%);
+  cursor: pointer;
 }
 
 .nav-actions {
@@ -117,7 +112,7 @@
   align-items: center;
 }
 
-.nav-actions a 
+.nav-actions .link,
 .nav-actions button {
   padding: 5px 10px;
   font-size: 14px;
@@ -128,7 +123,7 @@
   cursor: pointer;
 }
 
-.nav-actions a:hover
+.nav-actions .link:hover,
 .nav-actions button:hover {
   background: var( --color-text-main );
   color: var(--color-main-background);
@@ -142,8 +137,8 @@
   text-align: center;
 }
 
-@media (max-width: 768px) { 
-  .header {
+@media (max-width: 1024px) { 
+  .outer {
     padding: 10px 90px 10px 20px;
     justify-content: space-between;
   }

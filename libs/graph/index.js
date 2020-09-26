@@ -14,7 +14,6 @@ export function safePathQuery({ variables, ...rest }) {
     };
   }
   
-
   return {
     variables,
     ...rest

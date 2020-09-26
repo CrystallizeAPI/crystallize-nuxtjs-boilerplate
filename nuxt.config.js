@@ -1,5 +1,4 @@
 export default {
-  mode: 'universal',
   components: true,
   server: {
     port: 8000, // default: 3000
@@ -27,7 +26,9 @@ export default {
   /*
    ** Global CSS
    */
-  css: [],
+  css: [
+    '~/assets/styles/global.css'
+  ],
   /*
    ** Plugins to load before mounting the App
    */

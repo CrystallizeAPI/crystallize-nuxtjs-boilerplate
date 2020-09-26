@@ -1,16 +1,6 @@
 <template>
-  <div class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        nuxtjs
-      </h1>
-      <h2 class="subtitle">
-        My astonishing Nuxt.js project
-      </h2>
-      <div>
-      </div>
-    </div>
+  <div>
+    <Header />
   </div>
 </template>
 
@@ -36,8 +26,11 @@ export default {
 }
 </script>
 
-<style>
-.container {
+<style scoped>
+
+
+
+/* .container {
   margin: 0 auto;
   min-height: 100vh;
   display: flex;
@@ -66,5 +59,5 @@ export default {
 
 .links {
   padding-top: 15px;
-}
+} */
 </style>
