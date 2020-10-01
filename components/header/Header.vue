@@ -6,31 +6,20 @@
       </div>
     </NuxtLink>
     <nav class="nav">
-      <ul class="nav-list">
-        <li class="nav-list-item">
-          <a>
-            shop
-          </a>
-        </li>  
-        <li class="nav-list-item">
-          <a>
-            magazine
-          </a>
-        </li>  
-        <li class="nav-list-item">
-          <a>
-            stories
-          </a>
-        </li>  
-        <li class="nav-list-item">
-          <a>
-            about
-          </a>
-        </li>  
+      <p v-if="$fetchState.pending">Fetching data...</p>
+      <p v-else-if="$fetchState.error">Error while fetching data</p>
+      <ul v-else class="nav-list">
+        <li
+          v-for="child of catalogue.children"
+          :key="child.path"
+          class="nav-list-item"
+        >
+          <a>{{ child.name }}</a>
+        </li>
       </ul>
     </nav>
     <div class="nav-actions">
-      <NuxtLink to="/" >
+      <NuxtLink to="/">
         <a class="link">Login</a>
       </NuxtLink>
     </div>
@@ -125,7 +114,7 @@
 
 .nav-actions .link:hover,
 .nav-actions button:hover {
-  background: var( --color-text-main );
+  background: var(--color-text-main);
   color: var(--color-main-background);
   text-decoration: none;
 }
@@ -137,7 +126,7 @@
   text-align: center;
 }
 
-@media (max-width: 1024px) { 
+@media (max-width: 1024px) {
   .outer {
     padding: 10px 90px 10px 20px;
     justify-content: space-between;
@@ -159,17 +148,14 @@
     padding: 2em;
     font-size: 1.5rem;
 
-    
-     /* ${is('open')`
+    /* ${is('open')`
     display: block;
     `}; */
   }
 
- 
-
   .nav-list {
     margin-top: 30px;
-  } 
+  }
 
   .nav-list-item {
     display: block;
@@ -187,16 +173,43 @@
     font-size: 1.5rem;
   }
 
-   /* ${is('open')`
+  /* ${is('open')`
       display: flex;
       justify-content: center;
     `}; */
 }
 
-@media (min-width: 768px) { 
+@media (min-width: 768px) {
   .nav {
     justify-content: center;
   }
 }
-
 </style>
+
+<script>
+export default {
+  data() {
+    return { catalogue: {} };
+  },
+  async fetch() {
+    const res = await this.$http.$post(
+      "https://api.crystallize.com/furniture/catalogue",
+      {
+        query: `
+            {
+              catalogue(path: "/") {
+                id
+                children {
+                  name
+                  path
+                }
+              }
+            }
+          `,
+      }
+    );
+
+    this.catalogue = res.data.catalogue;
+  },
+};
+</script>
