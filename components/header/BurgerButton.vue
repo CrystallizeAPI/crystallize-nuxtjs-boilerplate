@@ -1,5 +1,5 @@
 <template>
-  <button class="outer" >
+  <button class="outer" v-on:click="toggleNavBar" >
     <div class="lines" 
       :class="open ? 'lines-active lines-transparent': 'lines-desactive lines-color-bg'"
     >
@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  props: ['open', 'onClick']
+  props: ['open', 'toggleNavBar']
 }
 </script>
 

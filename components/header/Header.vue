@@ -5,7 +5,10 @@
         <img src="/shop-logo.svg" alt="" />
       </div>
     </NuxtLink>
-    <nav class="nav">
+    <nav 
+      class="nav"
+      :class="open ? 'nav-open' : ''"
+    >
       <p v-if="$fetchState.pending">Fetching data...</p>
       <p v-else-if="$fetchState.error">Error while fetching data</p>
       <ul v-else class="nav-list">
@@ -14,19 +17,54 @@
           :key="child.path"
           class="nav-list-item"
         >
-          <a>{{ child.name }}</a>
+         <NuxtLink :to="child.name.toLowerCase()">
+           {{ child.name }}
+        </NuxtLink>
         </li>
       </ul>
     </nav>
-    <div class="nav-actions">
+    <div 
+      class="nav-actions"
+      :class="open ? 'nav-actions-open' : ''"
+    >
       <NuxtLink to="/">
-        <a class="link">Login</a>
+        <span class="link">Login</span>
       </NuxtLink>
     </div>
     <BasketButton />
-    <BurgerButton active="false" />
+    <BurgerButton :open="open" :toggleNavBar="toggleNavBar" />
   </header>
 </template>
+
+<script>
+import { simplyFetchFromGraph } from '../../libs/graph';
+
+export default {
+  data() {
+    return { catalogue: {}, open: false };
+  },
+  async fetch() {
+    const query = `
+      query {
+        catalogue {
+          children {
+            id
+            name
+          }
+        }
+      }
+    `
+    const { data } = await simplyFetchFromGraph({ query });
+
+    this.catalogue = data.catalogue;
+  },
+  methods: {
+    toggleNavBar() {
+      this.open = !this.open;
+    }
+  },
+};
+</script>
 
 <style scoped>
 .outer {
@@ -153,6 +191,10 @@
     `}; */
   }
 
+  .nav-open {
+    display: block;
+  }
+
   .nav-list {
     margin-top: 30px;
   }
@@ -177,6 +219,11 @@
       display: flex;
       justify-content: center;
     `}; */
+
+  .nav-actions-open {
+    display: flex;
+    justify-content: center;
+  }
 }
 
 @media (min-width: 768px) {
@@ -185,31 +232,3 @@
   }
 }
 </style>
-
-<script>
-export default {
-  data() {
-    return { catalogue: {} };
-  },
-  async fetch() {
-    const res = await this.$http.$post(
-      "https://api.crystallize.com/furniture/catalogue",
-      {
-        query: `
-            {
-              catalogue(path: "/") {
-                id
-                children {
-                  name
-                  path
-                }
-              }
-            }
-          `,
-      }
-    );
-
-    this.catalogue = res.data.catalogue;
-  },
-};
-</script>
