@@ -7,10 +7,10 @@
     </NuxtLink>
     <footer class="navlist">
       <h5>Menu</h5>
-      <p v-if="$fetchState.pending">Fetching data...</p>
-      <p v-else-if="$fetchState.error">Error while fetching data</p>
+      <p v-if="fetchState.pending">Fetching data...</p>
+      <p v-else-if="fetchState.error">Error while fetching data</p>
       <li
-        v-for="child of catalogue.children"
+        v-for="child of catalogue"
         :key="child.path"
         class="nav-list-item"
       >
@@ -29,27 +29,8 @@
 </template>
 
 <script>
-import { simplyFetchFromGraph } from '../../libs/graph';
-
 export default {
-   data() {
-    return { catalogue: {} };
-  },
-  async fetch() {
-    const query = `
-      query {
-        catalogue {
-          children {
-            id
-            name
-          }
-        }
-      }
-    `
-    const { data } = await simplyFetchFromGraph({ query });
-
-    this.catalogue = data.catalogue;
-  },
+  props: ['catalogue', 'fetchState'  ]
 }
 </script>
 

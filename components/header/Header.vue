@@ -9,11 +9,11 @@
       class="nav"
       :class="open ? 'nav-open' : ''"
     >
-      <p v-if="$fetchState.pending">Fetching data...</p>
-      <p v-else-if="$fetchState.error">Error while fetching data</p>
-      <ul v-else class="nav-list">
+      <p v-if="fetchState.pending">Fetching data...</p>
+      <p v-else-if="fetchState.error">Error while fetching data</p>
+      <ul class="nav-list">
         <li
-          v-for="child of catalogue.children"
+          v-for="child of catalogue"
           :key="child.path"
           class="nav-list-item"
         >
@@ -37,26 +37,10 @@
 </template>
 
 <script>
-import { simplyFetchFromGraph } from '../../libs/graph';
-
 export default {
+  props: ['catalogue', 'fetchState'],
   data() {
-    return { catalogue: {}, open: false };
-  },
-  async fetch() {
-    const query = `
-      query {
-        catalogue {
-          children {
-            id
-            name
-          }
-        }
-      }
-    `
-    const { data } = await simplyFetchFromGraph({ query });
-
-    this.catalogue = data.catalogue;
+    return { open: false };
   },
   methods: {
     toggleNavBar() {
