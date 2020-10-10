@@ -1,11 +1,11 @@
 <template>
   <button 
-    class="outer" 
+    class="outer"
     :type="type ? 'type' : 'button'"
   >
     <span class="inner">
       <span class="text">
-        send me a magick link
+        <slot></slot>
       </span>
     </span>
   </button>
@@ -20,8 +20,8 @@ export default {
 <style scoped>
 .inner {
   flex: 1 1 auto;
-  background: var(--color-box-background);
-  color: var(--color-text-main);
+  /* background: var(--color-box-background); */
+  /* color: var(--color-text-main); */
   font-weight: 600;
   text-decoration: none;
   text-align: center;
@@ -42,9 +42,11 @@ export default {
   text-decoration: none;
 }
 
-.inner:hover {
+
+.outer:hover  {
   background: var(--color-text-main);
   color: var(--color-main-background);
+  /* color: white !important; */
 }
 
 .outer:disabled {

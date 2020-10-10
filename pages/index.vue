@@ -1,27 +1,51 @@
 <template>
   <div class="outer">
-    <Grid />
+    <Grid>
+      <GridItem 
+        v-for="cell in rows"
+        :key="cell.itemId"
+        :data="cell.item"
+        :gridCell="cell"
+      />
+    </Grid>
   </div>
 </template>
 
 <script>
 import { simplyFetchFromGraph } from '../libs/graph';
+import fragments from '../libs/graph/fragments';
 
 export default {
-  async asyncData({ params, $http }) {
+  async asyncData() {
     const query = `
-      query {
-        catalogue {
-          children {
-            id
-            name
-          }
+      query FRONTPAGE($language: String!, $path: String!,  $version: VersionLabel!) {
+        catalogue(path: $path, language: $language, version: $version) {
+          ...item
+          ...product
         }
       }
-    `
-    const response = await simplyFetchFromGraph({ query });
 
-    return { catalogue: response.data }
+      ${fragments}
+    `
+    const { data } = await simplyFetchFromGraph({ query, variables: {
+      language: 'en',
+      path: '/web-frontpage',
+      version: 'published'
+    }});
+
+    const [grid] = data.catalogue?.components?.find((c) => c.type === 'gridRelations')?.content?.grids || [];
+
+    const columns = grid.rows.map(r =>  r.columns);
+
+    let rows = [];
+
+    columns.map(col => {
+      col.map(data => {
+        rows.push(data);
+      })
+    });
+
+    return { rows }
   }
 }
 </script>

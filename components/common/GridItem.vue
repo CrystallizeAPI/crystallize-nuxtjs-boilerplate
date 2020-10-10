@@ -1,22 +1,59 @@
 <template>
-  <a class="outer">
-    <div class="text">
-      <span class="price">$299.00</span>
-      <h3>Example</h3>
-      <Button />
-    </div>
-    <div class="image-wraper">
-      <div class="img">
-        <img 
-          src="https://media.crystallize.com/furniture/20/4/24/4/@1366/loung-chair.webp" 
-          alt="something"
-        >
+  <NuxtLink :to="path">
+    <div class="outer" :class="cellSize">
+      <div class="text">
+        <span class="price" v-if="defaultVariant">${{ defaultVariant.price}}.00</span>
+        <h3 class="title">{{ name }}</h3>
+        <template v-if="defaultVariant">
+          <Button>
+            Buy
+          </Button>
+        </template>
+      </div>
+      <div class="image-wraper">
+        <div class="img">
+          <img 
+            :src="image"
+            :alt="name"
+          >
+        </div>
       </div>
     </div>
-  </a>
+  </NuxtLink>
 </template>
 
+<script>
+export default {
+  props: ['data', 'gridCell'],
+  data() {
+    return {
+      name: this.data.name,
+      path: this.data.path,
+      type: this.data.type,
+      variants: this.data.variants,
+      defaultVariant: this.data.defaultVariant,
+      imageMdWidth: 100 / (this.gridCell?.layout?.colspan ?? 1),
+      cellSize: `cell-${this.gridCell?.layout?.rowspan}x${this.gridCell?.layout?.colspan}`,
+      image: this.data.defaultVariant ?  this.data.defaultVariant.image.url : ''
+    }
+  },
+  mounted() {
+    if (this.type === 'folder' || this.type === 'document') {
+      const images = this.data.components.find((c) => c.type === 'images');
+      this.image = images?.content?.images?.[0].url;
+      // console.log(image)
+    }
+
+    console.log(this.imageMdWidth);
+  }
+}
+</script>
+
 <style scoped>
+a {
+  text-decoration: none;
+}
+
 .image-wraper {
   position: relative;
   z-index: 1;
@@ -40,12 +77,21 @@
   height: 100%;
 }
 
+.img .test {
+   display: block;
+  object-fit: contain;
+  object-position: center;
+  width: 100%;
+  height: 100%;
+}
+
 .title {
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   text-transform: uppercase;
   color: var(--color-text-main);
   font-weight: 900;
   font-family: 'Roboto', sans-serif;
+  text-decoration: none !important;
 }
 
 .text {
@@ -69,7 +115,7 @@
 .outer {
   position: relative;
   background: var(--color-box-background);
-  height: 100%;
+  /* height: 100%; */
   display: flex;
   padding: 0 50px;
 }
