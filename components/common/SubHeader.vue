@@ -1,10 +1,34 @@
 <template>
-  <div class="header">
+  <div class="header"
+    :class="centerContent ? 'text-center auto-margin' : 'text-left bottom-margin' "
+  >
     <slot></slot>
   </div>
 </template>
 
+<script>
+export default {
+  props: [ 'centerContent']
+}
+</script>
+
 <style scoped>
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.auto-margin {
+  margin: 0 auto;
+}
+
+.bottom-margin {
+  margin: 0 0 50px 0;
+}
+
 .header {
   display: flex;
   flex-direction: column;
