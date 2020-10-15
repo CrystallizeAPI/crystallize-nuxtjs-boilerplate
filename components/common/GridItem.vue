@@ -16,6 +16,9 @@
             :src="image"
             :alt="name"
           >
+          <!-- <ImageComponent
+            :image="image"
+          /> -->
         </div>
       </div>
     </div>
@@ -44,7 +47,7 @@ export default {
       // console.log(image)
     }
 
-    console.log(this.imageMdWidth);
+    console.log('image image', this.data.defaultVariant);
   }
 }
 </script>

@@ -6,16 +6,14 @@
         <img :src="images[0]" style="{ width: '80vw' }" alt="" >
       </div>
     </div>
-    <div v-else>
+    <div v-else >
       <div class="outer">
         <div class="list">
-          <!-- add crystallize native image component -->
-          <img 
-            v-for="image in images" 
-            :key="image.id"
-            :src="image.url" 
-            alt="image.name" 
-          >
+          <ImageComponent 
+            v-for="(image, index) in images" 
+            :key="index" 
+            :image="image" 
+          />
         </div>
       </div>
     </div>

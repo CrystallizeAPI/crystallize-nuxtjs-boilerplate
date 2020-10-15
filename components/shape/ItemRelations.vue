@@ -1,6 +1,22 @@
 <template>
-  
+  <div>
+    <div v-if="!items"></div>
+    <ul class="outer" v-else>
+      <li v-for="item in items" :key="item.id">
+        <FolderItem 
+          v-if="item.type === 'product'" 
+          :data="item"
+        />
+      </li>
+    </ul>
+  </div>
 </template>
+
+<script>
+export default {
+  props: ['items']
+}
+</script>
 
 <style scoped>
 .outer {

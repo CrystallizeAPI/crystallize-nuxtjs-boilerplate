@@ -11,9 +11,24 @@ export default {
   components: {
     Folder
   },
-  mounted() {
-    // console.log('MOUNTED', this.$route.params.pathMatch);
-  }
+  //  asyncData({ params, error }) {
+  //   return fetch(`https://my-api/posts/osoos`)
+  //     .then(res => {
+  //       console.log(res)
+  //     })
+  //     .catch(e => {
+  //       error({ statusCode: 404, message: 'Post not found' })
+  //     })
+
+  //   fetch(`https://jsonplaceholder.typicode.com/todos/${params.pathMatch}`)
+  //   .then(response => response.json())
+  //   .then(json =>  json)
+  //   .catch(e => {
+  //     console.log('there is an error')
+  //   })
+
+  //    error({ statusCode: 404, message: 'Post not found' })
+  // },
 }
 </script>
 

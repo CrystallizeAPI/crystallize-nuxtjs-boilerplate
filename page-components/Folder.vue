@@ -1,8 +1,10 @@
 <template>
-  <div>
+  <p v-if="$fetchState.pending">Fetching mountains...</p>
+  <p v-else-if="$fetchState.error">An error occured :(</p>
+  <div v-else>
     <SubHeader centerContent="true">
       <H1>{{ folder.name }}</H1>
-      <Shape />
+      <Shape :components="rest" />
     </SubHeader>
   </div>
 </template>
@@ -14,7 +16,8 @@ import fragments  from '../libs/graph/fragments';
 export default {
   data() {
     return {
-      folder: ''
+      folder: '',
+      rest: ''
     }
   },
   async fetch() {
@@ -50,7 +53,7 @@ export default {
 
     const rest = folder.components?.filter((c) => c.type !== 'gridRelations');
 
-    console.log(rest)
+    this.rest = rest;
   }
 }
 </script>
