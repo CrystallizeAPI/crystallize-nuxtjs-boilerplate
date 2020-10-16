@@ -5,15 +5,15 @@
         v-if="srcSetWebp.length > 0" 
         :srcSet="srcSetWebp"
         type="image/webp" 
-        sizes="80vw"
+        :sizes="sizes"
       />
       <source 
         v-if="srcSet.length > 0" 
         :srcSet="srcSetWebp"
         :type="`image/${originalFileExtension}`"
-        sizes="80vw"
+        :sizes="sizes"
       />
-      <img :src="src" :alt="alt" sizes="80vw">
+      <img :src="src" :alt="alt" :sizes="sizes">
     </picture>
   </div>
 </template>
@@ -29,6 +29,10 @@ export default {
       type: String,
       default: ''
     },
+    sizes: {
+      type: String,
+       default: '100vw'
+    },
     // className: {
     //   type: String,
     //    default: null
@@ -37,7 +41,6 @@ export default {
   data() {
     return {
       url: this.image.url,
-      sizes: this.image.sizes,
       variants: this.image.variants,
       alt: typeof this.altPassed === "string" ? this.altPassed : this.image.altText,
       // className: this.className,
@@ -51,8 +54,7 @@ export default {
     const vars = this.variants || [];
     const hasVariants = vars.length > 0;
 
-
-    console.log('THIS IS MY IMAGE', this.image)
+    console.log('IMAGE IMAGE', this.image);
 
     // Determine srcSet
     const std = vars.filter((v) => v.url && !v.url.endsWith(".webp"));
@@ -82,7 +84,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>

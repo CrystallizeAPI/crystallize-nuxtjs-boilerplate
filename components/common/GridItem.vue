@@ -12,13 +12,10 @@
       </div>
       <div class="image-wraper">
         <div class="img">
-          <img 
-            :src="image"
-            :alt="name"
-          >
-          <!-- <ImageComponent
+          <ImageComponent
             :image="image"
-          /> -->
+            :sizes="`(min-width 1024px) ${imageMdWidth}px, 100vw`"
+          />
         </div>
       </div>
     </div>
@@ -32,22 +29,20 @@ export default {
     return {
       name: this.data.name,
       path: this.data.path,
-      type: this.data.type,
       variants: this.data.variants,
       defaultVariant: this.data.defaultVariant,
       imageMdWidth: 100 / (this.gridCell?.layout?.colspan ?? 1),
       cellSize: `cell-${this.gridCell?.layout?.rowspan}x${this.gridCell?.layout?.colspan}`,
-      image: this.data.defaultVariant ?  this.data.defaultVariant.image.url : ''
+      image: this.data.defaultVariant ? this.data.defaultVariant.image : this.filterContentImages(this.data.type, this.data.components)
     }
   },
-  mounted() {
-    if (this.type === 'folder' || this.type === 'document') {
-      const images = this.data.components.find((c) => c.type === 'images');
-      this.image = images?.content?.images?.[0].url;
-      // console.log(image)
+  methods: {
+    filterContentImages(type, components) {
+       if (type === 'folder' || type === 'document') {
+        const images = components.find((c) => c.type === 'images');
+        return images?.content?.images?.[0];
+      }
     }
-
-    console.log('image image', this.data.defaultVariant);
   }
 }
 </script>

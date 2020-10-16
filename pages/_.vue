@@ -1,34 +1,44 @@
 <template>
   <div>
-    <Folder />
+    <Folder :data="folder" />
   </div>
 </template>
 
 <script>
 import Folder from '../page-components/Folder';
+import { simplyFetchFromGraph } from '../libs/graph';
+import fragments from '../libs/graph/fragments';
 
 export default {
   components: {
     Folder
   },
-  //  asyncData({ params, error }) {
-  //   return fetch(`https://my-api/posts/osoos`)
-  //     .then(res => {
-  //       console.log(res)
-  //     })
-  //     .catch(e => {
-  //       error({ statusCode: 404, message: 'Post not found' })
-  //     })
+  async asyncData({ route }) {
+     const query = `
+      query FOLDER_PAGE($language: String!, $path: String, $version: VersionLabel!) {
+        folder: catalogue(language: $language, path: $path, version: $version) {
+          ...item
 
-  //   fetch(`https://jsonplaceholder.typicode.com/todos/${params.pathMatch}`)
-  //   .then(response => response.json())
-  //   .then(json =>  json)
-  //   .catch(e => {
-  //     console.log('there is an error')
-  //   })
+          children {
+            ...item
+            ...product
+          }
+        }
+      }
 
-  //    error({ statusCode: 404, message: 'Post not found' })
-  // },
+      ${fragments}
+    `
+
+    const { data } = await simplyFetchFromGraph({ query, variables: {
+      language: 'en',
+      path: route.fullPath,
+      version: 'published'
+    }});
+
+    // console.log('DATA FROM THE FOLDER', data);
+    
+    return { folder: data }
+  },
 }
 </script>
 

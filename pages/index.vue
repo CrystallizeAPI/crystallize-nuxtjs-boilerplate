@@ -15,6 +15,7 @@
 import { simplyFetchFromGraph } from '../libs/graph';
 import fragments from '../libs/graph/fragments';
 
+
 export default {
   async asyncData() {
     const query = `

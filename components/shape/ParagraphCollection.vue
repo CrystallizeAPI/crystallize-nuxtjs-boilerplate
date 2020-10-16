@@ -6,7 +6,7 @@
       <H3>{{ paragraph.title.text }}</H3>
     </div>
     <div v-if="paragraph.body" class="body" >
-      <!-- add content transformer -->
+      {{ JSON.stringify(paragraph.body) }}
     </div>
   </div>
   <div class="media">

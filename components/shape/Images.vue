@@ -3,7 +3,7 @@
     <div v-if="images.length === 0"></div>
     <div v-if="images.length === 1">
       <div class="outer">
-        <img :src="images[0]" style="{ width: '80vw' }" alt="" >
+        <ImageComponent :image="images[0]" sizes="80vw" />
       </div>
     </div>
     <div v-else >
@@ -13,6 +13,7 @@
             v-for="(image, index) in images" 
             :key="index" 
             :image="image" 
+            sizes="80vw"
           />
         </div>
       </div>

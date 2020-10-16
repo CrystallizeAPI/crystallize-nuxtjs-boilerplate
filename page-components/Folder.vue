@@ -1,7 +1,5 @@
 <template>
-  <p v-if="$fetchState.pending">Fetching mountains...</p>
-  <p v-else-if="$fetchState.error">An error occured :(</p>
-  <div v-else>
+  <div>
     <SubHeader centerContent="true">
       <H1>{{ folder.name }}</H1>
       <Shape :components="rest" />
@@ -10,48 +8,21 @@
 </template>
 
 <script>
-import { simplyFetchFromGraph } from '../libs/graph';
-import fragments  from '../libs/graph/fragments';
-
 export default {
+  props: ['data'],
   data() {
     return {
-      folder: '',
+      folder: this.data.folder,
+      children: this.data.folder.children,
       rest: ''
     }
   },
-  async fetch() {
-     const query = `
-      query FOLDER_PAGE($language: String!, $path: String, $version: VersionLabel!) {
-        folder: catalogue(language: $language, path: $path, version: $version) {
-          ...item
-
-          children {
-            ...item
-            ...product
-          }
-        }
-      }
-
-      ${fragments}
-    `
-
-    const { data } = await simplyFetchFromGraph({ query, variables: {
-      language: 'en',
-      path: this.$route.path,
-      version: 'published'
-    }});
-    
-    const { folder } = data;
-    const { children } = folder;
-    
-    this.folder = folder;
-
-    const gridRelations = folder.components
+  mounted() {
+     const gridRelations = this.folder.components
     ?.filter((c) => c.type === 'gridRelations')
     ?.reduce((acc, g) => [...acc, ...(g?.content?.grids || [])], []);
 
-    const rest = folder.components?.filter((c) => c.type !== 'gridRelations');
+    const rest = this.folder.components?.filter((c) => c.type !== 'gridRelations');
 
     this.rest = rest;
   }
