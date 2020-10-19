@@ -1,12 +1,32 @@
 <template>
-  <div>
-    <div v-if="!data"></div>
-    <!-- <NuxtLink v-if="image">
-      <div>
-
+  <div v-if="!data"></div>
+  <NuxtLink v-else>
+    <div class="outer">
+      <div class="text">
+        <H3>{{ this.name }}</H3>
+        <div class="description">
+          <div class="media-wrapper">
+            <WideScreenRatio>
+              <!-- <div class="media-inner">
+                <div>
+                  video here
+                </div>
+                <ImageComponent
+                  :image="images?.content?.images?.[0]"
+                   sizes="(min-width ${screen.md}px) 33vw, 100vw"
+                />
+              </div> -->
+            </WideScreenRatio>
+          </div>
+          <ContentTransformer v-for="(content, i) in component.content.json" :key="i" >
+            <div v-for="(child, childindex) in content.children" :key="childindex">
+              <p>{{ child.textContent }}</p> 
+            </div>
+          </ContentTransformer>
+        </div>
       </div>
-    </NuxtLink> -->
-  </div>
+    </div>
+  </NuxtLink>
 </template>
 
 <script>
@@ -18,16 +38,26 @@ export default {
       default: '4'
     }
   },
+  data() {
+    return {
+      path: this.data.path,
+      name: this.data.name,
+      images: this.findComponents(this.data.components, 'type', 'images'),
+      vdeo: this.findComponents(this.data.components, 'name', 'Video'),
+      description: this.findComponents(this.data.components, 'name', 'Intro'),
+    }
+  },
   mounted() {
-    const { name, path } = this.data;
-
-    let image;
-    const images = this.data.components?.find((c) => c.type === 'images');
-    image = images?.content?.images?.[0];
-    const description = this.data.components?.find((c) => c.name === 'Intro');
-    const video = this.data.components?.find((c) => c.name === 'Video');
-
-    // add video logic
+    // let image;
+    // const images = this.data.components?.find((c) => c.type === 'images');
+    // image = images?.content?.images?.[0];
+    // const description = this.data.components?.find((c) => c.name === 'Intro');
+    // const video = this.data.components?.find((c) => c.name === 'Video');
+  },
+  methods: {
+    findComponents(components, property, filter) {
+      return components.find((c) => c[property] === filter);
+    }
   }
 }
 </script>

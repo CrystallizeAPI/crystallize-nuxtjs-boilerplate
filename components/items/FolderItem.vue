@@ -1,20 +1,19 @@
 <template>
-  <div>
-    <div v-if="!data"></div>
-    <NuxtLink :to="path" v-else>
-      <div class="outer">
-        <div class="image-wrapper">
-           <img 
-            :src="image"
-            :alt="name"
-          >
-        </div>
+  <div v-if="!data"></div>
+  <NuxtLink :to="path" v-else>
+    <a class="outer">
+      <div class="image-wrapper">
+        <ImageComponent
+        v-if="image"
+          :image="image"
+          sizes="(min-width 1024px) 100px, 100vw"
+        />
       </div>
       <div class="text">
         <H3>{{ name }}</H3>
       </div>
-    </NuxtLink>
-  </div>
+    </a>
+  </NuxtLink>
 </template>
 
 <script>
@@ -22,9 +21,9 @@ export default {
   props: ['data', 'gridCell'],
   data() {
     return {
-      name: this.data,
-      path: this.path,
-      imageMdWidth: 100 / (gridCell?.layout?.colspan ?? 1),
+      name: this.data.name,
+      path: this.data.path,
+      // imageMdWidth: 100 / (gridCell?.layout?.colspan ?? 1),
       image: '',
     }
   },

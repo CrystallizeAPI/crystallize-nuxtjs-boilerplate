@@ -1,15 +1,20 @@
 <template>
-  <div>
-    <div v-if="!items"></div>
-    <ul class="outer" v-else>
-      <li v-for="item in items" :key="item.id">
-        <FolderItem 
-          v-if="item.type === 'product'" 
-          :data="item"
-        />
-      </li>
-    </ul>
-  </div>
+  <div v-if="!items"></div>
+  <ul class="outer" v-else>
+    <li v-for="item in items" :key="item.id">
+      <ProductItem 
+         v-if="item.type === 'product'" 
+      />
+      <FolderItem 
+        v-if="item.type === 'product'" 
+        :data="item"
+      />
+      <DocumentItem
+        v-if="item.type === 'document'" 
+        :data="item"
+      />
+    </li>
+  </ul>
 </template>
 
 <script>
