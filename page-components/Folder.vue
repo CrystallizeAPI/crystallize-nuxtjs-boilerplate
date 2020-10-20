@@ -4,10 +4,10 @@
       <H1>{{ folder.name }}</H1>
       <Shape :components="rest" />
     </SubHeader>
-    <div v-if="gridRelations.length > 0">
-      <Grid>
+    <div v-if="grid">
+      <Grid :grid="grid">
         <GridItem 
-          v-for="cell in gridRelations"
+          v-for="cell in gridCells"
           :key="cell.itemId"
           :data="cell.item"
           :gridCell="cell"
@@ -28,9 +28,15 @@
 export default {
   props: ['data'],
   data() {
+    const grid = this.data.folder?.components?.filter((c) => c.type !== 'gridRelations')?.[0];
+    const gridCells = [];
+    // grid?.rows.forEach(r => gridCells.push.apply(null, r.columns));
+
     return {
       folder: this.data.folder,
       children: this.data.folder.children,
+      grid,
+      gridCells,
       rest: [],
       gridRelations: []
     }

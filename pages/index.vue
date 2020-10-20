@@ -1,6 +1,6 @@
 <template>
   <div class="outer">
-    <Grid>
+    <Grid :grid="grid">
       <GridItem 
         v-for="cell in rows"
         :key="cell.itemId"
@@ -38,6 +38,7 @@ export default {
 
     const columns = grid.rows.map(r =>  r.columns);
 
+
     let rows = [];
 
     columns.map(col => {
@@ -46,7 +47,7 @@ export default {
       })
     });
 
-    return { rows }
+    return { rows, grid }
   }
 }
 </script>
