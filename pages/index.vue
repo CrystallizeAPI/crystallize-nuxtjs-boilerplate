@@ -40,6 +40,7 @@ export default {
 
     const columns = grid.rows.map(r =>  r.columns);
 
+
     let rows = [];
 
     columns.map(col => {
@@ -47,8 +48,6 @@ export default {
         rows.push(data);
       })
     });
-
-    console.log('THIS IS THE GRID', rows);
 
     return { rows, grid }
   }

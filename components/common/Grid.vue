@@ -1,3 +1,5 @@
+
+
 <template>
   <div 
     class="styled-grid"
@@ -21,8 +23,6 @@
           (acc, col) => acc + col.layout.colspan,
           0
         ) ?? 0;
-
-        console.log('total colspan',totalColSpan);
         return totalColSpan;
       }
     }
