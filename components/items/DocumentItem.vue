@@ -1,24 +1,41 @@
 <template>
   <div v-if="!data"></div>
-  <NuxtLink v-else>
+  <NuxtLink :to="path" v-else-if="image || video" class="outer">
+    <!-- <div class="outer"> -->
+      <div class="media-wrapper">
+        <WideScreenRatio>
+          <div class="media-inner">
+            <!-- <div >
+              video here
+            </div> -->
+            <div class="image">
+              <ImageComponent
+                v-if="image"
+                :image="image"
+                sizes="(min-width ${screen.md}px) 33vw, 100vw"
+              />
+            </div>
+          </div>
+          </WideScreenRatio>
+        </div>
+        <div class="text">
+          <H3>{{ this.name }}</H3>
+          <div class="description">
+            <ContentTransformer v-for="(content, i) in description.content.json" :key="i" >
+              <div v-for="(child, childindex) in content.children" :key="childindex">
+                <p>{{ child.textContent }}</p> 
+              </div>
+            </ContentTransformer>
+          </div>
+        </div>
+    <!-- </div> -->
+  </NuxtLink>
+  <NuxtLink v-else :to="path">
     <div class="outer">
       <div class="text">
         <H3>{{ this.name }}</H3>
         <div class="description">
-          <div class="media-wrapper">
-            <WideScreenRatio>
-              <!-- <div class="media-inner">
-                <div>
-                  video here
-                </div>
-                <ImageComponent
-                  :image="images?.content?.images?.[0]"
-                   sizes="(min-width ${screen.md}px) 33vw, 100vw"
-                />
-              </div> -->
-            </WideScreenRatio>
-          </div>
-          <ContentTransformer v-for="(content, i) in component.content.json" :key="i" >
+          <ContentTransformer v-for="(content, i) in description.content.json" :key="i" >
             <div v-for="(child, childindex) in content.children" :key="childindex">
               <p>{{ child.textContent }}</p> 
             </div>
@@ -42,17 +59,14 @@ export default {
     return {
       path: this.data.path,
       name: this.data.name,
-      images: this.findComponents(this.data.components, 'type', 'images'),
       vdeo: this.findComponents(this.data.components, 'name', 'Video'),
       description: this.findComponents(this.data.components, 'name', 'Intro'),
+      image: '',
     }
   },
   mounted() {
-    // let image;
-    // const images = this.data.components?.find((c) => c.type === 'images');
-    // image = images?.content?.images?.[0];
-    // const description = this.data.components?.find((c) => c.name === 'Intro');
-    // const video = this.data.components?.find((c) => c.name === 'Video');
+    const images = this.data.components?.find((c) => c.type === 'images');
+    this.image = images?.content?.images?.[0];
   },
   methods: {
     findComponents(components, property, filter) {
@@ -63,17 +77,37 @@ export default {
 </script>
 
 <style scoped>
+.grid {
+  display: grid;
+    grid-template-columns: repeat(12,1fr);
+    grid-gap: 1rem;
+}
+
 .outer {
   display: flex;
   flex-direction: column;
   height: 100%;
+  grid-column-end: span 4;
 
    /* ${(p) => (p.span ? `grid-column-end: span ${p.span}` : null)}; */
 }
 
 .media-wrapper {
   flex: 0 0 auto;
+  /* padding-top: 56.25%; */
+  position: relative;
 }
+
+.media-screen-ratio {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+
 
 .media-inner {
   flex: 1 1 100%;

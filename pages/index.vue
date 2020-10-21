@@ -1,6 +1,6 @@
 <template>
   <div class="outer">
-    <Grid>
+    <Grid :grid="grid">
       <GridItem 
         v-for="cell in rows"
         :key="cell.itemId"
@@ -36,6 +36,8 @@ export default {
 
     const [grid] = data.catalogue?.components?.find((c) => c.type === 'gridRelations')?.content?.grids || [];
 
+
+
     const columns = grid.rows.map(r =>  r.columns);
 
     let rows = [];
@@ -46,7 +48,9 @@ export default {
       })
     });
 
-    return { rows }
+    console.log('THIS IS THE GRID', rows);
+
+    return { rows, grid }
   }
 }
 </script>
@@ -69,6 +73,4 @@ export default {
     padding: 0 1rem;
   }
 }
-
-
 </style>

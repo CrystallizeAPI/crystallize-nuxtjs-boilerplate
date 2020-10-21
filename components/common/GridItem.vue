@@ -1,6 +1,11 @@
 <template>
   <div v-if="!data"></div>
-  <NuxtLink v-else :to="path">
+  <NuxtLink v-else :to="path" 
+    :style="{
+    gridColumn: `span ${gridCell.layout.colspan}`,
+    gridRow: `span ${gridCell.layout.rowspan}`
+    }"
+  >
     <div class="outer" :class="cellSize">
       <div class="text">
         <span class="price" v-if="defaultVariant">${{ defaultVariant.price}}.00</span>
@@ -37,9 +42,6 @@ export default {
       image: this.data.defaultVariant ? this.data.defaultVariant.image : this.filterContentImages(this.data.type, this.data.components)
     }
   },
-  mounted() {
-    console.log('GRIDITEM', this.data);
-  },
   methods: {
     filterContentImages(type, components) {
        if (type === 'folder' || type === 'document') {
@@ -54,6 +56,7 @@ export default {
 <style scoped>
 a {
   text-decoration: none;
+  display: flex;
 }
 
 .image-wraper {

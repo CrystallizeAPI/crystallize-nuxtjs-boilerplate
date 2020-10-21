@@ -10,7 +10,6 @@
   <DocumentItem
     v-else
     :data="item"
-    :gridCell="['dhhd']"
   />
 </template>
 

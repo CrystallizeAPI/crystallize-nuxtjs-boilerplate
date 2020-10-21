@@ -14,7 +14,7 @@
         />
       </Grid>
     </div>
-    <div class="list"  v-else-if="children">
+    <div v-else-if="children" class="list">
       <Items
         v-for="(item, i) in children" 
         :key="i"
@@ -26,7 +26,7 @@
 
 <script>
 export default {
-  props: ['data'],
+  props: ['data', 'gridCell'],
   data() {
     return {
       folder: this.data.folder,
@@ -39,12 +39,12 @@ export default {
      const gridRelations = this.folder.components
     ?.filter((c) => c.type === 'gridRelations')
     ?.reduce((acc, g) => [...acc, ...(g?.content?.grids || [])], []);
-
-    // console.log('MY CHILDREN DATA', this.children);
     
     const rest = this.folder.components?.filter((c) => c.type !== 'gridRelations');
 
     const columns = gridRelations.map(r =>  r.rows);
+
+    console.log('THIS IS THE RELATIONS', this.gridCell);
 
     let rows = [];
 
@@ -55,6 +55,7 @@ export default {
         })
       })
     });
+
 
     this.rest = rest;
     this.gridRelations = rows;

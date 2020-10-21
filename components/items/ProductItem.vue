@@ -1,16 +1,16 @@
 <template>
   <div v-if="!data"></div>
-  <NuxtLink v-else to="" >
+  <NuxtLink v-else to="dhhd" >
     <div class="outer">
       <div class="inner">
         <div class="image-wrapper">
           <div v-if="image">
-            <!-- <ImageComponent :image="image" :alt="name" sizes="250px" /> -->
+            <ImageComponent :image="image" :alt="name" sizes="250px" />
           </div>
         </div>
         <div class="text">
           <span class="price"></span>
-          <!-- <H3></H3> -->
+          <H3></H3>
         </div>
       </div>
     </div>

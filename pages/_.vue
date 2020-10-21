@@ -35,7 +35,7 @@ export default {
       version: 'published'
     }});
 
-    // console.log('DATA FROM THE FOLDER', data);
+    console.log('DATA FROM THE FOLDER', data);
     
     return { folder: data }
   },

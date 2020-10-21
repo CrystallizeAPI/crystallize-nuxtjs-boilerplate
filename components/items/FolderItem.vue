@@ -1,6 +1,6 @@
 <template>
   <div v-if="!data"></div>
-  <NuxtLink :to="path" v-else>
+  <NuxtLink :to="path" v-else class="testtest">
     <a class="outer">
       <div class="image-wrapper">
         <ImageComponent
@@ -35,6 +35,10 @@ export default {
 </script>
 
 <style scoped>
+a {
+  grid-column-end: span 4;
+}
+
 .outer {
   display: block;
   height: 100%;
