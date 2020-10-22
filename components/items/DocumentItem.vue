@@ -1,53 +1,67 @@
 <template>
   <div v-if="!data"></div>
-  <NuxtLink :to="path" v-else-if="image || video" class="outer">
-    <!-- <div class="outer"> -->
-      <div class="media-wrapper">
-        <WideScreenRatio>
-          <div class="media-inner">
-            <!-- <div >
-              video here
-            </div> -->
-            <div class="image">
-              <ImageComponent
-                v-if="image"
-                :image="image"
-                sizes="(min-width ${screen.md}px) 33vw, 100vw"
-              />
-            </div>
+  <NuxtLink  
+    v-else-if="image || video.content.videos" 
+    :to="path" 
+    class="outer"
+    :style="{ gridColumnEnd: colSpan ? `span ${colSpan}` : `span 4` }"
+  >
+    <div class="media-wrapper">
+      <WideScreenRatio>
+        <div class="media-inner">
+          <div  v-if="video.content.videos" >
+            <VimePlayer controls autoplay>
+              <VimeVideo crossOrigin="" poster="https://media.vimejs.com/poster.png">
+                <source 
+                  data-src="https://media.vimejs.com/720p.mp4" 
+                  type="video/mp4" 
+                />
+              </VimeVideo> 
+            </VimePlayer>
           </div>
-          </WideScreenRatio>
-        </div>
-        <div class="text">
-          <H3>{{ this.name }}</H3>
-          <div class="description">
-            <ContentTransformer v-for="(content, i) in description.content.json" :key="i" >
-              <div v-for="(child, childindex) in content.children" :key="childindex">
-                <p>{{ child.textContent }}</p> 
-              </div>
-            </ContentTransformer>
+          <div class="image" v-else-if="image">
+            <ImageComponent
+              :image="image"
+              sizes="(min-width ${screen.md}px) 33vw, 100vw"
+            />
           </div>
         </div>
-    <!-- </div> -->
+      </WideScreenRatio>
+    </div>
+    <div class="text">
+      <H3>{{ this.name }}</H3>
+      <div class="description">
+        <ContentTransformer v-for="(content, i) in description.content.json" :key="i" >
+          <div v-for="(child, childindex) in content.children" :key="childindex">
+            <p>{{ child.textContent }}</p> 
+          </div>
+        </ContentTransformer>
+      </div>
+    </div>
   </NuxtLink>
-  <NuxtLink v-else :to="path">
-    <div class="outer">
-      <div class="text">
-        <H3>{{ this.name }}</H3>
-        <div class="description">
-          <ContentTransformer v-for="(content, i) in description.content.json" :key="i" >
-            <div v-for="(child, childindex) in content.children" :key="childindex">
-              <p>{{ child.textContent }}</p> 
-            </div>
-          </ContentTransformer>
-        </div>
+  <NuxtLink v-else :to="path" class="outer">
+    <div class="text">
+      <H3>{{ this.name }}</H3>
+      <div class="description">
+        <ContentTransformer v-for="(content, i) in description.content.json" :key="i" >
+          <div v-for="(child, childindex) in content.children" :key="childindex">
+            <p>{{ child.textContent }}</p> 
+          </div>
+        </ContentTransformer>
       </div>
     </div>
   </NuxtLink>
 </template>
 
 <script>
+import { VimePlayer, VimeUi, VimeVideo } from '@vime/vue';
+
 export default {
+  components: {
+    VimePlayer,
+    VimeUi,
+    VimeVideo,
+  },
   props: {
     data: Object,
     colSpan: {
@@ -59,7 +73,7 @@ export default {
     return {
       path: this.data.path,
       name: this.data.name,
-      vdeo: this.findComponents(this.data.components, 'name', 'Video'),
+      video: this.findComponents(this.data.components, 'name', 'Video'),
       description: this.findComponents(this.data.components, 'name', 'Intro'),
       image: '',
     }
@@ -67,10 +81,27 @@ export default {
   mounted() {
     const images = this.data.components?.find((c) => c.type === 'images');
     this.image = images?.content?.images?.[0];
+
+
   },
   methods: {
     findComponents(components, property, filter) {
       return components.find((c) => c[property] === filter);
+    },
+    getVideoType(url) {
+      const HLS_EXTENSION = /\.(m3u8)($|\?)/i;
+      const DASH_EXTENSION = /\.(mpd)($|\?)/i;
+      const MOV_EXTENSION = /\.(mov)($|\?)/i;
+
+      if (HLS_EXTENSION.test(url)) {
+        return 'application/x-mpegURL';
+      } else if (DASH_EXTENSION.test(url)) {
+        return 'application/dash+xml';
+      } else if (MOV_EXTENSION.test(url)) {
+        return 'video/mp4';
+      } else {
+        return `video/mp4`;
+      }
     }
   }
 }
@@ -87,7 +118,6 @@ export default {
   display: flex;
   flex-direction: column;
   height: 100%;
-  grid-column-end: span 4;
 
    /* ${(p) => (p.span ? `grid-column-end: span ${p.span}` : null)}; */
 }
@@ -106,8 +136,6 @@ export default {
   height: 100%;
   display: flex;
 }
-
-
 
 .media-inner {
   flex: 1 1 100%;

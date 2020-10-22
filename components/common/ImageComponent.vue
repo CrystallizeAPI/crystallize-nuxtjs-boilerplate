@@ -1,21 +1,19 @@
 <template>
-  <div>
-    <picture>
-      <source 
-        v-if="srcSetWebp.length > 0" 
-        :srcSet="srcSetWebp"
-        type="image/webp" 
-        :sizes="sizes"
-      />
-      <source 
-        v-if="srcSet.length > 0" 
-        :srcSet="srcSetWebp"
-        :type="`image/${originalFileExtension}`"
-        :sizes="sizes"
-      />
-      <img :src="src" :alt="alt" :sizes="sizes">
-    </picture>
-  </div>
+  <picture :class="className" >
+    <source 
+      v-if="srcSetWebp.length > 0" 
+      :srcSet="srcSetWebp"
+      type="image/webp" 
+      :sizes="sizes"
+    />
+    <source 
+      v-if="srcSet.length > 0" 
+      :srcSet="srcSetWebp"
+      :type="`image/${originalFileExtension}`"
+      :sizes="sizes"
+    />
+    <img :src="src" :alt="alt" :sizes="sizes">
+  </picture>
 </template>
 
 <script>
@@ -33,10 +31,10 @@ export default {
       type: String,
        default: '100vw'
     },
-    // className: {
-    //   type: String,
-    //    default: null
-    // }
+    className: {
+      type: String,
+       default: ''
+    },
   },
   data() {
     return {

@@ -1,5 +1,6 @@
 <template>
   <div v-if="!data"></div>
+  <!-- <DocumentItem v-else-if="type === 'document'" :data="data"  /> -->
   <NuxtLink v-else :to="path" 
     :style="{
     gridColumn: `span ${gridCell.layout.colspan}`,
@@ -35,11 +36,13 @@ export default {
     return {
       name: this.data.name,
       path: this.data.path,
+      type: this.data.type,
       variants: this.data.variants,
       defaultVariant: this.data.defaultVariant,
       imageMdWidth: 100 / (this.gridCell?.layout?.colspan ?? 1),
       cellSize: `cell-${this.gridCell?.layout?.rowspan}x${this.gridCell?.layout?.colspan}`,
-      image: this.data.defaultVariant ? this.data.defaultVariant.image : this.filterContentImages(this.data.type, this.data.components)
+      image: this.data.defaultVariant ? this.data.defaultVariant.image : this.filterContentImages(this.data.type, this.data.components),
+      videos: this.findComponents(this.data.components, 'name', 'Video'),
     }
   },
   methods: {
@@ -48,7 +51,10 @@ export default {
         const images = components.find((c) => c.type === 'images');
         return images?.content?.images?.[0];
       }
-    }
+    },
+    findComponents(components, property, filter) {
+      return components.find((c) => c[property] === filter);
+    },
   }
 }
 </script>

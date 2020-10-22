@@ -1,7 +1,5 @@
 <template>
-  <div v-if="!components || !Array.isArray(components)">
-    no data
-  </div>
+  <div v-if="!components || !Array.isArray(components)"></div>
   <div v-else>
     <div v-for="(component, index) in filteredComponents" :key="index">
       <div v-if="component.type === 'paragraphCollection'">

@@ -13,6 +13,7 @@
             v-for="(image, index) in images" 
             :key="index" 
             :image="image" 
+            className="picture"
             sizes="80vw"
           />
         </div>
@@ -23,7 +24,7 @@
 
 <script>
 export default {
-  props: ['images']
+  props: ['images', 'className']
 }
 </script>
 
@@ -43,9 +44,10 @@ export default {
   min-height: 300px;
 }
 
-.list picture:nth-child(3) {
+/* .list picture:nth-child(1) {
   grid-column-start: span 2;
-}
+} */
+
 
 .list img {
   display: block;

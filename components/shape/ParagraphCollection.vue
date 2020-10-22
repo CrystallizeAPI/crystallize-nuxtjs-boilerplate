@@ -11,7 +11,6 @@
   </div>
   <div class="media">
     <Images :images="paragraph.images" />
-    <!-- add video media -->
   </div>
 </div>
   </div>
@@ -32,6 +31,11 @@ export default {
   margin: 1em var(--content-padding);
 }
 
+/* .list picture:nth-child(3) {
+  grid-column-start: span 2;
+} */
+
+
 .body {
   margin: 1em var(--content-padding);
 }
@@ -42,6 +46,11 @@ export default {
 
 .media {
   margin-bottom: 100px;
+}
+
+.media picture:nth-child(3) {
+  grid-column-start: span 2 !important;
+  background: red;
 }
 
 </style>

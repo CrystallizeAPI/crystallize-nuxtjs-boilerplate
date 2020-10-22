@@ -36,8 +36,6 @@ export default {
 
     const [grid] = data.catalogue?.components?.find((c) => c.type === 'gridRelations')?.content?.grids || [];
 
-
-
     const columns = grid.rows.map(r =>  r.columns);
 
 
@@ -45,7 +43,9 @@ export default {
 
     columns.map(col => {
       col.map(data => {
-        rows.push(data);
+        if (data.item) {
+          rows.push(data);
+        }
       })
     });
 
@@ -56,9 +56,6 @@ export default {
 
 <style scoped>
 .outer {
-  /* max-width: 1600px;
-  padding: 0; */
-
   margin-bottom: 30px;
   max-width: 1600px;
   padding: 0 0;

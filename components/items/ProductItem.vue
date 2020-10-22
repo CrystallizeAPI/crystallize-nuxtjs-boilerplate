@@ -1,17 +1,17 @@
 <template>
   <div v-if="!data"></div>
-  <NuxtLink v-else to="dhhd" >
-    <div class="outer">
-      <div class="inner">
-        <div class="image-wrapper">
-          <div v-if="image">
-            <ImageComponent :image="image" :alt="name" sizes="250px" />
-          </div>
+  <NuxtLink v-else :to="path" class="outer">
+    <div class="inner">
+      <div class="image-wrapper">
+        <div v-if="variant.image">
+          <ImageComponent :image="variant.image" :alt="name" sizes="250px" />
         </div>
-        <div class="text">
-          <span class="price"></span>
-          <H3></H3>
-        </div>
+      </div>
+      <div class="text">
+        <span class="price">
+          ${{ variant.price }}.00
+        </span>
+        <H3>{{ name }}</H3>
       </div>
     </div>
   </NuxtLink>
@@ -25,12 +25,14 @@ export default {
       name: this.data.name,
       path: this.data.path,
       type: this.data.type,
-      price: '',
-      image: this.data.variants ? this.findVariant(this.data.variants) : {}
+      variant: this.data.variants ? this.findVariant(this.data.variants) : {},
+      image: '',
+      // price: this.data.variants ? this.findVariant(this.data.variants) : {},
+      // image: this.data.variants ? this.findVariant(this.data.variants) : {}
     }
   },
   mounted() {
-    console.log('DATA FROM PRODUCT ITEM', this.data);
+    console.log('DATA FROM PRODUCT ITEM', this.variant.image);
   },
   methods: {
     findVariant(variants) {
