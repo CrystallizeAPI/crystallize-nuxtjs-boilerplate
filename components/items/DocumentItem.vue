@@ -10,13 +10,26 @@
       <WideScreenRatio>
         <div class="media-inner">
           <div  v-if="video.content.videos" >
-            <VimePlayer controls autoplay>
-              <VimeVideo crossOrigin="" poster="https://media.vimejs.com/poster.png">
+            <VimePlayer autoplay controls loop >
+              
+              <!-- <VimeVideo crossOrigin="" poster="https://media.vimejs.com/poster.png">
+                <source data-src="https://media.vimejs.com/720p.mp4" type="video/mp4" />
+              </VimeVideo>  -->
+
+
+              <!-- <VimeDash
+                src="https://media.crystallize.com/furniture/20/6/12/21/color-is-back-grafitti/cmaf/color-is-back-grafitti.mpd"
+                version="latest"
+              /> -->
+              <VimeHls version="latest" >
                 <source 
-                  data-src="https://media.vimejs.com/720p.mp4" 
-                  type="video/mp4" 
+                  data-src="https://media.crystallize.com/furniture/20/6/12/21/color-is-back-grafitti/cmaf/color-is-back-grafitti.m3u8" 
+                  type="application/x-mpegURL" 
                 />
-              </VimeVideo> 
+              </VimeHls>
+              <VimeUi>
+                <VimeSkeleton />
+              </VimeUi>
             </VimePlayer>
           </div>
           <div class="image" v-else-if="image">
@@ -54,13 +67,24 @@
 </template>
 
 <script>
-import { VimePlayer, VimeUi, VimeVideo } from '@vime/vue';
+import { 
+  VimePlayer, 
+  VimeHls, 
+  VimeDash, 
+  VimeVideo,  
+  VimeUi, 
+  VimeSkeleton 
+} 
+from '@vime/vue';
 
 export default {
   components: {
     VimePlayer,
-    VimeUi,
+    VimeHls,
+    VimeDash,
     VimeVideo,
+    VimeUi,
+    VimeSkeleton
   },
   props: {
     data: Object,
@@ -76,12 +100,26 @@ export default {
       video: this.findComponents(this.data.components, 'name', 'Video'),
       description: this.findComponents(this.data.components, 'name', 'Intro'),
       image: '',
+      sources: [],
     }
   },
   mounted() {
     const images = this.data.components?.find((c) => c.type === 'images');
     this.image = images?.content?.images?.[0];
 
+    let playlists = [];
+
+    if (this.video.content.videos) {
+      this.video.content.videos.map(v => {
+        playlists = v.playlists;
+      })
+
+      this.sources =
+      playlists?.map((playlist) => ({
+        type: this.getVideoType(playlist),
+        src: playlist
+      })) || [];
+    }
 
   },
   methods: {
