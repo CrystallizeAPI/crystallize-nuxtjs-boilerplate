@@ -1,17 +1,32 @@
 <template>
   <div>
     <Outer>
-      <SubHeader>
-        <H1></H1>
+      <SubHeader centerContent="true">
+        <H1>{{ title.content.text }}</H1>
+         <!-- <ContentTransformer v-for="(content, i) in description.content.json" :key="i" >
+          <div v-for="(child, childindex) in content.children" :key="childindex">
+            <p>{{ child.textContent }}</p> 
+          </div>
+        </ContentTransformer> -->
       </SubHeader>
       <div class="hero-image">
-        <ImageComponent />
+        <ImageComponent 
+          v-for="(image, index) in images.content.images"
+          :key="index"
+          :image="image"
+          :sizes="index > 0 ? '40vw' : '80vw'"
+         />
       </div>
+      <Shape :components="componentsRest" />
     </Outer>
-    <div class="related">
-      <H2></H2>
+    <div v-if="relatedProducts.content.items" class="related">
+      <H2>{{ elatedProducts.content.items.length }}</H2>
       <div class="list">
-        <Items />
+         <Items
+          v-for="(item, i) in relatedProducts.content.items" 
+          :key="i"
+          :item="item"
+        />   
       </div>
     </div>
   </div>
@@ -28,6 +43,9 @@ export default {
       relatedProducts:  this.findComponents(this.document.components, 'name', 'Products'),
       componentsRest:  this.document?.components?.filter((c) => !['Intro', 'Title', 'Image', 'Products'].includes(c.name))
     }
+  },
+  mounted() {
+    console.log('DOCS WITH DOCS', this.document);
   },
   methods: {
     findComponents(components, property, filter) {

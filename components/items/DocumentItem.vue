@@ -10,27 +10,12 @@
       <WideScreenRatio>
         <div class="media-inner">
           <div  v-if="video.content.videos" >
-            <VimePlayer autoplay controls loop >
-              
-              <!-- <VimeVideo crossOrigin="" poster="https://media.vimejs.com/poster.png">
-                <source data-src="https://media.vimejs.com/720p.mp4" type="video/mp4" />
-              </VimeVideo>  -->
-
-
-              <!-- <VimeDash
-                src="https://media.crystallize.com/furniture/20/6/12/21/color-is-back-grafitti/cmaf/color-is-back-grafitti.mpd"
-                version="latest"
-              /> -->
-              <VimeHls version="latest" >
-                <source 
-                  data-src="https://media.crystallize.com/furniture/20/6/12/21/color-is-back-grafitti/cmaf/color-is-back-grafitti.m3u8" 
-                  type="application/x-mpegURL" 
-                />
-              </VimeHls>
-              <VimeUi>
-                <VimeSkeleton />
-              </VimeUi>
-            </VimePlayer>
+            <!-- https://media.vimejs.com/720p.mp4 -->
+            <!-- video/mp4 -->
+            <!-- https://media.crystallize.com/furniture/20/6/12/21/color-is-back-grafitti/cmaf/color-is-back-grafitti.mpd -->
+            <!-- https://media.crystallize.com/furniture/20/6/12/21/color-is-back-grafitti/cmaf/color-is-back-grafitti.m3u8 -->
+            <!-- application/x-mpegURL -->
+            <VideoPlayer :options="videoOptions"/>
           </div>
           <div class="image" v-else-if="image">
             <ImageComponent
@@ -67,25 +52,8 @@
 </template>
 
 <script>
-import { 
-  VimePlayer, 
-  VimeHls, 
-  VimeDash, 
-  VimeVideo,  
-  VimeUi, 
-  VimeSkeleton 
-} 
-from '@vime/vue';
 
 export default {
-  components: {
-    VimePlayer,
-    VimeHls,
-    VimeDash,
-    VimeVideo,
-    VimeUi,
-    VimeSkeleton
-  },
   props: {
     data: Object,
     colSpan: {
@@ -101,6 +69,17 @@ export default {
       description: this.findComponents(this.data.components, 'name', 'Intro'),
       image: '',
       sources: [],
+      videoOptions: {
+				autoplay: true,
+        controls: true,
+				sources: [
+					{
+						src:
+							"https://media.vimejs.com/720p.mp4",
+						  type: "video/mp4"
+					}
+				]
+			}
     }
   },
   mounted() {
@@ -120,7 +99,6 @@ export default {
         src: playlist
       })) || [];
     }
-
   },
   methods: {
     findComponents(components, property, filter) {
