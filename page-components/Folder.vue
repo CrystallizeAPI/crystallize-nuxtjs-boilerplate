@@ -44,8 +44,6 @@ export default {
 
     const columns = gridRelations.map(r =>  r.rows);
 
-    // console.log('THIS IS THE RELATIONS', this.gridCell);
-
     let rows = [];
 
     columns.map(col => {

@@ -52,8 +52,6 @@ export default {
     const vars = this.variants || [];
     const hasVariants = vars.length > 0;
 
-    // console.log('IMAGE IMAGE', this.image);
-
     // Determine srcSet
     const std = vars.filter((v) => v.url && !v.url.endsWith(".webp"));
     const webp = vars.filter((v) => v.url && v.url.endsWith(".webp"));

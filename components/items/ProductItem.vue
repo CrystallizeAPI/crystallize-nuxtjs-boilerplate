@@ -31,9 +31,6 @@ export default {
       // image: this.data.variants ? this.findVariant(this.data.variants) : {}
     }
   },
-  mounted() {
-    console.log('DATA FROM PRODUCT ITEM', this.variant.image);
-  },
   methods: {
     findVariant(variants) {
       return variants.find((variant) => variant.isDefault)

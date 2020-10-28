@@ -1,12 +1,14 @@
 <template>
   <div>
-    <div v-for="(section, index) in seactions" :key="index" >
+    <div v-for="(section, index) in sections" :key="index"  class="section">
       <H3>{{ section.title }}</H3>
       <div class="properties-outer">
         <table class="properties">
           <tbody v-for="(property, index) in section.properties" :key="index"> 
-            <tr>{{ property.key }}</tr>
-            <tr>{{ property.value }}</tr>
+            <tr>
+              <td>{{ property.key }}</td>
+              <td>{{ property.value }}</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -16,7 +18,7 @@
 
 <script>
 export default {
-  props: ['seactions']
+  props: ['sections']
 }
 </script>
 
@@ -49,5 +51,4 @@ export default {
 .properties  tr:not(:first-child) td {
    border-top-width: 1px;
 }
-
 </style>

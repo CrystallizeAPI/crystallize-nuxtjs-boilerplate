@@ -32,10 +32,12 @@
       </div>
        <div v-if="component.type === 'propertiesTable'">
          <div class="content-outer">
-          <PropertiesTable :seactions="component.content" />
+          <PropertiesTable :sections="component.content.sections" />
         </div>
       </div>
-      <!-- items relation here -->
+      <div v-if="component.type === 'itemRelations'">
+        <ItemRelations :items="component.content.items" /> 
+      </div>
       <div v-if="component.type === 'gridRelations'">
         <GridRelations :grids="component.content.grids"  />
       </div>
