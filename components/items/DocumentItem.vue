@@ -15,7 +15,7 @@
             <!-- https://media.crystallize.com/furniture/20/6/12/21/color-is-back-grafitti/cmaf/color-is-back-grafitti.mpd -->
             <!-- https://media.crystallize.com/furniture/20/6/12/21/color-is-back-grafitti/cmaf/color-is-back-grafitti.m3u8 -->
             <!-- application/x-mpegURL -->
-            <VideoPlayer :options="videoOptions"/>
+            <!-- <VideoPlayer :options="videoOptions"/> -->
           </div>
           <div class="image" v-else-if="image">
             <ImageComponent

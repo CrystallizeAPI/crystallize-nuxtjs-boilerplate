@@ -10,7 +10,9 @@
     </div>
   </div>
   <div class="media">
-    <Images :images="paragraph.images" />
+    <Images 
+      :images="paragraph.images" 
+    />
   </div>
 </div>
   </div>
@@ -18,7 +20,7 @@
 
 <script>
 export default {
-  props: ['paragraphs'],
+  props: ['paragraphs']
 }
 </script>
 

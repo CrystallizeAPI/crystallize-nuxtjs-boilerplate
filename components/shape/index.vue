@@ -41,6 +41,7 @@
       <div v-if="component.type === 'gridRelations'">
         <GridRelations :grids="component.content.grids"  />
       </div>
+
     </div>
   </div>
 </template>
@@ -57,6 +58,7 @@ export default {
     this.$nextTick(function () {
       this.filteredComponents = this.components?.filter((component) => component.content != null)
     })
+
   }
 }
 </script>

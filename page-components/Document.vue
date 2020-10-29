@@ -3,11 +3,11 @@
     <Outer>
       <SubHeader centerContent="true">
         <H1>{{ title.content.text }}</H1>
-         <!-- <ContentTransformer v-for="(content, i) in description.content.json" :key="i" >
+         <ContentTransformer v-for="(content, i) in description.content.json" :key="i" >
           <div v-for="(child, childindex) in content.children" :key="childindex">
             <p>{{ child.textContent }}</p> 
           </div>
-        </ContentTransformer> -->
+        </ContentTransformer>
       </SubHeader>
       <div class="hero-image">
         <ImageComponent 
@@ -20,14 +20,14 @@
       <Shape :components="componentsRest" />
     </Outer>
     <div v-if="relatedProducts.content.items" class="related">
-      <H2>{{ elatedProducts.content.items.length }}</H2>
-      <div class="list">
+      <H2>RELATED PRODUCT</H2>
+      <!-- <div class="list" v-if="relatedProducts.content">
          <Items
           v-for="(item, i) in relatedProducts.content.items" 
           :key="i"
           :item="item"
         />   
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -43,9 +43,6 @@ export default {
       relatedProducts:  this.findComponents(this.document.components, 'name', 'Products'),
       componentsRest:  this.document?.components?.filter((c) => !['Intro', 'Title', 'Image', 'Products'].includes(c.name))
     }
-  },
-  mounted() {
-    console.log('DOCS WITH DOCS', this.document);
   },
   methods: {
     findComponents(components, property, filter) {

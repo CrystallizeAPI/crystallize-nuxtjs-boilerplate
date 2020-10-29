@@ -1,5 +1,5 @@
 <template>
-  <div v-if="topicMaps"></div>
+  <div v-if="!topicMaps"></div>
   <div v-else>
     <div 
       class="topic-map" 
@@ -18,10 +18,7 @@
 
 <script>
 export default {
-  props: ['topicMaps'],
-  mounted() {
-    
-  }
+  props: ['topicMaps']
 }
 </script>
 

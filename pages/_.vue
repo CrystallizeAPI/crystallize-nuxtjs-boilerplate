@@ -1,7 +1,7 @@
 <template>
   <div>
     <Product 
-      v-if="product.vatType" 
+      v-if="product.vatType && product.vatType !== null" 
       :product="product" 
     />
     <Document 
@@ -94,6 +94,8 @@ export default {
       path: route.fullPath,
       version: 'published'
     }});
+
+    console.log('product DATA', productData.product);
 
     return { 
       folder: folderData, 

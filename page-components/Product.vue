@@ -14,7 +14,6 @@
           </div>
           <div v-if="summary" class="summary">
             <!-- contentransformer -->
-
             <ContentTransformer v-for="(content, i) in summary.content.json" :key="i" >
               <div v-for="(child, childindex) in content.children" :key="childindex">
                 <p>{{ child.textContent }}</p> 

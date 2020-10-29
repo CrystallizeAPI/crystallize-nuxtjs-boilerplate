@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div v-if="images.length === 0"></div>
-    <div v-if="images.length === 1">
+    <div v-if="!images || images.length === 0"></div>
+    <div v-else-if="images.length === 1">
       <div class="outer">
         <ImageComponent :image="images[0]" sizes="80vw" />
       </div>
