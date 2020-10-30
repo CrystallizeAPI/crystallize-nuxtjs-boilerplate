@@ -14,6 +14,7 @@
           v-for="(image, index) in images.content.images"
           :key="index"
           :image="image"
+          className="img"
           :sizes="index > 0 ? '40vw' : '80vw'"
          />
       </div>
@@ -67,6 +68,10 @@ export default {
 }
 
 .img:first-child {
+  grid-column-end: span 2;
+}
+
+.secondary-image-block:last-child {
   grid-column-end: span 2;
 }
 

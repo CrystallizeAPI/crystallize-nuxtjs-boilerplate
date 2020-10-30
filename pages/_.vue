@@ -95,8 +95,6 @@ export default {
       version: 'published'
     }});
 
-    console.log('product DATA', productData.product);
-
     return { 
       folder: folderData, 
       document: DocumentData.document,

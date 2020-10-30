@@ -1,6 +1,8 @@
 <template>
   <div v-if="!data"></div>
-  <!-- <DocumentItem v-else-if="type === 'document'" :data="data"  /> -->
+  <!-- <div v-else-if="type === 'document'">
+    <DocumentItem :data="data"  />
+  </div> -->
   <NuxtLink v-else :to="path" 
     :style="{
     gridColumn: `span ${gridCell.layout.colspan}`,

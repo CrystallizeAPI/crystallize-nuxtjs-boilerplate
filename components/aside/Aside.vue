@@ -1,11 +1,11 @@
 <template>
   <div class="basket">
-    <h4 class="header"></h4>
-    <!--  -->
+    <h4 class="header">BASKET</h4>
+    <TinyBasket />
     <div class="footer">
-      <NuxtLink to="">
+      <NuxtLink to="somewhere">
         <button class="checkout-btn">
-          buy
+          Go to checkout
         </button>
       </NuxtLink>
     </div>

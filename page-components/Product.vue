@@ -8,21 +8,21 @@
             sizes="(max-width: 768px) 400px, 60vw"
           />
         </div>
-        <div class="info">
-          <div class="name">
-            <H1>{{ product.name }}</H1>
-          </div>
-          <div v-if="summary" class="summary">
-            <!-- contentransformer -->
-            <ContentTransformer v-for="(content, i) in summary.content.json" :key="i" >
-              <div v-for="(child, childindex) in content.children" :key="childindex">
-                <p>{{ child.textContent }}</p> 
-              </div>
-            </ContentTransformer>
-          </div>
-          <!-- variant selector -->
-          <Buy :product="product" :selectedVariant="variant" />
+      </div>
+      <div class="info">
+        <div class="name">
+          <H1>{{ product.name }}</H1>
         </div>
+        <div v-if="summary" class="summary">
+          <!-- contentransformer -->
+          <ContentTransformer v-for="(content, i) in summary.content.json" :key="i" >
+            <div v-for="(child, childindex) in content.children" :key="childindex">
+              <p>{{ child.textContent }}</p> 
+            </div>
+          </ContentTransformer>
+        </div>
+        <!-- variant selector -->
+        <Buy :product="product" :selectedVariant="variant" />
       </div>
     </div>
     <div class="content">
@@ -165,7 +165,6 @@ export default {
   margin-left: 5px;
 }
 
-/* responsive.smAndLess */
 @media (max-width: 1024px) {
   .sections {
     padding: 20px 0px;
@@ -174,7 +173,6 @@ export default {
   }
 }
 
-/* responsive.xs */
 @media (max-width: 768px) {
   .content {
     margin: 10px 10px 0;
@@ -198,7 +196,6 @@ export default {
   }
 }
 
-/* responsive.mdAndLess */
 @media (max-width: 1600px) {
   .media {
     display: block;

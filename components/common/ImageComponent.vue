@@ -80,3 +80,14 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.img > img {
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+</style>
