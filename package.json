@@ -1,8 +1,8 @@
 {
   "name": "nuxtjs",
   "version": "1.0.0",
-  "description": "My astonishing Nuxt.js project",
-  "author": "msweeneydev",
+  "description": "Crystallize Nuxt boilerplate",
+  "author": "Crystallize <hello@crystallize.com>",
   "private": true,
   "scripts": {
     "dev": "nuxt",
@@ -11,10 +11,11 @@
   },
   "dependencies": {
     "@nuxt/http": "^0.5.12",
-    "nuxt": "^2.14.5"
+    "isomorphic-unfetch": "^3.1.0",
+    "nuxt": "^2.14.7",
+    "video.js": "^7.10.1"
   },
   "devDependencies": {
-    "nodemon": "^1.18.9",
-    "video.js": "^7.10.1"
+    "nodemon": "^1.18.9"
   }
 }

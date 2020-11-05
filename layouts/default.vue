@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { simplyFetchFromGraph } from '../libs/graph';
+import { simplyFetchFromGraph } from '../lib/graph';
 
 export default {
   data() {

@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import { simplyFetchFromGraph } from '../libs/graph';
-import fragments from '../libs/graph/fragments';
+import { simplyFetchFromGraph } from '../lib/graph';
+import fragments from '../lib/graph/fragments';
 
 
 export default {

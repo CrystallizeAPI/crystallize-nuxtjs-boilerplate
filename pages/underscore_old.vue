@@ -16,8 +16,8 @@
 import Folder from '../page-components/Folder';
 import Document from '../page-components/Document';
 import Product from '../page-components/Product';
-import { simplyFetchFromGraph } from '../libs/graph';
-import fragments from '../libs/graph/fragments';
+import { simplyFetchFromGraph } from '../lib/graph';
+import fragments from '../lib/graph/fragments';
 
 export default {
   components: {
@@ -103,7 +103,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-
-</style>>
