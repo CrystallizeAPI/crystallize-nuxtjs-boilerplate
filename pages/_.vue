@@ -1,6 +1,8 @@
 <template>
   <div>
-    hey - dynamic
+    <div>
+      Type: {{catalogue.type}}
+    </div>
   </div>
 </template>
 
@@ -25,9 +27,9 @@ export default {
       version: 'published'
     }});
 
-    console.log(data);
-
-    return data;
+    return {
+      catalogue: data.catalogue
+    };
  }
 }
 </script>
