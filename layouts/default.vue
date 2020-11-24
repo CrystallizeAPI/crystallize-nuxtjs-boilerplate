@@ -1,35 +1,48 @@
 <template>
   <div>
-    <Header :catalogue="catalogue" :fetchState="$fetchState" />
-      <nuxt />
-    <Footer :catalogue="catalogue" :fetchState="$fetchState" />
+    <Header :catalogue="catalogue" :fetch-state="$fetchState" />
+    <nuxt />
+    <Footer :catalogue="catalogue" :fetch-state="$fetchState" />
   </div>
 </template>
 
 <script>
-import { simplyFetchFromGraph } from '../lib/graph';
+import { simplyFetchFromGraph } from "../lib/graph";
 
 export default {
   data() {
     return { catalogue: {} };
   },
   async fetch() {
-    const query = `
-      query {
-        catalogue {
-          children {
-            id
-            name
+    const { locales, locale: code } = this.$i18n;
+    const locale = locales.find((l) => l.locale === code) || locales[0];
+
+    /**
+     * Getting the top level catalogue items
+     * to show in the header and footer
+     */
+    const { data } = await simplyFetchFromGraph({
+      query: `
+        query GET_NAV_ITEMS($language: String!) {
+          catalogue(language: $language) {
+            children {
+              id
+              name
+            }
           }
         }
-      }
-    `
-    const { data } = await simplyFetchFromGraph({ query });
+      `,
+      variables: {
+        language: locale.crystallizeCatalogueLanguage,
+      },
+    });
 
-    const result = data.catalogue.children.filter(c => c.name !== '_web-frontpage');
-
-    this.catalogue = result;
+    /**
+     * Filter out some items
+     */
+    this.catalogue = data.catalogue.children.filter(
+      (c) => c.name !== "_web-frontpage"
+    );
   },
 };
 </script>
-

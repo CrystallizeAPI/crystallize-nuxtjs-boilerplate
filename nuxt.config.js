@@ -1,4 +1,28 @@
-import { simplyFetchFromGraph } from "./lib/graph";
+import { getCatalogueItems } from "./lib/graph";
+
+function getComponentForPath({ type }) {
+  switch (type) {
+    case "product": {
+      return "page-components/Product.vue";
+    }
+    case "document": {
+      return "page-components/Document.vue";
+    }
+    default: {
+      return "page-components/Folder.vue";
+    }
+  }
+}
+
+import appConfig from "./app.config.json";
+
+const locale = appConfig.locales[0] || {
+  locale: "en",
+  displayName: "English - US",
+  appLanguage: "en-US",
+  crystallizeCatalogueLanguage: "en",
+  crystallizePriceVariant: "default",
+};
 
 export default {
   env: {
@@ -8,81 +32,22 @@ export default {
   components: true,
   router: {
     async extendRoutes(routes, resolve) {
-      function handleItem({ path, name = "", children }) {
+      function handleItem({ path, name = "", type, children }) {
         if (path !== "/index" && !name.startsWith("_")) {
           routes.push({
             name: path,
             path,
-            component: resolve(__dirname, "pages/build-time.vue"),
+            component: resolve(__dirname, getComponentForPath({ type })),
           });
-          console.log("add route for ", path);
         }
-
         if (children) {
           children.forEach(handleItem);
         }
       }
-
-      const allCatalogueItems = await simplyFetchFromGraph({
-        query: `
-        query GET_ALL_CATALOGUE_ITEMS($language: String!) {
-          catalogue(language: $language, path: "/") {
-            path
-            name
-            shape {
-              name
-            }
-            children {
-              path
-              name
-              shape {
-                name
-              }
-              children {
-                path
-                name
-                shape {
-                  name
-                }
-                children {
-                  path
-                  name
-                  shape {
-                    name
-                  }
-                  children {
-                    path
-                    name
-                    shape {
-                      name
-                    }
-                    children {
-                      path
-                      name
-                      shape {
-                        name
-                      }
-                      children {
-                        path
-                        name
-                        shape {
-                          name
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      `,
-        variables: {
-          language: "en",
-        },
-      });
-
-      allCatalogueItems.data.catalogue.children.forEach(handleItem);
+      const allCatalogueItems = await getCatalogueItems(
+        locale.crystallizeCatalogueLanguage
+      );
+      allCatalogueItems.forEach(handleItem);
     },
   },
   /*
@@ -116,7 +81,25 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: ["@nuxt/http"],
+  modules: ["@nuxt/http", ["nuxt-i18n"]],
+
+  i18n: {
+    seo: true,
+    lazy: true,
+    langDir: "lang/",
+    defaultLocale: locale.locale,
+    locales: [
+      {
+        code: locale.locale,
+        iso: locale.appLanguage,
+        file: `${locale.appLanguage}.js`,
+        ...locale,
+      },
+    ],
+    vueI18n: {
+      fallbackLocale: locale.locale,
+    },
+  },
   /*
    ** Build configuration
    */
@@ -124,6 +107,6 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {},
+    // extend(config, ctx) {},
   },
 };

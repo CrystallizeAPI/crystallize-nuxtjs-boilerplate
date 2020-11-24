@@ -1,20 +1,19 @@
 <template>
   <div class="outer">
     <Grid :grid="grid">
-      <GridItem 
+      <GridItem
         v-for="cell in rows"
         :key="cell.itemId"
         :data="cell.item"
-        :gridCell="cell"
+        :grid-cell="cell"
       />
     </Grid>
   </div>
 </template>
 
 <script>
-import { simplyFetchFromGraph } from '../lib/graph';
-import fragments from '../lib/graph/fragments';
-
+import { simplyFetchFromGraph } from "../lib/graph";
+import fragments from "../lib/graph/fragments";
 
 export default {
   async asyncData() {
@@ -27,31 +26,35 @@ export default {
       }
 
       ${fragments}
-    `
-    const { data } = await simplyFetchFromGraph({ query, variables: {
-      language: 'en',
-      path: '/web-frontpage',
-      version: 'published'
-    }});
+    `;
+    const { data } = await simplyFetchFromGraph({
+      query,
+      variables: {
+        language: "en",
+        path: "/web-frontpage",
+        version: "published",
+      },
+    });
 
-    const [grid] = data.catalogue?.components?.find((c) => c.type === 'gridRelations')?.content?.grids || [];
+    const [grid] =
+      data.catalogue?.components?.find((c) => c.type === "gridRelations")
+        ?.content?.grids || [];
 
-    const columns = grid.rows.map(r =>  r.columns);
-
+    const columns = grid.rows.map((r) => r.columns);
 
     let rows = [];
 
-    columns.map(col => {
-      col.map(data => {
+    columns.map((col) => {
+      col.map((data) => {
         if (data.item) {
           rows.push(data);
         }
-      })
+      });
     });
 
-    return { rows, grid }
-  }
-}
+    return { rows, grid };
+  },
+};
 </script>
 
 <style scoped>

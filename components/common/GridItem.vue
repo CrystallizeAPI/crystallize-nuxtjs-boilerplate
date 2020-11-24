@@ -1,22 +1,21 @@
 <template>
   <div v-if="!data"></div>
-  <!-- <div v-else-if="type === 'document'">
-    <DocumentItem :data="data"  />
-  </div> -->
-  <NuxtLink v-else :to="path" 
+  <NuxtLink
+    v-else
+    :to="path"
     :style="{
-    gridColumn: `span ${gridCell.layout.colspan}`,
-    gridRow: `span ${gridCell.layout.rowspan}`
+      gridColumn: `span ${gridCell.layout.colspan}`,
+      gridRow: `span ${gridCell.layout.rowspan}`,
     }"
   >
     <div class="outer" :class="cellSize">
       <div class="text">
-        <span class="price" v-if="defaultVariant">${{ defaultVariant.price}}.00</span>
+        <span v-if="defaultVariant" class="price"
+          >${{ defaultVariant.price }}.00</span
+        >
         <h3 class="title">{{ name }}</h3>
         <template v-if="defaultVariant">
-          <Button>
-            Buy
-          </Button>
+          <Button> Buy </Button>
         </template>
       </div>
       <div class="image-wraper">
@@ -33,7 +32,7 @@
 
 <script>
 export default {
-  props: ['data', 'gridCell'],
+  props: ["data", "gridCell"],
   data() {
     return {
       name: this.data.name,
@@ -43,22 +42,24 @@ export default {
       defaultVariant: this.data.defaultVariant,
       imageMdWidth: 100 / (this.gridCell?.layout?.colspan ?? 1),
       cellSize: `cell-${this.gridCell?.layout?.rowspan}x${this.gridCell?.layout?.colspan}`,
-      image: this.data.defaultVariant ? this.data.defaultVariant.image : this.filterContentImages(this.data.type, this.data.components),
-      videos: this.findComponents(this.data.components, 'name', 'Video'),
-    }
+      image: this.data.defaultVariant
+        ? this.data.defaultVariant.image
+        : this.filterContentImages(this.data.type, this.data.components),
+      videos: this.findComponents(this.data.components, "name", "Video"),
+    };
   },
   methods: {
     filterContentImages(type, components) {
-       if (type === 'folder' || type === 'document') {
-        const images = components.find((c) => c.type === 'images');
+      if (type === "folder" || type === "document") {
+        const images = components.find((c) => c.type === "images");
         return images?.content?.images?.[0];
       }
     },
     findComponents(components, property, filter) {
       return components.find((c) => c[property] === filter);
     },
-  }
-}
+  },
+};
 </script>
 
 <style scoped>
@@ -90,20 +91,12 @@ a {
   height: 100%;
 }
 
-.img .test {
-   display: block;
-  object-fit: contain;
-  object-position: center;
-  width: 100%;
-  height: 100%;
-}
-
 .title {
   font-size: 1.5rem;
   text-transform: uppercase;
   color: var(--color-text-main);
   font-weight: 900;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   text-decoration: none !important;
 }
 
@@ -128,7 +121,6 @@ a {
 .outer {
   position: relative;
   background: var(--color-box-background);
-  /* height: 100%; */
   display: flex;
   padding: 0 50px;
 }

@@ -1,69 +1,64 @@
 <template>
   <div>
-    <SubHeader centerContent="true">
+    <SubHeader center-content="true">
       <H1>{{ folder.name }}</H1>
       <Shape :components="rest" />
     </SubHeader>
     <div v-if="gridRelations.length > 0">
       <Grid>
-        <GridItem 
+        <GridItem
           v-for="cell in gridRelations"
           :key="cell.itemId"
           :data="cell.item"
-          :gridCell="cell"
+          :grid-cell="cell"
         />
       </Grid>
     </div>
     <div v-else-if="children" class="list">
-      <Items
-        v-for="(item, i) in children" 
-        :key="i"
-        :item="item"
-      />   
+      <Items v-for="(item, i) in children" :key="i" :item="item" />
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['data', 'gridCell'],
+  props: ["data", "gridCell"],
   data() {
     return {
       folder: this.data.folder,
       children: this.data.folder.children,
       rest: [],
-      gridRelations: []
-    }
+      gridRelations: [],
+    };
   },
   mounted() {
-     const gridRelations = this.folder.components
-    ?.filter((c) => c.type === 'gridRelations')
-    ?.reduce((acc, g) => [...acc, ...(g?.content?.grids || [])], []);
-    
-    const rest = this.folder.components?.filter((c) => c.type !== 'gridRelations');
+    const gridRelations = this.folder.components
+      ?.filter((c) => c.type === "gridRelations")
+      ?.reduce((acc, g) => [...acc, ...(g?.content?.grids || [])], []);
 
-    const columns = gridRelations.map(r =>  r.rows);
+    const rest = this.folder.components?.filter(
+      (c) => c.type !== "gridRelations"
+    );
+
+    const columns = gridRelations.map((r) => r.rows);
 
     let rows = [];
 
-    columns.map(col => {
-      col.map(data => {
-        data.columns.map(column => {
+    columns.map((col) => {
+      col.map((data) => {
+        data.columns.map((column) => {
           rows.push(column);
-        })
-      })
+        });
+      });
     });
-
 
     this.rest = rest;
     this.gridRelations = rows;
   },
   methods: {
-    filterRelations() {
-
-    }
-  }
-}
+    filterRelations() {},
+  },
+};
 </script>
 
 <style scoped>

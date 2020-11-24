@@ -3,15 +3,13 @@
     <div class="login">
       <h1 class="title">Login</h1>
       <form>
-        <h4>Enter your email address and we’ll send a magic login link to your inbox.</h4>
+        <h4>
+          Enter your email address and we’ll send a magic login link to your
+          inbox.
+        </h4>
         <div class="login">
           <div class="fields">
-            <input 
-              type="email" 
-              name="email" 
-              placeholder="Email"
-              required
-            >
+            <input type="email" name="email" placeholder="Email" required />
             <Button />
             <!-- <button type="submit" value="Submit">
               send me a magick link
@@ -34,7 +32,7 @@
 .title {
   margin: 0 0 15px;
   font-size: 3rem;
-  font-family: 'Roboto Slab', sans-serif;
+  font-family: "Roboto Slab", sans-serif;
   color: var(--color-text-main);
 }
 
@@ -85,7 +83,7 @@
     display: block;
   }
 
-  .fields input { 
+  .fields input {
     width: 100%;
     min-width: auto;
     border-right-width: 2px;
