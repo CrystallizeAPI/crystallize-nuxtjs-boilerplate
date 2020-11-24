@@ -16,23 +16,27 @@
 export default {
   props: {
     grid: {
-      type: Array,
+      type: Object,
       required: true,
       default: null,
     },
   },
   data() {
     const flattened = [];
-    this.grid
-      ?.map((r) => r.rows)
-      .map((col) => {
-        col.map((data) => {
-          data.columns.map((column) => {
-            flattened.push(column);
-          });
-        });
-      });
 
+    /**
+     * Flatten the grid so that it is
+     * easier to convert to a CSS grid
+     */
+    this.grid?.rows?.map((row) => {
+      row.columns?.map((column) => {
+        if (column.item) {
+          flattened.push(column);
+        }
+      });
+    });
+
+    // Get the total number of columns in a row
     const totalColSpan =
       this.grid?.rows?.[0]?.columns?.reduce(
         (acc, col) => acc + col.layout.colspan,

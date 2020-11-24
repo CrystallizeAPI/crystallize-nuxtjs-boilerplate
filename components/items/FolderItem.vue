@@ -1,37 +1,35 @@
 <template>
   <div v-if="!data"></div>
-  <NuxtLink :to="path" v-else class="testtest">
-    <a class="outer">
-      <div class="image-wrapper">
-        <ImageComponent
+  <NuxtLink v-else :to="path" class="outer">
+    <div class="image-wrapper">
+      <ImageComponent
         v-if="image"
-          :image="image"
-          sizes="(min-width 1024px) 100px, 100vw"
-        />
-      </div>
-      <div class="text">
-        <H3>{{ name }}</H3>
-      </div>
-    </a>
+        :image="image"
+        sizes="(min-width 1024px) 100px, 100vw"
+      />
+    </div>
+    <div class="text">
+      <H3>{{ name }}</H3>
+    </div>
   </NuxtLink>
 </template>
 
 <script>
 export default {
-  props: ['data', 'gridCell'],
+  props: ["data", "gridCell"],
   data() {
     return {
       name: this.data.name,
       path: this.data.path,
       // imageMdWidth: 100 / (gridCell?.layout?.colspan ?? 1),
-      image: '',
-    }
+      image: "",
+    };
   },
   mounted() {
-    const images = this.data.components.find((c) => c.type === 'images')
+    const images = this.data.components.find((c) => c.type === "images");
     this.image = images?.content?.images?.[0];
-  }
-}
+  },
+};
 </script>
 
 <style scoped>
@@ -88,7 +86,7 @@ a {
   font-size: 1.4em;
   text-transform: uppercase;
   text-align: center;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   margin: 0;
   color: black;
 }
@@ -97,5 +95,4 @@ a {
   color: inherit;
   font-weight: bold;
 }
-
 </style>

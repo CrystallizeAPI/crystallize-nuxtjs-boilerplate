@@ -5,47 +5,37 @@
         <img src="/shop-logo.svg" alt="" />
       </div>
     </NuxtLink>
-    <nav 
-      class="nav"
-      :class="open ? 'nav-open' : ''"
-    >
+    <nav class="nav" :class="open ? 'nav-open' : ''">
       <p v-if="fetchState.pending">Fetching data...</p>
       <p v-else-if="fetchState.error">Error while fetching data</p>
       <ul class="nav-list">
-        <li
-          v-for="child of catalogue"
-          :key="child.path"
-          class="nav-list-item"
-        >
-         <NuxtLink :to="child.name.toLowerCase()">
-           {{ child.name }}
-        </NuxtLink>
+        <li v-for="child of catalogue" :key="child.path" class="nav-list-item">
+          <NuxtLink :to="child.path">
+            {{ child.name }}
+          </NuxtLink>
         </li>
       </ul>
     </nav>
-    <div 
-      class="nav-actions"
-      :class="open ? 'nav-actions-open' : ''"
-    >
+    <div class="nav-actions" :class="open ? 'nav-actions-open' : ''">
       <NuxtLink to="/">
         <span class="link">Login</span>
       </NuxtLink>
     </div>
     <BasketButton />
-    <BurgerButton :open="open" :toggleNavBar="toggleNavBar" />
+    <BurgerButton :open="open" :toggle-nav-bar="toggleNavBar" />
   </header>
 </template>
 
 <script>
 export default {
-  props: ['catalogue', 'fetchState'],
+  props: ["catalogue", "fetchState"],
   data() {
     return { open: false };
   },
   methods: {
     toggleNavBar() {
       this.open = !this.open;
-    }
+    },
   },
 };
 </script>
@@ -198,11 +188,6 @@ export default {
     margin: 0;
     font-size: 1.5rem;
   }
-
-  /* ${is('open')`
-      display: flex;
-      justify-content: center;
-    `}; */
 
   .nav-actions-open {
     display: flex;

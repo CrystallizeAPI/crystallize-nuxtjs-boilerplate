@@ -28,6 +28,7 @@ export default {
             children {
               id
               name
+              path
             }
           }
         }
@@ -38,7 +39,7 @@ export default {
     });
 
     /**
-     * Filter out some items
+     * Filter the items you don't want in the nav bar
      */
     this.catalogue = data.catalogue.children.filter(
       (c) => c.name !== "_web-frontpage"

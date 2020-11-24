@@ -2,21 +2,17 @@
   <footer class="outer">
     <NuxtLink to="/">
       <div class="logo">
-        <img src="/shop-logo.svg" alt="">
+        <img src="/shop-logo.svg" alt="" />
       </div>
     </NuxtLink>
     <footer class="navlist">
       <h5>Menu</h5>
       <p v-if="fetchState.pending">Fetching data...</p>
       <p v-else-if="fetchState.error">Error while fetching data</p>
-      <li
-        v-for="child of catalogue"
-        :key="child.path"
-        class="nav-list-item"
-      >
-        <NuxtLink :to="child.name.toLowerCase()">
+      <li v-for="child of catalogue" :key="child.path" class="nav-list-item">
+        <NuxtLink :to="child.path">
           {{ child.name }}
-      </NuxtLink>
+        </NuxtLink>
       </li>
     </footer>
     <div class="powered">
@@ -30,8 +26,8 @@
 
 <script>
 export default {
-  props: ['catalogue', 'fetchState'  ]
-}
+  props: ["catalogue", "fetchState"],
+};
 </script>
 
 <style scoped>

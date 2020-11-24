@@ -3,12 +3,14 @@
     <SubHeader center-content>
       <H1>{{ folder.name }}</H1>
     </SubHeader>
-    <div v-if="gridToDisplay">
-      <Grid :grid="gridToDisplay" />
-    </div>
-    <div v-else-if="folder.children" class="list">
-      <Items v-for="item in folder.children" :key="item.id" :item="item" />
-    </div>
+
+    <Grid v-if="grid" :grid="grid" />
+    <Items
+      v-for="item in folder.children"
+      v-else-if="folder.children"
+      :key="item.id"
+      :item="item"
+    />
   </div>
 </template>
 
@@ -18,7 +20,7 @@ import fragments from "../lib/graph/fragments";
 
 export default {
   data() {
-    return { folder: {}, gridToDisplay: null, allComponentsButGrid: null };
+    return { folder: {}, grid: null, allComponentsButGrid: null };
   },
   async fetch() {
     const { route } = this.$nuxt.context;
@@ -27,8 +29,8 @@ export default {
 
     /**
      * Get EVERYTHING for this folder
-     * You probably want to cherry pick the fields to
-     * show here to improve frontend performance
+     * You probably want to cherry pick the fields in
+     * the query here to improve performance
      */
     const response = await simplyFetchFromGraph({
       query: `
@@ -53,9 +55,7 @@ export default {
     const { folder } = response.data;
 
     // Get a grid to display
-    const gridToDisplay = folder.components?.find(
-      (c) => c.type === "gridRelations"
-    );
+    const grid = folder.components?.find((c) => c.type === "gridRelations");
 
     // Filter out the rest of the components
     const allComponentsButGrid = folder.components?.filter(
@@ -63,10 +63,30 @@ export default {
     );
 
     this.folder = folder;
-    this.gridToDisplay = gridToDisplay?.content?.grids?.[0];
+    this.grid = grid?.content?.grids?.[0];
     this.allComponentsButGrid = allComponentsButGrid;
+
+    // Provide a good meta description for this page
+    this.metaDescription = "";
+  },
+  head() {
+    if (!this.metaDescription) {
+      console.warn(
+        "this.metaDescription is missing for folder",
+        this.folder?.name
+      );
+    }
+
+    return {
+      title: this.folder?.name,
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content: this.metaDescription,
+        },
+      ],
+    };
   },
 };
 </script>
-
-<style scoped></style>
