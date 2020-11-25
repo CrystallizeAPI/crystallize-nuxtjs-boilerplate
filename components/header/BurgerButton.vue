@@ -1,16 +1,21 @@
 <template>
-  <button class="outer" v-on:click="toggleNavBar" >
-    <div class="lines" 
-      :class="open ? 'lines-active lines-transparent': 'lines-desactive lines-color-bg'"
-    >
-    </div>
+  <button class="outer" type="button" @click="toggleNavBar">
+    <div class="lines" :class="open ? 'open' : ''"></div>
   </button>
 </template>
 
 <script>
 export default {
-  props: ['open', 'toggleNavBar']
-}
+  props: {
+    open: {
+      type: Boolean,
+    },
+    toggleNavBar: {
+      type: Function,
+      required: true,
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -32,8 +37,7 @@ export default {
 .lines {
   width: 100%;
   position: absolute;
-  background: rgb(85, 84, 84);
-  /* background: ${(p) => (p.open ? 'transparent' : 'var(--color-text-main)')}; */
+  background: var(--color-text-main);
   height: 4px;
   top: 50%;
   margin-top: -2px;
@@ -41,12 +45,8 @@ export default {
   transition: all 0.2s ease-out;
 }
 
-.lines-transparent-bg {
+.lines.open {
   background: transparent;
-}
-
-.lines-color-bg {
-  background: var(--color-text-main);
 }
 
 .lines::before,
@@ -55,50 +55,37 @@ export default {
   top: -14px;
   background: var(--color-text-main);
   height: 4px;
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   transition: all 0.2s ease-out;
+  transform: rotate(0deg);
 }
 
-.lines-active::after {
+.lines::after {
+  left: 8px;
+  width: calc(100% - 8px);
+  top: 14px;
+}
+
+.lines.open::after {
   transform: rotate(-45deg);
   left: 0px;
   width: 100%;
   top: 0;
 }
 
-.lines-desactive::after {
-  transform: rotate(0deg);
-  left: 8px;
-  width: calc(100% - 8px);
-  top: 14px;
+.lines::before {
+  top: -14px;
 }
 
-.lines-active::before {
+.lines.open::before {
   transform: rotate(45deg);
   top: 0;
 }
 
-.lines-desactive::before {
-  transform: rotate(0deg);
-  top: 14px;
-}
-
-/* .lines::after {
-  transform: ${(p) => (p.open ? 'rotate(-45deg)' : 'rotate(0deg)')};
-  left: ${(p) => (p.open ? '0px' : '8px')};
-  width: ${(p) => (p.open ? '100%' : 'calc(100% - 8px)')};
-  top: ${(p) => (p.open ? '0' : '14px')};
-} */
-  
-/* .lines::before {
-  transform: ${(p) => (p.open ? 'rotate(45deg)' : 'rotate(0deg)')};
-  top: ${(p) => (p.open ? '0' : '-14px')};
-} */
-
-@media (max-width: 1024px) { 
-  .outer { 
+@media (max-width: 1024px) {
+  .outer {
     display: block;
   }
 }

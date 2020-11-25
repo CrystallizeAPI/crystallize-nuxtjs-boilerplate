@@ -1,7 +1,13 @@
 <template>
   <div class="outer">
-    <Grid v-if="grid" :grid="grid" />
-    <div v-else class="no-grids">No grids to show on the frontpage</div>
+    <div v-if="$fetchState.pending">Please wait...</div>
+    <div v-else-if="$fetchState.error">
+      An error occured when getting data for the frontpage
+    </div>
+    <div v-else>
+      <Grid v-if="grid" :grid="grid" />
+      <div v-else class="no-grids">No grids to show on the frontpage</div>
+    </div>
   </div>
 </template>
 
@@ -37,6 +43,7 @@ export default {
       },
     });
 
+    // Extract the grid that we want to show
     const grid = data.frontpage?.components?.find(
       (c) => c.type === "gridRelations"
     )?.content?.grids?.[0];

@@ -1,8 +1,14 @@
 <template>
   <div>
-    <Header :catalogue="catalogue" :fetch-state="$fetchState" />
-    <nuxt />
-    <Footer :catalogue="catalogue" :fetch-state="$fetchState" />
+    <p v-if="$fetchState.pending">Hold on...</p>
+    <p v-else-if="$fetchState.error">
+      Oh no! There was an error fetching the data in layouts/default.vue
+    </p>
+    <div v-else>
+      <Header :nav-items="navItems" />
+      <nuxt />
+      <Footer :nav-items="navItems" />
+    </div>
   </div>
 </template>
 
@@ -11,7 +17,7 @@ import { simplyFetchFromGraph } from "../lib/graph";
 
 export default {
   data() {
-    return { catalogue: {} };
+    return { navItems: [] };
   },
   async fetch() {
     const { locales, locale: code } = this.$i18n;
@@ -41,7 +47,7 @@ export default {
     /**
      * Filter the items you don't want in the nav bar
      */
-    this.catalogue = data.catalogue.children.filter(
+    this.navItems = data.catalogue.children.filter(
       (c) => c.name !== "_web-frontpage"
     );
   },

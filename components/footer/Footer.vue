@@ -7,9 +7,7 @@
     </NuxtLink>
     <footer class="navlist">
       <h5>Menu</h5>
-      <p v-if="fetchState.pending">Fetching data...</p>
-      <p v-else-if="fetchState.error">Error while fetching data</p>
-      <li v-for="child of catalogue" :key="child.path" class="nav-list-item">
+      <li v-for="child of navItems" :key="child.path" class="nav-list-item">
         <NuxtLink :to="child.path">
           {{ child.name }}
         </NuxtLink>
@@ -26,7 +24,12 @@
 
 <script>
 export default {
-  props: ["catalogue", "fetchState"],
+  props: {
+    navItems: {
+      type: Array,
+      required: true,
+    },
+  },
 };
 </script>
 

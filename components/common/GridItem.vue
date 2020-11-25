@@ -1,7 +1,5 @@
 <template>
-  <div v-if="!data"></div>
   <NuxtLink
-    v-else
     :to="path"
     :style="{
       gridColumn: `span ${gridCell.layout.colspan}`,
@@ -32,7 +30,16 @@
 
 <script>
 export default {
-  props: ["data", "gridCell"],
+  props: {
+    data: {
+      type: Object,
+      required: true,
+    },
+    gridCell: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
       name: this.data.name,

@@ -16,7 +16,7 @@ function getComponentForPath({ type }) {
 
 import appConfig from "./app.config.json";
 
-const locale = appConfig.locales[0] || {
+const locale = appConfig.locale || {
   locale: "en",
   displayName: "English - US",
   appLanguage: "en-US",

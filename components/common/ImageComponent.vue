@@ -1,18 +1,24 @@
 <template>
-  <picture :class="className" >
-    <source 
-      v-if="srcSetWebp.length > 0" 
+  <picture :class="className">
+    <source
+      v-if="srcSetWebp.length > 0"
       :srcSet="srcSetWebp"
-      type="image/webp" 
+      type="image/webp"
       :sizes="sizes"
     />
-    <source 
-      v-if="srcSet.length > 0" 
+    <source
+      v-if="srcSet.length > 0"
       :srcSet="srcSetWebp"
       :type="`image/${originalFileExtension}`"
       :sizes="sizes"
     />
-    <img :src="src" :alt="alt" :sizes="sizes">
+    <img
+      :src="src"
+      :alt="altText"
+      :sizes="sizes"
+      :width="width"
+      :height="height"
+    />
   </picture>
 </template>
 
@@ -21,73 +27,78 @@ export default {
   props: {
     image: {
       type: Object,
-      required: true
+      required: true,
     },
-    altPassed: {
+    alt: {
       type: String,
-      default: ''
+      default: "",
     },
     sizes: {
       type: String,
-       default: '100vw'
+      default: "100vw",
     },
     className: {
       type: String,
-       default: ''
+      default: "",
     },
   },
   data() {
-    return {
-      url: this.image.url,
-      variants: this.image.variants,
-      alt: typeof this.altPassed === "string" ? this.altPassed : this.image.altText,
-      // className: this.className,
-      originalFileExtension: "jpeg",
-      srcSetWebp: '',
-      srcSet: '',
-      src: ''
-    }
-  },
-  mounted() {
-    const vars = this.variants || [];
-    const hasVariants = vars.length > 0;
+    const image = this.image;
 
-    // Determine srcSet
+    // Separate the image variants by their respective types
+    const vars = image.variants || [];
     const std = vars.filter((v) => v.url && !v.url.endsWith(".webp"));
     const webp = vars.filter((v) => v.url && v.url.endsWith(".webp"));
-    this.srcSet = std.map(this.getVariantSrc).join(", ");
-    this.srcSetWebp = webp.map(this.getVariantSrc).join(", ");
+    const srcSet = std.map(this.getVariantSrc).join(", ");
+    const srcSetWebp = webp.map(this.getVariantSrc).join(", ");
 
-    if (std.length > 0) {
+    // Determine the file extension for the original image
+    let originalFileExtension = "jpeg";
+    const srcToGetOriginalFileExtension = image.url || std[0]?.url;
+    if (srcToGetOriginalFileExtension) {
       ({
         groups: { name: this.originalFileExtension },
-      } = std[0].url.match(/\.(?<name>[^\.]+)$/));
+      } = srcToGetOriginalFileExtension.match(/\.(?<name>[^.]+)$/));
 
       // Provide correct mime type for jpg
-      if (this.originalFileExtension === "jpg") {
-        this.originalFileExtension = "jpeg";
+      if (originalFileExtension === "jpg") {
+        originalFileExtension = "jpeg";
       }
-
     }
 
-    this.src = this.url || (hasVariants ? std[0].url : '');
+    /**
+     * Set the fallback url to be the standard variant
+     * if it exists, or the original image url.
+     * The fallback will be used if the browser does
+     * not support srcset: https://caniuse.com/srcset
+     */
+    const src = std[0]?.url || image.url;
 
+    // Get the image dimensions
+    let biggestImage = vars[0];
+    if (vars.length > 0) {
+      biggestImage = vars.reduce(function (acc, v) {
+        if (!acc.width || v.width > acc.width) {
+          return v;
+        }
+        return acc;
+      }, vars[0]);
+    }
+
+    return {
+      altText: this.alt || this.image.altText,
+      originalFileExtension,
+      srcSetWebp,
+      srcSet,
+      src,
+      width: biggestImage.width,
+      height: biggestImage.height,
+    };
   },
   methods: {
     getVariantSrc(variant) {
       return `${variant.url} ${variant.width}w`;
-    }
-  }
-}
+    },
+  },
+};
 </script>
-
-<style scoped>
-.img > img {
-  display: block;
-  object-fit: cover;
-  object-position: center;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-</style>

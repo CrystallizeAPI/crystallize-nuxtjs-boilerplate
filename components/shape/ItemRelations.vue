@@ -38,7 +38,7 @@ export default {
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: var(--screen-md)) {
   .outer { 
     grid-template-columns: repeat(4, 1fr);
   }

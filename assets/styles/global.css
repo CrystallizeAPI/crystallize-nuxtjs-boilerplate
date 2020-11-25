@@ -5,21 +5,10 @@
   --color-text-sub: #4c505b;
   --color-box-background: #efefef;
   --color-price: #d79b59;
-  --color-error: #EF4836;
+  --color-error: #ef4836;
   --main-bg-color: brown;
 }
 
-
-/* Uncomment this to enable dark mode */
-  /* @media (prefers-color-scheme: dark) {
-    :root {
-      --color-main-background: #020210;
-      --color-text-main: #fff;
-      --color-text-sub: #ddd;
-      --color-box-background: #555;
-    }
-} */
-  
 html {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
@@ -100,7 +89,8 @@ button {
   padding: 0;
   border: 0;
 }
-::-webkit-input-placeholder { /* Edge */
+::-webkit-input-placeholder {
+  /* Edge */
   color: var(--color-text-sub);
 }
 ::placeholder {
