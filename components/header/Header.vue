@@ -14,11 +14,6 @@
         </li>
       </ul>
     </nav>
-    <!-- <div class="nav-actions" :class="open ? 'nav-actions-open' : ''">
-      <NuxtLink to="/">
-        <span class="link">Login</span>
-      </NuxtLink>
-    </div> -->
     <BurgerButton :open="open" :toggle-nav-bar="toggleNavBar" />
   </header>
 </template>
@@ -108,38 +103,6 @@ export default {
   cursor: pointer;
 }
 
-.nav-actions {
-  margin: 8px 10px 0;
-  display: flex;
-  text-transform: uppercase;
-  align-items: center;
-}
-
-.nav-actions .link,
-.nav-actions button {
-  padding: 5px 10px;
-  font-size: 14px;
-  font-weight: 500;
-  border: 1.4px solid var(--color-text-main);
-  color: var(--color-text-main);
-  white-space: nowrap;
-  cursor: pointer;
-}
-
-.nav-actions .link:hover,
-.nav-actions button:hover {
-  background: var(--color-text-main);
-  color: var(--color-main-background);
-  text-decoration: none;
-}
-
-.preview-bar {
-  background: #000;
-  color: #fff;
-  padding: 20px;
-  text-align: center;
-}
-
 @media (max-width: 1024px) {
   .outer {
     padding: 10px 90px 10px 20px;
@@ -177,23 +140,6 @@ export default {
 
   .nav-list-item {
     display: block;
-  }
-
-  .nav-actions {
-    display: none;
-    position: absolute;
-    top: 40px;
-    left: 0;
-    width: 100%;
-    z-index: 99;
-    text-align: center;
-    margin: 0;
-    font-size: 1.5rem;
-  }
-
-  .nav-actions-open {
-    display: flex;
-    justify-content: center;
   }
 }
 

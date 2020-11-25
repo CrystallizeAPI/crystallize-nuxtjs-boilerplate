@@ -1,14 +1,10 @@
 <template>
-  <div class="outer">
-    <div v-if="$fetchState.pending">Please wait...</div>
-    <div v-else-if="$fetchState.error">
-      An error occured when getting data for the frontpage
-    </div>
-    <div v-else>
+  <FetchLoader :state="$fetchState">
+    <div class="outer">
       <Grid v-if="grid" :grid="grid" />
       <div v-else class="no-grids">No grids to show on the frontpage</div>
     </div>
-  </div>
+  </FetchLoader>
 </template>
 
 <script>

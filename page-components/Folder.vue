@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <FetchLoader :state="$fetchState">
     <SubHeader center-content>
       <H1>{{ folder.name }}</H1>
     </SubHeader>
@@ -11,7 +11,7 @@
       :key="item.id"
       :item="item"
     />
-  </div>
+  </FetchLoader>
 </template>
 
 <script>
@@ -70,10 +70,10 @@ export default {
     this.metaDescription = "";
   },
   head() {
-    if (!this.metaDescription) {
+    if (!this.metaDescription && this.folder?.name) {
       console.warn(
         "this.metaDescription is missing for folder",
-        this.folder?.name
+        this.folder.name
       );
     }
 

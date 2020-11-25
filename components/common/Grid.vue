@@ -58,10 +58,15 @@ export default {
   grid-template-rows: 700px;
 }
 
+@media (max-width: 1023px) {
+  .grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
 @media (max-width: 768px) {
   .grid {
     display: block !important;
-    grid-template-columns: 100% !important;
   }
 }
 </style>

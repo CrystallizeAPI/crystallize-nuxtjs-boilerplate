@@ -5,24 +5,24 @@
       gridColumn: `span ${gridCell.layout.colspan}`,
       gridRow: `span ${gridCell.layout.rowspan}`,
     }"
+    :class="cellSize"
   >
-    <div class="outer" :class="cellSize">
+    <div class="cell-inner">
       <div class="text">
         <span v-if="defaultVariant" class="price"
           >${{ defaultVariant.price }}.00</span
         >
         <h3 class="title">{{ name }}</h3>
         <template v-if="defaultVariant">
-          <Button> Buy </Button>
+          <Button>Buy</Button>
         </template>
       </div>
-      <div class="image-wraper">
-        <div class="img">
-          <ImageComponent
-            :image="image"
-            :sizes="`(min-width 1024px) ${imageMdWidth}px, 100vw`"
-          />
-        </div>
+
+      <div class="img">
+        <ImageComponent
+          :image="image"
+          :sizes="`(min-width 1024px) ${imageMdWidth}px, 100vw`"
+        />
       </div>
     </div>
   </NuxtLink>
@@ -48,7 +48,7 @@ export default {
       variants: this.data.variants,
       defaultVariant: this.data.defaultVariant,
       imageMdWidth: 100 / (this.gridCell?.layout?.colspan ?? 1),
-      cellSize: `cell-${this.gridCell?.layout?.rowspan}x${this.gridCell?.layout?.colspan}`,
+      cellSize: `cell cell-${this.gridCell?.layout?.rowspan}x${this.gridCell?.layout?.colspan}`,
       image: this.data.defaultVariant
         ? this.data.defaultVariant.image
         : this.filterContentImages(this.data.type, this.data.components),
@@ -72,30 +72,18 @@ export default {
 <style scoped>
 a {
   text-decoration: none;
-  display: flex;
-}
-
-.image-wraper {
-  position: relative;
-  z-index: 1;
-  overflow: hidden;
-  height: 100%;
-  width: 100%;
-}
-
-.img {
-  width: 100%;
-  height: 100%;
   display: block;
-  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  a {
+    display: flex;
+  }
 }
 
 .img img {
   display: block;
-  object-fit: contain;
-  object-position: center;
   width: 100%;
-  height: 100%;
 }
 
 .title {
@@ -125,25 +113,25 @@ a {
   font-weight: bold;
 }
 
-.outer {
+.cell-inner {
   position: relative;
   background: var(--color-box-background);
   display: flex;
   padding: 0 50px;
 }
 
-.outer:hover {
+.cell-inner:hover {
   text-decoration: none;
 }
 
-.outer button {
+.cell-inner button {
   margin: 0 auto;
   min-width: 200px;
   max-width: 80%;
 }
 
-@media (max-width: 768px) {
-  .outer {
+@media (max-width: 767px) {
+  .cell-inner {
     flex-direction: column-reverse;
     text-align: center;
     margin-bottom: 15px;
@@ -152,36 +140,40 @@ a {
 }
 
 @media (min-width: 1024px) {
-  .outer.cell-1x1 {
+  .cell-inner {
+    flex-grow: 1;
+  }
+
+  .cell-1x1 .cell-inner {
     flex-direction: column-reverse;
     justify-content: center;
     padding-bottom: 50px;
     text-align: center;
   }
 
-  .outer.cell-1x2 {
+  .cell-1x2 .cell-inner {
     flex-direction: row-reverse;
     padding: 0 50px 0 0;
   }
 
-  .outer.cell-1x2 .image {
+  .cell-1x2 .image {
     width: 200%;
     transform: translateX(-50%);
   }
 
-  .outer.cell-1x2 button {
+  .cell-1x2 button {
     margin: 0 0;
   }
 
-  .outer.cell-1x3 {
+  .cell-1x3 .cell-inner {
     padding-left: 15rem;
   }
 
-  .outer.cell-1x3 button {
+  .cell-1x3 button {
     margin: 0 0;
   }
 
-  .outer.cell-2x2 {
+  .cell-2x2 .cell-inner {
     flex-direction: column-reverse;
     padding-bottom: 50px;
     text-align: center;
