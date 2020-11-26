@@ -65,7 +65,7 @@ export default {
 
     // Get a header image to display
     const imagesComponent = folder.components?.find((c) => c.type === "images");
-    if (imagesComponent) {
+    if (imagesComponent?.content?.images) {
       const [image] = imagesComponent.content.images;
       this.headerImage = image;
     }
@@ -74,7 +74,7 @@ export default {
     const richTextComponent = folder.components?.find(
       (c) => c.type === "richText"
     );
-    if (richTextComponent) {
+    if (richTextComponent?.content?.json) {
       this.headerDescription = richTextComponent.content.json;
 
       // Provide a good meta description for this page

@@ -1,19 +1,19 @@
 <template>
-  <div v-if="items" class="items">
-    <template v-for="item in items">
-      <ProductItem v-if="item.type === 'product'" :key="item.id" :data="item" />
-      <FolderItem
-        v-else-if="item.type === 'folder'"
-        :key="item.id"
-        :data="item"
-      />
-      <DocumentItem v-else :key="item.id" :data="item" />
-    </template>
-  </div>
+  <ul v-if="items" class="items">
+    <li v-for="item in items" :key="item.id" class="item">
+      <ProductItem v-if="item.type === 'product'" :data="item" />
+      <FolderOrDocument v-else :data="item" />
+    </li>
+  </ul>
 </template>
 
 <script>
+import FolderOrDocument from "./folder-or-document";
+
 export default {
+  components: {
+    FolderOrDocument,
+  },
   props: {
     items: {
       type: Array,
@@ -25,8 +25,27 @@ export default {
 
 <style scoped>
 .items {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 1rem;
+  display: block;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  margin: 0 0 15px;
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .items {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1rem;
+  }
+
+  .item {
+    grid-column-end: span 4;
+    margin: 0;
+  }
 }
 </style>

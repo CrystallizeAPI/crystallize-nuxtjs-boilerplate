@@ -5,7 +5,7 @@
       Please wait...
     </div>
     <div v-else-if="state.error" class="fetch-loader">
-      An error occured when getting data for the frontpage
+      An error occured when getting data for the page
     </div>
     <slot v-else></slot>
   </div>

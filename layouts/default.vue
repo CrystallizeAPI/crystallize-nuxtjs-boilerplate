@@ -48,7 +48,7 @@ export default {
      * Filter the items you don't want in the nav bar
      */
     this.navItems = data.catalogue.children.filter(
-      (c) => c.name !== "_web-frontpage"
+      (c) => !c.name.startsWith("_")
     );
   },
 };

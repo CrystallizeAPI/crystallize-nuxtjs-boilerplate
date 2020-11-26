@@ -8,7 +8,7 @@
     <nav class="nav" :class="open ? 'nav-open' : ''">
       <ul class="nav-list">
         <li v-for="child of navItems" :key="child.path" class="nav-list-item">
-          <NuxtLink :to="child.path">
+          <NuxtLink :to="child.path" @click="open = false">
             {{ child.name }}
           </NuxtLink>
         </li>
@@ -26,12 +26,18 @@ export default {
       required: true,
     },
   },
-  data() {
+  data: function () {
     return { open: false };
   },
   methods: {
     toggleNavBar() {
       this.open = !this.open;
+      document.body.style.overflow = this.open ? "hidden" : "auto";
+    },
+    hideNavBar() {
+      alert("hello");
+      this.open = false;
+      document.body.style.overflow = "auto";
     },
   },
 };

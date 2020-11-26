@@ -1,5 +1,5 @@
 <template>
-  <div class="outer" :style="{ paddingTop: `${(9 / 16) * 100}%` }">
+  <div class="outer">
     <div class="inner">
       <slot></slot>
     </div>
@@ -8,7 +8,7 @@
 
 <style scoped>
 .outer {
-  /* padding-top: ${(9 / 16) * 100}%; */
+  padding-top: 56.25%;
   position: relative;
 }
 
