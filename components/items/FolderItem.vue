@@ -1,8 +1,7 @@
 <template>
-  <div v-if="!data"></div>
-  <NuxtLink v-else :to="path" class="outer">
+  <NuxtLink :to="path" class="outer">
     <div class="image-wrapper">
-      <ImageComponent
+      <CrystallizeImage
         v-if="image"
         :image="image"
         sizes="(min-width 1024px) 100px, 100vw"
@@ -16,18 +15,21 @@
 
 <script>
 export default {
-  props: ["data", "gridCell"],
+  props: {
+    data: {
+      type: Object,
+      default: null,
+    },
+  },
   data() {
+    const images = this.data?.components?.find((c) => c.type === "images");
+
     return {
       name: this.data.name,
       path: this.data.path,
       // imageMdWidth: 100 / (gridCell?.layout?.colspan ?? 1),
-      image: "",
+      image: images?.content?.images?.[0],
     };
-  },
-  mounted() {
-    const images = this.data.components.find((c) => c.type === "images");
-    this.image = images?.content?.images?.[0];
   },
 };
 </script>

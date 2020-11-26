@@ -10,7 +10,7 @@
         </ContentTransformer>
       </SubHeader>
       <div class="hero-image">
-        <ImageComponent 
+        <CrystallizeImage 
           v-for="(image, index) in images.content.images"
           :key="index"
           :image="image"

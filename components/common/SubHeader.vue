@@ -37,7 +37,6 @@ export default {
 .header {
   display: flex;
   flex-direction: column;
-  margin-bottom: 50px;
   padding: 100px 50px 50px;
   /* text-align: ${(p) => (p.centerContent ? 'center' : 'left')};
   margin: ${(p) => (p.centerContent ? '0 auto' : '0 0 50px 0')}; */

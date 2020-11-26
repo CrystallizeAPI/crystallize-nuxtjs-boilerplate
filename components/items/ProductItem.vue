@@ -4,7 +4,7 @@
     <div class="inner">
       <div class="image-wrapper">
         <div v-if="variant.image">
-          <ImageComponent :image="variant.image" :alt="name" sizes="250px" />
+          <CrystallizeImage :image="variant.image" :alt="name" sizes="250px" />
         </div>
       </div>
       <div class="text">

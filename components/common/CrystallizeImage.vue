@@ -91,8 +91,8 @@ export default {
       srcSetWebp,
       srcSet,
       src,
-      width: biggestImage.width,
-      height: biggestImage.height,
+      width: biggestImage?.width,
+      height: biggestImage?.height,
     };
   },
   methods: {

@@ -10,6 +10,7 @@
     "start": "nuxt start"
   },
   "dependencies": {
+    "@crystallize/content-transformer": "^6.1.0",
     "@nuxt/http": "^0.5.12",
     "isomorphic-unfetch": "^3.1.0",
     "nuxt": "^2.14.7",

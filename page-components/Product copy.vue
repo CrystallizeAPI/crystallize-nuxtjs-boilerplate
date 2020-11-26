@@ -3,7 +3,7 @@
     <div class="sections">
       <div class="media">
         <div class="media-inner">
-          <ImageComponent 
+          <CrystallizeImage 
             :image="variant.image"
             sizes="(max-width: 768px) 400px, 60vw"
           />

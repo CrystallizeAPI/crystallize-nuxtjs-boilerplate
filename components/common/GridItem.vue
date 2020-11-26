@@ -19,7 +19,7 @@
       </div>
 
       <div class="img">
-        <ImageComponent
+        <CrystallizeImage
           :image="image"
           :sizes="`(min-width 1024px) ${imageMdWidth}px, 100vw`"
         />

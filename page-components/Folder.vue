@@ -2,25 +2,31 @@
   <FetchLoader :state="$fetchState">
     <SubHeader center-content>
       <H1>{{ folder.name }}</H1>
+
+      <CrystallizeImage v-if="headerImage" :image="headerImage" />
+      <div v-if="headerDescription" class="headerDescription">
+        <CrystallizeContentTransformer :data="headerDescription" />
+      </div>
     </SubHeader>
 
     <Grid v-if="grid" :grid="grid" />
-    <Items
-      v-for="item in folder.children"
-      v-else-if="folder.children"
-      :key="item.id"
-      :item="item"
-    />
+    <Items v-else-if="folder.children" :items="folder.children" />
   </FetchLoader>
 </template>
 
 <script>
+import toText from "@crystallize/content-transformer/toText";
 import { simplyFetchFromGraph } from "../lib/graph";
 import fragments from "../lib/graph/fragments";
 
 export default {
   data() {
-    return { folder: {}, grid: null, allComponentsButGrid: null };
+    return {
+      folder: {},
+      grid: null,
+      headerImage: null,
+      headerDescription: null,
+    };
   },
   async fetch() {
     const { route } = this.$nuxt.context;
@@ -57,17 +63,26 @@ export default {
     // Get a grid to display
     const grid = folder.components?.find((c) => c.type === "gridRelations");
 
-    // Filter out the rest of the components
-    const allComponentsButGrid = folder.components?.filter(
-      (c) => c.type !== "gridRelations"
+    // Get a header image to display
+    const imagesComponent = folder.components?.find((c) => c.type === "images");
+    if (imagesComponent) {
+      const [image] = imagesComponent.content.images;
+      this.headerImage = image;
+    }
+
+    // Get a description for the folder
+    const richTextComponent = folder.components?.find(
+      (c) => c.type === "richText"
     );
+    if (richTextComponent) {
+      this.headerDescription = richTextComponent.content.json;
+
+      // Provide a good meta description for this page
+      this.metaDescription = toText(richTextComponent.content.json);
+    }
 
     this.folder = folder;
     this.grid = grid?.content?.grids?.[0];
-    this.allComponentsButGrid = allComponentsButGrid;
-
-    // Provide a good meta description for this page
-    this.metaDescription = "";
   },
   head() {
     if (!this.metaDescription && this.folder?.name) {
@@ -90,3 +105,11 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.headerDescription {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin: 1em var(--content-padding);
+}
+</style>
