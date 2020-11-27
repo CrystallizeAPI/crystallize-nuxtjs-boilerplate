@@ -81,7 +81,7 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: ["@nuxt/http", ["nuxt-i18n"]],
+  modules: ["nuxt-i18n"],
 
   i18n: {
     seo: true,

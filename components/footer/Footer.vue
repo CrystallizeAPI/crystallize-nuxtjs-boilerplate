@@ -1,10 +1,10 @@
 <template>
   <footer class="outer">
-    <NuxtLink to="/">
-      <div class="logo">
-        <img src="/shop-logo.svg" alt="" />
-      </div>
-    </NuxtLink>
+    <div>
+      <NuxtLink to="/" class="logo">
+        <img src="/logo-shop.svg" alt="" />
+      </NuxtLink>
+    </div>
     <footer class="navlist">
       <h5>Menu</h5>
       <li v-for="child of navItems" :key="child.path" class="nav-list-item">
@@ -16,7 +16,7 @@
     <div class="powered">
       <p>eCommerce by</p>
       <a href="https://crystallize.com" aria-label="crystallize.com">
-        <LogoCrystallize />
+        <img src="/logo-crystallize.svg" alt="" />
       </a>
     </div>
   </footer>
@@ -44,7 +44,7 @@ export default {
   justify-content: space-between;
 }
 
-.logo {
+.logo img {
   width: 70px;
 }
 
@@ -61,7 +61,7 @@ export default {
   margin: 0;
 }
 
-.powered svg {
+.powered img {
   width: 120px;
 }
 

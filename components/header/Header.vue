@@ -1,15 +1,13 @@
 <template>
   <header class="outer">
-    <NuxtLink to="/">
-      <div class="logo">
-        <img src="/shop-logo.svg" alt="" />
-      </div>
+    <NuxtLink to="/" class="logo">
+      <img src="/logo-shop.svg" alt="" />
     </NuxtLink>
     <nav class="nav" :class="open ? 'nav-open' : ''">
       <ul class="nav-list">
         <li v-for="child of navItems" :key="child.path" class="nav-list-item">
-          <NuxtLink :to="child.path" @click="open = false">
-            {{ child.name }}
+          <NuxtLink :to="child.path">
+            <span @click="hideNavBar">{{ child.name }}</span>
           </NuxtLink>
         </li>
       </ul>
@@ -26,7 +24,7 @@ export default {
       required: true,
     },
   },
-  data: function () {
+  data() {
     return { open: false };
   },
   methods: {
@@ -35,7 +33,6 @@ export default {
       document.body.style.overflow = this.open ? "hidden" : "auto";
     },
     hideNavBar() {
-      alert("hello");
       this.open = false;
       document.body.style.overflow = "auto";
     },
@@ -55,14 +52,15 @@ export default {
 }
 
 .logo {
+  display: inline-block;
+  position: relative;
+  z-index: 999;
+}
+
+.logo img {
   height: 84px;
   display: block;
   object-fit: contain;
-}
-
-.logo img,
-.logo svg {
-  height: 100%;
 }
 
 .nav {
