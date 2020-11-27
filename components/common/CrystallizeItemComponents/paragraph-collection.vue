@@ -1,0 +1,28 @@
+<template>
+  <div v-if="data" class="paragraphs">
+    <template v-for="(paragraph, index) in data.paragraphs">
+      <div :key="index" class="paragraph">
+        <H3>{{ paragraph.title.text }}</H3>
+        <CrystallizeContentTransformer :data="paragraph.body.json" />
+        <Images :data="paragraph" />
+      </div>
+    </template>
+  </div>
+</template>
+
+<script>
+export default {
+  props: {
+    data: {
+      type: Object,
+      default: null,
+    },
+  },
+};
+</script>
+
+<style scoped>
+.paragraph {
+  margin-bottom: var(--content-padding);
+}
+</style>
