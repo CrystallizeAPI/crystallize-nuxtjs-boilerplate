@@ -14,7 +14,7 @@ import fragments from "../lib/graph/fragments";
 export default {
   data() {
     return {
-      document: null,
+      document: {},
     };
   },
   async fetch() {
