@@ -55,7 +55,6 @@ export default {
 .grid {
   display: grid;
   grid-gap: 20px;
-  grid-template-rows: 700px;
 }
 
 @media (max-width: 1023px) {

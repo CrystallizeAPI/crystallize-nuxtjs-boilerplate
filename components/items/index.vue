@@ -1,7 +1,7 @@
 <template>
   <ul v-if="items" class="items">
     <li v-for="item in items" :key="item.id" class="item">
-      <ProductItem v-if="item.type === 'product'" :data="item" />
+      <Product v-if="item.type === 'product'" :data="item" />
       <FolderOrDocument v-else :data="item" />
     </li>
   </ul>
@@ -9,10 +9,12 @@
 
 <script>
 import FolderOrDocument from "./folder-or-document";
+import Product from "./product";
 
 export default {
   components: {
     FolderOrDocument,
+    Product,
   },
   props: {
     items: {

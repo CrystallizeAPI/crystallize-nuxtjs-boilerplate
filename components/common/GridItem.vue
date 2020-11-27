@@ -8,22 +8,24 @@
     :class="cellSize"
   >
     <div class="cell-inner">
-      <div class="text">
-        <span v-if="defaultVariant" class="price"
-          >${{ defaultVariant.price }}.00</span
-        >
+      <div v-if="type === 'product'" class="text product">
+        <span class="price">${{ defaultVariant.price }}.00</span>
         <h3 class="title">{{ name }}</h3>
-        <template v-if="defaultVariant">
-          <Button>Buy</Button>
-        </template>
+        <Button>Buy</Button>
+      </div>
+      <div v-else class="text">
+        <h3 class="title">{{ name }}</h3>
       </div>
 
-      <div class="img">
+      <WideScreenRatio class="media">
+        <CrystallizeVideo v-if="video" :video="video" />
         <CrystallizeImage
+          v-else
           :image="image"
           :sizes="`(min-width 1024px) ${imageMdWidth}px, 100vw`"
+          class="image"
         />
-      </div>
+      </WideScreenRatio>
     </div>
   </NuxtLink>
 </template>
@@ -41,30 +43,27 @@ export default {
     },
   },
   data() {
+    const { name, path, type, defaultVariant, components } = this.data;
+
+    let image = components?.find((c) => c.type === "images")?.content
+      ?.images?.[0];
+    if (type === "product") {
+      image = defaultVariant.images?.[0];
+    }
+
+    const video = components?.find((c) => c.type === "videos")?.content
+      ?.videos?.[0];
+
     return {
-      name: this.data.name,
-      path: this.data.path,
-      type: this.data.type,
-      variants: this.data.variants,
-      defaultVariant: this.data.defaultVariant,
+      name,
+      path,
+      type,
+      defaultVariant,
+      image,
+      video,
       imageMdWidth: 100 / (this.gridCell?.layout?.colspan ?? 1),
       cellSize: `cell cell-${this.gridCell?.layout?.rowspan}x${this.gridCell?.layout?.colspan}`,
-      image: this.data.defaultVariant
-        ? this.data.defaultVariant.image
-        : this.filterContentImages(this.data.type, this.data.components),
-      videos: this.findComponents(this.data.components, "name", "Video"),
     };
-  },
-  methods: {
-    filterContentImages(type, components) {
-      if (type === "folder" || type === "document") {
-        const images = components.find((c) => c.type === "images");
-        return images?.content?.images?.[0];
-      }
-    },
-    findComponents(components, property, filter) {
-      return components.find((c) => c[property] === filter);
-    },
   },
 };
 </script>
@@ -81,29 +80,45 @@ a {
   }
 }
 
-.img img {
+.media {
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.media >>> .image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.media >>> .image img {
   display: block;
   width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .title {
   font-size: 1.5rem;
-  text-transform: uppercase;
   color: var(--color-text-main);
   font-weight: 900;
-  font-family: "Roboto", sans-serif;
-  text-decoration: none !important;
 }
 
 .text {
-  z-index: 2;
-  bottom: 0;
-  left: 0;
-  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 1em;
+  padding: 3em var(--content-padding);
+}
+
+.title {
+  margin: 0;
+}
+
+.text.product .title {
+  margin: 0.5rem 0 1rem 0;
 }
 
 .price {
@@ -117,7 +132,6 @@ a {
   position: relative;
   background: var(--color-box-background);
   display: flex;
-  padding: 0 50px;
 }
 
 .cell-inner:hover {
@@ -135,7 +149,6 @@ a {
     flex-direction: column-reverse;
     text-align: center;
     margin-bottom: 15px;
-    padding: 50px;
   }
 }
 
@@ -146,13 +159,13 @@ a {
 
   .cell-1x1 .cell-inner {
     flex-direction: column-reverse;
-    justify-content: center;
-    padding-bottom: 50px;
+    justify-content: flex-end;
     text-align: center;
   }
 
   .cell-1x2 .cell-inner {
     flex-direction: row-reverse;
+    justify-content: flex-end;
     padding: 0 50px 0 0;
   }
 

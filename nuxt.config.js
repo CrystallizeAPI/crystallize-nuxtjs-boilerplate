@@ -99,6 +99,14 @@ export default {
     vueI18n: {
       fallbackLocale: locale.locale,
     },
+    numberFormats: {
+      "en-US": {
+        currency: {
+          style: "currency",
+          currency: "USD",
+        },
+      },
+    },
   },
   /*
    ** Build configuration

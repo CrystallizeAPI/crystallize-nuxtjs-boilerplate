@@ -1,3 +1,1 @@
-export default {
-  welcome: "Welcome",
-};
+export default {};

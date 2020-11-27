@@ -1,15 +1,12 @@
 <template>
-  <div v-if="!data"></div>
-  <NuxtLink v-else :to="path" class="outer">
+  <NuxtLink :to="path" class="outer">
     <div class="inner">
       <div class="image-wrapper">
-        <div v-if="variant.image">
-          <CrystallizeImage :image="variant.image" :alt="name" sizes="250px" />
-        </div>
+        <CrystallizeImage :image="image" :alt="name" sizes="50vw" />
       </div>
       <div class="text">
         <span class="price">
-          ${{ variant.price }}.00
+          {{ variant.price }}
         </span>
         <H3>{{ name }}</H3>
       </div>
@@ -19,24 +16,26 @@
 
 <script>
 export default {
-  props: ['data'],
-  data() {
-    return {
-      name: this.data.name,
-      path: this.data.path,
-      type: this.data.type,
-      variant: this.data.variants ? this.findVariant(this.data.variants) : {},
-      image: '',
-      // price: this.data.variants ? this.findVariant(this.data.variants) : {},
-      // image: this.data.variants ? this.findVariant(this.data.variants) : {}
-    }
+  props: {
+    data: {
+      type: Object,
+      required: true,
+      default: null,
+    },
   },
-  methods: {
-    findVariant(variants) {
-      return variants.find((variant) => variant.isDefault)
-    }
-  }
-}
+  data() {
+    const { name, path, variants, defaultVariant } = this.data;
+
+    const variant = defaultVariant || variants.find((v) => v.isDefault);
+
+    return {
+      name,
+      path,
+      image: variant.images?.[0],
+      variant,
+    };
+  },
+};
 </script>
 
 <style scoped>
@@ -56,7 +55,6 @@ a {
 }
 
 .inner {
-  padding: 20px;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -71,15 +69,9 @@ a {
   height: 250px;
 }
 
-.img {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
-.img > img {
+.image-wrapper >>> img {
   display: block;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
   width: 100%;
   height: 100%;
@@ -104,7 +96,7 @@ a {
   font-size: 1.5rem;
   text-transform: uppercase;
   color: inherit;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   margin: 0;
 }
 

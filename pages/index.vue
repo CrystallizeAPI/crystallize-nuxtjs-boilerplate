@@ -21,21 +21,20 @@ export default {
     const { locales, locale: code } = this.$i18n;
     const locale = locales.find((l) => l.locale === code) || locales[0];
 
-    const query = `
-      query FRONTPAGE($language: String!, $path: String!) {
-        frontpage: catalogue(path: $path, language: $language) {
-          ...item
-          ...product
-        }
-      }
-
-      ${fragments}
-    `;
     const { data } = await simplyFetchFromGraph({
-      query,
+      query: `
+        query FRONTPAGE($language: String!, $path: String!) {
+          frontpage: catalogue(path: $path, language: $language) {
+            ...item
+            ...product
+          }
+        }
+
+        ${fragments}
+      `,
       variables: {
-        language: locale.crystallizeCatalogueLanguage,
         path: "/web-frontpage",
+        language: locale.crystallizeCatalogueLanguage,
       },
     });
 

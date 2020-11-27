@@ -1,13 +1,14 @@
 <template>
   <NuxtLink :to="path" class="outer">
     <div v-if="image || video" class="media-wrapper">
-      <WideScreenRatio>
-        <CrystallizeImage
-          v-if="image"
-          :image="image"
-          sizes="(min-width 1024px) 33vw, 100vw"
-        />
+      <WideScreenRatio v-if="video">
+        <CrystallizeVideo :video="video" />
       </WideScreenRatio>
+      <CrystallizeImage
+        v-else
+        :image="image"
+        sizes="(min-width 1024px) 33vw, 100vw"
+      />
     </div>
     <div class="text">
       <H3>{{ name }}</H3>
@@ -49,6 +50,10 @@ export default {
   color: var(--color-text-main);
   background: var(--color-box-background);
   padding: 1em;
+}
+
+.outer:hover {
+  text-decoration: none;
 }
 
 .media-wrapper >>> img {
