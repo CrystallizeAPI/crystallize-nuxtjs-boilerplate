@@ -1,9 +1,7 @@
 <template>
   <NuxtLink :to="path" class="outer">
     <div v-if="image || video" class="media-wrapper">
-      <WideScreenRatio v-if="video">
-        <CrystallizeVideo :video="video" />
-      </WideScreenRatio>
+      <CrystallizeVideo v-if="video" :video="video" />
       <CrystallizeImage
         v-else
         :image="image"

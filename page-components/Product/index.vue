@@ -135,10 +135,6 @@ export default {
     onSelectedVariantChange(variant) {
       this.selectedVariant = variant;
     },
-    getLocale() {
-      const { locales, locale: code } = this.$i18n;
-      return locales.find((l) => l.locale === code) || locales[0];
-    },
   },
 };
 </script>

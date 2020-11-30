@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="variant-selector">
     <div v-for="attr in attrs" :key="attr.attribute" class="attr">
       <Button
         v-for="value in attr.values"

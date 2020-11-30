@@ -1,13 +1,13 @@
 <template>
   <FetchLoader :state="$fetchState">
-    <SubHeader center-content>
+    <div class="sub-header">
       <H1>{{ folder.name }}</H1>
 
       <CrystallizeImage v-if="headerImage" :image="headerImage" />
-      <div v-if="headerDescription" class="headerDescription">
+      <div v-if="headerDescription" class="header-description">
         <CrystallizeContentTransformer :data="headerDescription" />
       </div>
-    </SubHeader>
+    </div>
 
     <Grid v-if="grid" :grid="grid" />
     <Items v-else-if="folder.children" :items="folder.children" />
@@ -107,9 +107,37 @@ export default {
 </script>
 
 <style scoped>
-.headerDescription {
+.header-description {
   font-size: 1.1rem;
   line-height: 1.8;
   margin: 1em var(--content-padding);
+}
+
+.sub-header {
+  display: flex;
+  flex-direction: column;
+  padding: 100px 50px 50px;
+  max-width: 800px;
+}
+
+.sub-header h1 {
+  font-size: 2.4rem;
+  margin-bottom: 10px;
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+}
+
+.sub-header p {
+  /* text-align: ${(p) => (p.centerContent ? 'center !important' : 'left')}; */
+  font-size: 18px;
+  line-height: 1.8rem;
+  color: var(--color-text-sub);
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .sub-header {
+    padding: 100px 0 50px;
+  }
 }
 </style>

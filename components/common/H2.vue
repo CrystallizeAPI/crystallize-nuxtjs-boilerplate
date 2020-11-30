@@ -12,7 +12,7 @@
 }
 
 @media (max-width: 1024px) {
-  .h2 { 
+  .h2 {
     font-size: 1.5rem;
   }
 }
