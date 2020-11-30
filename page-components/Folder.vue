@@ -1,10 +1,10 @@
 <template>
   <FetchLoader :state="$fetchState">
-    <div class="sub-header">
+    <div class="folder--sub-header">
       <h1>{{ folder.name }}</h1>
 
       <CrystallizeImage v-if="headerImage" :image="headerImage" />
-      <div v-if="headerDescription" class="header-description">
+      <div v-if="headerDescription" class="folder--header-description">
         <CrystallizeContentTransformer :data="headerDescription" />
       </div>
     </div>
@@ -106,14 +106,14 @@ export default {
 };
 </script>
 
-<style scoped>
-.header-description {
+<style>
+.folder--header-description {
   font-size: 1.1rem;
   line-height: 1.8;
   margin: 1em var(--content-padding);
 }
 
-.sub-header {
+.folder--sub-header {
   display: flex;
   flex-direction: column;
   padding: 100px 50px 50px;
@@ -122,15 +122,14 @@ export default {
   text-align: center;
 }
 
-.sub-header h1 {
+.folder--sub-header h1 {
   font-size: 2.4rem;
   margin-bottom: 10px;
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
 }
 
-.sub-header p {
-  /* text-align: ${(p) => (p.centerContent ? 'center !important' : 'left')}; */
+.folder--sub-header p {
   font-size: 18px;
   line-height: 1.8rem;
   color: var(--color-text-sub);
@@ -138,7 +137,7 @@ export default {
 }
 
 @media (max-width: 768px) {
-  .sub-header {
+  .folder--sub-header {
     padding: 100px 0 50px;
   }
 }
