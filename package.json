@@ -12,6 +12,7 @@
   "dependencies": {
     "@crystallize/content-transformer": "^6.1.0",
     "isomorphic-unfetch": "^3.1.0",
+    "lodash": "^4.17.20",
     "nuxt": "^2.14.7",
     "nuxt-i18n": "^6.15.4",
     "video.js": "^7.10.1"

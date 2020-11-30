@@ -3,7 +3,7 @@ import { getCatalogueItems } from "./lib/graph";
 function getComponentForPath({ type }) {
   switch (type) {
     case "product": {
-      return "page-components/Product.vue";
+      return "page-components/Product/index.vue";
     }
     case "document": {
       return "page-components/Document.vue";

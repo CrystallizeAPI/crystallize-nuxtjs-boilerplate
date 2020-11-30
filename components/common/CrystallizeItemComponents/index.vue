@@ -17,6 +17,10 @@
         v-else-if="component.type === 'images'"
         :data="component.content"
       />
+      <PropertiesTable
+        v-else-if="component.type === 'propertiesTable'"
+        :data="component.content"
+      />
       <div v-else>No renderer for "{{ component.type }}"</div>
     </div>
   </div>

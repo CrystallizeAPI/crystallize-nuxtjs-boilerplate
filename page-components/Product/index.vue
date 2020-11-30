@@ -5,10 +5,19 @@
         <div class="media">
           <CrystallizeImage :image="image" />
         </div>
-        <div class="short-info">
+        <div class="main-info">
           <H1 class="name">{{ product.name }}</H1>
           <div class="summary">
-            <CrystallizeContentTransformer :data="summary" />
+            <CrystallizeItemComponents :components="summary" />
+          </div>
+          <VariantSelector
+            :selected-variant="selectedVariant"
+            :variants="product.variants"
+            @on-change="onSelectedVariantChange"
+          />
+
+          <div v-if="selectedVariant" class="price-wrap">
+            <Price :variant="selectedVariant" />
           </div>
         </div>
       </div>
@@ -16,7 +25,9 @@
         <div class="section">
           <CrystallizeItemComponents :components="components" />
         </div>
-        <div class="section properties">props</div>
+        <div class="section properties">
+          <CrystallizeItemComponents :components="specs" />
+        </div>
       </div>
     </Outer>
   </FetchLoader>
@@ -24,10 +35,16 @@
 
 <script>
 import toText from "@crystallize/content-transformer/toText";
-import { simplyFetchFromGraph } from "../lib/graph";
-import fragments from "../lib/graph/fragments";
+
+import { simplyFetchFromGraph } from "../../lib/graph";
+import fragments from "../../lib/graph/fragments";
+
+import VariantSelector from "./variant-selector";
 
 export default {
+  components: {
+    VariantSelector,
+  },
   data() {
     return {
       product: {},
@@ -35,6 +52,8 @@ export default {
       image: null,
       description: null,
       summary: null,
+      selectedVariant: null,
+      specs: null,
     };
   },
   async fetch() {
@@ -76,16 +95,15 @@ export default {
     }
     this.description = product?.components?.find((c) => c.id === "description");
 
-    // Get a summary
-    this.summary = product?.components?.find(
-      (c) => c.id === "summary"
-    )?.content?.json;
+    // Get the summary
+    this.summary = product?.components?.filter((c) => c.id === "summary");
 
-    /**
-     * Extract a selection of components to show
-     */
+    // Get the specs
+    this.specs = product?.components?.filter((c) => c.id === "specs");
+
+    // Get the rest of components to show
     this.components = product?.components?.filter(
-      (c) => !["description", "summary"].includes(c.id)
+      (c) => !["specs", "summary"].includes(c.id)
     );
 
     this.product = product;
@@ -113,6 +131,15 @@ export default {
       ],
     };
   },
+  methods: {
+    onSelectedVariantChange(variant) {
+      this.selectedVariant = variant;
+    },
+    getLocale() {
+      const { locales, locale: code } = this.$i18n;
+      return locales.find((l) => l.locale === code) || locales[0];
+    },
+  },
 };
 </script>
 
@@ -130,7 +157,7 @@ export default {
   margin-bottom: 15px;
 }
 
-.short-info {
+.main-info {
   flex: 0 0 30%;
   margin: 0 50px;
 }
@@ -163,5 +190,13 @@ h1.name {
   display: grid;
   grid-template-columns: auto 500px;
   grid-gap: 15px;
+}
+
+.price-wrap {
+  padding-top: 45px;
+  border-top: 1px solid rgb(206, 206, 206);
+  color: var(--color-text-sub);
+  font-size: 30px;
+  margin: 20px 20px 20px 0px;
 }
 </style>

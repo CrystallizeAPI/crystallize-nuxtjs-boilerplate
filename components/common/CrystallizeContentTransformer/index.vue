@@ -35,7 +35,6 @@ export default {
   data() {
     const d = this.data;
     let nodes = [];
-    console.log(this.data);
 
     if (Array.isArray(d)) {
       nodes = d;

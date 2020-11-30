@@ -9,7 +9,9 @@
   >
     <div class="cell-inner">
       <div v-if="type === 'product'" class="text product">
-        <span class="price">${{ defaultVariant.price }}.00</span>
+        <span class="price">
+          <Price :variant="defaultVariant" />
+        </span>
         <h3 class="title">{{ name }}</h3>
         <Button>Buy</Button>
       </div>

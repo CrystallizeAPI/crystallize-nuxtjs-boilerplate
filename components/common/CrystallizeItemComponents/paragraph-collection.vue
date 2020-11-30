@@ -2,8 +2,11 @@
   <div v-if="data" class="paragraphs">
     <template v-for="(paragraph, index) in data.paragraphs">
       <div :key="index" class="paragraph">
-        <H3>{{ paragraph.title.text }}</H3>
-        <CrystallizeContentTransformer :data="paragraph.body.json" />
+        <H3 v-if="paragraph.title">{{ paragraph.title.text }}</H3>
+        <CrystallizeContentTransformer
+          v-if="paragraph.body"
+          :data="paragraph.body.json"
+        />
         <Images :data="paragraph" />
       </div>
     </template>

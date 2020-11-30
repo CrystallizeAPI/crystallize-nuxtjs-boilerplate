@@ -6,7 +6,7 @@
       </div>
       <div class="text">
         <span class="price">
-          {{ variant.price }}
+          <Price :variant="variant" />
         </span>
         <H3>{{ name }}</H3>
       </div>
