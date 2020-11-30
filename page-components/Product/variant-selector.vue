@@ -18,7 +18,7 @@ import isEqual from "lodash/isEqual";
 
 function getAttributesFromVariants(variants) {
   return variants.reduce((acc, variant) => {
-    variant.attributes.forEach(({ attribute, value }) => {
+    variant.attributes?.forEach(({ attribute, value }) => {
       const currentAttribute = acc.find((a) => a.attribute === attribute);
       if (!currentAttribute) {
         acc.push({
