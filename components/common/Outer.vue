@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="outer">
     <slot></slot>
   </div>
 </template>
@@ -15,7 +15,7 @@
 }
 
 @media (max-width: 1024px) {
-  .outer { 
+  .outer {
     padding: 0 1rem;
   }
 }

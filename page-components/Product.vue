@@ -1,14 +1,24 @@
 <template>
   <FetchLoader :state="$fetchState">
-    <header class="top">
-      <div class="media">
-        <CrystallizeImage :image="image" />
+    <Outer>
+      <div class="top section">
+        <div class="media">
+          <CrystallizeImage :image="image" />
+        </div>
+        <div class="short-info">
+          <H1 class="name">{{ product.name }}</H1>
+          <div class="summary">
+            <CrystallizeContentTransformer :data="summary" />
+          </div>
+        </div>
       </div>
-      <div class="short-info">
-        <H1 class="product-name">{{ product.name }}</H1>
+      <div class="product-secondary-info">
+        <div class="section">
+          <CrystallizeItemComponents :components="components" />
+        </div>
+        <div class="section properties">props</div>
       </div>
-    </header>
-    <CrystallizeItemComponents :components="components" />
+    </Outer>
   </FetchLoader>
 </template>
 
@@ -24,6 +34,7 @@ export default {
       components: [],
       image: null,
       description: null,
+      summary: null,
     };
   },
   async fetch() {
@@ -63,11 +74,18 @@ export default {
       // Provide a good meta description for this page
       this.metaDescription = toText(richTextComponent.content.json);
     }
-
     this.description = product?.components?.find((c) => c.id === "description");
 
+    // Get a summary
+    this.summary = product?.components?.find(
+      (c) => c.id === "summary"
+    )?.content?.json;
+
+    /**
+     * Extract a selection of components to show
+     */
     this.components = product?.components?.filter(
-      (c) => !["description"].includes(c.id)
+      (c) => !["description", "summary"].includes(c.id)
     );
 
     this.product = product;
@@ -99,13 +117,17 @@ export default {
 </script>
 
 <style scoped>
+.section {
+  background: var(--color-box-background);
+  padding: 50px;
+}
+
 .top {
   display: flex;
   align-items: center;
-  background: var(--color-box-background);
-  padding: 50px;
   flex-direction: row-reverse;
   justify-content: center;
+  margin-bottom: 15px;
 }
 
 .short-info {
@@ -113,18 +135,33 @@ export default {
   margin: 0 50px;
 }
 
-h1.product-name {
+h1.name {
   font-size: 2rem;
   font-weight: 900;
   text-transform: uppercase;
 }
 
+.summary {
+  margin: 0px 0px 0.5em;
+  line-height: 1.8;
+}
+
 .media {
   flex: 1 1 auto;
+  padding: 3rem;
+  position: relative;
 }
 
 .media >>> img {
-  max-height: 40vh;
-  width: auto;
+  object-fit: contain;
+  max-height: 80vh;
+  width: 100%;
+  height: 100%;
+}
+
+.product-secondary-info {
+  display: grid;
+  grid-template-columns: auto 500px;
+  grid-gap: 15px;
 }
 </style>
