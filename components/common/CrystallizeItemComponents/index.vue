@@ -39,7 +39,7 @@ export default {
 </script>
 
 <style scoped>
-.component {
-  margin: 0 0 30px;
+.component:not(:last-child) {
+  margin-bottom: 30px;
 }
 </style>

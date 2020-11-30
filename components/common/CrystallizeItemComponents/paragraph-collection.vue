@@ -25,7 +25,7 @@ export default {
 </script>
 
 <style scoped>
-.paragraph {
+.paragraph:not(:last-child) {
   margin-bottom: var(--content-padding);
 }
 </style>

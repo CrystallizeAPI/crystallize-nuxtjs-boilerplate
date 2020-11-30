@@ -1,9 +1,9 @@
 <template>
-  <div class="outer">
+  <Outer>
     <FetchLoader :state="$fetchState">
       <CrystallizeItemComponents :components="document.components" />
     </FetchLoader>
-  </div>
+  </Outer>
 </template>
 
 <script>
@@ -78,11 +78,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.outer {
-  max-width: 1600px;
-  padding: 0 75px;
-  margin: 0 auto;
-}
-</style>

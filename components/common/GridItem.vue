@@ -19,7 +19,7 @@
         <h3 class="title">{{ name }}</h3>
       </div>
 
-      <WideScreenRatio class="media">
+      <div class="media">
         <CrystallizeVideo v-if="video" :video="video" />
         <CrystallizeImage
           v-else
@@ -27,7 +27,7 @@
           :sizes="`(min-width 1024px) ${imageMdWidth}px, 100vw`"
           class="image"
         />
-      </WideScreenRatio>
+      </div>
     </div>
   </NuxtLink>
 </template>
@@ -82,24 +82,14 @@ a {
   }
 }
 
-.media {
-  flex-grow: 1;
-  overflow: hidden;
+.cell:first-child >>> h3 {
+  font-size: 2.5rem;
+  text-transform: uppercase;
 }
 
-.media >>> .image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.media >>> .image img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.media >>> img {
+  max-height: 50vh;
+  object-fit: contain;
 }
 
 .title {
@@ -112,7 +102,7 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 3em var(--content-padding);
+  padding: 1em;
 }
 
 .title {
@@ -131,9 +121,11 @@ a {
 }
 
 .cell-inner {
-  position: relative;
   background: var(--color-box-background);
   display: flex;
+  flex-direction: column-reverse;
+  text-align: center;
+  margin-bottom: 15px;
 }
 
 .cell-inner:hover {
@@ -146,17 +138,26 @@ a {
   max-width: 80%;
 }
 
-@media (max-width: 767px) {
-  .cell-inner {
-    flex-direction: column-reverse;
-    text-align: center;
-    margin-bottom: 15px;
-  }
-}
-
 @media (min-width: 1024px) {
   .cell-inner {
+    flex-direction: row;
+    position: relative;
+    padding: 50px;
+  }
+
+  .media >>> img {
+    max-height: initial;
+  }
+
+  .text {
+    flex: 0 0 50%;
+    padding: 3em var(--content-padding);
+  }
+
+  .cell-inner {
     flex-grow: 1;
+    text-align: unset;
+    padding: 0 50px;
   }
 
   .cell-1x1 .cell-inner {

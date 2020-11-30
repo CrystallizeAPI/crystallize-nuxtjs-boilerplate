@@ -22,17 +22,11 @@ export default {
       default: null,
     },
   },
-  data() {
-    console.log(this.data);
-    return {
-      test: 1,
-    };
-  },
 };
 </script>
 
 <style scoped>
-.section {
+.section:not(:last-child) {
   margin-bottom: var(--content-padding);
 }
 

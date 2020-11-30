@@ -1,7 +1,7 @@
 <template>
   <div class="images">
     <template v-for="image in data.images">
-      <CrystallizeImage :key="image.url" :image="image" />
+      <CrystallizeImage :key="image.url" :image="image" class="image" />
     </template>
   </div>
 </template>
@@ -18,14 +18,36 @@ export default {
 </script>
 
 <style scoped>
-.images {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  margin-bottom: 100px;
-  gap: 5px;
+.images:not(:last-child) {
+  margin-bottom: 50px;
 }
 
-.images > :first-child {
-  grid-column-end: span 2;
+.image,
+.image >>> img {
+  display: block;
+}
+
+.image:not(:last-child) {
+  margin-bottom: 5px;
+}
+
+@media (min-width: 1024px) {
+  .images {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 5px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .images:not(:last-child) {
+    margin-bottom: 100px;
+  }
+
+  .image:first-child {
+    grid-column-end: span 2;
+  }
+  .image:not(:last-child) {
+    margin-bottom: 0;
+  }
 }
 </style>

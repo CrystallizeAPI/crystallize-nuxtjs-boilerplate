@@ -2,9 +2,6 @@
   <FetchLoader :state="$fetchState">
     <Outer>
       <div class="top section">
-        <div class="media">
-          <CrystallizeImage :image="image" />
-        </div>
         <div class="main-info">
           <H1 class="name">{{ product.name }}</H1>
           <div class="summary">
@@ -19,6 +16,9 @@
           <div v-if="selectedVariant" class="price-wrap">
             <Price :variant="selectedVariant" />
           </div>
+        </div>
+        <div class="media">
+          <CrystallizeImage :image="image" />
         </div>
       </div>
       <div class="product-secondary-info">
@@ -146,20 +146,37 @@ export default {
 <style scoped>
 .section {
   background: var(--color-box-background);
-  padding: 50px;
+  padding: 25px;
+}
+
+@media (min-width: 1024px) {
+  .section {
+    padding: 50px;
+  }
 }
 
 .top {
   display: flex;
   align-items: center;
-  flex-direction: row-reverse;
+  flex-direction: column-reverse;
   justify-content: center;
   margin-bottom: 15px;
 }
 
+@media (min-width: 1024px) {
+  .top {
+    flex-direction: row-reverse;
+  }
+}
+
 .main-info {
-  flex: 0 0 30%;
-  margin: 0 50px;
+}
+
+@media (min-width: 1024px) {
+  .main-info {
+    flex: 0 0 30%;
+    margin: 0 50px;
+  }
 }
 
 h1.name {
@@ -175,21 +192,40 @@ h1.name {
 
 .media {
   flex: 1 1 auto;
-  padding: 3rem;
   position: relative;
+}
+
+@media (min-width: 1024px) {
+  .media {
+    padding: 3rem;
+  }
 }
 
 .media >>> img {
   object-fit: contain;
-  max-height: 80vh;
+  max-height: 50vh;
   width: 100%;
   height: 100%;
 }
 
+@media (min-width: 1024px) {
+  .media >>> img {
+    max-height: 80vh;
+  }
+}
+
 .product-secondary-info {
-  display: grid;
-  grid-template-columns: auto 500px;
-  grid-gap: 15px;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 15px;
+}
+
+@media (min-width: 1024px) {
+  .product-secondary-info {
+    display: grid;
+    grid-template-columns: auto 500px;
+    grid-gap: 15px;
+  }
 }
 
 .price-wrap {
