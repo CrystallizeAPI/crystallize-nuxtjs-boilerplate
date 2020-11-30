@@ -17,6 +17,10 @@
         v-else-if="component.type === 'images'"
         :data="component.content"
       />
+      <Videos
+        v-else-if="component.type === 'videos'"
+        :data="component.content"
+      />
       <PropertiesTable
         v-else-if="component.type === 'propertiesTable'"
         :data="component.content"

@@ -139,12 +139,6 @@ a {
 }
 
 @media (min-width: 1024px) {
-  .cell-inner {
-    flex-direction: row;
-    position: relative;
-    padding: 50px;
-  }
-
   .media >>> img {
     max-height: initial;
   }
@@ -155,9 +149,11 @@ a {
   }
 
   .cell-inner {
+    flex-direction: row;
+    position: relative;
     flex-grow: 1;
     text-align: unset;
-    padding: 0 50px;
+    padding: 0;
   }
 
   .cell-1x1 .cell-inner {

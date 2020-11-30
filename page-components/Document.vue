@@ -1,9 +1,12 @@
 <template>
-  <Outer>
-    <FetchLoader :state="$fetchState">
-      <CrystallizeItemComponents :components="document.components" />
-    </FetchLoader>
-  </Outer>
+  <div class="document">
+    <Outer>
+      <FetchLoader :state="$fetchState">
+        <h1>{{ document.name }}</h1>
+        <CrystallizeItemComponents :components="document.components" />
+      </FetchLoader>
+    </Outer>
+  </div>
 </template>
 
 <script>
@@ -78,3 +81,10 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.document {
+  max-width: 800px;
+  margin: 0 auto;
+}
+</style>

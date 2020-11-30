@@ -9,7 +9,7 @@
       />
     </div>
     <div class="text">
-      <H3>{{ name }}</H3>
+      <h2>{{ name }}</h2>
       <div class="description">
         <CrystallizeContentTransformer :data="description" />
       </div>
@@ -54,12 +54,13 @@ export default {
   text-decoration: none;
 }
 
-.media-wrapper >>> img {
+.media-wrapper >>> img,
+.media-wrapper >>> video {
   display: block;
   object-fit: cover;
   object-position: center;
   width: 100%;
-  height: 100%;
+  height: 300px;
   overflow: hidden;
 }
 

@@ -1,7 +1,7 @@
 <template>
   <div v-if="data.sections" class="properties-table">
     <div v-for="section in data.sections" :key="section.title" class="section">
-      <H3>{{ section.title }}</H3>
+      <h3>{{ section.title }}</h3>
       <table class="table">
         <tbody>
           <tr v-for="(prop, index) in section.properties" :key="index">

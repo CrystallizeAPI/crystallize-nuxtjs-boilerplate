@@ -3,7 +3,7 @@
     <Outer>
       <div class="top section">
         <div class="main-info">
-          <H1 class="name">{{ product.name }}</H1>
+          <h1 class="name">{{ product.name }}</h1>
           <div class="summary">
             <CrystallizeItemComponents :components="summary" />
           </div>

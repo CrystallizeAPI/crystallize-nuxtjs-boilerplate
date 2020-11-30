@@ -101,3 +101,35 @@ img {
   height: auto;
   border: 0;
 }
+
+h1 {
+  margin: 0 0 15px;
+  font-size: 3rem;
+  font-family: "Roboto Slab", sans-serif;
+  color: var(--color-text-main);
+  text-transform: uppercase;
+}
+
+.h2 {
+  color: var(--color-text-main);
+  font-size: 2rem;
+  margin: 1rem 0;
+}
+
+h3 {
+  color: var(--color-text-main);
+  font-size: 1.4rem;
+  margin: 1rem 0;
+}
+
+@media (max-width: 1024px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+  h3 {
+    font-size: 1.2rem;
+  }
+}

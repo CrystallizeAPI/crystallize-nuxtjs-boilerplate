@@ -8,7 +8,7 @@
         <span class="price">
           <Price :variant="variant" />
         </span>
-        <H3>{{ name }}</H3>
+        <h2>{{ name }}</h2>
       </div>
     </div>
   </NuxtLink>

@@ -1,7 +1,7 @@
 <template>
   <FetchLoader :state="$fetchState">
     <div class="sub-header">
-      <H1>{{ folder.name }}</H1>
+      <h1>{{ folder.name }}</h1>
 
       <CrystallizeImage v-if="headerImage" :image="headerImage" />
       <div v-if="headerDescription" class="header-description">
@@ -117,7 +117,9 @@ export default {
   display: flex;
   flex-direction: column;
   padding: 100px 50px 50px;
+  margin: 0 auto;
   max-width: 800px;
+  text-align: center;
 }
 
 .sub-header h1 {

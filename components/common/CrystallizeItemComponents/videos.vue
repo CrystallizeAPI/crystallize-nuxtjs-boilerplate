@@ -1,7 +1,7 @@
 <template>
-  <div class="images">
-    <template v-for="image in data.images">
-      <CrystallizeImage :key="image.url" :image="image" class="image" />
+  <div class="videos">
+    <template v-for="video in data.videos">
+      <CrystallizeVideo :key="video.url" :video="video" class="video" />
     </template>
   </div>
 </template>
@@ -18,36 +18,35 @@ export default {
 </script>
 
 <style scoped>
-.images:not(:last-child) {
+.videos:not(:last-child) {
   margin-bottom: 50px;
 }
 
-.image,
-.image >>> img {
+.video,
+.video >>> img {
   display: block;
-  width: auto;
 }
 
-.image:not(:last-child) {
+.video:not(:last-child) {
   margin-bottom: 5px;
 }
 
 @media (min-width: 1024px) {
-  .images {
+  .videos {
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: 5px;
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .images:not(:last-child) {
+  .videos:not(:last-child) {
     margin-bottom: 100px;
   }
 
-  .image:first-child {
+  .video:first-child {
     grid-column-end: span 2;
   }
-  .image:not(:last-child) {
+  .video:not(:last-child) {
     margin-bottom: 0;
   }
 }
