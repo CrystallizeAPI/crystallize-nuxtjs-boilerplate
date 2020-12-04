@@ -5,9 +5,9 @@
       Oh no! There was an error fetching the data in layouts/default.vue
     </p>
     <div v-else>
-      <Header :nav-items="navItems" />
+      <PageHeader :nav-items="navItems" />
       <nuxt />
-      <Footer :nav-items="navItems" />
+      <PageFooter :nav-items="navItems" />
     </div>
   </div>
 </template>

@@ -12,7 +12,7 @@
         </li>
       </ul>
     </nav>
-    <BurgerButton :open="open" :toggle-nav-bar="toggleNavBar" />
+    <BurgerButton :open="open" @click="toggleNavBar" />
   </header>
 </template>
 

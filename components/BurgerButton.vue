@@ -1,5 +1,5 @@
 <template>
-  <button class="outer" type="button" @click="toggleNavBar">
+  <button class="outer" type="button" @click="$emit('click')">
     <div class="lines" :class="open ? 'open' : ''"></div>
   </button>
 </template>
@@ -10,7 +10,7 @@ export default {
     open: {
       type: Boolean,
     },
-    toggleNavBar: {
+    onClick: {
       type: Function,
       required: true,
     },
