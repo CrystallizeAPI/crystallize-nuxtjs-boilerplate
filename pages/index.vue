@@ -1,10 +1,10 @@
 <template>
-  <FetchLoader :state="$fetchState">
-    <div class="outer">
+  <Outer>
+    <FetchLoader :state="$fetchState">
       <CrystallizeGrid v-if="grid" :grid="grid" />
       <div v-else class="no-grids">No grids to show on the frontpage</div>
-    </div>
-  </FetchLoader>
+    </FetchLoader>
+  </Outer>
 </template>
 
 <script>
@@ -61,23 +61,8 @@ export default {
 </script>
 
 <style scoped>
-.outer {
-  margin-bottom: 30px;
-  max-width: 1600px;
-  padding: 0 0;
-  margin: 0 auto;
-  display: block;
-  min-height: 75vh;
-}
-
 .no-grids {
   padding: 50px;
   text-align: center;
-}
-
-@media (max-width: 1024px) {
-  .outer {
-    padding: 0 1rem;
-  }
 }
 </style>
