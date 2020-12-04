@@ -8,14 +8,7 @@
 </template>
 
 <script>
-import FolderOrDocument from "./folder-or-document";
-import Product from "./product";
-
 export default {
-  components: {
-    FolderOrDocument,
-    Product,
-  },
   props: {
     items: {
       type: Array,

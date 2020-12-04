@@ -10,10 +10,6 @@ export default {
     open: {
       type: Boolean,
     },
-    onClick: {
-      type: Function,
-      required: true,
-    },
   },
 };
 </script>

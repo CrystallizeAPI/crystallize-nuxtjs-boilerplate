@@ -9,7 +9,7 @@
       </div>
     </div>
 
-    <Grid v-if="grid" :grid="grid" />
+    <CrystallizeGrid v-if="grid" :grid="grid" />
     <CrystallizeCatalogueItems
       v-else-if="folder.children"
       :items="folder.children"

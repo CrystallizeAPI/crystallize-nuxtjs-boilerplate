@@ -1,7 +1,7 @@
 <template>
   <FetchLoader :state="$fetchState">
     <div class="outer">
-      <Grid v-if="grid" :grid="grid" />
+      <CrystallizeGrid v-if="grid" :grid="grid" />
       <div v-else class="no-grids">No grids to show on the frontpage</div>
     </div>
   </FetchLoader>
