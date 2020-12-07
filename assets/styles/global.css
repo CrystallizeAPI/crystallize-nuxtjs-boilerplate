@@ -7,6 +7,15 @@
   --color-price: #d79b59;
   --color-error: #ef4836;
   --main-bg-color: brown;
+  --max-width: 1600px;
+  --padding-lg: 100px;
+  --padding-md: 75px;
+  --padding-sm: 50px;
+  --padding-xs: 25px;
+  --screen-lg: 1600px;
+  --screen-md: 1280px;
+  --screen-sm: 1024px;
+  --screen-xs: 767px;
 }
 
 html {

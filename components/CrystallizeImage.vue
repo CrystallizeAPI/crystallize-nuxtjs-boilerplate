@@ -1,24 +1,13 @@
 <template>
   <picture :class="className">
-    <source
-      v-if="srcSetWebp.length > 0"
-      :srcSet="srcSetWebp"
-      type="image/webp"
-      :sizes="sizes"
-    />
+    <source v-if="srcSetWebp.length > 0" :srcSet="srcSetWebp" type="image/webp" :sizes="sizes" />
     <source
       v-if="srcSet.length > 0"
       :srcSet="srcSetWebp"
       :type="`image/${originalFileExtension}`"
       :sizes="sizes"
     />
-    <img
-      :src="src"
-      :alt="altText"
-      :sizes="sizes"
-      :width="width"
-      :height="height"
-    />
+    <img :src="src" :alt="altText" :sizes="sizes" :width="width" :height="height" />
   </picture>
 </template>
 
@@ -37,6 +26,14 @@ export default {
       type: String,
       default: "100vw",
     },
+    width: {
+      type: Number,
+      default: 100,
+    },
+    height:{
+      type:Number,
+      default:100,
+  },
     className: {
       type: String,
       default: "",

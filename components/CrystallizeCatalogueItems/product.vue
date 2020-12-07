@@ -4,12 +4,12 @@
       <div class="image-wrapper">
         <CrystallizeImage :image="image" :alt="name" sizes="50vw" />
       </div>
-      <div class="text">
-        <span class="price">
-          <Price :variant="variant" />
-        </span>
-        <h2>{{ name }}</h2>
-      </div>
+    </div>
+    <div class="text">
+      <h2>{{ name }}</h2>
+      <span class="price">
+        <Price :variant="variant" />
+      </span>
     </div>
   </NuxtLink>
 </template>
@@ -45,18 +45,20 @@ a {
 
 .outer {
   display: flex;
+  flex-direction: column;
   height: 100%;
   color: var(--color-main-background);
   position: relative;
-  padding: 20px;
-  background: var(--color-box-background);
+  /* padding: 20px; */
   transition: all 0.1s ease-in-out;
   grid-column-end: span 3;
 }
 
 .inner {
   height: 100%;
+  background: var(--color-box-background);
   display: flex;
+  min-height: 450px;
   justify-content: center;
   flex-direction: column;
 }
@@ -66,12 +68,13 @@ a {
   z-index: 1;
   overflow: hidden;
   width: 100%;
-  height: 250px;
+  height: 100%;
 }
 
 .image-wrapper >>> img {
   display: block;
-  object-fit: contain;
+  /* If you want to contain your images, change object-fit to `contain` */
+  object-fit: cover;
   object-position: center;
   width: 100%;
   height: 100%;
@@ -81,20 +84,16 @@ a {
 .text {
   z-index: 2;
   width: 100%;
-  height: 150px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  left: 0;
   width: 100%;
-  padding: 1em;
+  padding: 10px 0;
   color: var(--color-text-main);
 }
 
-.text h3 {
-  font-size: 1.5rem;
-  text-transform: uppercase;
+.text h2 {
+  font-size: 1rem;
+  font-weight: 500;
   color: inherit;
   font-family: "Roboto", sans-serif;
   margin: 0;
@@ -103,7 +102,8 @@ a {
 .price {
   color: var(--color-price);
   font-weight: bold;
-  padding-bottom: 5px;
+  font-size: 1rem;
+  padding-top: 5px;
 }
 
 @media (max-width: 768px) {

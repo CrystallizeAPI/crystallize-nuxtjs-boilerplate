@@ -34,7 +34,7 @@ export default {
 @media (min-width: 768px) {
   .items {
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: repeat(16, 1fr);
     gap: 1rem;
   }
 

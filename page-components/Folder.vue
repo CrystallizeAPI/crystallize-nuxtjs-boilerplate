@@ -8,12 +8,10 @@
         <CrystallizeContentTransformer :data="headerDescription" />
       </div>
     </div>
-
-    <CrystallizeGrid v-if="grid" :grid="grid" />
-    <CrystallizeCatalogueItems
-      v-else-if="folder.children"
-      :items="folder.children"
-    />
+    <div class="folder--content">
+      <CrystallizeGrid v-if="grid" :grid="grid" />
+      <CrystallizeCatalogueItems v-else-if="folder.children" :items="folder.children" />
+    </div>
   </FetchLoader>
 </template>
 
@@ -116,6 +114,12 @@ export default {
   margin: 1em var(--content-padding);
 }
 
+.folder--content {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0px var(--padding-lg);
+}
+
 .folder--sub-header {
   display: flex;
   flex-direction: column;
@@ -124,7 +128,9 @@ export default {
   max-width: 800px;
   text-align: center;
 }
-
+.folder--sub-header > img {
+  max-width: 100px;
+}
 .folder--sub-header h1 {
   font-size: 2.4rem;
   margin-bottom: 10px;

@@ -7,27 +7,44 @@
     }"
     :class="cellSize"
   >
-    <div class="cell-inner">
-      <div v-if="type === 'product'" class="text product">
+
+    <div v-if="type === 'product'" class="cell-inner product">
+      <div class="text product">
+        <h3 class="title">{{ name }}</h3>
         <span class="price">
           <Price :variant="defaultVariant" />
         </span>
-        <h3 class="title">{{ name }}</h3>
-        <Button>Buy</Button>
-      </div>
-      <div v-else class="text">
-        <h3 class="title">{{ name }}</h3>
+        <!-- <Button>Buy</Button> -->
       </div>
 
-      <div class="media">
-        <CrystallizeVideo v-if="video" :video="video" />
-        <CrystallizeImage
-          v-else
-          :image="image"
-          :sizes="`(min-width 1024px) ${imageMdWidth}px, 100vw`"
-          class="image"
-        />
+        <div class="media">
+          <CrystallizeVideo v-if="video" :video="video" />
+          <CrystallizeImage
+            v-else
+            :image="image"
+            :sizes="`(min-width 1024px) ${imageMdWidth}px, 100vw`"
+            :width="1024"
+            class="image"
+          />
+        </div>
       </div>
+      <div v-else class="cell-inner">
+      <div class="text product">
+        <h3 class="title">{{ name }}</h3>
+        </div>
+        <div class="media">
+          <CrystallizeVideo v-if="video" :video="video" />
+          <CrystallizeImage
+            v-else
+            :image="image"
+            :sizes="`(min-width 1024px) ${imageMdWidth}px, 100vw`"
+            :width="1024"
+            class="image"
+          />
+        </div>
+      </div>
+      
+      
     </div>
   </NuxtLink>
 </template>
@@ -83,70 +100,78 @@ a {
 }
 
 .cell:first-child >>> h3 {
-  font-size: 2.5rem;
-  text-transform: uppercase;
+  font-size: 1.2rem;
 }
 
 .media >>> img {
   max-height: 50vh;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .title {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   color: var(--color-text-main);
-  font-weight: 900;
+  margin: 0;
+  font-weight: 500;
 }
 
 .text {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 1em;
-}
-
-.title {
-  margin: 0;
-}
-
-.text.product .title {
-  margin: 0.5rem 0 1rem 0;
+  text-align: left;
+  padding:20px 0;
 }
 
 .price {
   color: inherit;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   color: var(--color-price);
   font-weight: bold;
+  padding:10px 0;
 }
 
 .cell-inner {
-  background: var(--color-box-background);
   display: flex;
   flex-direction: column-reverse;
   text-align: center;
   margin-bottom: 15px;
+}
+.cell-inner.product {
+  background: var(--color-box-background);
+}
+.cell-inner.product .text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px;
 }
 
 .cell-inner:hover {
   text-decoration: none;
 }
 
-.cell-inner button {
-  margin: 0 auto;
-  min-width: 200px;
-  max-width: 80%;
-}
 
 @media (min-width: 1024px) {
+  .media {
+    flex-grow: 2;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+  }
+  .media >>> video,
+  .media >>> img,
+  .media >>> .outer {
+    display: block;
+    /* If you want to contain your images, change object-fit to `contain` */
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
   .media >>> img {
     max-height: initial;
   }
 
-  .text {
-    flex: 0 0 50%;
-    padding: 3em var(--content-padding);
-  }
 
   .cell-inner {
     flex-direction: row;
@@ -161,8 +186,10 @@ a {
     justify-content: flex-end;
     text-align: center;
   }
-
   .cell-1x2 .cell-inner {
+    flex-direction:column-reverse;
+  }
+  .cell-1x2 .cell-inner.product {
     flex-direction: row-reverse;
     justify-content: flex-end;
     padding: 0 50px 0 0;
@@ -170,7 +197,7 @@ a {
 
   .cell-1x2 .image {
     width: 200%;
-    transform: translateX(-50%);
+    /* transform: translateX(-50%); */
   }
 
   .cell-1x2 button {
@@ -180,7 +207,9 @@ a {
   .cell-1x3 .cell-inner {
     padding-left: 15rem;
   }
-
+  .cell-1x3 .media {
+      max-height:50vh;
+  }
   .cell-1x3 button {
     margin: 0 0;
   }
