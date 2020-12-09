@@ -1,12 +1,54 @@
 <template>
   <p v-if="type === 'paragraph'">
     <template v-if="textContent">{{ textContent }}</template>
-    <template v-for="child in children">
-      <CrystallizeContentTransformerNode :key="child.id" :node="child" />
-    </template>
+    <CrystallizeContentTransformerNode
+      v-for="child in children"
+      :key="child.id"
+      :node="child"
+    />
   </p>
-  <span v-else-if="kind === 'inline' && textContent">{{ textContent }}</span>
-  <span v-else-if="kind === 'block' && textContent">{{ textContent }}</span>
+  <a v-else-if="type === 'link'" :href="metadata.href">
+    <span v-if="textContent">{{ textContent }}</span>
+    <span v-else-if="children && children.length > 0">
+      <CrystallizeContentTransformerNode
+        v-for="child in children"
+        :key="child.id"
+        :node="child"
+      />
+    </span>
+  </a>
+  <ul v-else-if="type === 'unordered-list'">
+    <CrystallizeContentTransformerNode
+      v-for="child in children"
+      :key="child.id"
+      :node="child"
+    />
+  </ul>
+  <ol v-else-if="type === 'ordered-list'">
+    <CrystallizeContentTransformerNode
+      v-for="child in children"
+      :key="child.id"
+      :node="child"
+    />
+  </ol>
+  <li v-else-if="type === 'list-item'">
+    <span v-if="textContent">{{ textContent }}</span>
+    <span v-else-if="children && children.length > 0">
+      <CrystallizeContentTransformerNode
+        v-for="child in children"
+        :key="child.id"
+        :node="child"
+      />
+    </span>
+  </li>
+  <span v-else-if="textContent">{{ textContent }}</span>
+  <span v-else-if="children && children.length > 0">
+    <CrystallizeContentTransformerNode
+      v-for="child in children"
+      :key="child.id"
+      :node="child"
+    />
+  </span>
 </template>
 
 <script>
@@ -19,13 +61,14 @@ export default {
     },
   },
   data() {
-    const { textContent, children, type, kind } = this.node || {};
+    const { textContent, children, type, kind, metadata } = this.node || {};
 
     return {
       textContent,
       children,
       type,
       kind,
+      metadata,
     };
   },
 };

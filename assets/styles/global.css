@@ -80,9 +80,14 @@ p > a {
   font-weight: 600;
 }
 
-p:hover {
+p > a:hover {
   text-decoration: none;
   border-bottom-color: transparent;
+}
+
+ul > li,
+ol > li {
+  margin-left: 30px;
 }
 
 button {
