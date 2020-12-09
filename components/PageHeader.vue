@@ -1,7 +1,7 @@
 <template>
   <header class="outer">
     <NuxtLink to="/" class="logo">
-      <img src="/logo-shop.svg" alt="" />
+      <img src="/logo-shop.svg" alt="" width="69" height="84" />
     </NuxtLink>
     <nav class="nav" :class="open ? 'nav-open' : ''">
       <ul class="nav-list">
