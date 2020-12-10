@@ -2,7 +2,11 @@
   <NuxtLink :to="path" class="outer">
     <div v-if="image || video" class="media-wrapper">
       <CrystallizeVideo v-if="video" :video="video" />
-      <CrystallizeImage v-else :image="image" sizes="(min-width 1024px) 33vw, 100vw" />
+      <CrystallizeImage
+        v-else
+        :image="image"
+        sizes="(min-width 1024px) 33vw, 100vw"
+      />
     </div>
     <div class="text">
       <h2>{{ name }}</h2>

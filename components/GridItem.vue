@@ -7,44 +7,24 @@
     }"
     :class="cellSize"
   >
-
-    <div v-if="type === 'product'" class="cell-inner product">
-      <div class="text product">
+    <div :class="type === 'product' ? 'cell-inner product' : 'cell-inner'">
+      <div class="text">
         <h3 class="title">{{ name }}</h3>
-        <span class="price">
+        <span v-if="type === 'product'" class="price">
           <Price :variant="defaultVariant" />
         </span>
-        <!-- <Button>Buy</Button> -->
       </div>
 
-        <div class="media">
-          <CrystallizeVideo v-if="video" :video="video" />
-          <CrystallizeImage
-            v-else
-            :image="image"
-            :sizes="`(min-width 1024px) ${imageMdWidth}px, 100vw`"
-            :width="1024"
-            class="image"
-          />
-        </div>
+      <div class="media">
+        <CrystallizeVideo v-if="video" :video="video" />
+        <CrystallizeImage
+          v-else
+          :image="image"
+          :sizes="`(min-width 1024px) ${imageMdWidth}px, 100vw`"
+          :width="1024"
+          class="image"
+        />
       </div>
-      <div v-else class="cell-inner">
-      <div class="text product">
-        <h3 class="title">{{ name }}</h3>
-        </div>
-        <div class="media">
-          <CrystallizeVideo v-if="video" :video="video" />
-          <CrystallizeImage
-            v-else
-            :image="image"
-            :sizes="`(min-width 1024px) ${imageMdWidth}px, 100vw`"
-            :width="1024"
-            class="image"
-          />
-        </div>
-      </div>
-      
-      
     </div>
   </NuxtLink>
 </template>
@@ -117,7 +97,7 @@ a {
 
 .text {
   text-align: left;
-  padding:20px 0;
+  padding: 20px 0;
 }
 
 .price {
@@ -125,7 +105,7 @@ a {
   font-size: 1.4rem;
   color: var(--color-price);
   font-weight: bold;
-  padding:10px 0;
+  padding: 10px 0;
 }
 
 .cell-inner {
@@ -147,7 +127,6 @@ a {
 .cell-inner:hover {
   text-decoration: none;
 }
-
 
 @media (min-width: 1024px) {
   .media {
@@ -172,7 +151,6 @@ a {
     max-height: initial;
   }
 
-
   .cell-inner {
     flex-direction: row;
     position: relative;
@@ -187,7 +165,7 @@ a {
     text-align: center;
   }
   .cell-1x2 .cell-inner {
-    flex-direction:column-reverse;
+    flex-direction: column-reverse;
   }
   .cell-1x2 .cell-inner.product {
     flex-direction: row-reverse;
@@ -208,7 +186,7 @@ a {
     padding-left: 15rem;
   }
   .cell-1x3 .media {
-      max-height:50vh;
+    max-height: 50vh;
   }
   .cell-1x3 button {
     margin: 0 0;

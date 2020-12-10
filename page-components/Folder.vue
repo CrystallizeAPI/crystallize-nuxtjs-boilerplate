@@ -10,7 +10,10 @@
     </div>
     <div class="folder--content">
       <CrystallizeGrid v-if="grid" :grid="grid" />
-      <CrystallizeCatalogueItems v-else-if="folder.children" :items="folder.children" />
+      <CrystallizeCatalogueItems
+        v-else-if="folder.children"
+        :items="folder.children"
+      />
     </div>
   </FetchLoader>
 </template>
