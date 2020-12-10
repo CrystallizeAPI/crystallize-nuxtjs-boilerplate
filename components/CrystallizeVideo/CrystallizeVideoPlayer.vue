@@ -1,9 +1,5 @@
 <template>
-  <div class="outer">
-    <div class="inner">
-      <video ref="video" class="video-js" playslinline />
-    </div>
-  </div>
+  <video ref="video" class="video-js" playslinline />
 </template>
 
 <script>
@@ -78,35 +74,21 @@ export default {
 };
 </script>
 
-<style scoped>
-.outer {
-  padding-top: 56.25%;
-  position: relative;
-}
-
-.inner {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-}
-
-.outer >>> .video-js {
+<style>
+.video-js {
   height: 100% !important;
   position: absolute;
   z-index: 0;
 }
-.outer >>> .video-js video {
+.video-js video {
   transform: none;
 }
 
-.outer >>> .video-js:not(.vjs-has-started) video {
+.video-js:not(.vjs-has-started) video {
   cursor: pointer;
 }
 
-.outer >>> .video-js button.vjs-big-play-button {
+.video-js button.vjs-big-play-button {
   opacity: 0;
 }
 </style>
