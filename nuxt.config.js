@@ -44,9 +44,11 @@ export default {
           children.forEach(handleItem);
         }
       }
+
       const allCatalogueItems = await getCatalogueItems(
         locale.crystallizeCatalogueLanguage
       );
+
       allCatalogueItems.forEach(handleItem);
     },
   },
