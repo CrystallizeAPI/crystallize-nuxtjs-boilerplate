@@ -1,5 +1,5 @@
 <template>
-  <fragment>
+  <div>
     <nav class="nav" :class="open ? 'nav--open' : ''">
       <ul class="nav__list">
         <li v-for="child of navItems" :key="child.path" class="nav__item">
@@ -11,12 +11,10 @@
     </nav>
 
     <BurgerButton :open="open" @click="toggleNavBar" />
-  </fragment>
+  </div>
 </template>
 
 <script>
-import { Fragment } from 'vue-fragment'
-
 export default {
   props: {
     navItems: {
