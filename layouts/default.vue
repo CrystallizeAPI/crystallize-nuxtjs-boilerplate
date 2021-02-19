@@ -5,9 +5,13 @@
       Oh no! There was an error fetching the data in layouts/default.vue
     </p>
     <div v-else>
-      <PageHeader :nav-items="navItems" />
+      <LayoutHeader>
+        <template v-slot:navigation>
+          <LayoutNavigation :nav-items="navItems" />
+        </template>
+      </LayoutHeader>
       <nuxt />
-      <PageFooter :nav-items="navItems" />
+      <LayoutFooter :nav-items="navItems" />
     </div>
   </div>
 </template>

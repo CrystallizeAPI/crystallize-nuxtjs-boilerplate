@@ -18,7 +18,8 @@
     "nuxt": "^2.14.7",
     "nuxt-i18n": "^6.15.4",
     "video.js": "^7.10.2",
-    "videojs-contrib-dash": "^4.0.0"
+    "videojs-contrib-dash": "^4.0.0",
+    "vue-fragment": "^1.5.1"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",

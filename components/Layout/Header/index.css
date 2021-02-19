@@ -1,46 +1,3 @@
-<template>
-  <header class="outer">
-    <NuxtLink to="/" class="logo">
-      <img src="/logo-shop.svg" alt="" width="69" height="84" />
-    </NuxtLink>
-    <nav class="nav" :class="open ? 'nav-open' : ''">
-      <ul class="nav-list">
-        <li v-for="child of navItems" :key="child.path" class="nav-list-item">
-          <NuxtLink :to="child.path">
-            <span @click="hideNavBar">{{ child.name }}</span>
-          </NuxtLink>
-        </li>
-      </ul>
-    </nav>
-    <BurgerButton :open="open" @click="toggleNavBar" />
-  </header>
-</template>
-
-<script>
-export default {
-  props: {
-    navItems: {
-      type: Array,
-      required: true,
-    },
-  },
-  data() {
-    return { open: false };
-  },
-  methods: {
-    toggleNavBar() {
-      this.open = !this.open;
-      document.body.style.overflow = this.open ? "hidden" : "auto";
-    },
-    hideNavBar() {
-      this.open = false;
-      document.body.style.overflow = "auto";
-    },
-  },
-};
-</script>
-
-<style scoped>
 .outer {
   text-align: center;
   padding: 20px 75px;
@@ -152,4 +109,3 @@ export default {
     justify-content: center;
   }
 }
-</style>
