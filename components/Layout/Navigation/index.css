@@ -20,7 +20,7 @@
   display: none;
 }
 
-.nav__list {
+.nav__list {  
   margin-top: 30px;
   display: inline-block;
   list-style: none;
@@ -35,6 +35,8 @@
 }
 
 .nav__item a {
+  color: black;
+  cursor: pointer;
   display: inline-block;
   font-size: 1.25rem;
   font-weight: 600;
@@ -44,13 +46,12 @@
 }
 
 .nav__item a:hover {
-  text-decoration: underline;
-  cursor: pointer;
+  font-size: 1.25rem;
 }
 
-@media (min-width: 768px) {
-  .nav {
-    justify-content: center;
+@media screen and (min-width: 1024px) {
+  .nav__item a {
+    font-size: 1.5rem;
   }
 }
 
@@ -61,8 +62,11 @@
     position: relative;
     background-color: transparent;
     min-height: auto;
+    padding: 0;
+    margin-left: 2em;
   }
 
+  /* For large devices we want the navigation to be always shown */
   .nav.nav--open,
   .nav:not(.nav--open) {
     display: block;
@@ -70,6 +74,10 @@
 
   .nav__item {
     display: inline-block;
+  }
+
+  .nav__item a {
+    font-size: 1.125em;
   }
 }
 
