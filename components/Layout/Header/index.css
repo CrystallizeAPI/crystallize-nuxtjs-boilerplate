@@ -1,29 +1,12 @@
 .outer {
-  text-align: center;
-  padding: 20px 75px;
-  max-width: 1600px;
+  padding: 20px 20px;
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  margin: 0 auto 0;
+  justify-content: space-between;
+  margin-bottom: 1.5em;
 }
 
-.logo {
-  display: inline-block;
-  position: relative;
-  z-index: 999;
-}
-
-.logo img {
-  height: 84px;
-  display: block;
-  object-fit: contain;
-}
-
-
-@media (max-width: 1024px) {
+@media screen and (min-width: 1024px) {
   .outer {
-    padding: 10px 90px 10px 20px;
-    justify-content: space-between;
+    max-width: 1600px;
   }
 }
