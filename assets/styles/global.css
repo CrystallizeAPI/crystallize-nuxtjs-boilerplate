@@ -1,4 +1,7 @@
 :root {
+  /*
+   * Color palette
+   */
   --content-padding: 50px;
   --color-main-background: #fff;
   --color-text-main: #000;
@@ -7,11 +10,28 @@
   --color-price: #d79b59;
   --color-error: #ef4836;
   --main-bg-color: brown;
+
+  /*
+   * Container maximum width
+   */
   --max-width: 1600px;
+  
+  /*
+  * Custom Properties to keep in sync and horizontally aligned
+  * all the components in the same viewport
+  */
   --padding-lg: 100px;
   --padding-md: 75px;
   --padding-sm: 50px;
-  --padding-xs: 25px;
+  --padding-xs: 20px;
+  --viewport-xs-lateral-padding: var(--padding-xs);
+  
+  /* 
+   * The var() function can not be used as property names,
+   * selectors, or anything else besides property values.
+   *
+   * This values are only for documentation purposes.
+   */
   --screen-lg: 1600px;
   --screen-md: 1280px;
   --screen-sm: 1024px;

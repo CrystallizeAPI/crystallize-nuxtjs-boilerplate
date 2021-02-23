@@ -1,27 +1,70 @@
-.outer {
+.layout-header {
+  --padding-lateral: var(--viewport-xs-lateral-padding);
+  --padding-vertical: var(--viewport-xs-lateral-padding);
+
+  align-items: center;
   display: flex;
   justify-content: space-between;
   margin-bottom: 1.5em;
-  padding: 20px 20px;
+  padding-bottom: var(--padding-vertical);
+  padding-left: var(--padding-lateral);
+  /*
+   * The extra space on the right needed is equal
+   * the horizontal padding (the same as the left) and
+   * the size of the burguer icon aproximately.
+   */
+  padding-right: calc(var(--padding-lateral) + 40px);
+  padding-top: var(--padding-vertical);
+  position: relative;
   text-align: center;
 }
 
+.layout-header__menu {
+  position: absolute;
+  right: var(--padding-lateral);
+  /*
+  * We position the element the same as the vertical padding
+  * plus some extra space to align it on the center.
+  */
+  --button-distance-from-top: calc(var(--padding-vertical) + var(--padding-vertical) / 4);
+  top: var(--button-distance-from-top);
+}
+
 @media screen and (min-width: 768px) {
-  .outer {
-    min-height: 100px;
+  .layout-header {
+    --padding-vertical: 30px;
     align-items: center;
+  }
+
+  .layout-header__menu {
+    /*
+    * We position the element the same as the vertical padding
+    * plus some extra space to align it on the center.
+    */
+    --button-distance-from-top: calc(var(--padding-vertical) + var(--padding-vertical) / 3);
   }
 }
 
 
 @media screen and (min-width: 1024px) {
-  .outer {
-    margin: 0 auto 3em auto;
-    max-width: 1600px;
-    padding-left: 0;
-    padding-right: 0;
-    min-height: 150px;
+  .layout-header {
     align-items: center;
     justify-content: flex-start;
+    margin: 0 auto 3em auto;
+    max-width: 1600px;
+    min-height: 150px;
+    padding-right: var(--padding-lateral);
+  }
+
+  .layout-header__menu {
+    margin-left: 3em;
+    position: relative;
+    top: initial;
+    right: initial;
+  }
+
+  .layout-header__actions {
+    /* This make the actions go to the right */
+    margin-left: auto;
   }
 }

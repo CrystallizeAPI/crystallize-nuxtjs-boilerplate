@@ -1,14 +1,14 @@
 button {
-  --menu-line-height: 4px;
+  --menu-line-height: 3px;
   --menu-line-border-radius: 2px;
-  --menu-line-vertical-distance: 10px;
+  --menu-line-vertical-distance: 9px;
   --menu-line-horizontal-distance: 8px;
   appearance: none;
   background: transparent;
   cursor: pointer;
-  height: 40px;
+  height: 30px;
   position: relative;
-  width: 40px !important;
+  width: 30px !important;
   z-index: 100;
   padding-left: 0;
   padding-right: 0;
@@ -60,6 +60,13 @@ button {
   top: 0;
   transform: rotate(-45deg);
   width: 100%;
+}
+
+@media (min-width: 768px) {
+  button {
+    --menu-line-vertical-distance: 10px;
+    --menu-line-horizontal-distance: 10px;
+  }
 }
 
 

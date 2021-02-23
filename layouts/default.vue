@@ -9,6 +9,20 @@
         <template v-slot:navigation>
           <LayoutNavigation :nav-items="navItems" />
         </template>
+        <template v-slot:actions>
+          <div class="actions">
+            <IconButton
+              to="/login"
+              screenReaderText="login"
+              iconSrc="/icons/user.svg" />
+            <IconButton
+              screenReaderText="search"
+              iconSrc="/icons/search.svg" />
+            <IconButton
+              screenReaderText="basket"
+              iconSrc="/icons/basket.svg" />
+          </div>
+        </template>
       </LayoutHeader>
       <nuxt />
       <LayoutFooter :nav-items="navItems" />
@@ -57,3 +71,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+  .actions {
+    display: flex;
+  }
+</style>

@@ -7,7 +7,7 @@
 <style scoped>
 .outer {
   margin-bottom: 30px;
-  max-width: 1600px;
+  max-width: var(--max-width);
   padding: 0 0;
   margin: 0 auto;
   display: block;

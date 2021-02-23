@@ -1,10 +1,14 @@
 <template>
-  <header class="outer">
+  <header class="layout-header">
     <NuxtLink to="/" class="logo">
       <LayoutHeaderLogo />
     </NuxtLink>
-    
-    <slot name="navigation"></slot>
+    <div class="layout-header__menu">
+      <slot name="navigation"></slot>
+    </div>
+    <div class="layout-header__actions">
+      <slot name="actions"></slot>
+    </div>
   </header>
 </template>
 
