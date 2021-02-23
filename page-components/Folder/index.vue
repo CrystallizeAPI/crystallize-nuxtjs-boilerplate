@@ -1,12 +1,9 @@
 <template>
   <FetchLoader :state="$fetchState">
     <div class="folder--sub-header">
-      <h1>{{ folder.name }}</h1>
-
-      <CrystallizeImage v-if="headerImage" :image="headerImage" />
-      <div v-if="headerDescription" class="folder--header-description">
-        <CrystallizeContentTransformer :data="headerDescription" />
-      </div>
+      <PageHeader
+        :title="folder.name"
+        :description="headerDescription"/>
     </div>
     <div class="folder--content">
       <CrystallizeGrid v-if="grid" :grid="grid" />
@@ -20,8 +17,7 @@
 
 <script>
 import toText from "@crystallize/content-transformer/toText";
-import { simplyFetchFromGraph } from "../../lib/graph";
-import fragments from "../../lib/graph/fragments";
+import { getFolderData } from './get-folder-data'
 
 export default {
   data() {
@@ -38,28 +34,13 @@ export default {
     const locale = locales.find((l) => l.locale === code) || locales[0];
 
     /**
-     * Get EVERYTHING for this folder
+     * As default, we get EVERYTHING for this folder
      * You probably want to cherry pick the fields in
      * the query here to improve performance
      */
-    const response = await simplyFetchFromGraph({
-      query: `
-        query FOLDER_PAGE($path: String!, $language: String!) {
-          folder: catalogue (path: $path, language: $language) {
-            ...item
-            children {
-              ...item
-              ...product
-            }
-          }
-        }
-
-        ${fragments}
-      `,
-      variables: {
-        path: route.path,
-        language: locale.crystallizeCatalogueLanguage,
-      },
+    const response = await getFolderData({
+      asPath: route.path,
+      language: locale.crystallizeCatalogueLanguage,
     });
 
     const { folder } = response.data;
