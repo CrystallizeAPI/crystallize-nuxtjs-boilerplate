@@ -1,6 +1,6 @@
-import { getCatalogueItems } from "./lib/graph";
+import { getAllCatalogueItems } from "./lib/graph";
 
-function getComponentForPath({ type }) {
+function getComponentPathForRoute({ type }) {
   switch (type) {
     case "product": {
       return "page-components/Product/index.vue";
@@ -35,12 +35,28 @@ export default {
   },
   router: {
     async extendRoutes(routes, resolve) {
+      /*
+       * We extend the router to dynamically indicate at build time
+       * what /page-component we want to be rendered for each route.
+       * 
+       * We query all items from the catalogue, and iterate them.
+       * For each result, we get it's /page-component depending on the type.
+       */
       function handleItem({ path, name = "", type, children }) {
-        if (path !== "/index" && !name.startsWith("_")) {
+        const isHomePage = path === "/index"
+        // Assets aer used to create content such as banners and grids
+        const isCrystallizeAssets = name.startsWith("_")
+
+        /*
+         * The home page has its explicit render.
+         * Assets cannot be rendered as a page.
+         * Because of this, we omit these cases.
+         */
+        if (!isHomePage && !isCrystallizeAssets) {
           routes.push({
             name: path,
             path,
-            component: resolve(__dirname, getComponentForPath({ type })),
+            component: resolve(__dirname, getComponentPathForRoute({ type })),
           });
         }
         if (children) {
@@ -48,7 +64,7 @@ export default {
         }
       }
 
-      const allCatalogueItems = await getCatalogueItems(
+      const allCatalogueItems = await getAllCatalogueItems(
         locale.crystallizeCatalogueLanguage
       );
 
