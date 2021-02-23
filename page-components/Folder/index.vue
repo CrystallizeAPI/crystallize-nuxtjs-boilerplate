@@ -1,16 +1,19 @@
 <template>
   <FetchLoader :state="$fetchState">
-    <div class="folder--sub-header">
-      <PageHeader
-        :title="folder.name"
-        :description="headerDescription"/>
-    </div>
+    <PageHeader
+      :title="folder.name"
+      :description="headerDescription">
+      <!-- @TODO: Add subfolders -->
+    </PageHeader>
     <div class="folder--content">
       <CrystallizeGrid v-if="grid" :grid="grid" />
       <CrystallizeCatalogueItems
         v-else-if="folder.children"
         :items="folder.children"
       />
+      <!-- @TODO: Add body -->
+      <!-- @TODO: Add stackable -->
+      <!-- @TODO: Add List -->
     </div>
   </FetchLoader>
 </template>

@@ -16,8 +16,12 @@ export default {
       type: String,
       required: true
     },
+    /*
+     * The description prop is coupled to how the Crystallize GraphQLtreats text
+     * 
+     */
     description: {
-      type: Object,
+      type: Array,
       required: false,
     }
   }
