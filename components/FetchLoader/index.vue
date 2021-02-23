@@ -22,16 +22,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.fetch-loader {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 80vh;
-  padding: 50px;
-}
-
-.fetch-loader > svg {
-  margin-right: 25px;
-}
-</style>
+<style scoped src="./index.css"></style>

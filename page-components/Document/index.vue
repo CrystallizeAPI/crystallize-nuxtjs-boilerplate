@@ -11,8 +11,8 @@
 
 <script>
 import toText from "@crystallize/content-transformer/toText";
-import { simplyFetchFromGraph } from "../lib/graph";
-import fragments from "../lib/graph/fragments";
+import { simplyFetchFromGraph } from "../../lib/graph";
+import fragments from "../../lib/graph/fragments";
 
 export default {
   data() {
@@ -82,53 +82,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.document {
-  margin: 0 auto;
-  max-width: var(--max-width);
-  padding: 100px var(--padding-lg) 100px 200px;
-  font-size: 1.6rem;
-}
-
-.document >>> p,
-.document >>> ul,
-.document >>> ol,
-.document >>> blockquote,
-.document >>> code,
-.document >>> h1,
-.document >>> h2,
-.document >>> h3,
-.document >>> h4,
-.document >>> h5,
-.document >>> h6 {
-  max-width: 900px;
-  padding-right: 100px;
-}
-.document >>> h1 {
-  font-size: 5.5rem;
-}
-.document >>> h2,
-.document >>> h3 {
-  font-size: 2.5rem;
-  margin-top: 150px;
-}
-
-.document >>> p,
-.document >>> ul,
-.document >>> ol {
-  line-height: 1.6em;
-  font-size: 1.2rem;
-}
-.document >>> .images {
-  margin-left: -100px;
-  margin-bottom: 25px;
-}
-@media (max-width: 1024px) {
-  .document {
-    padding: var(--padding-xs);
-  }
-  .document >>> .images {
-    margin-left: 0;
-  }
-}
-</style>
+<style scoped src='./index.css'></style>

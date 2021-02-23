@@ -1,0 +1,42 @@
+.folder--header-description {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin: 1em var(--content-padding);
+}
+
+.folder--content {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0px var(--padding-lg);
+}
+
+.folder--sub-header {
+  display: flex;
+  flex-direction: column;
+  padding: 100px 50px 50px;
+  margin: 0 auto;
+  max-width: 800px;
+  text-align: center;
+}
+.folder--sub-header > img {
+  max-width: 100px;
+}
+.folder--sub-header h1 {
+  font-size: 2.4rem;
+  margin-bottom: 10px;
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+}
+
+.folder--sub-header p {
+  font-size: 18px;
+  line-height: 1.8rem;
+  color: var(--color-text-sub);
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .folder--sub-header {
+    padding: 100px 0 50px;
+  }
+}

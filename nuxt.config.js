@@ -6,10 +6,10 @@ function getComponentForPath({ type }) {
       return "page-components/Product/index.vue";
     }
     case "document": {
-      return "page-components/Document.vue";
+      return "page-components/Document/index.vue";
     }
     default: {
-      return "page-components/Folder.vue";
+      return "page-components/Folder/index.vue";
     }
   }
 }
@@ -29,7 +29,10 @@ export default {
     // Expose CRYSTALLIZE_TENANT_IDENTIFIER to the client side script
     CRYSTALLIZE_TENANT_IDENTIFIER: process.env.CRYSTALLIZE_TENANT_IDENTIFIER,
   },
-  components: true,
+  components: true, // NuxtJS will import automatically yor components
+  server: {
+    port: 8000 // default: 3000
+  },
   router: {
     async extendRoutes(routes, resolve) {
       function handleItem({ path, name = "", type, children }) {
