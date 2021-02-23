@@ -33,6 +33,8 @@
   --padding-sm: 50px;
   --padding-xs: 20px;
   --viewport-xs-lateral-padding: var(--padding-xs);
+  --viewport-sm-lateral-padding: var(--padding-sm);
+  --viewport-md-lateral-padding: var(--padding-lg);
   
   
   --font-max-width: 800px;
