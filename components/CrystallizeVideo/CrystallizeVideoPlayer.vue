@@ -74,21 +74,4 @@ export default {
 };
 </script>
 
-<style>
-.video-js {
-  height: 100% !important;
-  position: absolute;
-  z-index: 0;
-}
-.video-js video {
-  transform: none;
-}
-
-.video-js:not(.vjs-has-started) video {
-  cursor: pointer;
-}
-
-.video-js button.vjs-big-play-button {
-  opacity: 0;
-}
-</style>
+<style src='./index.css'></style>

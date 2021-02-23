@@ -18,29 +18,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.items {
-  display: block;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.item {
-  margin: 0 0 15px;
-  display: block;
-}
-
-@media (min-width: 768px) {
-  .items {
-    display: grid;
-    grid-template-columns: repeat(16, 1fr);
-    gap: 1rem;
-  }
-
-  .item {
-    grid-column-end: span 4;
-    margin: 0;
-  }
-}
-</style>
+<style scoped src='./index.css'></style>

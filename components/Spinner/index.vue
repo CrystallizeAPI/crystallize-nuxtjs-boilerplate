@@ -51,21 +51,4 @@ export default {
 };
 </script>
 
-<style scoped>
-@keyframes spinnerRotation {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-svg {
-  transition-property: transform;
-  animation-name: spinnerRotation;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-  animation-duration: 600ms;
-}
-</style>
+<style scoped src="./index.css"></style>
