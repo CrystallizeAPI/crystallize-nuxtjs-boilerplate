@@ -4,10 +4,10 @@
       <LayoutHeaderLogo />
     </NuxtLink>
     <div class="layout-header__menu">
-      <slot name="navigation"></slot>
+      <slot name="navigation"/>
     </div>
     <div class="layout-header__actions">
-      <slot name="actions"></slot>
+      <slot name="actions"/>
     </div>
   </header>
 </template>
