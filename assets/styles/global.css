@@ -12,6 +12,14 @@
   --main-bg-color: brown;
 
   /*
+   * Font-size
+   */
+  --font-size-xl: 40px;
+  --font-size-lg: 32px;
+  --font-size-md: 26px;
+  --font-size-sm: 16px;
+
+  /*
    * Container maximum width
    */
   --max-width: 1600px;
@@ -25,6 +33,9 @@
   --padding-sm: 50px;
   --padding-xs: 20px;
   --viewport-xs-lateral-padding: var(--padding-xs);
+  
+  
+  --font-max-width: 800px;
   
   /* 
    * The var() function can not be used as property names,
@@ -141,7 +152,6 @@ h1 {
   font-size: 3rem;
   font-family: "Roboto Slab", sans-serif;
   color: var(--color-text-main);
-  text-transform: uppercase;
 }
 
 .h2 {
