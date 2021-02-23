@@ -51,8 +51,8 @@ export default {
     // Get a header image to display
     const imagesComponent = folder.components?.find((c) => c.type === "images");
     if (imagesComponent?.content?.images) {
-      const [image] = imagesComponent.content.images;
-      this.headerImage = image;
+      const [firstImage] = imagesComponent.content.images;
+      this.headerImage = firstImage;
     }
 
     // Get a description for the folder

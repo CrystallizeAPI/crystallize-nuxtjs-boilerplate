@@ -35,10 +35,7 @@
 
 <script>
 import toText from "@crystallize/content-transformer/toText";
-
-import { simplyFetchFromGraph } from "../../lib/graph";
-import fragments from "../../lib/graph/fragments";
-
+import {getProductData} from './get-product-data'
 import VariantSelector from "./variant-selector";
 
 export default {
@@ -62,25 +59,14 @@ export default {
     const locale = locales.find((l) => l.locale === code) || locales[0];
 
     /**
-     * Get EVERYTHING for this product
-     * You probably want to cherry pick the fields in
-     * the query here to improve performance
+     * As default, we get EVERYTHING for this product.
+     * To change the behavior, you can modify:
+     * 1- Modify the ./query.js file
+     * 2- Pass a new query as parameter
      */
-    const response = await simplyFetchFromGraph({
-      query: `
-        query PRODUCT_PAGE($path: String!, $language: String!) {
-          product: catalogue (path: $path, language: $language) {
-            ...item
-            ...product
-          }
-        }
-
-        ${fragments}
-      `,
-      variables: {
-        path: route.path,
-        language: locale.crystallizeCatalogueLanguage,
-      },
+    const response = await getProductData({
+      asPath: route.path,
+      language: locale.crystallizeCatalogueLanguage,
     });
 
     const { product } = response.data;
@@ -139,96 +125,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.section {
-  background: var(--color-box-background);
-  padding: 25px;
-}
-
-@media (min-width: 1024px) {
-  .section {
-    padding: 50px;
-  }
-}
-
-.top {
-  display: flex;
-  align-items: center;
-  flex-direction: column-reverse;
-  justify-content: center;
-  margin-bottom: 15px;
-}
-
-@media (min-width: 1024px) {
-  .top {
-    flex-direction: row-reverse;
-  }
-}
-
-.main-info {
-}
-
-@media (min-width: 1024px) {
-  .main-info {
-    flex: 0 0 30%;
-    margin: 0 50px;
-  }
-}
-
-h1.name {
-  font-size: 2rem;
-  font-weight: 900;
-  text-transform: uppercase;
-}
-
-.summary {
-  margin: 0px 0px 0.5em;
-  line-height: 1.8;
-}
-
-.media {
-  flex: 1 1 auto;
-  position: relative;
-}
-
-@media (min-width: 1024px) {
-  .media {
-    padding: 3rem;
-  }
-}
-
-.media >>> img {
-  object-fit: contain;
-  max-height: 50vh;
-  width: 100%;
-  height: 100%;
-}
-
-@media (min-width: 1024px) {
-  .media >>> img {
-    max-height: 80vh;
-  }
-}
-
-.product-secondary-info {
-  display: flex;
-  flex-direction: column-reverse;
-  gap: 15px;
-}
-
-@media (min-width: 1024px) {
-  .product-secondary-info {
-    display: grid;
-    grid-template-columns: auto 500px;
-    grid-gap: 15px;
-  }
-}
-
-.price-wrap {
-  padding-top: 45px;
-  border-top: 1px solid rgb(206, 206, 206);
-  color: var(--color-text-sub);
-  font-size: 30px;
-  margin: 20px 20px 20px 0px;
-}
-</style>
+<style scoped src='./index.css'></style>
