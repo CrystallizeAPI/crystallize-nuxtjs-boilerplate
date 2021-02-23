@@ -1,5 +1,19 @@
-.folder--content {
-  max-width: var(--max-width);
+.folder__content {
+  --lateral-padding: var(--viewport-xs-lateral-padding);
   margin: 0 auto;
-  padding: 0px var(--padding-lg);
+  max-width: var(--max-width);
+  padding-left: var(--lateral-padding);
+  padding-right: var(--lateral-padding);
+}
+
+@media screen and (min-width: 768px) {
+  .folder__content {
+    --lateral-padding: var(--viewport-sm-lateral-padding);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .folder__content {
+    --lateral-padding: var(--viewport-md-lateral-padding);
+  }
 }

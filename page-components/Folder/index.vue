@@ -5,13 +5,17 @@
       :description="headerDescription">
       <!-- @TODO: Add subfolders -->
     </PageHeader>
-    <div class="folder--content">
+    <div class="folder__content">
       <CrystallizeGrid v-if="grid" :grid="grid" />
+      <!--
       <CrystallizeCatalogueItems
         v-else-if="folder.children"
         :items="folder.children"
-      />
+      /> -->
+
       <!-- @TODO: Add body -->
+      <CrystallizeComponents :components="[body]"/>
+
       <!-- @TODO: Add stackable -->
       <!-- @TODO: Add List -->
     </div>
@@ -21,14 +25,17 @@
 <script>
 import toText from "@crystallize/content-transformer/toText";
 import { getFolderData } from './get-folder-data'
+import { getFolderTitle } from './utils'
 
 export default {
   data() {
     return {
       folder: {},
       grid: null,
+      title: null,
       headerImage: null,
       headerDescription: null,
+      body: []
     };
   },
   async fetch() {
@@ -47,30 +54,31 @@ export default {
     });
 
     const { folder } = response.data;
-
-    // Get a grid to display
-    const grid = folder.components?.find((c) => c.type === "gridRelations");
-
-    // Get a header image to display
-    const imagesComponent = folder.components?.find((c) => c.type === "images");
-    if (imagesComponent?.content?.images) {
-      const [firstImage] = imagesComponent.content.images;
-      this.headerImage = firstImage;
-    }
-
-    // Get a description for the folder
-    const richTextComponent = folder.components?.find(
-      (c) => c.type === "richText"
-    );
-    if (richTextComponent?.content?.json) {
-      this.headerDescription = richTextComponent.content.json;
-
-      // Provide a good meta description for this page
-      this.metaDescription = toText(richTextComponent.content.json);
-    }
-
     this.folder = folder;
-    this.grid = grid?.content?.grids?.[0];
+    this.title = getFolderTitle(folder)
+    const { components } = folder
+
+    if (components && components.length > 0) {
+      // Get a header image to display
+      const imagesComponent = components.find(({type}) => type === "images");
+      if (imagesComponent?.content?.images) {
+        const [firstImage] = imagesComponent.content.images;
+        this.headerImage = firstImage;
+      }
+
+      // Get a description for the folder
+      const richTextComponent = components.find(({type}) => type === "richText");
+      if (richTextComponent?.content?.json) {
+        this.headerDescription = richTextComponent.content.json;
+        this.metaDescription = toText(richTextComponent.content.json);
+      }
+
+      this.body = components.find(({name}) => name === 'Body') || []
+
+      // Get a grid to display
+      const grid = components.find(({type}) => type === "gridRelations");
+      this.grid = grid?.content?.grids?.[0];
+    }
   },
   head() {
     if (!this.metaDescription && this.folder?.name) {

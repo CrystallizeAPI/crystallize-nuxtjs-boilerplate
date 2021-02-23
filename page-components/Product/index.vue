@@ -5,7 +5,7 @@
         <div class="main-info">
           <h1 class="name">{{ product.name }}</h1>
           <div class="summary">
-            <CrystallizeItemComponents :components="summary" />
+            <CrystallizeComponents :components="summary" />
           </div>
           <VariantSelector
             :selected-variant="selectedVariant"
@@ -23,10 +23,10 @@
       </div>
       <div class="product-secondary-info">
         <div class="section">
-          <CrystallizeItemComponents :components="components" />
+          <CrystallizeComponents :components="components" />
         </div>
         <div class="section properties">
-          <CrystallizeItemComponents :components="specs" />
+          <CrystallizeComponents :components="specs" />
         </div>
       </div>
     </Outer>

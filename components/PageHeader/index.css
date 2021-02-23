@@ -1,6 +1,7 @@
 .page-header {
-  padding-left: var(--viewport-xs-lateral-padding);
-  padding-right: var(--viewport-xs-lateral-padding);
+  --lateral-padding: var(--viewport-xs-lateral-padding);
+  padding-left: var(--lateral-padding);
+  padding-right: var(--lateral-padding);
 }
 
 .page-header__title {
@@ -18,4 +19,16 @@
   line-height: 36px;
   margin-top: 10px;
   max-width: var(--font-max-width);
+}
+
+@media screen and (min-width: 768px) {
+  .page-header {
+    --lateral-padding: var(--viewport-sm-lateral-padding);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .page-header {
+    --lateral-padding: var(--viewport-md-lateral-padding);
+  }
 }

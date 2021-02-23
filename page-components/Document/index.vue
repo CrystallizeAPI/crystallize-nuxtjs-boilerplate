@@ -3,7 +3,7 @@
     <Outer>
       <FetchLoader :state="$fetchState">
         <h1>{{ document.name }}</h1>
-        <CrystallizeItemComponents :components="document.components" />
+        <CrystallizeComponents :components="document.components" />
       </FetchLoader>
     </Outer>
   </div>

@@ -25,19 +25,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.section:not(:last-child) {
-  margin-bottom: var(--content-padding);
-}
-
-.table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.cell {
-  width: 50%;
-  padding: 1em 0px;
-  border-bottom: 1px solid var(--color-main-background);
-}
-</style>
+<style scoped src='./properties-table.css'></style>

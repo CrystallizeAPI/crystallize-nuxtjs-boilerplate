@@ -1,27 +1,27 @@
 <template>
   <div v-if="components" class="components">
     <div v-for="component in components" :key="component.id" class="component">
-      <SingleLine
+      <CrystallizeComponentsSingleLine
         v-if="component.type === 'singleLine'"
         :data="component.content"
       />
-      <RichText
+      <CrystallizeComponentsRichText
         v-else-if="component.type === 'richText'"
         :data="component.content"
       />
-      <ParagraphCollection
+      <CrystallizeComponentsParagraphCollection
         v-else-if="component.type === 'paragraphCollection'"
         :data="component.content"
       />
-      <Images
+      <CrystallizeComponentsImages
         v-else-if="component.type === 'images'"
         :data="component.content"
       />
-      <Videos
+      <CrystallizeComponentsVideos
         v-else-if="component.type === 'videos'"
         :data="component.content"
       />
-      <PropertiesTable
+      <CrystallizeComponentsPropertiesTable
         v-else-if="component.type === 'propertiesTable'"
         :data="component.content"
       />

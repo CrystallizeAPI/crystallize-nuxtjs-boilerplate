@@ -33,6 +33,7 @@
 @media screen and (min-width: 768px) {
   .layout-header {
     --padding-vertical: 30px;
+    --padding-lateral: var(--viewport-sm-lateral-padding);
     align-items: center;
   }
 
@@ -48,6 +49,7 @@
 
 @media screen and (min-width: 1024px) {
   .layout-header {
+    --padding-lateral: var(--viewport-md-lateral-padding);
     align-items: center;
     justify-content: flex-start;
     margin: 0 auto 3em auto;

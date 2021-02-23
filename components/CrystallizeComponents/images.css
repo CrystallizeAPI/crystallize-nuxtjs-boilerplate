@@ -1,0 +1,42 @@
+.crystallize-components-images {
+  --grid-element-separation: 10px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: var(--grid-element-separation);
+}
+
+/*
+ * We use ">>>" instead of ">" because it's how vuejs understands
+ * that we want to modify a child component
+ *
+ * FYI: https://vue-loader.vuejs.org/guide/scoped-css.html#mixing-local-and-global-styles
+ */
+.crystallize-components-images__image,
+.crystallize-components-images__image >>> img {
+  display: block;
+  width: auto;
+}
+
+@media (min-width: 768px) {
+  .crystallize-components-images {
+    --grid-element-separation: 20px;
+    --grid-columns-count: 2;
+    /*
+     * We create a grid with equal columns based on
+     * the custom property "--grid-columns-count"
+     */
+    grid-template-columns: repeat(var(--grid-columns-count), 1fr);
+  }
+  
+  .crystallize-components-images__image:first-child {
+    /*
+     * We force the first element to fill the first row.
+     * If you modify the grid structure by adding columns,
+     * make sure to update the line below.
+     *
+     * To make the first element fill the hole row do the following:
+     * grid-column-end: span NUMBER_OF_COLUMNS;
+     */
+    grid-column-end: span var(--grid-columns-count);
+  }
+}
