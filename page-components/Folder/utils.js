@@ -4,3 +4,7 @@ export function getFolderTitle(folder) {
 
   return title || folder.name;
 }
+
+export function isFolderType(component) {
+  return component.type === 'folder'
+}
