@@ -46,6 +46,7 @@ export default {
       headerImage: null,
       subFolders: null,
       title: null,
+      stackableContent: null,
     };
   },
   async fetch() {
@@ -72,14 +73,12 @@ export default {
     this.subFolders = subFolders || null
 
     if (components && components.length > 0) {
-      // Get a header image to display
       const imagesComponent = components.find(({type}) => type === "images");
       if (imagesComponent?.content?.images) {
         const [firstImage] = imagesComponent.content.images;
         this.headerImage = firstImage;
       }
 
-      // Get a description for the folder
       const richTextComponent = components.find(({type}) => type === "richText");
       if (richTextComponent?.content?.json) {
         this.headerDescription = richTextComponent.content.json;
@@ -88,9 +87,10 @@ export default {
 
       this.body = components.find(({name}) => name === 'Body') || []
 
-      // Get a grid to display
       const grid = components.find(({type}) => type === "gridRelations");
       this.grid = grid?.content?.grids?.[0];
+
+      this.stackableContent = components.find(({name}) => name === "Stackable content")?.content?.items
     }
   },
   head() {
