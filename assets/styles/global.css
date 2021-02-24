@@ -4,12 +4,23 @@
    */
   --content-padding: 50px;
   --color-main-background: #fff;
-  --color-text-main: #000;
+  --color-text-main: #080708;
   --color-text-sub: #4c505b;
   --color-box-background: #efefef;
   --color-price: #d79b59;
   --color-error: #ef4836;
   --main-bg-color: brown;
+
+  /* --color-price: var(--color-text-main); */
+  /* --color-discount: #070707; */
+  /* --color-blockquote: var(--color-text-main); */
+
+  /* --color-primary-action-lightest: #83462a; */
+  /* --color-primary-action-light: #83462a; */
+  --color-primary-action: #FBDCCE;
+  --color-primary-action-dark: #fdd4c2;
+  --color-primary-action-darkest: #83462a;
+
 
   /*
    * Font-size
