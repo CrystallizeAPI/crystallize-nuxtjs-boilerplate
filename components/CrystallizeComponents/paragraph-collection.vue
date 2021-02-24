@@ -1,6 +1,6 @@
 <template>
   <div v-if="data" class="paragraphs">
-    <template v-for="(paragraph, index) in data.paragraphs" :load="log(paragraph)">
+    <template v-for="(paragraph, index) in data.paragraphs">
       <div :key="index" class="paragraph">
         <h3 v-if="paragraph.title">{{ paragraph.title.text }}</h3>
         <CrystallizeContentTransformer
@@ -20,11 +20,6 @@ export default {
       type: Object,
       default: null,
     },
-  },
-  methods: {
-    log(item) {
-      console.log(item)
-    }
   }
 };
 </script>
