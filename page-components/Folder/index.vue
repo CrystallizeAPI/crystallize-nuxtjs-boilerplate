@@ -3,7 +3,16 @@
     <PageHeader
       :title="folder.name"
       :description="headerDescription">
-      <!-- @TODO: Add subfolders -->
+      <template v-slot:postHeader>
+        <div v-if="subFolders" class="subfolder-list">
+        <NuxtLink
+          v-for="subFolder in subFolders"
+          :to="subFolder.path"
+          :key="subFolder.name">
+          <Tag>{{subFolder.name}}</Tag>
+        </NuxtLink>
+        </div>
+      </template>
     </PageHeader>
     <div class="folder__content">
       <CrystallizeGrid v-if="grid" :grid="grid" />
@@ -25,17 +34,18 @@
 <script>
 import toText from "@crystallize/content-transformer/toText";
 import { getFolderData } from './get-folder-data'
-import { getFolderTitle } from './utils'
+import { getFolderTitle, isFolderType } from './utils'
 
 export default {
   data() {
     return {
+      body: null,
       folder: {},
       grid: null,
-      title: null,
-      headerImage: null,
       headerDescription: null,
-      body: []
+      headerImage: null,
+      subFolders: null,
+      title: null,
     };
   },
   async fetch() {
@@ -56,7 +66,10 @@ export default {
     const { folder } = response.data;
     this.folder = folder;
     this.title = getFolderTitle(folder)
-    const { components } = folder
+    const { components, children } = folder
+    
+    const subFolders = children?.filter(isFolderType);
+    this.subFolders = subFolders || null
 
     if (components && components.length > 0) {
       // Get a header image to display
