@@ -1,11 +1,11 @@
 <template>
   <section class="page-header">
-    <slot name='before-content' />
+    <slot name='preHeader' />
     <h1>{{title}}</h1>
     <div v-if="description" class="page-header__description">
       <CrystallizeContentTransformer :data="description" />
     </div>
-    <slot name='after-content' />
+    <slot name='postHeader' />
   </section>
 </template>
 
