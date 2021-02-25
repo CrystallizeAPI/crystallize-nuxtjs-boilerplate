@@ -1,0 +1,7 @@
+.price {
+  font-size: 1.25em;
+  display: inline-block;
+  color: var(--color-price);
+  font-weight: bold;
+  padding: 10px 0;
+}

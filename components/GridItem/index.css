@@ -9,10 +9,6 @@ a {
   }
 }
 
-.cell:first-child >>> h3 {
-  font-size: 1.2rem;
-}
-
 .grid-item__media >>> img {
   max-height: 50vh;
   object-fit: cover;
@@ -28,14 +24,6 @@ a {
 .grid-item__info {
   text-align: left;
   padding: 0.5em 0;
-}
-
-.grid-item__price {
-  color: inherit;
-  font-size: 1.4rem;
-  color: var(--color-price);
-  font-weight: bold;
-  padding: 10px 0;
 }
 
 .grid-item__inner {

@@ -5,14 +5,12 @@
       gridColumn: `span ${gridCell.layout.colspan}`,
       gridRow: `span ${gridCell.layout.rowspan}`,
     }"
-    :class="`${cellSize} grid-item--${type}`"
+    :class="`grid-item grid-item--${type} ${cellDynamicClass}`"
   >
     <div v-if="type === 'product'" class="grid-item__inner product">
       <div class="grid-item__info">
         <h3 class="grid-item__title">{{ name }}</h3>
-        <span class="grid-item__price">
-          <Price :variant="defaultVariant" />
-        </span>
+        <Price :variant="defaultVariant" />
       </div>
 
       <div class="grid-item__media">
@@ -97,7 +95,7 @@ export default {
       image,
       video,
       imageMdWidth: 100 / (this.gridCell?.layout?.colspan ?? 1),
-      cellSize: `cell cell-${this.gridCell?.layout?.rowspan}x${this.gridCell?.layout?.colspan}`,
+      cellDynamicClass: `cell cell-${this.gridCell?.layout?.rowspan}x${this.gridCell?.layout?.colspan}`,
     };
   },
 };

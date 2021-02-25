@@ -7,12 +7,11 @@
   --color-text-main: #080708;
   --color-text-sub: #4c505b;
   --color-box-background: #efefef;
-  --color-price: #d79b59;
+  --color-price: var(--color-text-main);
+  --color-price-discount:#EE6969;
   --color-error: #ef4836;
   --main-bg-color: brown;
 
-  /* --color-price: var(--color-text-main); */
-  /* --color-discount: #070707; */
   /* --color-blockquote: var(--color-text-main); */
 
   /* --color-primary-action-lightest: #83462a; */
