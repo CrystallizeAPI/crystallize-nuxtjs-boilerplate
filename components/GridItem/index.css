@@ -44,10 +44,10 @@ a {
   text-align: center;
   margin-bottom: 15px;
 }
-.grid-item__inner .product {
+.grid-item__inner .grid-item__inner--product {
   background: var(--color-box-background);
 }
-.grid-item__inner .product .grid-item__info {
+.grid-item__inner .grid-item__inner--product .grid-item__info {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -97,7 +97,7 @@ a {
   .cell-1x2 .grid-item__inner  {
     flex-direction: column-reverse;
   }
-  .cell-1x2 .grid-item__inner .product {
+  .cell-1x2 .grid-item__inner .grid-item__inner--product {
     flex-direction: row-reverse;
     justify-content: flex-end;
     padding: 0 50px 0 0;
