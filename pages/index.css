@@ -1,29 +1,18 @@
-.folder__content {
+.home-page {
   --lateral-padding: var(--viewport-xs-lateral-padding);
   margin: 0 auto;
   padding-left: var(--lateral-padding);
   padding-right: var(--lateral-padding);
 }
 
-.subfolder-list {
-  --subfolder-list-elements-distance: 0.5em;
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.subfolder-list > * {
-  margin-bottom: var(--subfolder-list-elements-distance);
-  margin-right: var(--subfolder-list-elements-distance);
-}
-
 @media screen and (min-width: 768px) {
-  .folder__content {
+  .home-page {
     --lateral-padding: var(--viewport-sm-lateral-padding);
   }
 }
 
 @media screen and (min-width: 1024px) {
-  .folder__content {
+  .home-page {
     --lateral-padding: var(--viewport-md-lateral-padding);
     max-width: var(--viewport-content-max-width);
   }

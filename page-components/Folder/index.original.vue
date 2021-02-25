@@ -36,24 +36,17 @@
 <script>
 import toText from "@crystallize/content-transformer/toText";
 import { getFolderData } from "./get-folder-data";
-import {
-  getFolderTitle,
-  getFolderDescription,
-  getFolderSubFolders,
-  getFolderBody,
-  getFolderGrids,
-  getFolderStackableContent,
-} from "./utils";
+import { getFolderTitle, isFolderType } from "./utils";
 
 export default {
   data() {
     return {
+      body: null,
       folder: {},
-      title: null,
+      grid: null,
       headerDescription: null,
       subFolders: null,
-      grid: null,
-      body: null,
+      title: null,
       stackableContent: null,
     };
   },
@@ -74,21 +67,28 @@ export default {
 
     const { folder } = response.data;
     this.folder = folder;
-    const { components } = folder;
-
     this.title = getFolderTitle(folder);
-    this.subFolders = getFolderSubFolders(folder) || null;
+    const { components, children } = folder;
+
+    const subFolders = children?.filter(isFolderType);
+    this.subFolders = subFolders || null;
 
     if (components && components.length > 0) {
-      const richTextComponent = getFolderDescription(folder);
+      console.log(folder);
+      const richTextComponent = components.find(({ type }) => type === "Brief");
       if (richTextComponent?.content?.json) {
         this.headerDescription = richTextComponent.content.json;
         this.metaDescription = toText(richTextComponent.content.json);
       }
 
-      this.body = getFolderBody(folder) || [];
-      this.grid = getFolderGrids(folder);
-      this.stackableContent = getFolderStackableContent(folder);
+      this.body = components.find(({ name }) => name === "Body") || [];
+
+      const grid = components.find(({ type }) => type === "gridRelations");
+      this.grid = grid?.content?.grids?.[0];
+
+      this.stackableContent = components.find(
+        (c) => c.name === "Stackable content"
+      )?.content?.items;
     }
   },
   head() {

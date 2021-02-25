@@ -1,14 +1,18 @@
 <template>
-  <Outer>
+  <div class="home-page">
     <FetchLoader :state="$fetchState">
       <CrystallizeGrid v-if="grid" :grid="grid" />
       <Stackable :stacks="stackableContent" />
     </FetchLoader>
-  </Outer>
+  </div>
 </template>
 
 <script>
 import { getFolderData } from "../page-components/Folder/get-folder-data";
+import {
+  getFolderGrids,
+  getFolderStackableContent,
+} from "../page-components/Folder/utils";
 
 export default {
   data() {
@@ -26,14 +30,9 @@ export default {
       language: locale.crystallizeCatalogueLanguage,
     });
 
-    // Extract the stackable content that we want to show
-    this.grid = data.folder?.components?.find(
-      (c) => c.type === "gridRelations"
-    )?.content?.grids?.[0];
-
-    this.stackableContent = data.folder?.components?.find(
-      (c) => c.name === "Stackable content"
-    )?.content?.items;
+    const { folder } = data;
+    this.grid = getFolderGrids(folder);
+    this.stackableContent = getFolderStackableContent(folder);
   },
   head() {
     return {
@@ -50,9 +49,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.no-grids {
-  padding: 50px;
-  text-align: center;
-}
-</style>
+<style scoped src='./index.css'></style>
