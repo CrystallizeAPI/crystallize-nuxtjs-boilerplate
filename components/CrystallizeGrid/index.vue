@@ -51,21 +51,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.grid {
-  display: grid;
-  grid-gap: 20px;
-}
-
-@media (max-width: 1023px) {
-  .grid {
-    grid-template-columns: 1fr 1fr !important;
-  }
-}
-
-@media (max-width: 768px) {
-  .grid {
-    display: block !important;
-  }
-}
-</style>
+<style scoped src='./index.css'></style>
