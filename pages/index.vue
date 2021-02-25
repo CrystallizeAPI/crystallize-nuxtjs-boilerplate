@@ -23,10 +23,8 @@ export default {
     const locale = locales.find((l) => l.locale === code) || locales[0];
 
     const { data } = await getFolderData({
-      variables: {
-        asPath: "/frontpage-2021",
-        language: locale.crystallizeCatalogueLanguage,
-      },
+      asPath: "/frontpage-2021",
+      language: locale.crystallizeCatalogueLanguage,
     });
 
     // Extract the stackable content that we want to show
