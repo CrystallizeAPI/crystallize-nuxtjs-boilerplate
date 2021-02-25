@@ -1,7 +1,7 @@
 .folder__content {
   --lateral-padding: var(--viewport-xs-lateral-padding);
   margin: 0 auto;
-  max-width: var(--max-width);
+  max-width: var(--viewport-content-max-width);
   padding-left: var(--lateral-padding);
   padding-right: var(--lateral-padding);
 }

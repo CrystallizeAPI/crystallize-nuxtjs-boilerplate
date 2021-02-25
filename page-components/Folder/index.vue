@@ -1,16 +1,15 @@
 <template>
   <FetchLoader :state="$fetchState">
-    <PageHeader
-      :title="folder.name"
-      :description="headerDescription">
+    <PageHeader :title="folder.name" :description="headerDescription">
       <template v-slot:postHeader>
         <div v-if="subFolders" class="subfolder-list">
           <NuxtLink
             v-for="subFolder in subFolders"
             :to="subFolder.path"
             :key="subFolder.name"
-            style="display: flex;">
-            <Tag>{{subFolder.name}}</Tag>
+            style="display: flex"
+          >
+            <Tag>{{ subFolder.name }}</Tag>
           </NuxtLink>
         </div>
       </template>
@@ -24,10 +23,10 @@
       /> -->
 
       <!-- @TODO: Add body -->
-      <CrystallizeComponents :components="[body]"/>
+      <CrystallizeComponents :components="[body]" />
 
       <!-- @TODO: Add stackable -->
-      <Stackable  :stacks="stackableContent" />
+      <Stackable :stacks="stackableContent" />
 
       <!-- @TODO: Add List -->
     </div>
@@ -36,8 +35,8 @@
 
 <script>
 import toText from "@crystallize/content-transformer/toText";
-import { getFolderData } from './get-folder-data'
-import { getFolderTitle, isFolderType } from './utils'
+import { getFolderData } from "./get-folder-data";
+import { getFolderTitle, isFolderType } from "./utils";
 
 export default {
   data() {
@@ -69,31 +68,35 @@ export default {
 
     const { folder } = response.data;
     this.folder = folder;
-    this.title = getFolderTitle(folder)
-    const { components, children } = folder
-    
+    this.title = getFolderTitle(folder);
+    const { components, children } = folder;
+
     const subFolders = children?.filter(isFolderType);
-    this.subFolders = subFolders || null
+    this.subFolders = subFolders || null;
 
     if (components && components.length > 0) {
-      const imagesComponent = components.find(({type}) => type === "images");
+      const imagesComponent = components.find(({ type }) => type === "images");
       if (imagesComponent?.content?.images) {
         const [firstImage] = imagesComponent.content.images;
         this.headerImage = firstImage;
       }
 
-      const richTextComponent = components.find(({type}) => type === "richText");
+      const richTextComponent = components.find(
+        ({ type }) => type === "richText"
+      );
       if (richTextComponent?.content?.json) {
         this.headerDescription = richTextComponent.content.json;
         this.metaDescription = toText(richTextComponent.content.json);
       }
 
-      this.body = components.find(({name}) => name === 'Body') || []
+      this.body = components.find(({ name }) => name === "Body") || [];
 
-      const grid = components.find(({type}) => type === "gridRelations");
+      const grid = components.find(({ type }) => type === "gridRelations");
       this.grid = grid?.content?.grids?.[0];
 
-      this.stackableContent = components.find((c) => c.name === 'Stackable content')?.content?.items;
+      this.stackableContent = components.find(
+        (c) => c.name === "Stackable content"
+      )?.content?.items;
     }
   },
   head() {

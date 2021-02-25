@@ -2,20 +2,19 @@
   <Outer>
     <FetchLoader :state="$fetchState">
       <CrystallizeGrid v-if="grid" :grid="grid" />
-      <div v-else class="no-grids">No grids to show on the frontpage</div>
+      <Stackable :stacks="stackableContent" />
     </FetchLoader>
   </Outer>
 </template>
 
 <script>
-import { getFolderData } from '../page-components/Folder/get-folder-data'
-import { simplyFetchFromGraph } from "../lib/graph";
-import fragments from "../lib/graph/fragments";
+import { getFolderData } from "../page-components/Folder/get-folder-data";
 
 export default {
   data() {
     return {
       grid: null,
+      stackableContent: null,
     };
   },
   async fetch() {
@@ -28,11 +27,13 @@ export default {
     });
 
     // Extract the stackable content that we want to show
-    const grid = data.frontpage?.components?.find(
+    this.grid = data.folder?.components?.find(
       (c) => c.type === "gridRelations"
     )?.content?.grids?.[0];
 
-    this.grid = grid;
+    this.stackableContent = data.folder?.components?.find(
+      (c) => c.name === "Stackable content"
+    )?.content?.items;
   },
   head() {
     return {

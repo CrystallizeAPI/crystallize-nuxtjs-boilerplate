@@ -1,7 +1,9 @@
 .page-header {
   --lateral-padding: var(--viewport-xs-lateral-padding);
+  --distance-to-next-element: 100px;
   padding-left: var(--lateral-padding);
   padding-right: var(--lateral-padding);
+  margin-bottom: var(--distance-to-next-element);
 }
 
 .page-header__title {
@@ -35,5 +37,13 @@
 @media screen and (min-width: 1024px) {
   .page-header {
     --lateral-padding: var(--viewport-md-lateral-padding);
+    max-width: var(--viewport-content-max-width);
+
+    /*
+     * When automatic lateral margins are assigned to an element,
+     * this one is centered on its container.
+     */
+    margin-left: auto;
+    margin-right: auto;
   }
 }

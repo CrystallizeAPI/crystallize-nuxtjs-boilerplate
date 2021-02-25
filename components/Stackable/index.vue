@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="stackable">
     <div v-for="stack in stacks" :key="stack.id">
       <!-- @TODO: Grid Collection -->
       <Collection :title="getTitle(stack)" :description="getDescription(stack)">
