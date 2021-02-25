@@ -33,7 +33,8 @@
   /*
    * Container maximum width
    */
-  --max-width: 1600px;
+  --viewport-content-max-width: 1600px;
+  --viewport-context-extended-max-width: 1800px;
   
   /*
   * Custom Properties to keep in sync and horizontally aligned
