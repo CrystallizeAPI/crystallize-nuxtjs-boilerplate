@@ -5,12 +5,13 @@
       :description="headerDescription">
       <template v-slot:postHeader>
         <div v-if="subFolders" class="subfolder-list">
-        <NuxtLink
-          v-for="subFolder in subFolders"
-          :to="subFolder.path"
-          :key="subFolder.name">
-          <Tag>{{subFolder.name}}</Tag>
-        </NuxtLink>
+          <NuxtLink
+            v-for="subFolder in subFolders"
+            :to="subFolder.path"
+            :key="subFolder.name"
+            style="display: flex;">
+            <Tag>{{subFolder.name}}</Tag>
+          </NuxtLink>
         </div>
       </template>
     </PageHeader>
@@ -26,6 +27,8 @@
       <CrystallizeComponents :components="[body]"/>
 
       <!-- @TODO: Add stackable -->
+      <Stackable  :stacks="stackableContent" />
+
       <!-- @TODO: Add List -->
     </div>
   </FetchLoader>
@@ -90,7 +93,7 @@ export default {
       const grid = components.find(({type}) => type === "gridRelations");
       this.grid = grid?.content?.grids?.[0];
 
-      this.stackableContent = components.find(({name}) => name === "Stackable content")?.content?.items
+      this.stackableContent = components.find((c) => c.name === 'Stackable content')?.content?.items;
     }
   },
   head() {
