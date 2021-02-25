@@ -5,24 +5,58 @@
       gridColumn: `span ${gridCell.layout.colspan}`,
       gridRow: `span ${gridCell.layout.rowspan}`,
     }"
-    :class="cellSize"
+    :class="`${cellSize} grid-item--${type}`"
   >
-    <div :class="type === 'product' ? 'cell-inner product' : 'cell-inner'">
-      <div class="text">
-        <h3 class="title">{{ name }}</h3>
-        <span v-if="type === 'product'" class="price">
+    <div v-if="type === 'product'" class="grid-item__inner product">
+      <div class="grid-item__info">
+        <h3 class="grid-item__title">{{ name }}</h3>
+        <span class="grid-item__price">
           <Price :variant="defaultVariant" />
         </span>
       </div>
 
-      <div class="media">
+      <div class="grid-item__media">
         <CrystallizeVideo v-if="video" :video="video" />
         <CrystallizeImage
           v-else
           :image="image"
           :sizes="`(min-width 1024px) ${imageMdWidth}px, 100vw`"
           :width="1024"
-          class="image"
+          class="grid-item__image"
+        />
+      </div>
+    </div>
+
+    <div v-if="type === 'document'" class="grid-item__inner">
+      <div class="grid-item__info">
+        <h3 class="grid-item__title">{{ name }}</h3>
+      </div>
+
+      <div class="grid-item__media">
+        <CrystallizeVideo v-if="video" :video="video" />
+        <CrystallizeImage
+          v-else
+          :image="image"
+          :sizes="`(min-width 1024px) ${imageMdWidth}px, 100vw`"
+          :width="1024"
+          class="grid-item__image"
+        />
+      </div>
+    </div>
+
+    <div v-if="type === 'folder'" class="grid-item__inner">
+      <div class="grid-item__info">
+        <h3 class="grid-item__title">{{ name }}</h3>
+      </div>
+
+      <div class="grid-item__media">
+        <CrystallizeVideo v-if="video" :video="video" />
+        <CrystallizeImage
+          v-else
+          :image="image"
+          :sizes="`(min-width 1024px) ${imageMdWidth}px, 100vw`"
+          :width="1024"
+          class="grid-item__image"
         />
       </div>
     </div>
@@ -52,6 +86,8 @@ export default {
 
     const video = components?.find((c) => c.type === "videos")?.content
       ?.videos?.[0];
+
+    console.log(type);
 
     return {
       name,

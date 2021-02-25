@@ -13,24 +13,24 @@ a {
   font-size: 1.2rem;
 }
 
-.media >>> img {
+.grid-item__media >>> img {
   max-height: 50vh;
   object-fit: cover;
 }
 
-.title {
-  font-size: 1.2rem;
+.grid-item__title {
+  font-size: 1em;
   color: var(--color-text-main);
   margin: 0;
-  font-weight: 500;
+  font-weight: 600;
 }
 
-.text {
+.grid-item__info {
   text-align: left;
-  padding: 20px 0;
+  padding: 0.5em 0;
 }
 
-.price {
+.grid-item__price {
   color: inherit;
   font-size: 1.4rem;
   color: var(--color-price);
@@ -38,37 +38,37 @@ a {
   padding: 10px 0;
 }
 
-.cell-inner {
+.grid-item__inner {
   display: flex;
   flex-direction: column-reverse;
   text-align: center;
   margin-bottom: 15px;
 }
-.cell-inner.product {
+.grid-item__inner .product {
   background: var(--color-box-background);
 }
-.cell-inner.product .text {
+.grid-item__inner .product .grid-item__info {
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 40px;
 }
 
-.cell-inner:hover {
+.grid-item__inner :hover {
   text-decoration: none;
 }
 
 @media (min-width: 1024px) {
-  .media {
+  .grid-item__media {
     flex-grow: 2;
     position: relative;
     overflow: hidden;
     width: 100%;
     height: 100%;
   }
-  .media >>> video,
-  .media >>> img,
-  .media >>> .outer {
+  .grid-item__media >>> video,
+  .grid-item__media >>> img,
+  .grid-item__media >>> .outer {
     display: block;
     /* If you want to contain your images, change object-fit to `contain` */
     object-fit: cover;
@@ -77,11 +77,11 @@ a {
     height: 100%;
     overflow: hidden;
   }
-  .media >>> img {
+  .grid-item__media >>> img {
     max-height: initial;
   }
 
-  .cell-inner {
+  .grid-item__inner  {
     flex-direction: row;
     position: relative;
     flex-grow: 1;
@@ -89,21 +89,21 @@ a {
     padding: 0;
   }
 
-  .cell-1x1 .cell-inner {
+  .cell-1x1 .grid-item__inner  {
     flex-direction: column-reverse;
     justify-content: flex-end;
     text-align: center;
   }
-  .cell-1x2 .cell-inner {
+  .cell-1x2 .grid-item__inner  {
     flex-direction: column-reverse;
   }
-  .cell-1x2 .cell-inner.product {
+  .cell-1x2 .grid-item__inner .product {
     flex-direction: row-reverse;
     justify-content: flex-end;
     padding: 0 50px 0 0;
   }
 
-  .cell-1x2 .image {
+  .cell-1x2 .grid-item__image {
     width: 200%;
     /* transform: translateX(-50%); */
   }
@@ -112,17 +112,17 @@ a {
     margin: 0 0;
   }
 
-  .cell-1x3 .cell-inner {
+  .cell-1x3 .grid-item__inner  {
     padding-left: 15rem;
   }
-  .cell-1x3 .media {
+  .cell-1x3 .grid-item__media {
     max-height: 50vh;
   }
   .cell-1x3 button {
     margin: 0 0;
   }
 
-  .cell-2x2 .cell-inner {
+  .cell-2x2 .grid-item__inner  {
     flex-direction: column-reverse;
     padding-bottom: 50px;
     text-align: center;
