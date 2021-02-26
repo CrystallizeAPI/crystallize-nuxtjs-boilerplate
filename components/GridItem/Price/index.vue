@@ -1,7 +1,7 @@
 <template>
   <div class="price" :class="discountPercentage ? 'price--with-discount' : ''">
     <div v-if="discountPercentage" class="price__discount-percentage">
-      <DiscountTag :discount="1" />
+      <DiscountTag :discount="discountPercentage" />
     </div>
     <div v-if="discountPrice" class="price__details">
       <!-- Price with discount-->
