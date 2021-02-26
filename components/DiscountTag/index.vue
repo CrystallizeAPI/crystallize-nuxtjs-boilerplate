@@ -6,7 +6,7 @@
 export default {
   props: {
     discount: {
-      type: String,
+      type: [String, Number],
       required: true,
     },
   },
