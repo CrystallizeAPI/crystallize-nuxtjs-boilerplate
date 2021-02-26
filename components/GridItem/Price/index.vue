@@ -1,12 +1,18 @@
 <template>
-  <div v-if="discountPrice" class="price price--with-discount">
-    <!-- Price with discount-->
-    <strong>{{ discountPrice }}</strong>
-    <div class="price__old-price">{{ defaultPrice }}</div>
-  </div>
-  <div v-else class="price">
-    <!-- Price without discount-->
-    <strong>{{ defaultPrice }}</strong>
+  <div class="price" :class="discountPercentage ? 'price--with-discount' : ''">
+    <div v-if="discountPercentage" class="price__discount-percentage">
+      <DiscountTag :discount="1" />
+    </div>
+    <div v-if="discountPrice" class="price__details">
+      <!-- Price with discount-->
+      <strong>{{ discountPrice }}</strong>
+      <!-- Original Price-->
+      <div class="price__old-price">{{ defaultPrice }}</div>
+    </div>
+    <div v-else class="price__details">
+      <!-- Original Price-->
+      <strong>{{ defaultPrice }}</strong>
+    </div>
   </div>
 </template>
 
@@ -23,7 +29,6 @@ export default {
     const { defaultPrice, discountPrice, discountPercentage } = this.getPricing(
       this.variant
     );
-    console.log({ defaultPrice, discountPrice, discountPercentage });
 
     return {
       defaultPrice,

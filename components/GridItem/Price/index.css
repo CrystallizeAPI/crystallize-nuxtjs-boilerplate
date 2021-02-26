@@ -13,10 +13,11 @@
   /*
    * The css properties below are applied because
    * the "old price" will be always shown along with
-   * the new price with the discount applied
+   * the new price (price with discount applied)
    */
   margin-left: 0.5rem;
 }
+
 .price__old-price:after {
   position: absolute;
   content: "";
@@ -34,7 +35,7 @@
  * - First, the new price with the discount applied
  * - Second, the original price crossed with a line
  */
-.price.price--with-discount {
+.price__details {
   display: flex;
   align-items: center;
 }
@@ -45,4 +46,19 @@
  */
 .price.price--with-discount strong {
   color: var(--color-price-discount);
+}
+
+
+/*
+ * Take into account that its parent must implement
+ * the position: relative; css rule in order to be placed
+ * in the upper-right corner of this one.
+ */
+.price__discount-percentage {
+  --vertical-distance-from-top-of-parent: 0.75rem;
+  --lateral-distance-from-top-of-parent: 0;
+  position: absolute;
+  top: var(--vertical-distance-from-top-of-parent);
+  right: var(--lateral-distance-from-top-of-parent);
+  z-index: 1;
 }
