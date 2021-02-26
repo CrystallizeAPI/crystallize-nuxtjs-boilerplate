@@ -8,6 +8,9 @@
     :class="`grid-item grid-item--${type} ${cellDynamicClass}`"
   >
     <div v-if="type === 'product'" class="grid-item__inner product">
+      <div class="grid-item__discount">
+        <DiscountTag :discount="1" />
+      </div>
       <div class="grid-item__info">
         <h3 class="grid-item__title">{{ name }}</h3>
         <Price :variant="defaultVariant" />
@@ -84,8 +87,6 @@ export default {
 
     const video = components?.find((c) => c.type === "videos")?.content
       ?.videos?.[0];
-
-    console.log(type);
 
     return {
       name,
