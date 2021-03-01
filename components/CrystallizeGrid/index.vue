@@ -8,7 +8,17 @@
       :key="cell.itemId"
       :data="cell.item"
       :grid-cell="cell"
-    />
+    >
+      <ListFormatProduct
+        v-if="cell.item.type === 'product'"
+        :data="cell.item"
+      />
+      <ListFormatFolder v-if="cell.item.type === 'folder'" :data="cell.item" />
+      <ListFormatDocument
+        v-if="cell.item.type === 'document'"
+        :data="cell.item"
+      />
+    </GridItem>
   </div>
 </template>
 

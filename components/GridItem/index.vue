@@ -7,19 +7,13 @@
     }"
     :class="`grid-item grid-item--${type} ${cellDynamicClass}`"
   >
-    <ListFormatProduct v-if="data.type === 'product'" :data="data" />
-    <ListFormatFolder v-if="data.type === 'folder'" :data="data" />
-    <ListFormatDocument v-if="data.type === 'document'" :data="data" />
+    <slot />
   </div>
 </template>
 
 <script>
 export default {
   props: {
-    data: {
-      type: Object,
-      required: true,
-    },
     gridCell: {
       type: Object,
       required: true,
