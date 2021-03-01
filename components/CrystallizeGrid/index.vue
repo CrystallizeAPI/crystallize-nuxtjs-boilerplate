@@ -3,12 +3,7 @@
     class="grid"
     :style="{ gridTemplateColumns: `repeat(${totalColSpan}, 1fr)` }"
   >
-    <GridItem
-      v-for="cell in flattened"
-      :key="cell.itemId"
-      :data="cell.item"
-      :grid-cell="cell"
-    >
+    <GridItem v-for="cell in flattened" :key="cell.itemId" :grid-cell="cell">
       <ListFormatProduct
         v-if="cell.item.type === 'product'"
         :data="cell.item"
