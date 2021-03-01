@@ -8,7 +8,7 @@
     <article class="list-format-product__inner">
       <div class="list-format-product__info">
         <h3 class="list-format-product__title">{{ name }}</h3>
-        <GridItemPrice :variant="variant" />
+        <ListFormatProductPrice :variant="variant" />
       </div>
 
       <!-- We assume that there will always be an image or a video -->
