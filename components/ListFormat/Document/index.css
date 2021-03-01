@@ -13,7 +13,6 @@
    * and sliders that have different heights.
    */
   height: 100%;
-  min-height: 500px;
   position: relative;
 }
 
