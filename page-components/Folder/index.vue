@@ -16,16 +16,11 @@
     </PageHeader>
     <div class="folder__content">
       <CrystallizeGrid v-if="grid" :grid="grid" />
-      <!--
-      <CrystallizeCatalogueItems
+      <!-- <CrystallizeCatalogueItems
         v-else-if="folder.children"
         :items="folder.children"
       /> -->
-
-      <!-- @TODO: Add body -->
       <CrystallizeComponents :components="[body]" />
-
-      <!-- @TODO: Add stackable -->
       <Stackable :stacks="stackableContent" />
 
       <!-- @TODO: Add List -->
