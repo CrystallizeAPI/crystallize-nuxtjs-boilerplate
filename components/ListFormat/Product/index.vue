@@ -38,10 +38,7 @@ export default {
       required: false,
     },
   },
-  data: function () {
-    return {};
-  },
 };
 </script>
 
-<style scoped src='./product.css'></style>
+<style scoped src='./index.css'></style>
