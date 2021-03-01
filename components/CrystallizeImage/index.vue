@@ -110,3 +110,16 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+img {
+  /*
+     * Images that don't have an explicit `display: block` have some space
+     * after the `<img/>` tag because of the `inline-block` behavior.
+     *
+     * Adding a `display: block` we make sure that the elements ends
+     * where the image finishes, which is the expected behavior.
+     */
+  display: block;
+}
+</style>
