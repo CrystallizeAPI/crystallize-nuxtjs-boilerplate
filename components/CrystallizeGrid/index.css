@@ -1,16 +1,28 @@
 .grid {
+  --grid-row-height: 500px;
+
   display: grid;
-  grid-gap: 1em;
+  column-gap: 0.5em;
+  row-gap: 1em;
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 767px) {
   .grid {
-    grid-template-columns: 1fr 1fr !important;
+    display: block !important;
+    grid-auto-rows: var(--grid-row-height);
+  }
+
+  /*
+   * We add a separation between elements because grid-gap, column-gap,
+   * and row-gap don't work because the container doesn't have display: grid.
+   */
+  .grid > * {
+    margin-bottom: 1em;
   }
 }
 
-@media (max-width: 768px) {
+@media screen and (min-width: 768px) and (max-width: 1023px) {
   .grid {
-    display: block !important;
+    grid-template-columns: 1fr 1fr !important;
   }
 }
