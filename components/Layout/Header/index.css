@@ -53,7 +53,7 @@
     align-items: center;
     justify-content: flex-start;
     margin: 0 auto 3em auto;
-    max-width: 1600px;
+    max-width: var(--viewport-content-max-width);
     min-height: 150px;
     padding-right: var(--padding-lateral);
   }

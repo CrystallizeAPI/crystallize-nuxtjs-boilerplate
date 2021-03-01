@@ -34,7 +34,7 @@
 }
 
 .list-format-product__title {
-  font-size: 1em;
+  font-size: var(--font-size-sm);
   color: var(--color-text-main);
   margin: 0;
   font-weight: 600;
@@ -43,15 +43,6 @@
 .list-format-product__media {
   border: 1px solid var(--border-color);
   margin-bottom: var(--distance-between-text-and-media);
-}
-
-/*
- * In VueJS if we want to select the direct child
- * we must use the `>>>` syntax instead of `>`.
- */
-.list-format-product__media >>> img {
-  max-height: 50vh;
-  object-fit: cover;
 }
 
 @media screen and (min-width: 1024px) {
@@ -63,8 +54,7 @@
   }
 
   .list-format-product__media >>> video,
-  .list-format-product__media >>> img,
-  .list-format-product__media >>> .outer {
+  .list-format-product__media >>> img {
     display: block;
     /* If you want to contain your images, change object-fit to `contain` */
     object-fit: cover;

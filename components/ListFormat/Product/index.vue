@@ -17,9 +17,7 @@
         <CrystallizeImage
           v-else
           :image="image"
-          :width="1024"
           class="list-format-product__image"
-          sizes="(min-width 1024px) 33vw, 100vw"
         />
       </figure>
     </article>

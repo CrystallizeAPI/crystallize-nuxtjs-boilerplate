@@ -1,7 +1,10 @@
 <template>
   <div
     class="grid"
-    :style="{ gridTemplateColumns: `repeat(${totalColSpan}, 1fr)` }"
+    :style="{
+      gridTemplateColumns: `repeat(${totalGridColumns}, 1fr);`,
+      gridTemplateRows: `repeat(${totalGridRows}, var(--grid-row-height));`,
+    }"
   >
     <GridItem v-for="cell in flattened" :key="cell.itemId" :grid-cell="cell">
       <ListFormatProduct
@@ -41,15 +44,18 @@ export default {
       });
     });
 
+    const totalGridRows = this.grid?.rows.length;
+
     // Get the total number of columns in a row
-    const totalColSpan =
+    const totalGridColumns =
       this.grid?.rows?.[0]?.columns?.reduce(
         (acc, col) => acc + col.layout.colspan,
         0
       ) ?? 0;
 
     return {
-      totalColSpan,
+      totalGridRows,
+      totalGridColumns,
       flattened,
     };
   },

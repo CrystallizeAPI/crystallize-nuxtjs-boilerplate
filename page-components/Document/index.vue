@@ -1,11 +1,9 @@
 <template>
   <div class="document">
-    <Outer>
-      <FetchLoader :state="$fetchState">
-        <h1>{{ document.name }}</h1>
-        <CrystallizeComponents :components="document.components" />
-      </FetchLoader>
-    </Outer>
+    <FetchLoader :state="$fetchState">
+      <h1>{{ document.name }}</h1>
+      <CrystallizeComponents :components="document.components" />
+    </FetchLoader>
   </div>
 </template>
 

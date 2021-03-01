@@ -1,7 +1,7 @@
 .outer {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  max-width: 1600px;
+  max-width: var(--viewport-content-max-width);
   margin: 50px auto;
   border-top: 2px solid var(--color-box-background);
   padding: 50px 50px;
