@@ -45,7 +45,13 @@
   --padding-xs: 20px;
   --viewport-xs-lateral-padding: var(--padding-xs);
   --viewport-sm-lateral-padding: var(--padding-sm);
-  --viewport-md-lateral-padding: var(--padding-lg);
+  /*
+   * The lateral padding should be
+   * --viewport-md-lateral-padding: var(--padding-lg);
+   * but because the lateral menu button won't be implemented
+   * we stop using the `--padding-lg` padding to have extra space
+   */
+  --viewport-md-lateral-padding: 0;
   
   
   --font-max-width: 800px;
