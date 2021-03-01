@@ -1,41 +1,16 @@
 <template>
-  <NuxtLink
-    :to="path"
+  <div
+    class="grid-item__inner"
     :style="{
       gridColumn: `span ${gridCell.layout.colspan}`,
       gridRow: `span ${gridCell.layout.rowspan}`,
     }"
     :class="`grid-item grid-item--${type} ${cellDynamicClass}`"
   >
-    <div class="grid-item__inner">
-      <ListFormatProduct
-        v-if="type === 'product'"
-        :variant="defaultVariant"
-        :name="name"
-        :video="video"
-        :image="image"
-      />
-
-      <ListFormatFolder v-if="type === 'folder'" :name="name" />
-
-      <div v-if="type === 'document'" class="grid-item__inner">
-        <div class="grid-item__info">
-          <h3 class="grid-item__title">{{ name }}</h3>
-        </div>
-
-        <div class="grid-item__media">
-          <CrystallizeVideo v-if="video" :video="video" />
-          <CrystallizeImage
-            v-else
-            :image="image"
-            :sizes="`(min-width 1024px) ${imageMdWidth}px, 100vw`"
-            :width="1024"
-            class="grid-item__image"
-          />
-        </div>
-      </div>
-    </div>
-  </NuxtLink>
+    <ListFormatProduct v-if="data.type === 'product'" :data="data" />
+    <ListFormatFolder v-if="data.type === 'folder'" :data="data" />
+    <ListFormatDocument v-if="data.type === 'document'" :data="data" />
+  </div>
 </template>
 
 <script>
@@ -51,25 +26,7 @@ export default {
     },
   },
   data: function () {
-    const { name, path, type, defaultVariant, components } = this.data;
-
-    let image = components?.find((c) => c.type === "images")?.content
-      ?.images?.[0];
-    if (type === "product") {
-      image = defaultVariant.images?.[0];
-    }
-
-    const video = components?.find((c) => c.type === "videos")?.content
-      ?.videos?.[0];
-
     return {
-      name,
-      path,
-      type,
-      defaultVariant,
-      image,
-      video,
-      imageMdWidth: 100 / (this.gridCell?.layout?.colspan ?? 1),
       cellDynamicClass: `cell cell-${this.gridCell?.layout?.rowspan}x${this.gridCell?.layout?.colspan}`,
     };
   },

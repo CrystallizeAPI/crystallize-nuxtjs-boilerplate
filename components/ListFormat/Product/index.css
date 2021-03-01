@@ -1,6 +1,18 @@
 .list-format-product {
   --border-color: var(--color-box-background);
   --distance-between-text-and-media: 0.75em;
+  
+  /*
+   * The `<article>` tag added for semantic purposes needs to be 100% height too
+   */
+  height: 100%;
+}
+
+/*
+ * If you remove this element, all the styles contained in this selector
+ * will have to be added to `.list-format-product`
+ */
+.list-format-product__inner {
   display: flex;
   /*
    * We use `column-reverse` instead of `column` because
@@ -17,7 +29,7 @@
   height: 100%;
 }
 
-.list-format-product :hover {
+.list-format-product:hover {
   text-decoration: none;
 }
 

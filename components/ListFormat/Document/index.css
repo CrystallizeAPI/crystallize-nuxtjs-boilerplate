@@ -1,4 +1,4 @@
-.list-format-folder {
+.list-format-document {
   --border-color: var(--color-box-background);
   --background-color: var(--color-primary-action);
   --color: var(--color-primary-action-darkest);
@@ -18,11 +18,12 @@
   padding: 1em 1.5em;
 }
 
-.list-format-folder:hover {
+.list-format-document:hover {
   text-decoration: none;
 }
 
-.list-format-folder__title {
+
+.list-format-document__title {
   color: var(--color);
   font-size: var(--font-size-md);
   font-weight: 600;

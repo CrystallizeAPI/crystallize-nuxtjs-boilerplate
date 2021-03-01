@@ -1,15 +1,15 @@
 <template>
-  <div class="list-format-folder">
-    <h3 class="list-format-folder__title">{{ name }}</h3>
-  </div>
+  <NuxtLink :to="data.path" class="list-format-folder">
+    <h3 class="list-format-folder__title">{{ data.name }}</h3>
+  </NuxtLink>
 </template>
 
 <script>
 export default {
   props: {
-    name: {
-      type: String,
-      required: true,
+    data: {
+      type: Object,
+      default: null,
     },
   },
 };
