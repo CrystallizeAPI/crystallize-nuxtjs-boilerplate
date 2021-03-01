@@ -1,0 +1,68 @@
+.list-format-product {
+  --border-color: var(--color-box-background);
+  --distance-between-text-and-media: 0.75em;
+  display: flex;
+  /*
+   * We use `column-reverse` instead of `column` because
+   * to us, it makes more sense semantically to have in the DOM
+   * first the name of the product and its price, and then the image.
+   */
+  flex-direction: column-reverse;
+  position: relative;
+  /*
+   * Make sure that the elements fills the hole height of its container
+   * This is usefull because this element can be placed in grids
+   * and sliders that have different heights.
+   */
+  height: 100%;
+}
+
+.list-format-product :hover {
+  text-decoration: none;
+}
+
+.list-format-product__title {
+  font-size: 1em;
+  color: var(--color-text-main);
+  margin: 0;
+  font-weight: 600;
+}
+
+.list-format-product__media {
+  border: 1px solid var(--border-color);
+  margin-bottom: var(--distance-between-text-and-media);
+}
+
+/*
+ * In VueJS if we want to select the direct child
+ * we must use the `>>>` syntax instead of `>`.
+ */
+.list-format-product__media >>> img {
+  max-height: 50vh;
+  object-fit: cover;
+}
+
+@media screen and (min-width: 1024px) {
+  .list-format-product__media {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+  }
+
+  .list-format-product__media >>> video,
+  .list-format-product__media >>> img,
+  .list-format-product__media >>> .outer {
+    display: block;
+    /* If you want to contain your images, change object-fit to `contain` */
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .list-format-product__media >>> img {
+    max-height: initial;
+  }
+}

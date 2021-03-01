@@ -7,55 +7,47 @@
     }"
     :class="`grid-item grid-item--${type} ${cellDynamicClass}`"
   >
-    <div v-if="type === 'product'" class="grid-item__inner product">
-      <div class="grid-item__info">
-        <h3 class="grid-item__title">{{ name }}</h3>
-        <GridItemPrice :variant="defaultVariant" />
+    <div class="grid-item__inner">
+      <ListFormatProduct
+        v-if="type === 'product'"
+        :variant="defaultVariant"
+        :name="name"
+        :video="video"
+        :image="image"
+      />
+
+      <div v-if="type === 'document'" class="grid-item__inner">
+        <div class="grid-item__info">
+          <h3 class="grid-item__title">{{ name }}</h3>
+        </div>
+
+        <div class="grid-item__media">
+          <CrystallizeVideo v-if="video" :video="video" />
+          <CrystallizeImage
+            v-else
+            :image="image"
+            :sizes="`(min-width 1024px) ${imageMdWidth}px, 100vw`"
+            :width="1024"
+            class="grid-item__image"
+          />
+        </div>
       </div>
 
-      <div class="grid-item__media">
-        <CrystallizeVideo v-if="video" :video="video" />
-        <CrystallizeImage
-          v-else
-          :image="image"
-          :sizes="`(min-width 1024px) ${imageMdWidth}px, 100vw`"
-          :width="1024"
-          class="grid-item__image"
-        />
-      </div>
-    </div>
+      <div v-if="type === 'folder'" class="grid-item__inner">
+        <div class="grid-item__info">
+          <h3 class="grid-item__title">{{ name }}</h3>
+        </div>
 
-    <div v-if="type === 'document'" class="grid-item__inner">
-      <div class="grid-item__info">
-        <h3 class="grid-item__title">{{ name }}</h3>
-      </div>
-
-      <div class="grid-item__media">
-        <CrystallizeVideo v-if="video" :video="video" />
-        <CrystallizeImage
-          v-else
-          :image="image"
-          :sizes="`(min-width 1024px) ${imageMdWidth}px, 100vw`"
-          :width="1024"
-          class="grid-item__image"
-        />
-      </div>
-    </div>
-
-    <div v-if="type === 'folder'" class="grid-item__inner">
-      <div class="grid-item__info">
-        <h3 class="grid-item__title">{{ name }}</h3>
-      </div>
-
-      <div class="grid-item__media">
-        <CrystallizeVideo v-if="video" :video="video" />
-        <CrystallizeImage
-          v-else
-          :image="image"
-          :sizes="`(min-width 1024px) ${imageMdWidth}px, 100vw`"
-          :width="1024"
-          class="grid-item__image"
-        />
+        <div class="grid-item__media">
+          <CrystallizeVideo v-if="video" :video="video" />
+          <CrystallizeImage
+            v-else
+            :image="image"
+            :sizes="`(min-width 1024px) ${imageMdWidth}px, 100vw`"
+            :width="1024"
+            class="grid-item__image"
+          />
+        </div>
       </div>
     </div>
   </NuxtLink>
