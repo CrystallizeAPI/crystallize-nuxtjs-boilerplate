@@ -1,3 +1,14 @@
+.folder__subfolder-list {
+  --subfolder-list-elements-distance: 0.5em;
+  display: flex;
+  overflow-x: auto;
+}
+
+.folder__subfolder-list > * {
+  margin-bottom: var(--subfolder-list-elements-distance);
+  margin-right: var(--subfolder-list-elements-distance);
+}
+
 .folder__content {
   --lateral-padding: var(--viewport-xs-lateral-padding);
   margin: 0 auto;
@@ -5,18 +16,11 @@
   padding-right: var(--lateral-padding);
 }
 
-.subfolder-list {
-  --subfolder-list-elements-distance: 0.5em;
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.subfolder-list > * {
-  margin-bottom: var(--subfolder-list-elements-distance);
-  margin-right: var(--subfolder-list-elements-distance);
-}
-
 @media screen and (min-width: 768px) {
+  .folder__subfolder-list {
+    flex-wrap: wrap;
+  }
+
   .folder__content {
     --lateral-padding: var(--viewport-sm-lateral-padding);
   }

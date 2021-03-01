@@ -2,7 +2,7 @@
   <FetchLoader :state="$fetchState">
     <PageHeader :title="title" :description="headerDescription">
       <template v-slot:postHeader>
-        <div v-if="subFolders" class="subfolder-list">
+        <div v-if="subFolders" class="folder__subfolder-list">
           <NuxtLink
             v-for="subFolder in subFolders"
             :to="subFolder.path"
