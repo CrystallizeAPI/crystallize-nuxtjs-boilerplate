@@ -1,6 +1,6 @@
 <template>
   <FetchLoader :state="$fetchState">
-    <PageHeader :title="folder.name" :description="headerDescription">
+    <PageHeader :title="title" :description="headerDescription">
       <template v-slot:postHeader>
         <div v-if="subFolders" class="subfolder-list">
           <NuxtLink
