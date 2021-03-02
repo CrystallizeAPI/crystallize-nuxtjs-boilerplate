@@ -45,3 +45,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.stackable > * {
+  margin-bottom: 100px !important;
+}
+</style>
