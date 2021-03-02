@@ -1,4 +1,6 @@
 :root {
+  --font-family-main: "Trebuchet MS", sans-serif;
+
   /*
    * Color palette
    */
@@ -19,7 +21,6 @@
   --color-primary-action: #FBDCCE;
   --color-primary-action-dark: #fdd4c2;
   --color-primary-action-darkest: #6b361e;
-
 
   /*
    * Font-size
