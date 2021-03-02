@@ -36,7 +36,21 @@
         </template>
       </PageHeader>
 
-      <!-- <CrystallizeComponents :components="document.components" /> -->
+      <main>
+        <!-- The article component does overwrite styles in order to make the
+        document/article look the same after using CrystallizeComponents -->
+        <Article>
+          <CrystallizeComponents :components="document.components" />
+        </Article>
+
+        <!-- @todo: add sidebar -->
+        <div>
+          <!-- @todo: add featured content -->
+          <aside></aside>
+          <!-- @todo: add related content -->
+          <aside></aside>
+        </div>
+      </main>
     </FetchLoader>
   </div>
 </template>
