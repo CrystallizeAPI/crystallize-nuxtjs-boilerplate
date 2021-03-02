@@ -17,6 +17,7 @@
         <CrystallizeImage
           v-else
           :image="image"
+          :width="1024"
           class="list-format-product__image"
         />
       </figure>

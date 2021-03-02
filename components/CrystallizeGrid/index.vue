@@ -2,8 +2,8 @@
   <div
     class="grid"
     :style="{
-      gridTemplateColumns: `repeat(${totalGridColumns}, 1fr);`,
-      gridTemplateRows: `repeat(${totalGridRows}, var(--grid-row-height));`,
+      gridTemplateColumns: `repeat(${totalGridColumns}, 1fr)`,
+      gridTemplateRows: `repeat(${totalGridRows}, var(--grid-row-height))`,
     }"
   >
     <GridItem v-for="cell in flattened" :key="cell.itemId" :grid-cell="cell">
@@ -44,8 +44,6 @@ export default {
       });
     });
 
-    const totalGridRows = this.grid?.rows.length;
-
     // Get the total number of columns in a row
     const totalGridColumns =
       this.grid?.rows?.[0]?.columns?.reduce(
@@ -54,8 +52,8 @@ export default {
       ) ?? 0;
 
     return {
-      totalGridRows,
       totalGridColumns,
+      totalGridRows: this.grid?.rows?.length || null,
       flattened,
     };
   },

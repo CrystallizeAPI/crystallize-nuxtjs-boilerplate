@@ -9,12 +9,6 @@ a {
   }
 }
 
-.grid-item {
-}
-
-.grid-item__inner {
-}
-
 .grid-item__inner :hover {
   text-decoration: none;
 }
