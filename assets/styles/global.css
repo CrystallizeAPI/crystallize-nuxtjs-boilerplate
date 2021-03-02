@@ -25,11 +25,15 @@
   /*
    * Font-size
    */
-  --font-size-xl: 40px;
-  --font-size-lg: 32px;
-  --font-size-md: 26px;
-  --font-size-sm: 16px;
+  --font-size-xxl: 40px;
+  --font-size-xl: 32px;
+  --font-size-l: 26px;
+  --font-size-m: 20px;
+  --font-size-s: 16px;
 
+  
+
+  
   /*
    * Container maximum width
    */
@@ -76,12 +80,12 @@ html {
 }
 
 body {
-  margin: 0;
-  font: 14px/1 roboto, sans-serif;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   background: var(--color-main-background);
   color: var(--color-text-sub);
+  font: 14px/1 Helvetica, Arial, Verdana, sans-serif;
+  margin: 0;
 }
 
 *,

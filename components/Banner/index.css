@@ -26,20 +26,27 @@
   height: 100%;
 }
 
-.banner__description >>> p,
-.banner__description >>> li {
-  line-height: 1.8;
-  color: var(--color-text-main);
-  font-size: var(--font-size-sm);
-  margin-top: 10px;
-  max-width: var(--font-max-width);
-}
-
 .banner__title {
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-xl);
   font-weight: 600;
   margin-bottom: 15px;
   margin-top: 0;
+}
+
+.banner__description >>> p {
+  margin: 0;
+}
+
+.banner__description >>> p,
+.banner__description >>> li {
+  color: var(--color-text-main);
+  font-size: var(--font-size-m);
+  line-height: 1.8;
+  max-width: var(--font-max-width);
+}
+
+.banner__description >>> li {
+  margin-top: 10px;
 }
 
 .banner__cta {
@@ -47,7 +54,7 @@
   border-radius: 4px;
   color: #fff;
   display: inline-block;
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-s);
   font-weight: 600;
   margin-top: 15px;
   padding: 10px 15px;
@@ -120,32 +127,6 @@
   height: 100%;
 }
 
-
-@media screen and (min-width: 768px) {
-  .banner.banner--withOverlay .banner__content {
-    padding: 0 5em;
-    margin-right: 0;
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  .banner.banner--withOverlay .banner__content {
-    min-height: 600px;
-  }
-}
-
-@media screen and (min-width: 1280px) {
-  .banner.banner--withOverlay .banner__content {
-    min-height: 700px;
-  }
-}
-
-@media screen and (min-width: 1600px) {
-  .banner.banner--withOverlay .banner__content {
-    min-height: 800px;
-  }
-}
-
 /*
  * All the text must be white
  */
@@ -158,6 +139,11 @@
 .banner.banner--withOverlay .banner__content >>> h5,
 .banner.banner--withOverlay .banner__content >>> h6 {
   color: #fff;
+}
+
+.banner.banner--withOverlay .banner__cta {
+  color: #000;
+  background: #fff;
 }
 
 .banner.banner--withOverlay .banner__media {
@@ -191,7 +177,27 @@
   height: 100%;
 }
 
-.banner.banner--withOverlay .banner__cta {
-  color: #000;
-  background: #fff;
+@media screen and (min-width: 768px) {
+  .banner.banner--withOverlay .banner__content {
+    padding: 0 5em;
+    margin-right: 0;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .banner.banner--withOverlay .banner__content {
+    min-height: 600px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .banner.banner--withOverlay .banner__content {
+    min-height: 700px;
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  .banner.banner--withOverlay .banner__content {
+    min-height: 800px;
+  }
 }

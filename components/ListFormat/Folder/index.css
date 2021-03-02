@@ -24,7 +24,7 @@
 
 .list-format-folder__title {
   color: var(--color);
-  font-size: var(--font-size-md);
+  font-size: var(--font-size-l);
   font-weight: 600;
   margin: 0;
   text-align: center;
