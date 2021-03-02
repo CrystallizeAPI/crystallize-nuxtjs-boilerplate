@@ -61,6 +61,7 @@
 }
 
 .banner__media {
+  margin-bottom: 0;
   height: 100%;
 }
 
@@ -77,10 +78,9 @@
     overflow: hidden;
   }
 
-  /* @todo: this styles are not being applied */
-  .banner__content {
-    max-width: var(--font-max-width) !important;
-    padding: 5em 50px !important;
+  .banner__content {
+    max-width: var(--font-max-width);
+    padding: 5em var(--padding-m);
     flex-direction: row;
     margin-right: 30px;
   }
@@ -93,6 +93,11 @@
 }
 
 @media screen and (min-width: 1024px) {
+  .banner__content {
+    padding-left: var(--padding-l);
+    padding-right: var(--padding-l);
+  }
+
   .banner__media {
     max-width: 60%;
   }

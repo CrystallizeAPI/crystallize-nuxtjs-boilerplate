@@ -1,7 +1,7 @@
 .document {
   margin: 0 auto;
   max-width: var(--viewport-content-max-width);
-  padding: 100px var(--padding-lg) 100px 200px;
+  padding: 100px var(--padding-xxl) 100px 200px;
   font-size: 1.6rem;
 }
 

@@ -43,17 +43,18 @@
   * Custom Properties to keep in sync and horizontally aligned
   * all the components in the same viewport
   */
-  --padding-lg: 100px;
-  --padding-md: 75px;
-  --padding-sm: 50px;
+  --padding-xxl: 100px;
+  --padding-xl: 75px;
+  --padding-l: 50px;
+  --padding-m: 35px;
   --padding-xs: 20px;
   --viewport-xs-lateral-padding: var(--padding-xs);
-  --viewport-sm-lateral-padding: var(--padding-sm);
+  --viewport-sm-lateral-padding: var(--padding-l);
   /*
    * The lateral padding should be
-   * --viewport-md-lateral-padding: var(--padding-lg);
+   * --viewport-md-lateral-padding: var(--padding-xxl);
    * but because the lateral menu button won't be implemented
-   * we stop using the `--padding-lg` padding to have extra space
+   * we stop using the `--padding-xxl` padding to have extra space
    */
   --viewport-md-lateral-padding: 0;
   
