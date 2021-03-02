@@ -1,8 +1,16 @@
 <template>
   <ul v-if="items" class="items">
     <li v-for="item in items" :key="item.id" class="item">
-      <Product v-if="item.type === 'product'" :data="item" />
-      <FolderOrDocument v-else :data="item" />
+      <!-- <CrystallizeCatalogueItemsProduct
+        v-if="item.type === 'product'"
+        :data="item"
+        :load="log(item)"
+      />
+      <CrystallizeCatalogueItemsFolderOrDocument v-else :data="item" /> -->
+
+      <ListFormatProduct v-if="item.type === 'product'" :data="item" />
+      <ListFormatDocument v-else-if="item.type === 'document'" :data="item" />
+      <ListFormatFolder v-else-if="item.type === 'folder'" :data="item" />
     </li>
   </ul>
 </template>
@@ -13,6 +21,11 @@ export default {
     items: {
       type: Array,
       default: null,
+    },
+  },
+  methods: {
+    log: function (payload) {
+      console.log(payload);
     },
   },
 };

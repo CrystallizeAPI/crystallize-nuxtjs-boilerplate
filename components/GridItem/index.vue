@@ -5,7 +5,7 @@
       gridColumn: `span ${gridCell.layout.colspan}`,
       gridRow: `span ${gridCell.layout.rowspan}`,
     }"
-    :class="`grid-item grid-item--${type} ${cellDynamicClass}`"
+    :class="`grid-item ${cellDynamicClass}`"
   >
     <slot />
   </div>

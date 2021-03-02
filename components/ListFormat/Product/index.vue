@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import { findDefaultVariant } from "./utils";
 export default {
   props: {
     data: {
@@ -36,7 +37,8 @@ export default {
   data() {
     const d = this.data;
     const c = d.components || [];
-    const defaultVariant = this.data.defaultVariant;
+    const defaultVariant =
+      this.data.defaultVariant || findDefaultVariant(d.variants) || {};
 
     return {
       description: c.find((c) => c.type === "richText")?.content?.json,

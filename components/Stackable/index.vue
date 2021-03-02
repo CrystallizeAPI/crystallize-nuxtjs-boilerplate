@@ -12,10 +12,16 @@
       </Collection>
 
       <!-- @TODO: Item Collection -->
+      <Collection
+        v-if="stack.shape.id === 'item-collection'"
+        :title="getCollectionTitle(stack)"
+        :description="getCollectionDescription(stack)"
+      >
+        <CrystallizeCatalogueItems :items="getItemsFromStack(stack)" />
+      </Collection>
 
       <!-- @TODO: Collection This can be a grid collection or item collection -->
 
-      <!-- @TODO: Banner -->
       <Banner v-if="stack.shape.id === 'banner'" :data="stack" />
     </div>
   </div>
@@ -32,7 +38,6 @@ export default {
   },
   methods: {
     getCollectionTitle: function (stack) {
-      console.log(stack);
       return stack.components?.find((c) => c.name === "Title")?.content?.text;
     },
     getCollectionDescription: function (stack) {
@@ -41,6 +46,9 @@ export default {
     },
     getGridsFromStack: function (stack) {
       return stack.components?.find((c) => c.name === "Grid")?.content?.grids;
+    },
+    getItemsFromStack: function (stack) {
+      return stack.components?.find((c) => c.name === "Items")?.content?.items;
     },
   },
 };
