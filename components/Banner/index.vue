@@ -55,9 +55,9 @@ export default {
       title,
       description,
       linkText,
-      link: "/shop",
+      link,
       image,
-      hasTextAsOverlay: true,
+      hasTextAsOverlay,
     };
   },
 };
