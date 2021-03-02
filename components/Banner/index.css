@@ -79,7 +79,7 @@
 
   /* @todo: this styles are not being applied */
   .banner__content {
-    max-width: var(--font-max-width);
+    max-width: var(--font-max-width) !important;
     padding: 5em 50px !important;
     flex-direction: row;
     margin-right: 30px;
@@ -179,8 +179,8 @@
 
 @media screen and (min-width: 768px) {
   .banner.banner--withOverlay .banner__content {
+    max-width: var(--font-max-width);
     padding: 0 5em;
-    margin-right: 0;
   }
 }
 

@@ -30,10 +30,9 @@
   --font-size-l: 26px;
   --font-size-m: 20px;
   --font-size-s: 16px;
+  --font-size-xs: 14px;
+  --font-max-width: 800px;
 
-  
-
-  
   /*
    * Container maximum width
    */
@@ -58,9 +57,6 @@
    */
   --viewport-md-lateral-padding: 0;
   
-  
-  
-  --font-max-width: 800px;
   
   /* 
    * The var() function can not be used as property names,

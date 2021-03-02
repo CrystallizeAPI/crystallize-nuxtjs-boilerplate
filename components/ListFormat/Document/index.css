@@ -65,7 +65,7 @@
   overflow: hidden;
   color: inherit;
   line-height: 1.8;
-  font-size: var(--font-size-secondary);
+  font-size: var(--font-size-s);
   margin-top: 0;
   margin-bottom: 0;
 }
