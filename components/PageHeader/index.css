@@ -1,9 +1,10 @@
 .page-header {
   --lateral-padding: var(--viewport-xs-lateral-padding);
   --distance-to-next-element: 100px;
+  margin-bottom: var(--distance-to-next-element);
   padding-left: var(--lateral-padding);
   padding-right: var(--lateral-padding);
-  margin-bottom: var(--distance-to-next-element);
+  position: relative;
 }
 
 .page-header__title {

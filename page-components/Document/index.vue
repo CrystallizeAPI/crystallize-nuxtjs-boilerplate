@@ -1,8 +1,42 @@
 <template>
   <div class="document">
     <FetchLoader :state="$fetchState">
-      <h1>{{ document.name }}</h1>
-      <CrystallizeComponents :components="document.components" />
+      <PageHeader :title="title" :description="headerDescription">
+        <template v-if="topics" v-slot:preHeader>
+          <ul class="document__topics">
+            <li
+              v-for="topic in topics"
+              :v-key="topic.id"
+              class="document__topics-element"
+            >
+              <Topic :isUnderlined="true" :data="topic" />
+            </li>
+          </ul>
+        </template>
+
+        <template v-if="topics" v-slot:postHeader>
+          <div class="document__socials">
+            <IconButton
+              screenReaderText="share on Twitter"
+              iconSrc="/icons/twitter.svg"
+            />
+            <IconButton
+              screenReaderText="share on Facebok"
+              iconSrc="/icons/facebook.svg"
+            />
+            <IconButton
+              screenReaderText="share on Pinterest"
+              iconSrc="/icons/pinterest.svg"
+            />
+            <IconButton
+              screenReaderText="share on Linkedin"
+              iconSrc="/icons/linkedin.svg"
+            />
+          </div>
+        </template>
+      </PageHeader>
+
+      <!-- <CrystallizeComponents :components="document.components" /> -->
     </FetchLoader>
   </div>
 </template>
@@ -11,11 +45,17 @@
 import toText from "@crystallize/content-transformer/toText";
 import { simplyFetchFromGraph } from "../../lib/graph";
 import fragments from "../../lib/graph/fragments";
+import { getDocumentTitle, getHumanReadableDate } from "./utils";
 
 export default {
-  data() {
+  data: function () {
     return {
       document: {},
+      title: null,
+      headerDescription: null,
+      publicatedAt: null,
+      humanReadableDate: null,
+      topics: [],
     };
   },
   async fetch() {
@@ -28,7 +68,7 @@ export default {
      * You probably want to cherry pick the fields in
      * the query here to improve performance
      */
-    const response = await simplyFetchFromGraph({
+    const { data } = await simplyFetchFromGraph({
       query: `
         query DOCUMENT_PAGE($path: String!, $language: String!) {
           document: catalogue (path: $path, language: $language) {
@@ -45,21 +85,51 @@ export default {
       },
     });
 
-    const { document } = response.data;
+    const { document } = data;
 
-    // Get a description for the document
-    const richTextComponent = document?.components?.find(
-      (c) => c.type === "richText"
-    );
-    if (richTextComponent?.content?.json) {
-      // Provide a good meta description for this page
-      this.metaDescription = toText(richTextComponent.content.json);
+    if (!document) {
+      return;
     }
+    const description = document.components?.find((c) => c.name === "Intro");
+    const publicatedAt = new Date(document.publishedAt);
+    // const ISODate = publicatedAt.toISOString();
+    const topics = document.topics;
 
     this.document = document;
+    this.title = getDocumentTitle(document);
+    this.metaDescription = toText(description.content.json);
+    this.headerDescription = description.content.json;
+    /*
+     * @TODO: Get topics from the graphql. Why are they missing??
+     */
+    const MOCKED_TOPICS = [
+      {
+        id: "5fcb5b7b877645086d7a4581",
+        name: "Organic",
+      },
+      {
+        id: "5fcb5b93af1eeb083df3b227",
+        name: "Eco friendly",
+      },
+      {
+        id: "5fcb5bb5af1eebf7f3f3b229",
+        name: "Livingroom",
+      },
+      {
+        id: "5ff58cee7af25b44e7fcdf96",
+        name: "Outdoor",
+      },
+      {
+        id: "5fcf4b82af1eeb6397f3bb14",
+        name: "Campaign",
+      },
+    ];
+    this.topics = MOCKED_TOPICS;
+    this.publicatedAt = publicatedAt;
+    this.humanReadableDate = getHumanReadableDate(publicatedAt);
   },
   head() {
-    if (!this.metaDescription && this.document?.name) {
+    if (!this.metaDescription) {
       console.warn(
         "this.metaDescription is missing for document",
         this.document.name
@@ -67,7 +137,7 @@ export default {
     }
 
     return {
-      title: this.document?.name,
+      title: this.title,
       meta: [
         {
           hid: "description",

@@ -1,41 +1,39 @@
 <template>
   <FetchLoader :state="$fetchState">
-    <Outer>
-      <div class="top section">
-        <div class="main-info">
-          <h1 class="name">{{ product.name }}</h1>
-          <div class="summary">
-            <CrystallizeComponents :components="summary" />
-          </div>
-          <VariantSelector
-            :selected-variant="selectedVariant"
-            :variants="product.variants"
-            @on-change="onSelectedVariantChange"
-          />
+    <div class="top section">
+      <div class="main-info">
+        <h1 class="name">{{ product.name }}</h1>
+        <div class="summary">
+          <CrystallizeComponents :components="summary" />
+        </div>
+        <VariantSelector
+          :selected-variant="selectedVariant"
+          :variants="product.variants"
+          @on-change="onSelectedVariantChange"
+        />
 
-          <div v-if="selectedVariant" class="price-wrap">
-            <Price :variant="selectedVariant" />
-          </div>
-        </div>
-        <div class="media">
-          <CrystallizeImage :image="image" />
+        <div v-if="selectedVariant" class="price-wrap">
+          <Price :variant="selectedVariant" />
         </div>
       </div>
-      <div class="product-secondary-info">
-        <div class="section">
-          <CrystallizeComponents :components="components" />
-        </div>
-        <div class="section properties">
-          <CrystallizeComponents :components="specs" />
-        </div>
+      <div class="media">
+        <CrystallizeImage :image="image" />
       </div>
-    </Outer>
+    </div>
+    <div class="product-secondary-info">
+      <div class="section">
+        <CrystallizeComponents :components="components" />
+      </div>
+      <div class="section properties">
+        <CrystallizeComponents :components="specs" />
+      </div>
+    </div>
   </FetchLoader>
 </template>
 
 <script>
 import toText from "@crystallize/content-transformer/toText";
-import {getProductData} from './get-product-data'
+import { getProductData } from "./get-product-data";
 import VariantSelector from "./variant-selector";
 
 export default {
