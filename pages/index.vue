@@ -2,7 +2,7 @@
   <div class="home-page">
     <FetchLoader :state="$fetchState">
       <CrystallizeGrid v-if="grid" :grid="grid" />
-      <Stackable :stacks="stackableContent" />
+      <CrystallizeStackable :stacks="stackableContent" />
     </FetchLoader>
   </div>
 </template>

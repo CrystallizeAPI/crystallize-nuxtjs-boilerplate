@@ -1,5 +1,5 @@
 <template>
-  <div class="videos">
+  <div v-if="videos" class="videos">
     <template v-for="video in data.videos">
       <CrystallizeVideo :key="video.url" :video="video" class="video" />
     </template>

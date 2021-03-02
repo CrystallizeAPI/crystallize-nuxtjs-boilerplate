@@ -21,7 +21,7 @@
         :items="folder.children"
       /> -->
       <CrystallizeComponents :components="[body]" />
-      <Stackable :stacks="stackableContent" />
+      <CrystallizeStackable :stacks="stackableContent" />
 
       <!-- @TODO: Add List -->
     </div>

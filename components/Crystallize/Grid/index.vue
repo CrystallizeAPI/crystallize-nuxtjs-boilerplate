@@ -6,7 +6,11 @@
       gridTemplateRows: `repeat(${totalGridRows}, var(--grid-row-height))`,
     }"
   >
-    <GridItem v-for="cell in flattened" :key="cell.itemId" :grid-cell="cell">
+    <CrystallizeGridItem
+      v-for="cell in flattened"
+      :key="cell.itemId"
+      :grid-cell="cell"
+    >
       <ListFormatProduct
         v-if="cell.item.type === 'product'"
         :data="cell.item"
@@ -16,7 +20,7 @@
         v-if="cell.item.type === 'document'"
         :data="cell.item"
       />
-    </GridItem>
+    </CrystallizeGridItem>
   </div>
 </template>
 

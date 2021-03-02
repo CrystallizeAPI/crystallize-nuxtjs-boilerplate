@@ -22,7 +22,7 @@
 
       <!-- @TODO: Collection This can be a grid collection or item collection -->
 
-      <Banner v-if="stack.shape.id === 'banner'" :data="stack" />
+      <CrystallizeBanner v-if="stack.shape.id === 'banner'" :data="stack" />
     </div>
   </div>
 </template>

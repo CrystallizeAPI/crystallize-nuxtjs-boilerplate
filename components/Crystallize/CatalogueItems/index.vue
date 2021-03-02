@@ -16,11 +16,6 @@ export default {
       default: null,
     },
   },
-  methods: {
-    log: function (payload) {
-      console.log(payload);
-    },
-  },
 };
 </script>
 
