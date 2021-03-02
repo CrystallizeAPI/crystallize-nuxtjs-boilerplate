@@ -1,16 +1,22 @@
 <template>
   <div class="stackable">
     <div v-for="stack in stacks" :key="stack.id">
-      <!-- @TODO: Grid Collection -->
-      <Collection :title="getTitle(stack)" :description="getDescription(stack)">
+      <Collection
+        v-if="stack.shape.id === 'grid-collection'"
+        :title="getCollectionTitle(stack)"
+        :description="getCollectionDescription(stack)"
+      >
         <div v-for="grid in getGridsFromStack(stack)" :key="grid.name">
           <CrystallizeGrid :grid="grid" />
         </div>
       </Collection>
 
       <!-- @TODO: Item Collection -->
+
       <!-- @TODO: Collection This can be a grid collection or item collection -->
+
       <!-- @TODO: Banner -->
+      <Banner v-if="stack.shape.id === 'banner'" :data="stack" />
     </div>
   </div>
 </template>
@@ -25,10 +31,11 @@ export default {
     },
   },
   methods: {
-    getTitle: function (stack) {
+    getCollectionTitle: function (stack) {
+      console.log(stack);
       return stack.components?.find((c) => c.name === "Title")?.content?.text;
     },
-    getDescription: function (stack) {
+    getCollectionDescription: function (stack) {
       return stack.components?.find((c) => c.name === "Description")?.content
         ?.json;
     },
