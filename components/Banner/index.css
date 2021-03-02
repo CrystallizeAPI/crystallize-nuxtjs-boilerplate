@@ -4,8 +4,6 @@
   border: 1px solid #dfdfdf;
   margin-top: 15px;
   display: flex;
-  margin-bottom: 100px; /* @todo: move this responsalibity to the layout */
-  margin-top: 15px; /* @todo: move this responsalibity to the layout */
   position: relative;
   flex-direction: column;
 }
