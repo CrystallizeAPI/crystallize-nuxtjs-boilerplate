@@ -1,25 +1,28 @@
 <template>
-  <picture :class="className">
-    <source
-      v-if="srcSetWebp.length > 0"
-      :srcSet="srcSetWebp"
-      type="image/webp"
-      :sizes="sizes"
-    />
-    <source
-      v-if="srcSet.length > 0"
-      :srcSet="srcSetWebp"
-      :type="`image/${originalFileExtension}`"
-      :sizes="sizes"
-    />
-    <img
-      :src="src"
-      :alt="altText"
-      :sizes="sizes"
-      :width="width || bigWidth"
-      :height="height || bigHeight"
-    />
-  </picture>
+  <figure>
+    <picture :class="className">
+      <source
+        v-if="srcSetWebp.length > 0"
+        :srcSet="srcSetWebp"
+        type="image/webp"
+        :sizes="sizes"
+      />
+      <source
+        v-if="srcSet.length > 0"
+        :srcSet="srcSetWebp"
+        :type="`image/${originalFileExtension}`"
+        :sizes="sizes"
+      />
+      <img
+        :src="src"
+        :alt="altText"
+        :sizes="sizes"
+        :width="width || bigWidth"
+        :height="height || bigHeight"
+      />
+    </picture>
+    <figcaption v-if="captionString" v-html="captionString"></figcaption>
+  </figure>
 </template>
 
 <script>
@@ -49,16 +52,32 @@ export default {
       type: String,
       default: "",
     },
+    /*
+     * Caption as the following shape:
+     * {
+     *   html?: Array<string>;
+     *   json?: Array<any>;
+     *   plainText?: Array<string>;
+     * }
+     * The `html` content has higher priority than `plainText` because it has richer content.
+     * In case of getting both, the `html` is the one that will be displayed.
+     *
+     */
+    caption: {
+      type: Object,
+      required: false,
+    },
   },
   data() {
     const image = this.image;
-
+    const { variants: vars = [], caption } = image;
     // Separate the image variants by their respective types
-    const vars = image.variants || [];
     const std = vars.filter((v) => v.url && !v.url.endsWith(".webp"));
     const webp = vars.filter((v) => v.url && v.url.endsWith(".webp"));
     const srcSet = std.map(this.getVariantSrc).join(", ");
     const srcSetWebp = webp.map(this.getVariantSrc).join(", ");
+    const captionString = caption?.html?.[0] || caption?.plainText?.[0] || "";
+    console.log(this.caption?.html?.[0]);
 
     // Determine the file extension for the original image
     let originalFileExtension = "jpeg";
@@ -101,6 +120,7 @@ export default {
       src,
       bigWidth: biggestImage?.width,
       bigHeight: biggestImage?.height,
+      captionString,
     };
   },
   methods: {
@@ -114,12 +134,18 @@ export default {
 <style scoped>
 img {
   /*
-     * Images that don't have an explicit `display: block` have some space
-     * after the `<img/>` tag because of the `inline-block` behavior.
-     *
-     * Adding a `display: block` we make sure that the elements ends
-     * where the image finishes, which is the expected behavior.
-     */
+   * Images that don't have an explicit `display: block` have some space
+   * after the `<img/>` tag because of the `inline-block` behavior.
+   *
+   * Adding a `display: block` we make sure that the elements ends
+   * where the image finishes, which is the expected behavior.
+   */
   display: block;
+}
+
+figcaption {
+  margin-top: 0.25rem;
+  font-size: var(--font-size-s);
+  font-style: italic;
 }
 </style>
