@@ -70,7 +70,6 @@ export default {
   },
   data() {
     const { textContent, children, type, kind, metadata } = this.node || {};
-    console.log(type);
 
     return {
       textContent,

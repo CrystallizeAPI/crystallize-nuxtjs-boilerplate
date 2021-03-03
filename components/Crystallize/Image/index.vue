@@ -77,7 +77,6 @@ export default {
     const srcSet = std.map(this.getVariantSrc).join(", ");
     const srcSetWebp = webp.map(this.getVariantSrc).join(", ");
     const captionString = caption?.html?.[0] || caption?.plainText?.[0] || "";
-    console.log(this.caption?.html?.[0]);
 
     // Determine the file extension for the original image
     let originalFileExtension = "jpeg";
