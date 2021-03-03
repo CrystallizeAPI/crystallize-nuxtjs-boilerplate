@@ -1,0 +1,44 @@
+.article {
+  --lateral-space: var(--viewport-xs-lateral-space);
+}
+
+/*
+ * Overwrite styles for inner components and nodes
+ */
+ .article img {
+  width: 100%;
+  max-width: 100%;
+}
+
+.article >>> p,
+.article >>> li,
+.article >>> h1,
+.article >>> h2,
+.article >>> h3,
+.article >>> h4,
+.article >>> h5,
+.article >>> h6 {
+  margin-left: var(--viewport-xs-lateral-space);
+}
+
+.article >>> ul {
+  padding-left: var(--viewport-xs-lateral-space);
+}
+
+.article >>> li {
+  margin-bottom: 0.5rem;
+}
+
+
+@media screen and (min-width: 768px) {
+  .article {
+    --lateral-space: var(--viewport-sm-lateral-space);
+  }
+}
+
+
+@media screen and (min-width: 1024px) {
+  .article {
+    --lateral-space: var(--viewport-md-lateral-space);
+  }
+}

@@ -1,6 +1,7 @@
 .document__topics {
   display: flex;
   flex-wrap: wrap;
+  margin-bottom: 1rem;
 }
 
 .document__topics-element {
@@ -19,7 +20,19 @@
   margin-right: 1rem;
 }
 
+.document__main {
+  --padding-lateral: var(--viewport-xs-lateral-space);
+  padding-left: var(--padding-lateral);
+  padding-right: var(--padding-lateral);
+}
+
 @media screen and (min-width: 768px) {
+  .document__main {
+    --padding-lateral: var(--viewport-sm-lateral-space);
+  }
+}
+
+@media screen and (min-width: 1024px) {
   .document__socials {
     flex-direction: column;
     position: absolute;
@@ -30,5 +43,9 @@
   .document__socials > * {
     margin-right: 0;
     margin-bottom: 0.5rem;
+  }
+  
+  .document__main {
+    --padding-lateral: var(--viewport-md-lateral-space);
   }
 }

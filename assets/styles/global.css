@@ -48,9 +48,9 @@
   --padding-l: 50px;
   --padding-m: 35px;
   --padding-xs: 20px;
-  --viewport-xs-lateral-padding: var(--padding-xs);
-  --viewport-sm-lateral-padding: var(--padding-l);
-  --viewport-md-lateral-padding: var(--padding-xxl);
+  --viewport-xs-lateral-space: var(--padding-xs);
+  --viewport-sm-lateral-space: var(--padding-l);
+  --viewport-md-lateral-space: var(--padding-xxl);
   
   
   /* 

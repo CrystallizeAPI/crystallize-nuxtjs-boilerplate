@@ -1,5 +1,5 @@
 .page-header {
-  --lateral-padding: var(--viewport-xs-lateral-padding);
+  --lateral-padding: var(--viewport-xs-lateral-space);
   --distance-to-next-element: 100px;
   margin-bottom: var(--distance-to-next-element);
   padding-left: var(--lateral-padding);
@@ -31,13 +31,13 @@
 
 @media screen and (min-width: 768px) {
   .page-header {
-    --lateral-padding: var(--viewport-sm-lateral-padding);
+    --lateral-padding: var(--viewport-sm-lateral-space);
   }
 }
 
 @media screen and (min-width: 1024px) {
   .page-header {
-    --lateral-padding: var(--viewport-md-lateral-padding);
+    --lateral-padding: var(--viewport-md-lateral-space);
     max-width: var(--viewport-content-max-width);
 
     /*

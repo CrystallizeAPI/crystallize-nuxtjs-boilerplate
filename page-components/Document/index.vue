@@ -36,11 +36,11 @@
         </template>
       </PageHeader>
 
-      <main>
+      <main class="document__main">
         <!-- The article component does overwrite styles in order to make the
         document/article look the same after using CrystallizeComponents -->
         <Article>
-          <CrystallizeComponents :components="document.components" />
+          <CrystallizeComponents :components="[body]" />
         </Article>
 
         <!-- @todo: add sidebar -->
@@ -70,6 +70,7 @@ export default {
       publicatedAt: null,
       humanReadableDate: null,
       topics: [],
+      body: null,
     };
   },
   async fetch() {
@@ -108,11 +109,13 @@ export default {
     const publicatedAt = new Date(document.publishedAt);
     // const ISODate = publicatedAt.toISOString();
     const topics = document.topics;
+    const body = document?.components?.find((c) => c.name === "Body");
 
     this.document = document;
     this.title = getDocumentTitle(document);
     this.metaDescription = toText(description.content.json);
     this.headerDescription = description.content.json;
+    this.body = body;
     /*
      * @TODO: Get topics from the graphql. Why are they missing??
      */

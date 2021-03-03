@@ -10,7 +10,7 @@
 }
 
 .folder__content {
-  --lateral-padding: var(--viewport-xs-lateral-padding);
+  --lateral-padding: var(--viewport-xs-lateral-space);
   margin: 0 auto;
   padding-left: var(--lateral-padding);
   padding-right: var(--lateral-padding);
@@ -22,13 +22,13 @@
   }
 
   .folder__content {
-    --lateral-padding: var(--viewport-sm-lateral-padding);
+    --lateral-padding: var(--viewport-sm-lateral-space);
   }
 }
 
 @media screen and (min-width: 1024px) {
   .folder__content {
-    --lateral-padding: var(--viewport-md-lateral-padding);
+    --lateral-padding: var(--viewport-md-lateral-space);
     max-width: var(--viewport-content-max-width);
   }
 }

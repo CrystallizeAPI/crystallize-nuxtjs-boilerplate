@@ -1,19 +1,19 @@
 .layout-header {
-  --padding-xxlateral: var(--viewport-xs-lateral-padding);
-  --padding-vertical: var(--viewport-xs-lateral-padding);
+  --padding-lateral: var(--viewport-xs-lateral-space);
+  --padding-vertical: var(--viewport-xs-lateral-space);
 
   align-items: center;
   display: flex;
   justify-content: space-between;
   margin-bottom: 1.5em;
   padding-bottom: var(--padding-vertical);
-  padding-left: var(--padding-xxlateral);
+  padding-left: var(--padding-lateral);
   /*
    * The extra space on the right needed is equal
    * the horizontal padding (the same as the left) and
    * the size of the burguer icon aproximately.
    */
-  padding-right: calc(var(--padding-xxlateral) + 40px);
+  padding-right: calc(var(--padding-lateral) + 40px);
   padding-top: var(--padding-vertical);
   position: relative;
   text-align: center;
@@ -21,7 +21,7 @@
 
 .layout-header__menu {
   position: absolute;
-  right: var(--padding-xxlateral);
+  right: var(--padding-lateral);
   /*
   * We position the element the same as the vertical padding
   * plus some extra space to align it on the center.
@@ -33,7 +33,7 @@
 @media screen and (min-width: 768px) {
   .layout-header {
     --padding-vertical: 30px;
-    --padding-xxlateral: var(--viewport-sm-lateral-padding);
+    --padding-lateral: var(--viewport-sm-lateral-space);
     align-items: center;
   }
 
@@ -49,13 +49,13 @@
 
 @media screen and (min-width: 1024px) {
   .layout-header {
-    --padding-xxlateral: var(--viewport-md-lateral-padding);
+    --padding-lateral: var(--viewport-md-lateral-space);
     align-items: center;
     justify-content: flex-start;
     margin: 0 auto 3em auto;
     max-width: var(--viewport-content-max-width);
     min-height: 150px;
-    padding-right: var(--padding-xxlateral);
+    padding-right: var(--padding-lateral);
   }
 
   .layout-header__menu {
