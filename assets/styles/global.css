@@ -51,6 +51,11 @@
   --viewport-xs-lateral-space: var(--padding-xs);
   --viewport-sm-lateral-space: var(--padding-l);
   --viewport-md-lateral-space: var(--padding-xxl);
+
+  /*
+   * Grid images
+   */
+  --grid-images-columns-count: 2;
   
   
   /* 

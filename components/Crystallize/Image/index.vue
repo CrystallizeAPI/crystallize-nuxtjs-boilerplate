@@ -149,8 +149,9 @@ picture {
 
 figcaption {
   margin-top: 0.25rem;
-  font-size: var(--font-size-s);
+  font-size: var(--font-size-xs);
   font-style: italic;
+  line-height: 1.35;
 }
 
 figcaption >>> p {

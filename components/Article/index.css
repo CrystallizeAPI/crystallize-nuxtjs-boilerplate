@@ -1,6 +1,4 @@
-.article {
-  --lateral-space: var(--viewport-xs-lateral-space);
-}
+.article {}
 
 /*
  * Overwrite styles for inner components and nodes
@@ -20,6 +18,7 @@
 .article >>> h6,
 .article >>> blockquote {
   margin-left: var(--viewport-xs-lateral-space);
+  margin-right: var(--viewport-xs-lateral-space);
 }
 
 .article >>> ul {
@@ -59,15 +58,22 @@
 }
 
 
-@media screen and (min-width: 768px) {
-  .article {
-    --lateral-space: var(--viewport-sm-lateral-space);
-  }
-}
-
-
 @media screen and (min-width: 1024px) {
-  .article {
-    --lateral-space: var(--viewport-md-lateral-space);
+  .article >>> p,
+  .article >>> li,
+  .article >>> h1,
+  .article >>> h2,
+  .article >>> h3,
+  .article >>> h4,
+  .article >>> h5,
+  .article >>> h6,
+  .article >>> blockquote {
+    margin-left: var(--viewport-sm-lateral-space);
+    margin-right: var(--viewport-sm-lateral-space);
+  }
+
+  .article >>> figcaption p {
+    margin-left: var(--viewport-xs-lateral-space);
+    margin-right: var(--viewport-xs-lateral-space);
   }
 }

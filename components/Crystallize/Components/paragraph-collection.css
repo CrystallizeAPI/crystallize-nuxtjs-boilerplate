@@ -9,3 +9,7 @@
 .paragraph:not(:last-child) {
   margin-bottom: var(--content-padding);
 }
+
+.paragraphs-media {
+  margin-bottom: 5rem;
+}

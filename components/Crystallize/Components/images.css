@@ -1,7 +1,7 @@
 .crystallize-components-images {
   --grid-element-separation: 10px;
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(var(--grid-images-columns-count), 1fr);
   grid-gap: var(--grid-element-separation);
 }
 
@@ -34,12 +34,12 @@
 
 @media (min-width: 768px) {
   .crystallize-components-images {
-    --grid-columns-count: 2;
+    --grid-images-columns-count: 2;
     /*
      * We create a grid with equal columns based on
-     * the custom property "--grid-columns-count"
+     * the custom property "--grid-images-columns-count"
      */
-    grid-template-columns: repeat(var(--grid-columns-count), 1fr);
+    grid-template-columns: repeat(var(--grid-images-columns-count), 1fr);
   }
   
   /*
@@ -58,6 +58,6 @@
      * To make the first element fill the hole row do the following:
      * grid-column-end: span NUMBER_OF_COLUMNS;
      */
-    grid-column-end: span var(--grid-columns-count);
+    grid-column: span var(--grid-images-columns-count);
   }
 }

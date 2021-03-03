@@ -7,7 +7,11 @@
           v-if="paragraph.body"
           :data="paragraph.body.json"
         />
-        <CrystallizeComponentsImages :data="paragraph" />
+
+        <CrystallizeComponentsImages
+          :data="paragraph"
+          class="paragraphs-media"
+        />
       </div>
     </template>
   </div>
@@ -20,7 +24,7 @@ export default {
       type: Object,
       default: null,
     },
-  }
+  },
 };
 </script>
 
