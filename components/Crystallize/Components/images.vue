@@ -4,7 +4,8 @@
       <CrystallizeImage
         :key="image.url"
         :image="image"
-        class="crystallize-components-images__image" />
+        class="crystallize-components-images__image"
+      />
     </template>
   </div>
 </template>

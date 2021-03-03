@@ -143,6 +143,10 @@ img {
   display: block;
 }
 
+picture {
+  display: block;
+}
+
 figcaption {
   margin-top: 0.25rem;
   font-size: var(--font-size-s);

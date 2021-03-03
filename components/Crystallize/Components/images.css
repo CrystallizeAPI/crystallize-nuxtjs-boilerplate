@@ -11,15 +11,29 @@
  *
  * FYI: https://vue-loader.vuejs.org/guide/scoped-css.html#mixing-local-and-global-styles
  */
-.crystallize-components-images__image,
+
+ .crystallize-components-images__image,
+ .crystallize-components-images__image >>> picture,
+ .crystallize-components-images__image >>> img {
+   display: block;
+ }
+
+ .crystallize-components-images__image >>> picture,
+ .crystallize-components-images__image >>> img {
+   height: 100%;
+ }
+ 
+ .crystallize-components-images__image {
+   margin-bottom: 2.5rem;
+ }
+ 
 .crystallize-components-images__image >>> img {
-  display: block;
-  width: auto;
+  width: 100%;
+  object-fit: cover;
 }
 
 @media (min-width: 768px) {
   .crystallize-components-images {
-    --grid-element-separation: 20px;
     --grid-columns-count: 2;
     /*
      * We create a grid with equal columns based on
@@ -28,7 +42,14 @@
     grid-template-columns: repeat(var(--grid-columns-count), 1fr);
   }
   
-  .crystallize-components-images__image:first-child {
+  /*
+   * :only-child targets an element without any siblings
+   * It does the same as `:first-child:last-child` and `:nth-child(1):nth-last-child(1)`
+   * but with lower specifity, which reduces css accidental complexity.
+   *
+   * FYI: https://developer.mozilla.org/en-US/docs/Web/CSS/:only-child
+   */
+  .crystallize-components-images__image:only-child {
     /*
      * We force the first element to fill the first row.
      * If you modify the grid structure by adding columns,
