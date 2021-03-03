@@ -1,13 +1,14 @@
 .icon-button {
-  --size-small-mobile: 35px;
-  --size-small-desktop: 45px;
+  --size-mobile: 45px;
+  --size-desktop: 50px;
+  align-items: center;
   background-color: transparent;
   border-radius: 3px;
   box-sizing: border-box;
-  display: block;
-  padding: 0;
-  height: var(--size-medium-mobile);
-  width: var(--size-medium-mobile);
+  display: inline-flex;
+  height: var(--size-mobile);
+  padding: 0.15rem;
+  width: var(--size-mobile);
 }
 
 .icon-button:hover {
@@ -20,7 +21,7 @@
 
 @media screen and (min-width: 768px) {
   .icon-button {
-    height: var(--size-small-desktop);
-    width: var(--size-small-desktop);
+    height: var(--size-desktop);
+    width: var(--size-desktop);
   }
 }
