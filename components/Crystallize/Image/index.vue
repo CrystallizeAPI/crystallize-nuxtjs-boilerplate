@@ -143,8 +143,10 @@ img {
   display: block;
 }
 
+figure,
 picture {
   display: block;
+  height: 100%;
 }
 
 figcaption {

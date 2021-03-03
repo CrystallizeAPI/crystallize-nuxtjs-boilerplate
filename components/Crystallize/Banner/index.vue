@@ -14,13 +14,14 @@
         </NuxtLink>
       </div>
     </div>
-    <figure v-if="image" class="banner__media">
+    <div v-if="image" class="banner__media">
       <CrystallizeImage
+        v-if="image"
         :image="image"
         :width="1024"
         sizes="(max-width: 700px) 100vw, 1200px"
       />
-    </figure>
+    </div>
   </section>
 </template>
 
