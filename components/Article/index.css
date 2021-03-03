@@ -17,7 +17,8 @@
 .article >>> h3,
 .article >>> h4,
 .article >>> h5,
-.article >>> h6 {
+.article >>> h6,
+.article >>> blockquote {
   margin-left: var(--viewport-xs-lateral-space);
 }
 
@@ -27,6 +28,20 @@
 
 .article >>> li {
   margin-bottom: 0.5rem;
+}
+
+/*
+ * @todo: the component doesn't render a blockquote. It renders a span
+ */
+.article >>> blockquote {
+  font-size: var(--font-size-l);
+  font-style: italic;
+  position: relative;
+  display: flex;
+  line-height: 140%;
+  align-items: center;
+  margin: var(--padding-xl) 0;
+  color: vvar(--color-text-main);
 }
 
 
