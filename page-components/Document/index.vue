@@ -37,18 +37,32 @@
       </PageHeader>
 
       <main class="document__main">
-        <!-- The article component does overwrite styles in order to make the
-        document/article look the same after using CrystallizeComponents -->
-        <Article>
-          <CrystallizeComponents :components="[body]" />
-        </Article>
+        <div>
+          <div v-if="images" class="document__pre-article-images">
+            <CrystallizeComponentsImages :data="images.content" />
+          </div>
+          <!--
+            The article component does overwrite styles in order to
+            make the document/article look the same after using
+            CrystallizeComponents
+            -->
+          <Article>
+            <CrystallizeComponents :components="[body]" />
+          </Article>
+        </div>
 
         <!-- @todo: add sidebar -->
         <div>
           <!-- @todo: add featured content -->
-          <aside>working</aside>
+          <aside>
+            <h3>Featured content</h3>
+            <div>list of elements</div>
+          </aside>
           <!-- @todo: add related content -->
-          <aside>working</aside>
+          <aside>
+            <h3>Related content</h3>
+            <div>list of elements</div>
+          </aside>
         </div>
       </main>
     </FetchLoader>
@@ -68,6 +82,7 @@ export default {
       title: null,
       headerDescription: null,
       publicatedAt: null,
+      images: [],
       humanReadableDate: null,
       topics: [],
       body: null,
@@ -116,6 +131,7 @@ export default {
     this.metaDescription = toText(description.content.json);
     this.headerDescription = description.content.json;
     this.body = body;
+    this.images = document?.components?.find((c) => c.name === "Image");
     /*
      * @TODO: Get topics from the graphql. Why are they missing??
      */

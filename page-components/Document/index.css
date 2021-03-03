@@ -26,6 +26,10 @@
   padding-right: var(--padding-lateral);
 }
 
+.document__pre-article-images {
+  margin-bottom: var(--padding-xl);
+}
+
 @media screen and (min-width: 768px) {
   .document__main {
     --padding-lateral: var(--viewport-sm-lateral-space);
