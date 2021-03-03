@@ -10,7 +10,7 @@
           <LayoutNavigation :nav-items="navItems" />
         </template>
         <template v-slot:actions>
-          <div class="actions">
+          <div class="layout__actions">
             <IconButton
               to="/login"
               screenReaderText="login"
@@ -70,11 +70,13 @@ export default {
 </script>
 
 <style scoped>
-.actions {
+.layout__actions {
   display: flex;
 }
 
-.actions > * {
-  margin-left: 0.35rem;
+@media screen and (min-width: 768px) {
+  .layout__actions > * {
+    margin-left: 0.35rem;
+  }
 }
 </style>
