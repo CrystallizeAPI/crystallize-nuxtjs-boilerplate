@@ -7,7 +7,7 @@
       </div>
     </div>
 
-    <figure v-if="image || video" class="list-format-document__media">
+    <div v-if="image || video" class="list-format-document__media">
       <CrystallizeVideo v-if="video" :video="video" />
       <CrystallizeImage
         v-else
@@ -16,7 +16,7 @@
         sizes="(min-width 1024px) 33vw, 100vw"
         class="list-format-document__image"
       />
-    </figure>
+    </div>
   </NuxtLink>
 </template>
 
