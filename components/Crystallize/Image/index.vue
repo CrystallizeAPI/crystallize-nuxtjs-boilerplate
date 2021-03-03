@@ -148,4 +148,8 @@ figcaption {
   font-size: var(--font-size-s);
   font-style: italic;
 }
+
+figcaption >>> p {
+  margin-bottom: 0;
+}
 </style>

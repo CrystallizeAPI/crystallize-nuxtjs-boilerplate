@@ -34,14 +34,28 @@
  * @todo: the component doesn't render a blockquote. It renders a span
  */
 .article >>> blockquote {
+  align-items: center;
+  color: var(--color-text-main);
+  display: flex;
   font-size: var(--font-size-l);
   font-style: italic;
-  position: relative;
-  display: flex;
   line-height: 140%;
-  align-items: center;
-  margin: var(--padding-xl) 0;
-  color: vvar(--color-text-main);
+  margin-top: var(--padding-xl);
+  margin-bottom: var(--padding-xl);
+  position: relative;
+  padding-left: var(--viewport-sm-lateral-space);
+}
+
+.article >>> blockquote:empty {
+  display: none;
+}
+
+.article >>> blockquote:after {
+  content: open-quote;
+  font-size: 4rem;
+  left: 0;
+  position: absolute;
+  top: 20px;
 }
 
 

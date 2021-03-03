@@ -7,6 +7,14 @@
       :node="child"
     />
   </p>
+  <blockquote v-else-if="type === 'quote'">
+    <template v-if="textContent">{{ textContent }}</template>
+    <CrystallizeContentTransformerNode
+      v-for="child in children"
+      :key="child.id"
+      :node="child"
+    />
+  </blockquote>
   <a v-else-if="type === 'link'" :href="metadata.href">
     <span v-if="textContent">{{ textContent }}</span>
     <span v-else-if="children && children.length > 0">
@@ -62,6 +70,7 @@ export default {
   },
   data() {
     const { textContent, children, type, kind, metadata } = this.node || {};
+    console.log(type);
 
     return {
       textContent,
