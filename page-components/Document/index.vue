@@ -51,14 +51,11 @@
           </Article>
         </div>
 
-        <!-- @todo: add sidebar -->
         <div>
-          <!-- @todo: add featured content -->
           <aside>
             <h3>Featured content</h3>
             <div>list of elements</div>
           </aside>
-          <!-- @todo: add related content -->
           <aside>
             <h3>Related content</h3>
             <div>list of elements</div>
@@ -73,7 +70,11 @@
 import toText from "@crystallize/content-transformer/toText";
 import { simplyFetchFromGraph } from "../../lib/graph";
 import fragments from "../../lib/graph/fragments";
-import { getDocumentTitle, getHumanReadableDate } from "./utils";
+import {
+  getDocumentTitle,
+  getHumanReadableDate,
+  getArticlesWithoutRepeatedElements,
+} from "./utils";
 
 export default {
   data: function () {
@@ -86,6 +87,8 @@ export default {
       humanReadableDate: null,
       topics: [],
       body: null,
+      featuredContent: [],
+      relatedContent: [],
     };
   },
   async fetch() {
@@ -124,14 +127,28 @@ export default {
     const publicatedAt = new Date(document.publishedAt);
     // const ISODate = publicatedAt.toISOString();
     const topics = document.topics;
-    const body = document?.components?.find((c) => c.name === "Body");
+    const body = document.components?.find((c) => c.name === "Body");
+    const featured = document?.components?.find((c) => c.name === "Featured");
 
     this.document = document;
     this.title = getDocumentTitle(document);
     this.metaDescription = toText(description.content.json);
     this.headerDescription = description.content.json;
     this.body = body;
-    this.images = document?.components?.find((c) => c.name === "Image");
+    this.images = document.components?.find((c) => c.name === "Image");
+
+    // Find all topic maps, as a parent, then filter on "document" type
+    // Comment in the first filter line with your topic name to filter on a specific topic
+    // Comment in the "document" if to only show articles
+    const relatedArticles = topics
+      // ?.filter((topic) => topic?.parent?.name === '[YOUR-TOPIC-MAP-NAME]')
+      ?.map((topic) => topic?.items?.edges)
+      ?.flat()
+      ?.filter((node) => node?.node?.path !== asPath);
+
+    this.relatedItems = getArticlesWithoutRepeatedElements(relatedArticles);
+    this.featuredItems = featured?.content?.items;
+
     /*
      * @TODO: Get topics from the graphql. Why are they missing??
      */
