@@ -47,5 +47,19 @@
   
   .document__main {
     --padding-lateral: var(--viewport-md-lateral-space);
+    max-width: var(--viewport-content-max-width);
+    margin-left: auto;
+    margin-right: auto;
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    grid-gap: 100px;
+  }
+
+  .document__main:first-child {
+    grid-area: article;
+  }
+
+  .document__main:second-child {
+    grid-area: sidebar;
   }
 }

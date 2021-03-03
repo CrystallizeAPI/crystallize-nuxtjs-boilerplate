@@ -46,9 +46,9 @@
         <!-- @todo: add sidebar -->
         <div>
           <!-- @todo: add featured content -->
-          <aside></aside>
+          <aside>working</aside>
           <!-- @todo: add related content -->
-          <aside></aside>
+          <aside>working</aside>
         </div>
       </main>
     </FetchLoader>
