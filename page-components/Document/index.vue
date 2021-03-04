@@ -2,8 +2,8 @@
   <div class="document">
     <FetchLoader :state="$fetchState">
       <PageHeader :title="title" :description="headerDescription">
-        <template v-if="topics" v-slot:preHeader>
-          <ul class="document__topics">
+        <template v-slot:preHeader>
+          <ul v-if="topics" class="document__topics">
             <li
               v-for="topic in topics"
               :v-key="topic.id"
@@ -12,9 +12,6 @@
               <Topic :isUnderlined="true" :data="topic" />
             </li>
           </ul>
-          <time :dateTime="publicatedAt.toISOString()"
-            >{humanReadableDate}</time
-          >
         </template>
 
         <template v-slot:postHeader>
@@ -56,7 +53,7 @@
 
         <div>
           <aside v-if="featuredItems" class="document__aside">
-            <h3 class="document__aside-title">Featured content</h3>
+            <h3 class="document__aside">Featured content</h3>
             <ul class="document__aside-list">
               <li
                 v-for="item in featuredItems"
@@ -68,7 +65,7 @@
             </ul>
           </aside>
           <aside v-if="relatedItems" class="document__aside">
-            <h3 class="document__aside-title">Related content</h3>
+            <h3 class="document__aside">Related content</h3>
             <ul v-if="relatedItems" class="document__aside-list">
               <li
                 class="document__aside-list-element"
@@ -138,16 +135,13 @@ export default {
     });
 
     const { document } = data;
-    console.log(document);
 
     if (!document) {
       return;
     }
     const description = document.components?.find((c) => c.name === "Intro");
     const publicatedAt = new Date(document.publishedAt);
-    // const ISODate = publicatedAt.toISOString();
     const topics = document?.topics;
-    console.log(topics);
     const body = document.components?.find((c) => c.name === "Body");
     const featured = document?.components?.find((c) => c.name === "Featured");
 
@@ -169,7 +163,6 @@ export default {
       ?.flat()
       ?.filter((node) => node?.node?.path !== route.path);
 
-    // console.log(relatedArticles);
     this.relatedItems = getArticlesWithoutRepeatedElements(relatedArticles);
 
     this.publicatedAt = publicatedAt;
