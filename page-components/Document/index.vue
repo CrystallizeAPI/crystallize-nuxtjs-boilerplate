@@ -12,6 +12,9 @@
               <Topic :isUnderlined="true" :data="topic" />
             </li>
           </ul>
+          <time v-if="publishedAtHumanReadable" :dateTime="publishedAtDateISO">
+            {{ publishedAtHumanReadable }}
+          </time>
         </template>
 
         <template v-slot:postHeader>
@@ -98,9 +101,9 @@ export default {
       document: {},
       title: null,
       headerDescription: null,
-      publicatedAt: null,
+      publishedAtHumanReadable: null,
+      publishedAtDateISO: null,
       images: [],
-      humanReadableDate: null,
       topics: [],
       body: null,
       featuredItems: [],
@@ -135,15 +138,15 @@ export default {
     });
 
     const { document } = data;
-
     if (!document) {
       return;
     }
+
     const description = document.components?.find((c) => c.name === "Intro");
-    const publicatedAt = new Date(document.publishedAt);
-    const topics = document?.topics;
+    const topics = document.topics;
     const body = document.components?.find((c) => c.name === "Body");
-    const featured = document?.components?.find((c) => c.name === "Featured");
+    const featured = document.components?.find((c) => c.name === "Featured");
+    const publishedAt = new Date(document.publishedAt);
 
     this.document = document;
     this.title = getDocumentTitle(document);
@@ -153,6 +156,11 @@ export default {
     this.images = document.components?.find((c) => c.name === "Image");
     this.featuredItems = featured?.content?.items;
     this.topics = topics;
+
+    if (document.publishedAt) {
+      this.publishedAtDateISO = this.getDateISO(publishedAt);
+      this.publishedAtHumanReadable = getHumanReadableDate(publishedAt);
+    }
 
     // Find all topic maps, as a parent, then filter on "document" type
     // Comment in the first filter line with your topic name to filter on a specific topic
@@ -164,9 +172,11 @@ export default {
       ?.filter((node) => node?.node?.path !== route.path);
 
     this.relatedItems = getArticlesWithoutRepeatedElements(relatedArticles);
-
-    this.publicatedAt = publicatedAt;
-    this.humanReadableDate = getHumanReadableDate(publicatedAt);
+  },
+  methods: {
+    getDateISO: function (date) {
+      return date.toISOString();
+    },
   },
   head() {
     if (!this.metaDescription) {
