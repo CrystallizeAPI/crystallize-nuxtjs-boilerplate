@@ -12,6 +12,9 @@
               <Topic :isUnderlined="true" :data="topic" />
             </li>
           </ul>
+          <time :dateTime="publicatedAt.toISOString()"
+            >{humanReadableDate}</time
+          >
         </template>
 
         <template v-slot:postHeader>

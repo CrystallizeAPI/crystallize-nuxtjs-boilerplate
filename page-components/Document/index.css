@@ -71,9 +71,9 @@
 @media screen and (min-width: 1024px) {
   .document__socials {
     flex-direction: column;
-    position: absolute;
-    left: 1rem;
-    top: -0.5rem;
+    position: fixed;
+    left: 8rem;
+    top: 9rem;
   }
 
   .document__socials > * {
