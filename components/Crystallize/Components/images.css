@@ -32,6 +32,25 @@
   object-fit: cover;
 }
 
+/*
+ * :only-child targets an element without any siblings
+ * It does the same as `:first-child:last-child` and `:nth-child(1):nth-last-child(1)`
+ * but with lower specifity, which reduces css accidental complexity.
+ *
+ * FYI: https://developer.mozilla.org/en-US/docs/Web/CSS/:only-child
+ */
+.crystallize-components-images__image:only-child {
+  /*
+   * We force the first element to fill the first row.
+   * If you modify the grid structure by adding columns,
+   * make sure to update the line below.
+   *
+   * To make the first element fill the hole row do the following:
+   * grid-column-end: span NUMBER_OF_COLUMNS;
+   */
+  grid-column: span var(--grid-images-columns-count);
+}
+
 @media (min-width: 768px) {
   .crystallize-components-images {
     --grid-images-columns-count: 2;
@@ -42,22 +61,4 @@
     grid-template-columns: repeat(var(--grid-images-columns-count), 1fr);
   }
   
-  /*
-   * :only-child targets an element without any siblings
-   * It does the same as `:first-child:last-child` and `:nth-child(1):nth-last-child(1)`
-   * but with lower specifity, which reduces css accidental complexity.
-   *
-   * FYI: https://developer.mozilla.org/en-US/docs/Web/CSS/:only-child
-   */
-  .crystallize-components-images__image:only-child {
-    /*
-     * We force the first element to fill the first row.
-     * If you modify the grid structure by adding columns,
-     * make sure to update the line below.
-     *
-     * To make the first element fill the hole row do the following:
-     * grid-column-end: span NUMBER_OF_COLUMNS;
-     */
-    grid-column: span var(--grid-images-columns-count);
-  }
 }
