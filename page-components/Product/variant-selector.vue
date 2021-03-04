@@ -1,14 +1,22 @@
 <template>
   <div class="variant-selector">
-    <div v-for="attr in attrs" :key="attr.attribute" class="attr">
-      <Button
-        v-for="value in attr.values"
-        :key="value"
-        :class="isSelected(attr, value) ? 'secondary' : ''"
-        @click="setVariant(attr, value)"
-      >
-        {{ value }}
-      </Button>
+    <div
+      v-for="attr in attrs"
+      :key="attr.attribute"
+      class="variant-selector__attribute"
+    >
+      <h4 class="variant-selector__title">{{ attr.attribute }}</h4>
+      <div class="variant-selector__button-list">
+        <button
+          v-for="value in attr.values"
+          :key="value"
+          class="variant-selector__button"
+          :class="isSelected(attr, value) ? 'secondary' : ''"
+          @click="setVariant(attr, value)"
+        >
+          {{ value }}
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -60,6 +68,7 @@ export default {
     },
   },
   data() {
+    console.log(getAttributesFromVariants(this.variants));
     return {
       attrs: getAttributesFromVariants(this.variants),
     };
@@ -106,23 +115,29 @@ export default {
 </script>
 
 <style scoped>
-.attr {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  grid-gap: 0.5rem;
-  margin-bottom: 0.5rem;
+.variant-selector__attribute:not(:first-child) {
+  margin-top: 1.5rem;
 }
 
-.attr >>> .button .inner {
-  border-color: transparent;
+.variant-selector__title {
+  color: var(--color-text-main);
+  font-size: var(--font-size-s);
+  margin-bottom: 10px;
 }
 
-.attr >>> .button.secondary:hover .inner {
-  background: var(--color-text-main);
-  color: var(--color-main-background);
+.variant-selector__button-list {
+  display: flex;
 }
 
-.attr >>> .button .inner::first-letter {
-  text-transform: uppercase;
+.variant-selector__button {
+  align-items: flex-end;
+  border: 1px solid #dfdfdf;
+  display: flex;
+  flex-wrap: wrap;
+  font-weight: bold;
+  justify-content: center;
+  padding: 10px 0;
+  text-transform: capitalize;
+  width: 25%;
 }
 </style>
