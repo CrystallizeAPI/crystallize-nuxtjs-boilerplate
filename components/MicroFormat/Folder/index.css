@@ -1,0 +1,28 @@
+.micro-format-folder {
+  --border-color: var(--color-box-background);
+  --background-color: var(--color-primary-action);
+  --color: var(--color-primary-action-darkest);
+
+  align-items: center;
+  background: var(--background-color);
+  border: 1px solid var(--border-color);
+  color: var(--color);
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  min-height: 75px;
+  min-height: var(--grid-row-height);
+  padding: 1em 1.5em;
+}
+
+.micro-format-folder:hover {
+  text-decoration: underline;
+}
+
+.micro-format-folder__title {
+  color: var(--color);
+  font-size: var(--font-size-m);
+  font-weight: 600;
+  margin: 0;
+  text-align: center;
+}
