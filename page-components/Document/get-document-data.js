@@ -10,5 +10,6 @@ export async function getData({ asPath, language, preview = null }) {
       version: preview ? 'draft' : 'published'
     }
   });
+
   return { ...data, preview };
 }

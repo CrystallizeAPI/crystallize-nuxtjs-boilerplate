@@ -1,4 +1,4 @@
-import fragments from 'lib/graph/fragments';
+import fragments from '../../lib/graph/fragments';
 
 export const QUERY_DOCUMENT = `
   query DOCUMENT_DOCUMENT($language: String!, $path: String, $version: VersionLabel! ) {
