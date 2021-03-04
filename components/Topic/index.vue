@@ -13,8 +13,7 @@ export default {
     },
     isUnderlined: {
       type: Boolean,
-      required: false,
-      default: false,
+      required: true,
     },
   },
   data: function () {

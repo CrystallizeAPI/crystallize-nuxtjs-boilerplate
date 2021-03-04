@@ -3,15 +3,7 @@
     <FetchLoader :state="$fetchState">
       <PageHeader :title="title" :description="headerDescription">
         <template v-slot:preHeader>
-          <ul v-if="topics" class="document__topics">
-            <li
-              v-for="topic in topics"
-              :v-key="topic.id"
-              class="document__topics-element"
-            >
-              <Topic :isUnderlined="true" :data="topic" />
-            </li>
-          </ul>
+          <TopicsList v-if="topics" :data="topics" :isUnderlined="true" />
           <time v-if="publishedAtHumanReadable" :dateTime="publishedAtDateISO">
             {{ publishedAtHumanReadable }}
           </time>

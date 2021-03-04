@@ -1,33 +1,53 @@
 <template>
   <FetchLoader :state="$fetchState">
-    <div class="top section">
-      <div class="main-info">
-        <h1 class="name">{{ product.name }}</h1>
-        <div class="summary">
+    <main class="product-page">
+      <header class="product-page__header">
+        <h1 class="product-page__title">{{ product.name }}</h1>
+        <div class="product-page__summary">
           <CrystallizeComponents :components="summary" />
         </div>
+        <TopicsList v-if="topics" :data="topics" :isUnderlined="false" />
         <VariantSelector
           :selected-variant="selectedVariant"
           :variants="product.variants"
           @on-change="onSelectedVariantChange"
         />
-
-        <div v-if="selectedVariant" class="price-wrap">
+        <!-- <div v-if="selectedVariant" class="price-wrap">
           <Price :variant="selectedVariant" />
+        </div> -->
+      </header>
+
+      <div>
+        <!-- <section
+          v-if="selectedVariant"
+          class="product-page__pre-article-images"
+          :aria-label="`Gallery of ${product.name}`"
+        >
+          <CrystallizeImage
+            :v-for="image in images"
+            :image="image"
+            :width="768"
+          />
+        </section> -->
+        <!--
+          The article component does overwrite styles in order to
+          make the document/article look the same after using
+          CrystallizeComponents
+          -->
+        <Article>
+          <CrystallizeComponents :components="[components]" />
+        </Article>
+      </div>
+
+      <div class="product-secondary-info">
+        <div class="section">
+          <CrystallizeComponents :components="components" />
+        </div>
+        <div class="section properties">
+          <CrystallizeComponents :components="specs" />
         </div>
       </div>
-      <div class="media">
-        <CrystallizeImage :image="image" />
-      </div>
-    </div>
-    <div class="product-secondary-info">
-      <div class="section">
-        <CrystallizeComponents :components="components" />
-      </div>
-      <div class="section properties">
-        <CrystallizeComponents :components="specs" />
-      </div>
-    </div>
+    </main>
   </FetchLoader>
 </template>
 
@@ -35,6 +55,12 @@
 import toText from "@crystallize/content-transformer/toText";
 import { getProductData } from "./get-product-data";
 import VariantSelector from "./variant-selector";
+import {
+  isSumaryComponent,
+  isDescriptionComponent,
+  isSpecsComponent,
+  COMPONENT_NAMES_TO_EXTRACT_FROM_COMPONENTS,
+} from "./utils";
 
 export default {
   components: {
@@ -44,9 +70,9 @@ export default {
     return {
       product: {},
       components: [],
-      image: null,
-      description: null,
+      images: null,
       summary: null,
+      topics: null,
       selectedVariant: null,
       specs: null,
     };
@@ -62,42 +88,43 @@ export default {
      * 1- Modify the ./query.js file
      * 2- Pass a new query as parameter
      */
-    const response = await getProductData({
+    const { data } = await getProductData({
       asPath: route.path,
       language: locale.crystallizeCatalogueLanguage,
     });
 
-    const { product } = response.data;
-
-    // Get a description for the product
-    const richTextComponent = product?.components?.find(
-      (c) => c.type === "richText"
-    );
-    if (richTextComponent?.content?.json) {
-      // Provide a good meta description for this page
-      this.metaDescription = toText(richTextComponent.content.json);
+    const { product } = data;
+    if (!product) {
+      return;
     }
-    this.description = product?.components?.find((c) => c.id === "description");
-
-    // Get the summary
-    this.summary = product?.components?.filter((c) => c.id === "summary");
-
-    // Get the specs
-    this.specs = product?.components?.filter((c) => c.id === "specs");
-
-    // Get the rest of components to show
-    this.components = product?.components?.filter(
-      (c) => !["specs", "summary"].includes(c.id)
-    );
 
     this.product = product;
+    const { components = [], variants = [], topics } = product;
 
-    this.selectedVariant = product.variants.find((v) => v.isDefault);
+    if (components && components.length) {
+      const descriptionComponent = components.find(isDescriptionComponent);
+      if (descriptionComponent?.content?.json) {
+        this.metaDescription = toText(descriptionComponent.content.json);
+      }
 
-    this.image = this.selectedVariant.images?.[0];
+      this.summary = components.filter(isSumaryComponent);
+      this.topics = topics;
+      this.specs = components.filter(isSpecsComponent);
+
+      /*
+       * Since we will render all the components on the body,
+       * We want to extract the ones we're rendering explicitly
+       * so we don't have duplicated content
+       */
+      this.components = components.filter(
+        (c) => !COMPONENT_NAMES_TO_EXTRACT_FROM_COMPONENTS.includes(c.id)
+      );
+      this.selectedVariant = variants.find((v) => v.isDefault);
+      this.images = this.selectedVariant.images;
+    }
   },
   head() {
-    if (!this.metaDescription && this.product?.name) {
+    if (!this.metaDescription && this.product.name) {
       console.warn(
         "this.metaDescription is missing for product",
         this.product.name
@@ -105,7 +132,7 @@ export default {
     }
 
     return {
-      title: this.product?.name,
+      title: this.product.name,
       meta: [
         {
           hid: "description",
