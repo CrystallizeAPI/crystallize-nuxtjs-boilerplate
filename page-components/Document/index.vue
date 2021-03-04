@@ -14,7 +14,7 @@
           </ul>
         </template>
 
-        <template v-if="topics" v-slot:postHeader>
+        <template v-slot:postHeader>
           <div class="document__socials">
             <IconButton
               screenReaderText="share on Twitter"
@@ -52,13 +52,29 @@
         </div>
 
         <div>
-          <aside>
-            <h3>Featured content</h3>
-            <div>list of elements</div>
+          <aside v-if="featuredItems" class="document__aside">
+            <h3 class="document__aside-title">Featured content</h3>
+            <ul class="document__aside-list">
+              <li
+                v-for="item in featuredItems"
+                :v-key="item.id"
+                class="document__aside-list-element"
+              >
+                <MicroFormatProduct :data="item" />
+              </li>
+            </ul>
           </aside>
-          <aside>
-            <h3>Related content</h3>
-            <div>list of elements</div>
+          <aside v-if="relatedItems" class="document__aside">
+            <h3 class="document__aside-title">Related content</h3>
+            <ul v-if="relatedItems" class="document__aside-list">
+              <li
+                class="document__aside-list-element"
+                v-for="item in relatedItems"
+                :v-key="item.id"
+              >
+                <MicroFormatProduct :data="item" />
+              </li>
+            </ul>
           </aside>
         </div>
       </main>
@@ -87,8 +103,8 @@ export default {
       humanReadableDate: null,
       topics: [],
       body: null,
-      featuredContent: [],
-      relatedContent: [],
+      featuredItems: [],
+      relatedItems: [],
     };
   },
   async fetch() {
@@ -119,6 +135,7 @@ export default {
     });
 
     const { document } = data;
+    console.log(document);
 
     if (!document) {
       return;
@@ -126,7 +143,8 @@ export default {
     const description = document.components?.find((c) => c.name === "Intro");
     const publicatedAt = new Date(document.publishedAt);
     // const ISODate = publicatedAt.toISOString();
-    const topics = document.topics;
+    const topics = document?.topics;
+    console.log(topics);
     const body = document.components?.find((c) => c.name === "Body");
     const featured = document?.components?.find((c) => c.name === "Featured");
 
@@ -136,6 +154,8 @@ export default {
     this.headerDescription = description.content.json;
     this.body = body;
     this.images = document.components?.find((c) => c.name === "Image");
+    this.featuredItems = featured?.content?.items;
+    this.topics = topics;
 
     // Find all topic maps, as a parent, then filter on "document" type
     // Comment in the first filter line with your topic name to filter on a specific topic
@@ -144,37 +164,11 @@ export default {
       // ?.filter((topic) => topic?.parent?.name === '[YOUR-TOPIC-MAP-NAME]')
       ?.map((topic) => topic?.items?.edges)
       ?.flat()
-      ?.filter((node) => node?.node?.path !== asPath);
+      ?.filter((node) => node?.node?.path !== route.path);
 
+    // console.log(relatedArticles);
     this.relatedItems = getArticlesWithoutRepeatedElements(relatedArticles);
-    this.featuredItems = featured?.content?.items;
 
-    /*
-     * @TODO: Get topics from the graphql. Why are they missing??
-     */
-    const MOCKED_TOPICS = [
-      {
-        id: "5fcb5b7b877645086d7a4581",
-        name: "Organic",
-      },
-      {
-        id: "5fcb5b93af1eeb083df3b227",
-        name: "Eco friendly",
-      },
-      {
-        id: "5fcb5bb5af1eebf7f3f3b229",
-        name: "Livingroom",
-      },
-      {
-        id: "5ff58cee7af25b44e7fcdf96",
-        name: "Outdoor",
-      },
-      {
-        id: "5fcf4b82af1eeb6397f3bb14",
-        name: "Campaign",
-      },
-    ];
-    this.topics = MOCKED_TOPICS;
     this.publicatedAt = publicatedAt;
     this.humanReadableDate = getHumanReadableDate(publicatedAt);
   },
