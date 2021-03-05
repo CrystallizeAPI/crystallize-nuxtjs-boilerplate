@@ -24,18 +24,6 @@
         </div>
       </header>
 
-      <!-- @todo: add images -->
-      <!-- <section
-          v-if="selectedVariant"
-          class="product-page__pre-article-images"
-          :aria-label="`Gallery of ${product.name}`"
-        >
-          <CrystallizeImage
-            :v-for="image in images"
-            :image="image"
-            :width="768"
-          />
-        </section> -->
       <!--
           The article component does overwrite styles in order to
           make the document/article look the same after using
@@ -129,7 +117,6 @@ export default {
         (c) => !COMPONENT_NAMES_TO_EXTRACT_FROM_COMPONENTS.includes(c.name)
       );
       this.selectedVariant = variants.find((v) => v.isDefault);
-      console.log(this.selectedVariant);
       this.images = this.selectedVariant.images;
     }
   },
@@ -155,6 +142,7 @@ export default {
   methods: {
     onSelectedVariantChange(variant) {
       this.selectedVariant = variant;
+      this.images = variant.images;
     },
   },
 };
