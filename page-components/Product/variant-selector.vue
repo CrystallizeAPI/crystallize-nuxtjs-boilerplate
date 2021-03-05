@@ -68,7 +68,6 @@ export default {
     },
   },
   data() {
-    console.log(getAttributesFromVariants(this.variants));
     return {
       attrs: getAttributesFromVariants(this.variants),
     };
