@@ -20,8 +20,7 @@
         <!-- todo: add stock -->
       </header>
 
-      <div>
-        <!-- <section
+      <!-- <section
           v-if="selectedVariant"
           class="product-page__pre-article-images"
           :aria-label="`Gallery of ${product.name}`"
@@ -32,23 +31,18 @@
             :width="768"
           />
         </section> -->
-        <!--
+      <!--
           The article component does overwrite styles in order to
           make the document/article look the same after using
           CrystallizeComponents
           -->
+      <div class="product-page__organic-content">
         <Article>
-          <CrystallizeComponents :components="[components]" />
-        </Article>
-      </div>
-
-      <div class="product-secondary-info">
-        <div class="section">
+          <div class="product-page__specs">
+            <CrystallizeComponents :components="specs" />
+          </div>
           <CrystallizeComponents :components="components" />
-        </div>
-        <div class="section properties">
-          <CrystallizeComponents :components="specs" />
-        </div>
+        </Article>
       </div>
     </main>
   </FetchLoader>
@@ -124,7 +118,7 @@ export default {
        * so we don't have duplicated content
        */
       this.components = components.filter(
-        (c) => !COMPONENT_NAMES_TO_EXTRACT_FROM_COMPONENTS.includes(c.id)
+        (c) => !COMPONENT_NAMES_TO_EXTRACT_FROM_COMPONENTS.includes(c.name)
       );
       this.selectedVariant = variants.find((v) => v.isDefault);
       this.images = this.selectedVariant.images;
