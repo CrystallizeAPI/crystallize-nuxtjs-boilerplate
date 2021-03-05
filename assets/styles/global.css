@@ -169,7 +169,6 @@ button {
 img {
   max-width: 100%;
   height: auto;
-  border: 0;
   border: 1px solid var(--color-box-background);
 }
 
