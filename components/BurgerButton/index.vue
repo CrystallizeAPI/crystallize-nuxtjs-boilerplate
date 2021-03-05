@@ -1,8 +1,10 @@
 <template>
-  <button
-    type="button"
-    @click="$emit('click')"
-    aria-label='menu'>
+  <!--
+    The shorthand for :v-on is @. For example:
+    - Instead of <button v-on:click="functionName">
+    - We can do <button @:click="functionName">
+  -->
+  <button type="button" @click="$emit('click')" aria-label="menu">
     <div class="lines" :class="open ? 'open' : ''"></div>
   </button>
 </template>
