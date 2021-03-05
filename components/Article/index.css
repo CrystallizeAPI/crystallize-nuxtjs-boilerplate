@@ -16,7 +16,8 @@
 .article >>> h4,
 .article >>> h5,
 .article >>> h6,
-.article >>> blockquote {
+.article >>> blockquote,
+.article >>> table {
   margin-left: var(--viewport-xs-lateral-space);
   margin-right: var(--viewport-xs-lateral-space);
 }
@@ -67,7 +68,8 @@
   .article >>> h4,
   .article >>> h5,
   .article >>> h6,
-  .article >>> blockquote {
+  .article >>> blockquote,
+  .article >>> table {
     margin-left: var(--viewport-sm-lateral-space);
     margin-right: var(--viewport-sm-lateral-space);
   }
