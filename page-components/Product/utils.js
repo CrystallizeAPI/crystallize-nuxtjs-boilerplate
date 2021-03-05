@@ -23,4 +23,4 @@ export function findDefaultVariant(variants) {
  * We want to extract the ones we're rendering explicitly
  * so we don't have duplicated content
  */
-export const COMPONENT_NAMES_TO_EXTRACT_FROM_COMPONENTS = ["specs", "summary"];
+export const COMPONENT_NAMES_TO_EXTRACT_FROM_COMPONENTS = ["Specs", "Summary"];
