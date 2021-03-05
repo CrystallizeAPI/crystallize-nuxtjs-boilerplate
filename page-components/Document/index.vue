@@ -53,30 +53,18 @@
         </div>
 
         <div>
-          <aside v-if="featuredItems" class="document__aside">
-            <h3 class="document__aside">Featured content</h3>
-            <ul class="document__aside-list">
-              <li
-                v-for="item in featuredItems"
-                :v-key="item.id"
-                class="document__aside-list-element"
-              >
-                <MicroFormatProduct :data="item" />
-              </li>
-            </ul>
-          </aside>
-          <aside v-if="relatedItems" class="document__aside">
-            <h3 class="document__aside">Related content</h3>
-            <ul v-if="relatedItems" class="document__aside-list">
-              <li
-                class="document__aside-list-element"
-                v-for="item in relatedItems"
-                :v-key="item.id"
-              >
-                <MicroFormatProduct :data="item" />
-              </li>
-            </ul>
-          </aside>
+          <Aside
+            v-if="featuredItems"
+            :title="Featured"
+            :items="featuredItems"
+            :isSticky="!relatedItems"
+          />
+          <Aside
+            v-if="relatedItems"
+            :title="Related"
+            :items="relatedItems"
+            :isSticky="true"
+          />
         </div>
       </main>
     </FetchLoader>
@@ -91,8 +79,12 @@ import {
   getHumanReadableDate,
   getArticlesWithoutRepeatedElements,
 } from "./utils";
+import Aside from "./Aside/index";
 
 export default {
+  components: {
+    Aside,
+  },
   data: function () {
     return {
       document: {},
@@ -122,7 +114,6 @@ export default {
       language: locale.crystallizeCatalogueLanguage,
       // preview: true,// @todo: read that from a context
     });
-    console.log(data);
 
     const { document } = data;
     if (!document) {
