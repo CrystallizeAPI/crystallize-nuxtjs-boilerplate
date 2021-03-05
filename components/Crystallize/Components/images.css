@@ -1,9 +1,18 @@
 .crystallize-components-images {
-  --grid-element-separation: 10px;
+  --grid-element-separation: 5px;
   display: grid;
   grid-template-columns: repeat(var(--grid-images-columns-count), 1fr);
   grid-gap: var(--grid-element-separation);
 }
+     
+
+/*
+ * only children -> 100% no matter if is portrait or landscape
+ * if there are more children than 1
+ *   -> if the first element it's landscape, with 100%
+ *   -> if the last element has no siblinks on the same row, width 100%
+ *   -> the rest, width 50%;
+ */
 
 /*
  * We use ">>>" instead of ">" because it's how vuejs understands
@@ -51,6 +60,27 @@
   grid-column: span var(--grid-images-columns-count);
 }
 
+/*
+ * Landscape images fill all the row
+ */
+.crystallize-components-images__image:not(.crystallize-components-images__image--is-portait) {
+  grid-column: span var(--grid-images-columns-count);
+}
+
+/*
+ * Landscape images fill all the row
+ */
+.crystallize-components-images__image:not(.crystallize-components-images__image--is-portait) {
+  grid-column: span var(--grid-images-columns-count);
+}
+
+/*
+   * Landscape images fill all the row
+   */
+   .crystallize-components-images__image:not(.crystallize-components-images__image--is-portait) + .crystallize-components-images__image.crystallize-components-images__image--is-portait {
+    grid-column: span var(--grid-images-columns-count);
+  }
+
 @media (min-width: 768px) {
   .crystallize-components-images {
     --grid-images-columns-count: 2;
@@ -60,5 +90,63 @@
      */
     grid-template-columns: repeat(var(--grid-images-columns-count), 1fr);
   }
-  
 }
+
+/*
+ * Styles of the NextJS boilerplate
+ * but they don't work :/
+ */
+
+ /* .crystallize-components-images {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 100px;
+}
+.crystallize-components-images >>> picture {
+  min-height: 300px;
+}
+
+.crystallize-components-images >>> picture:nth-child(3n) {
+  grid-column-start: span 2;
+}
+
+.crystallize-components-images >>> img {
+  display: block;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.crystallize-components-images__image-wrapper {
+  border: 4px solid #fff;
+  width: 50%;
+  max-width: 100%;
+  flex-grow: 1;
+  position: relative;
+}
+
+.crystallize-components-images__image-wrapper >>> figure {
+  height: 100%;
+}
+
+.crystallize-components-images__image-wrapper >>> img {
+  object-fit: cover;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  border: 1px solid #dfdfdf;
+}
+.crystallize-components-images__image-wrapper.crystallize-components-images__image-wrapper--is-portrair {
+  width: 33.333%;
+  max-width: 50%;
+}
+
+.crystallize-components-images__image-wrapper:first-child {
+  width: 100%;
+}
+
+@media screen and (max-width: 499px) {
+  .crystallize-components-images >>> picture {
+    min-height: 100px;
+  }
+} */

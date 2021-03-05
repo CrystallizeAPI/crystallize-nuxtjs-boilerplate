@@ -1,11 +1,14 @@
 <template>
   <div class="crystallize-components-images">
     <template v-for="image in data.images">
+      <!-- <div class="crystallize-components-images__image-wrapper"> -->
       <CrystallizeImage
         :key="image.url"
         :image="image"
         class="crystallize-components-images__image"
+        :class="getImageDynamicClasses(image)"
       />
+      <!-- </div> -->
     </template>
   </div>
 </template>
@@ -16,6 +19,22 @@ export default {
     data: {
       type: Object,
       default: null,
+    },
+  },
+  methods: {
+    getImageDynamicClasses: function (image) {
+      const isPortrait = this.isPortraitImage(image);
+      /* The is-portait modifier will make the portait images to be displayd in 2 columns.
+       * The images that are not portrait, will occupy the whole row when not having an element in the same row
+       */
+      return isPortrait
+        ? "crystallize-components-images__image--is-portait"
+        : "";
+    },
+    isPortraitImage: function (image) {
+      const { variants = [] } = image;
+
+      return variants[0].height >= variants[0]?.width;
     },
   },
 };
