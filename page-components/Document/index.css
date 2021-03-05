@@ -1,3 +1,11 @@
+.document__header-pretitle {
+  margin-bottom: 1rem;
+}
+
+.document__published-at {
+  font-size: var(--font-size-s);
+}
+
 .document__socials {
   display: flex;
 }

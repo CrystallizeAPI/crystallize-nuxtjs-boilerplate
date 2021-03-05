@@ -3,10 +3,16 @@
     <FetchLoader :state="$fetchState">
       <PageHeader :title="title" :description="headerDescription">
         <template v-slot:preHeader>
-          <TopicsList v-if="topics" :data="topics" :isUnderlined="true" />
-          <time v-if="publishedAtHumanReadable" :dateTime="publishedAtDateISO">
-            {{ publishedAtHumanReadable }}
-          </time>
+          <div class="document__header-pretitle">
+            <TopicsList v-if="topics" :data="topics" :isUnderlined="true" />
+            <time
+              v-if="publishedAtHumanReadable"
+              :dateTime="publishedAtDateISO"
+              class="document__published-at"
+            >
+              {{ publishedAtHumanReadable }}
+            </time>
+          </div>
         </template>
 
         <template v-slot:postHeader>
@@ -80,7 +86,6 @@
 <script>
 import toText from "@crystallize/content-transformer/toText";
 import { getData as getDocumentData } from "./get-document-data";
-import fragments from "../../lib/graph/fragments";
 import {
   getDocumentTitle,
   getHumanReadableDate,
@@ -115,8 +120,9 @@ export default {
     const { data } = await getDocumentData({
       asPath: route.path,
       language: locale.crystallizeCatalogueLanguage,
-      // preview: true, @todo: read that from a context
+      // preview: true,// @todo: read that from a context
     });
+    console.log(data);
 
     const { document } = data;
     if (!document) {
@@ -136,6 +142,7 @@ export default {
     this.body = body;
     this.images = document.components?.find((c) => c.name === "Image");
     this.featuredItems = featured?.content?.items;
+    // @todo: why topics are not returned? a _normalized error is thrown
     this.topics = topics;
 
     if (document.publishedAt) {

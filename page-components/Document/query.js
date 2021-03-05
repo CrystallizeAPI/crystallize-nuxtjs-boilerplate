@@ -5,6 +5,7 @@ query DOCUMENT_PAGE($path: String!, $language: String!) {
   document: catalogue (path: $path, language: $language) {
     ...item
     ...product
+    publishedAt
   }
 }
 
