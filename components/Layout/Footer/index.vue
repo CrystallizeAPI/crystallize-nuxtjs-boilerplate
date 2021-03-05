@@ -2,7 +2,13 @@
   <footer class="outer">
     <div>
       <NuxtLink to="/" class="logo">
-        <img src="/logo-shop.svg" alt="" width="69" height="84" />
+        <img
+          src="/logo-shop.svg"
+          alt=""
+          width="69"
+          height="84"
+          style="border: none"
+        />
       </NuxtLink>
     </div>
     <footer class="navlist">
@@ -16,7 +22,13 @@
     <div class="powered">
       <p>eCommerce by</p>
       <a href="https://crystallize.com" aria-label="crystallize.com">
-        <img src="/logo-crystallize.svg" alt="" width="120" height="54" />
+        <img
+          src="/logo-crystallize.svg"
+          alt=""
+          width="120"
+          height="54"
+          style="border: none"
+        />
       </a>
     </div>
   </footer>

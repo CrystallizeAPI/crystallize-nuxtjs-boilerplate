@@ -1,6 +1,5 @@
 .micro-format-document {
   --image-size: 90px;
-  --border-color: var(--color-box-background);
   --distance-between-text-and-media: 1rem;
   --distance-to-topics : 7px;
   --media-height: 120px;
@@ -55,7 +54,6 @@
 
 .micro-format-document__media {
   grid-area: media;
-  border: 1px solid var(--border-color);
   height: var(--media-height);
 }
 

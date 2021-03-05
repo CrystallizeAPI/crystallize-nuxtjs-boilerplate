@@ -50,7 +50,6 @@
 
 .micro-format-product__media {
   grid-area: media;
-  border: 1px solid var(--border-color);
   height: var(--media-height);
 }
 

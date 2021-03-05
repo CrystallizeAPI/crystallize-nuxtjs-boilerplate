@@ -41,7 +41,6 @@
 }
 
 .list-format-product__media {
-  border: 1px solid var(--border-color);
   margin-bottom: var(--distance-between-text-and-media);
 }
 
