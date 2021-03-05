@@ -35,6 +35,12 @@
   padding: 15px 0 15px;
 }
 
+.product-page__specs {
+  display: block;
+  margin-top: 15px;
+  padding: 20px 0;
+}
+
 @media screen and (min-width: 768px) {
   .product-page {
     --lateral-padding: var(--viewport-sm-lateral-space);
