@@ -79,7 +79,7 @@
 
 <script>
 import toText from "@crystallize/content-transformer/toText";
-import { simplyFetchFromGraph } from "../../lib/graph";
+import { getData as getDocumentData } from "./get-document-data";
 import fragments from "../../lib/graph/fragments";
 import {
   getDocumentTitle,
@@ -112,21 +112,10 @@ export default {
      * You probably want to cherry pick the fields in
      * the query here to improve performance
      */
-    const { data } = await simplyFetchFromGraph({
-      query: `
-        query DOCUMENT_PAGE($path: String!, $language: String!) {
-          document: catalogue (path: $path, language: $language) {
-            ...item
-            ...product
-          }
-        }
-
-        ${fragments}
-      `,
-      variables: {
-        path: route.path,
-        language: locale.crystallizeCatalogueLanguage,
-      },
+    const { data } = await getDocumentData({
+      asPath: route.path,
+      language: locale.crystallizeCatalogueLanguage,
+      // preview: true, @todo: read that from a context
     });
 
     const { document } = data;
