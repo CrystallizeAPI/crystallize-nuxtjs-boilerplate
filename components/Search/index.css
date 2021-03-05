@@ -1,0 +1,119 @@
+.search__view {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  z-index: 10;
+}
+
+/*
+ * Dark overlay
+ */
+.search__overlay {
+  position: absolute;
+  content: "";
+  display: block;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.6);
+  z-index: -1;
+}
+
+
+.search__form {
+  --padding-lateral: var(--viewport-xs-lateral-space);
+  --search-input-lateral-padding: 35px;
+  --distance-from-top-of-viewport: 75px;
+  padding-top: var(--distance-from-top-of-viewport);
+  padding-bottom: 1rem;
+  background-color: white;
+  min-height: 200px;
+  padding-left: var(--padding-lateral);
+  padding-right: var(--padding-lateral);
+}
+
+/*
+ * Container to give some inner spacing
+ */
+.search__form-inner {
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+  border-top: 1px solid var(--color-box-background);
+  max-width: var(--viewport-content-max-width);
+}
+
+/*
+ * Label for the input
+ */
+.search__label {  
+  display: block;
+  padding-left: var(--search-input-lateral-padding);
+  margin-bottom: 1rem;
+  font-size: var(--font-size-m);
+  font-weight: 600;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+/*
+ * Submit search button
+ */
+.search__submit {
+  background-color: black;
+  border-radius: 50%;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  bottom: 50%;
+  color: white;
+}
+
+/*
+ * This element exist as a relative point for placing the button in absolute.
+ */
+.search__input-wrapper {
+  position: relative;
+  margin: 0 auto;
+}
+
+.search__input {
+  border-radius: 35px;
+  border: 1px solid var(--color-text-sub);
+  font-size: var(--font-size-m);
+  outline: none;
+  padding: 12px var(--search-input-lateral-padding);
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .search__form {
+    /*
+     * Space to be below the top bar
+     */
+     --distance-from-top-of-viewport: 100px;
+  }
+
+  .search__form-inner {
+    --padding-lateral: var(--viewport-sm-lateral-space);
+    
+  }
+}
+
+
+@media screen and (min-width: 1024px) {
+  .search__form {
+    /*
+    * Space to be below the top bar
+    */
+    padding-top: 125px;
+  }
+
+  .search__form-inner {
+    --padding-lateral: var(--viewport-md-lateral-space);
+    margin: 0 auto;
+    max-width: 600px;
+  }
+}
