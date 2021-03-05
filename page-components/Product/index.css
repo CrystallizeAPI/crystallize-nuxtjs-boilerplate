@@ -44,6 +44,18 @@
 @media screen and (min-width: 768px) {
   .product-page {
     --lateral-padding: var(--viewport-sm-lateral-space);
+    display: grid;
+    grid-template-columns: repeat(12,1fr);
+    column-gap: 30px;
+    grid-template-areas: 'content content content content content content content header header header header header';
+  }
+
+  .product-page__header{
+    grid-area: header;
+  }
+  
+  .product-page__organic-content{
+    grid-area: content;
   }
 }
 

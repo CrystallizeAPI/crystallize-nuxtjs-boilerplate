@@ -115,6 +115,9 @@ h4 {
 strong {
   font-weight: bold;
 }
+tr {
+  display: block;
+}
 a,
 button {
   color: inherit;
