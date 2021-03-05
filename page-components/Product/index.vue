@@ -3,21 +3,23 @@
     <main class="product-page">
       <!-- @todo: try to use the PageHeader component, had issues with the description -->
       <header class="product-page__header">
-        <h1 class="product-page__title">{{ product.name }}</h1>
-        <div class="product-page__summary">
-          <CrystallizeComponents :components="summary" />
-        </div>
-        <TopicsList v-if="topics" :data="topics" :isUnderlined="false" />
-        <!-- @todo: add images to the variant buttons -->
-        <VariantSelector
-          :selected-variant="selectedVariant"
-          :variants="product.variants"
-          @on-change="onSelectedVariantChange"
-        />
-        <div class="product-page__pricing-details">
-          <Price :variant="selectedVariant" />
-          <BuyButton />
-          <!-- @todo: add stock -->
+        <div class="product-page__header-inner">
+          <h1 class="product-page__title">{{ product.name }}</h1>
+          <div class="product-page__summary">
+            <CrystallizeComponents :components="summary" />
+          </div>
+          <TopicsList v-if="topics" :data="topics" :isUnderlined="false" />
+          <!-- @todo: add images to the variant buttons -->
+          <VariantSelector
+            :selected-variant="selectedVariant"
+            :variants="product.variants"
+            @on-change="onSelectedVariantChange"
+          />
+          <div class="product-page__pricing-details">
+            <Price :variant="selectedVariant" />
+            <BuyButton />
+            <!-- @todo: add stock -->
+          </div>
         </div>
       </header>
 
