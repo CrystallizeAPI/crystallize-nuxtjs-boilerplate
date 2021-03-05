@@ -32,7 +32,7 @@
  * We assume that the key or property name is always shown first (on the left)
  */
 .properties-table__cell:first-child {
-  width: 30%;
+  width: 25%;
   font-weight: 600;
 }
 
