@@ -10,7 +10,7 @@
  * only children -> 100% no matter if is portrait or landscape
  * if there are more children than 1
  *   -> if the first element it's landscape, with 100%
- *   -> if the last element has no siblinks on the same row, width 100%
+ *   -> if the last element has no siblings on the same row, width 100%
  *   -> the rest, width 50%;
  */
 

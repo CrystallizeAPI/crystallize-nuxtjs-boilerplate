@@ -5,6 +5,7 @@
       <header class="product-page__header">
         <div class="product-page__header-inner">
           <h1 class="product-page__title">{{ product.name }}</h1>
+
           <div class="product-page__summary">
             <CrystallizeComponents :components="summary" />
           </div>
@@ -41,6 +42,9 @@
           CrystallizeComponents
           -->
       <div class="product-page__organic-content">
+        <div v-if="images" class="product-page__pre-article-images">
+          <CrystallizeComponentsImages :data="images" />
+        </div>
         <Article>
           <div class="product-page__specs">
             <CrystallizeComponents :components="specs" />
@@ -125,6 +129,7 @@ export default {
         (c) => !COMPONENT_NAMES_TO_EXTRACT_FROM_COMPONENTS.includes(c.name)
       );
       this.selectedVariant = variants.find((v) => v.isDefault);
+      console.log(this.selectedVariant);
       this.images = this.selectedVariant.images;
     }
   },
