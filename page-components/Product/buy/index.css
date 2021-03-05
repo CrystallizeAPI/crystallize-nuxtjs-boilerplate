@@ -11,3 +11,9 @@
   position: relative;
   border-radius: 4px;
 }
+
+@media sceen and (min-width: 1024px) {
+  .product-page__buy {
+    flex-grow: 0;
+  }
+}
