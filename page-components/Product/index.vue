@@ -1,6 +1,7 @@
 <template>
   <FetchLoader :state="$fetchState">
     <main class="product-page">
+      <!-- @todo: try to use the PageHeader component, had issues with the description -->
       <header class="product-page__header">
         <h1 class="product-page__title">{{ product.name }}</h1>
         <div class="product-page__summary">
@@ -16,10 +17,11 @@
         <div class="product-page__pricing-details">
           <Price :variant="selectedVariant" />
           <BuyButton />
+          <!-- @todo: add stock -->
         </div>
-        <!-- todo: add stock -->
       </header>
 
+      <!-- @todo: add images -->
       <!-- <section
           v-if="selectedVariant"
           class="product-page__pre-article-images"

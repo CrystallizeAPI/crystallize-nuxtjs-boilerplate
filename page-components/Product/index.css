@@ -71,4 +71,23 @@
     margin-left: auto;
     margin-right: auto;
   }
+
+  /*
+   * Styles for showing the price next to the buy button
+   */
+ .product-page__pricing-details {
+  margin-bottom: 0;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+ }
+
+ /*
+  * We add some separation between the first and the second child
+  * of the `.product-page__pricing-details` element, instead of adding
+  * it to the Price component so we keep each component layout agnostic.
+  */
+ .product-page__pricing-details *:first-child {
+   margin-right: 25px;
+ }
 }
