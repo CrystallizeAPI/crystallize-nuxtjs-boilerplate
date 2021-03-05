@@ -16,7 +16,7 @@
               screenReaderText="login"
               iconSrc="/icons/user.svg"
             />
-            <IconButton screenReaderText="search" iconSrc="/icons/search.svg" />
+            <Search />
             <IconButton screenReaderText="basket" iconSrc="/icons/basket.svg" />
           </div>
         </template>
