@@ -40,7 +40,7 @@
       <main class="document__main">
         <div>
           <div v-if="images" class="document__pre-article-images">
-            <CrystallizeComponentsImages :data="images.content" />
+            <CrystallizeComponentsImages :data="images.content.images" />
           </div>
           <!--
             The article component does overwrite styles in order to

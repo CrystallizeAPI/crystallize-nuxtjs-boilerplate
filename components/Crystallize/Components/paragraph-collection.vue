@@ -9,7 +9,7 @@
         />
 
         <CrystallizeComponentsImages
-          :data="paragraph"
+          :data="paragraph.images"
           class="paragraphs-media"
         />
       </div>

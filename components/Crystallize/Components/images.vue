@@ -1,6 +1,6 @@
 <template>
   <div class="crystallize-components-images">
-    <template v-for="image in data.images">
+    <template v-for="image in data">
       <!-- <div class="crystallize-components-images__image-wrapper"> -->
       <CrystallizeImage
         :key="image.url"
@@ -17,8 +17,8 @@
 export default {
   props: {
     data: {
-      type: Object,
-      default: null,
+      type: Array,
+      required: true,
     },
   },
   methods: {
