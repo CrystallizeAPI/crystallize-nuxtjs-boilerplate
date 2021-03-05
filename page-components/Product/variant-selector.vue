@@ -75,6 +75,10 @@ export default {
   },
   methods: {
     setVariant(attr, value) {
+      /*
+       * Attribute is the "group" or "type" of the variant.
+       * It can have values like color, frame, material, size, etc.
+       */
       const { attribute } = attr;
 
       const selectedAttributes = attributesToObject(this.selectedVariant);
@@ -82,10 +86,7 @@ export default {
 
       // Get the most suitable variant
       let variant = this.variants.find((variant) => {
-        if (isEqual(selectedAttributes, attributesToObject(variant))) {
-          return true;
-        }
-        return false;
+        isEqual(selectedAttributes, attributesToObject(variant));
       });
 
       /**
@@ -115,6 +116,10 @@ export default {
 </script>
 
 <style scoped>
+.variant-selector {
+  margin: 30px 0;
+}
+
 .variant-selector__attribute:not(:first-child) {
   margin-top: 1.5rem;
 }

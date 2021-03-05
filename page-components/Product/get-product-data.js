@@ -10,7 +10,8 @@ export async function getProductData({
     query,
     variables: {
       path: asPath,
-      language
+      language,
+      version: 'published' // @todo: still have to work on this
     },
   });
 }

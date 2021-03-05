@@ -7,14 +7,17 @@
           <CrystallizeComponents :components="summary" />
         </div>
         <TopicsList v-if="topics" :data="topics" :isUnderlined="false" />
+        <!-- @todo: add images to the variant buttons -->
         <VariantSelector
           :selected-variant="selectedVariant"
           :variants="product.variants"
           @on-change="onSelectedVariantChange"
         />
-        <!-- <div v-if="selectedVariant" class="price-wrap">
+        <div class="product-page__pricing-details">
           <Price :variant="selectedVariant" />
-        </div> -->
+          <BuyButton />
+        </div>
+        <!-- todo: add stock -->
       </header>
 
       <div>
@@ -55,6 +58,8 @@
 import toText from "@crystallize/content-transformer/toText";
 import { getProductData } from "./get-product-data";
 import VariantSelector from "./variant-selector";
+import Price from "./price/index";
+import BuyButton from "./buy/index";
 import {
   isSumaryComponent,
   isDescriptionComponent,
@@ -65,6 +70,8 @@ import {
 export default {
   components: {
     VariantSelector,
+    Price,
+    BuyButton,
   },
   data() {
     return {

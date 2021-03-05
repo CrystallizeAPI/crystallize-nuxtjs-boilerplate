@@ -10,6 +10,7 @@
   max-width: var(--font-max-width);
   margin-bottom: 15px;
 }
+
 .product-page__summary {
   color: var(--color-text-main);
   font-family: "Roboto", sans-serif;
@@ -23,6 +24,15 @@
 /* Overwrite styles for p from global.css */
 .product-page__summary >>> p {
   margin-bottom: 1em;
+}
+
+.product-page__pricing-details {
+  align-items: center;
+  border-bottom: 1px solid #cecece;
+  border-top: 1px solid #cecece;
+  display: flex;
+  flex-direction: column;
+  padding: 15px 0 15px;
 }
 
 @media screen and (min-width: 768px) {

@@ -1,14 +1,49 @@
-.section:not(:last-child) {
-  margin-bottom: var(--content-padding);
+.properties-table {
+  --cell-border-thickness: 1px;
+  --cell-border-color: var(--color-box-background);
 }
 
-.table {
+/*
+ * Give space at the bottom of each table that is not the first one
+ */
+.properties-table__section:not(:first-child) {
+  margin-top: var(--content-padding);
+}
+
+.properties-table__table {
   width: 100%;
   border-collapse: collapse;
 }
 
-.cell {
-  width: 50%;
-  padding: 1em 0px;
-  border-bottom: 1px solid var(--color-main-background);
+.properties-table__row:not(:first-child) {
+  border-top: var(--cell-border-thickness) solid var(--cell-border-color);
+}
+
+.properties-table__row:last-child {
+  border-bottom: var(--cell-border-thickness) solid var(--cell-border-color);
+}
+
+.properties-table__cell {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+/*
+ * We assume that the key or property name is always shown first (on the left)
+ */
+.properties-table__cell:first-child {
+  width: 30%;
+  font-weight: 600;
+}
+
+/*
+ * We assume that the values of a property is always shown last (on the right)
+ */
+.properties-table__cell:nth-child(2) {
+  width: 70%;
+  padding-left: 0.5rem;
+}
+
+.properties-table__cell.properties-table__cell--bold {
+  font-weight: 600;
 }

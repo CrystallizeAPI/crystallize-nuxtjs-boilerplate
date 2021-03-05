@@ -1,17 +1,29 @@
 <template>
-  <div class="price" :class="discountPercentage ? 'price--with-discount' : ''">
-    <div v-if="discountPrice" class="price__details">
-      <!-- Price with discount-->
-      <strong>{{ discountPrice }}</strong>
-      <!-- Original Price-->
-      <div class="price__old-price">{{ defaultPrice }}</div>
+  <div
+    class="product__price"
+    :class="discountPercentage ? 'product__price--with-discount' : ''"
+  >
+    <!-- Displayed if there any kind of discount -->
+    <div
+      v-if="discountPrice || discountPercentage"
+      class="product__price-inner"
+    >
+      <strong class="product__price-current">{{ discountPrice }}</strong>
+      <div class="product__price-discount-details">
+        <span v-if="discountPrice" class="product__price-discount-amount">
+          {{ defaultPrice }}
+        </span>
+        <span
+          v-if="discountPercentage"
+          class="product__price-discount-percentage"
+        >
+          - {{ discountPercentage }}%
+        </span>
+      </div>
     </div>
-    <div v-else class="price__details">
-      <!-- Original Price-->
-      <strong>{{ defaultPrice }}</strong>
-    </div>
-    <div v-if="discountPercentage" class="price__discount-percentage">
-      <DiscountTag :discount="discountPercentage" />
+    <!-- This is printed if there is no discount -->
+    <div v-else class="product__price-inner">
+      <strong class="product__price-current">{{ defaultPrice }}</strong>
     </div>
   </div>
 </template>
