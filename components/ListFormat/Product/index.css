@@ -44,7 +44,7 @@
   margin-bottom: var(--distance-between-text-and-media);
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 768px) {
   .list-format-product__media {
     position: relative;
     overflow: hidden;
