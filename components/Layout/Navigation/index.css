@@ -12,16 +12,16 @@
   right: 0;
   bottom: 0;
   width: 100%;
-  z-index: 99;
 }
 
 .nav.nav--open {
   display: block;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1023px) {
   .nav {
     display: none;
+    z-index: var(--z-index-topbar);
   }
 
   .nav:not(.nav--open) {

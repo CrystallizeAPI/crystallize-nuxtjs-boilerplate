@@ -57,6 +57,14 @@
    */
   --grid-images-columns-count: 2;
   
+  /*
+   * Z-index overview
+   */
+   --z-index-topbar: 80;
+   --z-index-search: 90;
+   --z-index-logo: 85;
+   --z-index-burger-button: 85;
+   
   
   /* 
    * The var() function can not be used as property names,

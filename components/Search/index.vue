@@ -8,10 +8,20 @@
     <IconButton
       screenReaderText="search"
       iconSrc="/icons/search.svg"
-      @click="this.handleClick"
+      @click="this.toggleSearch"
     />
-    <div class="search__view">
-      <div class="search__overlay" />
+    <div v-if="isSearchViewOpened" class="search__view">
+      <!--
+        We use aria-hidden to avoid screen readers to read content
+        that is only for persentational purposes.
+      -->
+      <div class="search__overlay" aria-hidden="true" />
+      <div class="search__close-button">
+        <CloseButton
+          @click="this.toggleSearch"
+          screenReaderText="close search"
+        />
+      </div>
       <form
         class="search__form"
         v-on:submit.prevent="handleSubmit"
@@ -26,9 +36,7 @@
               type="search"
               placeholder="Find things"
             />
-            <button class="search__submit" aria-label="submit search">
-              hi
-            </button>
+            <button class="search__submit" aria-label="submit search">➔</button>
           </div>
         </div>
       </form>
@@ -44,7 +52,7 @@ export default {
     };
   },
   methods: {
-    handleClick: function (e) {
+    toggleSearch: function (e) {
       const isOpen = !this.isSearchViewOpened;
       this.isSearchViewOpened = isOpen;
     },

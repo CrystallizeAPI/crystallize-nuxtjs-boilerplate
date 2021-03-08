@@ -4,7 +4,7 @@
   right: 0;
   bottom: 0;
   position: fixed;
-  z-index: 10;
+  z-index: var(--z-index-search);
 }
 
 /*
@@ -22,6 +22,12 @@
   z-index: -1;
 }
 
+.search__close-button {
+  display: block;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
 
 .search__form {
   --padding-lateral: var(--viewport-xs-lateral-space);
@@ -61,20 +67,23 @@
 /*
  * Submit search button
  */
-.search__submit {
+.search__submit {
+  --distance-to-input: 5px;
+  --button-size: 40px;
   background-color: black;
-  border-radius: 50%;
+  border-radius: 999px;
   position: absolute;
-  right: 10px;
-  top: 50%;
-  bottom: 50%;
+  right: var(--distance-to-input);
+  top: var(--distance-to-input);
   color: white;
+  height: var(--button-size);
+  width: var(--button-size);
 }
 
 /*
  * This element exist as a relative point for placing the button in absolute.
  */
-.search__input-wrapper {
+.search__input-wrapper {
   position: relative;
   margin: 0 auto;
 }
@@ -89,28 +98,19 @@
 }
 
 @media screen and (min-width: 768px) {
-  .search__form {
+  .search__form {
     /*
      * Space to be below the top bar
      */
-     --distance-from-top-of-viewport: 100px;
   }
 
   .search__form-inner {
     --padding-lateral: var(--viewport-sm-lateral-space);
-    
   }
 }
 
 
 @media screen and (min-width: 1024px) {
-  .search__form {
-    /*
-    * Space to be below the top bar
-    */
-    padding-top: 125px;
-  }
-
   .search__form-inner {
     --padding-lateral: var(--viewport-md-lateral-space);
     margin: 0 auto;
