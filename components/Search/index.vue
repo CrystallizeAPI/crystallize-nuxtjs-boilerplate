@@ -72,7 +72,9 @@ export default {
       }
     },
     handleSubmit: function (event) {
-      alert("search has been submitted! :)");
+      alert(
+        "The form has been submitted. Still need to implement the SERVICE API :)"
+      );
     },
     closeSearch: function (event) {
       this.toggleSearch();
