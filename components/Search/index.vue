@@ -10,12 +10,19 @@
       iconSrc="/icons/search.svg"
       @click="this.toggleSearch"
     />
-    <div v-if="isSearchViewOpened" class="search__view">
+    <div
+      class="search__view"
+      :class="isSearchViewOpened ? 'search__view--opened' : ''"
+    >
       <!--
         We use aria-hidden to avoid screen readers to read content
         that is only for persentational purposes.
       -->
-      <div class="search__overlay" aria-hidden="true" />
+      <div
+        v-if="isSearchViewOpened"
+        class="search__overlay"
+        aria-hidden="true"
+      />
       <div class="search__close-button">
         <CloseButton
           @click="this.toggleSearch"
@@ -24,14 +31,15 @@
       </div>
       <form
         class="search__form"
-        v-on:submit.prevent="handleSubmit"
+        v-on:submit="this.handleSubmit"
         aria-label="search"
         role="search"
       >
         <div class="search__form-inner">
-          <label class="search__label">Find things</label>
+          <label class="search__label" for="site-search">Find things</label>
           <div class="search__input-wrapper">
             <input
+              id="site-search"
               class="search__input"
               type="search"
               placeholder="Find things"
@@ -52,11 +60,12 @@ export default {
     };
   },
   methods: {
-    toggleSearch: function (e) {
+    toggleSearch: function (event) {
       const isOpen = !this.isSearchViewOpened;
       this.isSearchViewOpened = isOpen;
     },
-    handleSubmit: function (e) {
+    handleSubmit: function (event) {
+      e.preventDefault();
       alert("im being submitted");
     },
   },
