@@ -31,7 +31,7 @@
       </div>
       <form
         class="search__form"
-        v-on:submit="this.handleSubmit"
+        v-on:submit.prevent="handleSubmit"
         aria-label="search"
         role="search"
       >
@@ -40,9 +40,13 @@
           <div class="search__input-wrapper">
             <input
               id="site-search"
+              ref="search__input"
               class="search__input"
               type="search"
               placeholder="Find things"
+              v-on:keyup.esc="closeSearch"
+              v-on:keyup.enter="handleSubmit"
+              tabindex="0"
             />
             <button class="search__submit" aria-label="submit search">➔</button>
           </div>
@@ -63,10 +67,15 @@ export default {
     toggleSearch: function (event) {
       const isOpen = !this.isSearchViewOpened;
       this.isSearchViewOpened = isOpen;
+      if (isOpen) {
+        this.$refs.search__input.focus();
+      }
     },
     handleSubmit: function (event) {
-      e.preventDefault();
-      alert("im being submitted");
+      alert("search has been submitted! :)");
+    },
+    closeSearch: function (event) {
+      this.toggleSearch();
     },
   },
 };
