@@ -15,15 +15,24 @@
       </template>
     </PageHeader>
     <div class="folder__content">
-      <CrystallizeGrid v-if="grid" :grid="grid" />
-      <!-- <CrystallizeCatalogueItems
-        v-else-if="folder.children"
-        :items="folder.children"
-      /> -->
       <CrystallizeComponents :components="[body]" />
+      <CrystallizeGrid v-if="grid" :grid="grid" />
       <CrystallizeStackable :stacks="stackableContent" />
 
-      <!-- @TODO: Add List -->
+      <ul v-if="nonFolderItems" class="folder-page__list">
+        <li
+          v-for="item in nonFolderItems"
+          class="folder-page__list-item"
+          :class="`folder-page__list-item--${item.type}`"
+        >
+          <ListFormat :data="item" />
+        </li>
+      </ul>
+
+      <!-- <CrystallizeCatalogueItems
+        v-if="nonFolderItems"
+        :items="nonFolderItems"
+      /> -->
     </div>
   </FetchLoader>
 </template>
@@ -50,6 +59,7 @@ export default {
       grid: null,
       body: null,
       stackableContent: null,
+      nonFolderItems: null,
     };
   },
   async fetch() {
@@ -69,7 +79,7 @@ export default {
 
     const { folder } = response.data;
     this.folder = folder;
-    const { components } = folder;
+    const { children, components } = folder;
 
     this.title = getFolderTitle(folder);
     this.subFolders = getFolderSubFolders(folder) || null;
@@ -84,6 +94,7 @@ export default {
       this.body = getFolderBody(folder) || [];
       this.grid = getFolderGrids(folder);
       this.stackableContent = getFolderStackableContent(folder);
+      this.nonFolderItems = children.filter((c) => c.type !== "folder");
     }
   },
   head() {
