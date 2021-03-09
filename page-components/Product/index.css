@@ -1,7 +1,11 @@
 .product-page {
+  --distance-to-related-content: 100px;
   --lateral-padding: var(--viewport-xs-lateral-space);
   padding-left: var(--lateral-padding);
   padding-right: var(--lateral-padding);
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 100px;
 }
 
 .product-page__title {
@@ -41,6 +45,10 @@
   padding: 20px 0;
 }
 
+.product-page__related-content {
+  margin-top: var(--distance-to-related-content);
+}
+
 @media screen and (min-width: 768px) {
   .product-page {
     --lateral-padding: var(--viewport-sm-lateral-space);
@@ -48,8 +56,8 @@
   
   .product-page__inner {
     display: grid;
-    grid-template-columns: repeat(12,1fr);
     column-gap: 15px;
+    grid-template-columns: repeat(12,1fr);
     grid-template-areas: 'content content content content content content  . header header header header header';
   }
 

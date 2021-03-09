@@ -43,7 +43,14 @@
         </div>
       </div>
 
-      <aside>asdasdas</aside>
+      <aside class="product-page__related-content">
+        <Collection
+          v-if="relatedProducts"
+          title="You might also be interested in"
+        >
+          <CrystallizeCatalogueItems :items="relatedProducts" />
+        </Collection>
+      </aside>
     </main>
   </FetchLoader>
 </template>
@@ -59,6 +66,7 @@ import {
   isSumaryComponent,
   isDescriptionComponent,
   isSpecsComponent,
+  isRelatedProductsComponent,
   COMPONENT_NAMES_TO_EXTRACT_FROM_COMPONENTS,
 } from "./utils";
 
@@ -78,6 +86,7 @@ export default {
       topics: null,
       selectedVariant: null,
       specs: null,
+      relatedProducts: null,
     };
   },
   async fetch() {
@@ -124,6 +133,9 @@ export default {
       );
       this.selectedVariant = variants.find((v) => v.isDefault);
       this.images = this.selectedVariant.images;
+      this.relatedProducts = components.find(
+        isRelatedProductsComponent
+      )?.content?.items;
     }
   },
   head() {
