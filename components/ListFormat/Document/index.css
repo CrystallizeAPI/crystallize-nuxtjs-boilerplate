@@ -34,11 +34,12 @@
   height: 50%;
   justify-content: flex-end;
   left: 0px;
+  padding-bottom: 2rem;
   padding-left: 1rem;
   padding-right: 1rem;
-  padding-bottom: 2rem;
   position: absolute;
   width: 100%;
+  z-index: 1;
 }
 
 .list-format-document__title {

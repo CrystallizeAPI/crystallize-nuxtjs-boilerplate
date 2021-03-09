@@ -33,6 +33,10 @@
   text-decoration: none;
 }
 
+.list-format-product__info {
+  z-index: 1;
+}
+
 .list-format-product__title {
   font-size: var(--font-size-s);
   color: var(--color-text-main);
