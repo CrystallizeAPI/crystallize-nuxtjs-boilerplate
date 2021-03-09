@@ -47,7 +47,7 @@
 <script>
 import toText from "@crystallize/content-transformer/toText";
 import { getProductData } from "./get-product-data";
-import VariantSelector from "./variant-selector";
+import VariantSelector from "./VariantSelector/index";
 import Price from "./price/index";
 import BuyButton from "./buy/index";
 import {
