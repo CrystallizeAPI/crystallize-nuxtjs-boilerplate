@@ -1,0 +1,18 @@
+.document__stock {
+  align-items: center;
+  display: flex;
+  font-size: var(--font-size-s);
+  font-weight: 600;
+  margin-top: 50px;
+}
+
+.document__stock-icon {
+  margin-right: 10px;
+}
+
+.document__stock-color-indicator {
+  border-radius: 50%;
+  height: 10px;
+  margin-left: 10px;
+  width: 10px;
+}

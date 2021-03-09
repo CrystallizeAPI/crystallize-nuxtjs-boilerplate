@@ -19,8 +19,8 @@
           <div class="product-page__pricing-details">
             <Price :variant="selectedVariant" />
             <BuyButton />
-            <!-- @todo: add stock -->
           </div>
+          <Stock v-if="selectedVariant" :stock="selectedVariant.stock" />
         </div>
       </header>
 
@@ -50,6 +50,7 @@ import { getProductData } from "./get-product-data";
 import VariantSelector from "./VariantSelector/index";
 import Price from "./price/index";
 import BuyButton from "./buy/index";
+import Stock from "./stock/index";
 import {
   isSumaryComponent,
   isDescriptionComponent,
@@ -62,6 +63,7 @@ export default {
     VariantSelector,
     Price,
     BuyButton,
+    Stock,
   },
   data() {
     return {
