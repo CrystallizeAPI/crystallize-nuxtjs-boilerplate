@@ -53,7 +53,6 @@ export default {
       stockColor = STOCK_COLOR_INDICATOR.BEETWEN_ZERO_AND_LIMIT;
     }
 
-    console.log(stockColor);
     return {
       stockLimit: STOCK_LIMIT,
       stockColor,
