@@ -44,9 +44,12 @@
 @media screen and (min-width: 768px) {
   .product-page {
     --lateral-padding: var(--viewport-sm-lateral-space);
+  }
+  
+  .product-page__inner {
     display: grid;
     grid-template-columns: repeat(12,1fr);
-    column-gap: 30px;
+    column-gap: 15px;
     grid-template-areas: 'content content content content content content  . header header header header header';
   }
 
@@ -67,7 +70,6 @@
 @media screen and (min-width: 1024px) {
   .product-page {
     --lateral-padding: var(--viewport-md-lateral-space);
-    column-gap: initial;
     max-width: var(--viewport-context-extended-max-width);
     /*
      * When automatic lateral margins are assigned to an element,
@@ -77,14 +79,19 @@
     margin-right: auto;
   }
 
+  .product-page__inner {
+    column-gap: 50px;
+    grid-template-areas: 'content content content content content content content header header header header header';
+  }
+
   /*
    * Styles for showing the price next to the buy button
    */
  .product-page__pricing-details {
-  margin-bottom: 0;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
+    margin-bottom: 0;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
  }
 
  /*
@@ -97,7 +104,8 @@
  }
 }
 
-@media screen and (min-width: 1200px) {
-  .product-page {
+@media screen and (min-width: 1600px) {
+  .product-page__inner {
+    column-gap: 100px;
   }
 }

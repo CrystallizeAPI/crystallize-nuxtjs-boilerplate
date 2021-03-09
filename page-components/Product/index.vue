@@ -1,45 +1,49 @@
 <template>
   <FetchLoader :state="$fetchState">
     <main class="product-page">
-      <!-- @todo: try to use the PageHeader component, had issues with the description -->
-      <header class="product-page__header">
-        <div class="product-page__header-inner">
-          <h1 class="product-page__title">{{ product.name }}</h1>
+      <div class="product-page__inner">
+        <!-- @todo: try to use the PageHeader component, had issues with the description -->
+        <header class="product-page__header">
+          <div class="product-page__header-inner">
+            <h1 class="product-page__title">{{ product.name }}</h1>
 
-          <div class="product-page__summary">
-            <CrystallizeComponents :components="summary" />
+            <div class="product-page__summary">
+              <CrystallizeComponents :components="summary" />
+            </div>
+            <TopicsList v-if="topics" :data="topics" :isUnderlined="false" />
+            <!-- @todo: add images to the variant buttons -->
+            <VariantSelector
+              :selected-variant="selectedVariant"
+              :variants="product.variants"
+              @on-change="onSelectedVariantChange"
+            />
+            <div class="product-page__pricing-details">
+              <Price :variant="selectedVariant" />
+              <BuyButton />
+            </div>
+            <Stock v-if="selectedVariant" :stock="selectedVariant.stock" />
           </div>
-          <TopicsList v-if="topics" :data="topics" :isUnderlined="false" />
-          <!-- @todo: add images to the variant buttons -->
-          <VariantSelector
-            :selected-variant="selectedVariant"
-            :variants="product.variants"
-            @on-change="onSelectedVariantChange"
-          />
-          <div class="product-page__pricing-details">
-            <Price :variant="selectedVariant" />
-            <BuyButton />
-          </div>
-          <Stock v-if="selectedVariant" :stock="selectedVariant.stock" />
-        </div>
-      </header>
+        </header>
 
-      <!--
+        <!--
           The article component does overwrite styles in order to
           make the document/article look the same after using
           CrystallizeComponents
           -->
-      <div class="product-page__organic-content">
-        <div v-if="images" class="product-page__pre-article-images">
-          <CrystallizeComponentsImages :data="images" />
-        </div>
-        <Article>
-          <div class="product-page__specs">
-            <CrystallizeComponents :components="specs" />
+        <div class="product-page__organic-content">
+          <div v-if="images" class="product-page__pre-article-images">
+            <CrystallizeComponentsImages :data="images" />
           </div>
-          <CrystallizeComponents :components="components" />
-        </Article>
+          <Article>
+            <div class="product-page__specs">
+              <CrystallizeComponents :components="specs" />
+            </div>
+            <CrystallizeComponents :components="components" />
+          </Article>
+        </div>
       </div>
+
+      <aside>asdasdas</aside>
     </main>
   </FetchLoader>
 </template>
