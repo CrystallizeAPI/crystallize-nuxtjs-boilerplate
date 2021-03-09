@@ -14,6 +14,6 @@
 @media screen and (min-width: 1024px) {
   .home-page {
     --lateral-padding: var(--viewport-md-lateral-space);
-    max-width: var(--viewport-content-max-width);
+    max-width: var(--viewport-context-extended-max-width);
   }
 }

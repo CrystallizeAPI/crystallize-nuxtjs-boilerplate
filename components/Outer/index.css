@@ -1,6 +1,6 @@
 .outer {
   margin-bottom: 30px;
-  max-width: var(--viewport-content-max-width);
+  max-width: var(--viewport-context-extended-max-width);
   padding: 0 0;
   margin: 0 auto;
   display: block;

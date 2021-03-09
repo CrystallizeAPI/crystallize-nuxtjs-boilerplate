@@ -57,7 +57,7 @@
   
   .document__main {
     --padding-lateral: var(--viewport-md-lateral-space);
-    max-width: var(--viewport-content-max-width);
+    max-width: var(--viewport-context-extended-max-width);
     margin-left: auto;
     margin-right: auto;
     display: grid;
