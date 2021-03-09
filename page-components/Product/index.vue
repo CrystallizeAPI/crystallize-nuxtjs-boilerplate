@@ -141,7 +141,6 @@ export default {
   },
   methods: {
     onSelectedVariantChange(variant) {
-      console.log(variant);
       this.selectedVariant = variant;
       this.images = variant.images;
     },
