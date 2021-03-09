@@ -1,7 +1,7 @@
 <template>
   <button
-    :aria-label="`${value} ${attr.attribute}`"
-    @click="$emit('selectVariant', attr, value)"
+    :aria-label="`${value} ${attributeName}`"
+    @click="$emit('selectVariant', attributeName, value)"
     :class="dynamicButtonClasses"
   >
     <div>
@@ -24,8 +24,8 @@ export default {
       required: true,
       default: false,
     },
-    attr: {
-      type: Object,
+    attributeName: {
+      type: String,
       required: true,
     },
     value: {

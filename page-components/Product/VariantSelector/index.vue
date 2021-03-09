@@ -1,24 +1,24 @@
 <template>
   <div class="variant-selector">
     <div
-      v-for="attributeName in Object.keys(attrs)"
-      :key="attributeName.attribute"
+      v-for="attr in attributes"
+      :key="attr.attribute"
       class="variant-selector__attribute"
     >
-      <h4 class="variant-selector__title">{{ attributeName.attribute }}</h4>
+      <h4 class="variant-selector__title">{{ attr.attribute }}</h4>
       <div class="variant-selector__button-list">
         <VariantButton
-          v-for="value in attributeName.values"
+          v-for="value in attr.values"
           :key="value"
-          :isSelected="isSelectedVariant(attributeName, value)"
-          :attr="attributeName"
+          :isSelected="isSelectedAttributeValue(value, attr.attribute)"
+          :attributeName="attr.attribute"
           :value="value"
           @selectVariant="onAttributeSelect"
           :image="
             getVariantImage({
               variants,
               selectedVariant,
-              attributeName: attributeName.attribute,
+              attributeName: attr.attribute,
               value,
             })
           "
@@ -51,11 +51,11 @@ export default {
   },
   data() {
     return {
-      attrs: getAttributesFromVariants(this.variants),
+      attributes: getAttributesFromVariants(this.variants),
     };
   },
   methods: {
-    setVariant(variant) {
+    onVariantChange(variant) {
       this.$emit("on-change", variant);
     },
     isSelected(attr, value) {
@@ -81,17 +81,35 @@ export default {
       const [firstImage] = mostSuitableVariant?.images || [];
       return firstImage;
     },
-    isSelectedVariant: function (attr, value) {
-      console.log(this.isSelected(attr, value));
+    isSelectedAttributeValue: function (value, attributeName) {
+      return (
+        value ===
+        this.getSelectedAttributeFromSelectedVariant(
+          this.selectedVariant,
+          attributeName
+        )?.value
+      );
     },
-    onAttributeSelect: function (attribute, value) {
+    getSelectedAttributeFromSelectedVariant: function (
+      selectedVariant,
+      attributeName
+    ) {
+      return selectedVariant.attributes.find(
+        (a) => a.attribute === attributeName
+      );
+    },
+    onAttributeSelect: function (attributeName, value) {
       const selectedAttributes = attributesToObject(this.selectedVariant);
-      selectedAttributes[attribute] = value;
+      console.log({ selectedAttributes });
+      selectedAttributes[attributeName] = value;
+      console.log({ selectedAttributes });
 
       // Get the most suitable variant
       let variant = this.variants.find((variant) =>
         isEqual(selectedAttributes, attributesToObject(variant))
       );
+
+      console.log({ variant });
 
       /**
        * No variant matches all attributes. Let's select the first one
@@ -100,14 +118,12 @@ export default {
       if (!variant) {
         variant = this.variants.find((variant) =>
           variant.attributes.some(
-            (a) => a.attribute === attribute && a.value === value
+            (a) => a.attribute === attributeName && a.value === value
           )
         );
       }
 
-      if (variant) {
-        this.setVariant(attribute, value);
-      }
+      this.onVariantChange(variant);
     },
   },
 };
