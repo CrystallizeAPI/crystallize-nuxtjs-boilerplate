@@ -1,23 +1,22 @@
-.items {
-  display: block;
+.catalogue-items {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 1rem;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.item {
-  margin: 0 0 15px;
-  display: block;
+.catalogue-items__item {
+  margin: 0;
 }
 
 @media (min-width: 768px) {
-  .items {
-    display: grid;
+  .catalogue-items {
     grid-template-columns: repeat(16, 1fr);
-    gap: 1rem;
   }
 
-  .item {
+  .catalogue-items__item {
     grid-column-end: span 4;
     margin: 0;
   }

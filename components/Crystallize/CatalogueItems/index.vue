@@ -1,9 +1,7 @@
 <template>
-  <ul v-if="items" class="items">
-    <li v-for="item in items" :key="item.id" class="item">
-      <ListFormatProduct v-if="item.type === 'product'" :data="item" />
-      <ListFormatDocument v-else-if="item.type === 'document'" :data="item" />
-      <ListFormatFolder v-else-if="item.type === 'folder'" :data="item" />
+  <ul v-if="items" class="catalogue-items">
+    <li v-for="item in items" :key="item.id" class="catalogue-items__item">
+      <ListFormat :data="item" />
     </li>
   </ul>
 </template>
