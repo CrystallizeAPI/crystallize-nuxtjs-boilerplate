@@ -82,34 +82,25 @@ export default {
       return firstImage;
     },
     isSelectedAttributeValue: function (value, attributeName) {
-      return (
-        value ===
-        this.getSelectedAttributeFromSelectedVariant(
-          this.selectedVariant,
-          attributeName
-        )?.value
+      const selectedAttribute = this.getSelectedAttributeFromSelectedVariant(
+        attributeName
       );
+
+      return value === selectedAttribute?.value;
     },
-    getSelectedAttributeFromSelectedVariant: function (
-      selectedVariant,
-      attributeName
-    ) {
-      return selectedVariant.attributes.find(
+    getSelectedAttributeFromSelectedVariant: function (attributeName) {
+      return this.selectedVariant.attributes.find(
         (a) => a.attribute === attributeName
       );
     },
     onAttributeSelect: function (attributeName, value) {
       const selectedAttributes = attributesToObject(this.selectedVariant);
-      console.log({ selectedAttributes });
       selectedAttributes[attributeName] = value;
-      console.log({ selectedAttributes });
 
       // Get the most suitable variant
       let variant = this.variants.find((variant) =>
         isEqual(selectedAttributes, attributesToObject(variant))
       );
-
-      console.log({ variant });
 
       /**
        * No variant matches all attributes. Let's select the first one

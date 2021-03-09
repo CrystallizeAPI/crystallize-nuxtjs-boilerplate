@@ -15,9 +15,7 @@
   border: none;
 }
 
-.variant-selector__button.variant-selector__button--is-selected {
-  background: #000;
-  color: white;
+.variant-selector__button.variant-selector__button--is-selected {
   border: 1px solid #000;
 }
 
