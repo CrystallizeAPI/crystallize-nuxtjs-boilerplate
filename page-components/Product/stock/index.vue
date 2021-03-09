@@ -26,6 +26,13 @@
 </template>
 
 <script>
+const STOCK_LIMIT = 20;
+const STOCK_COLOR_INDICATOR = {
+  NO_STOCK: "red",
+  ABOVE_LIMIT: "#DAF5CB",
+  BEETWEN_ZERO_AND_LIMIT: "#FFD23F",
+};
+
 export default {
   props: {
     stock: {
@@ -34,13 +41,6 @@ export default {
     },
   },
   data: function () {
-    const STOCK_LIMIT = 20;
-    const STOCK_COLOR_INDICATOR = {
-      NO_STOCK: "red",
-      ABOVE_LIMIT: "#DAF5CB",
-      BEETWEN_ZERO_AND_LIMIT: "#FFD23F",
-    };
-
     const hasStock = this.stock > 1;
     const hasMoreStockThanLimit = this.stock > STOCK_LIMIT;
 
