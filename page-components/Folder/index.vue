@@ -94,7 +94,7 @@ export default {
       this.body = getFolderBody(folder) || [];
       this.grid = getFolderGrids(folder);
       this.stackableContent = getFolderStackableContent(folder);
-      this.nonFolderItems = children.filter((c) => c.type !== "folder");
+      this.nonFolderItems = children?.filter((c) => c.type !== "folder");
     }
   },
   head() {
