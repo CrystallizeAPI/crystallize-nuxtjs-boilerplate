@@ -92,7 +92,7 @@ export default {
       headerDescription: null,
       publishedAtHumanReadable: null,
       publishedAtDateISO: null,
-      images: [],
+      images: null,
       topics: [],
       body: null,
       featuredItems: [],
