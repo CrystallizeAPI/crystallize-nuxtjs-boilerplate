@@ -9,6 +9,7 @@
         />
 
         <CrystallizeComponentsImages
+          v-if="paragraph.images"
           :data="paragraph.images"
           class="paragraphs-media"
         />

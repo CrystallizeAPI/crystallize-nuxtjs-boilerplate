@@ -14,7 +14,7 @@
         :data="component.content"
       />
       <CrystallizeComponentsImages
-        v-else-if="component.type === 'images'"
+        v-else-if="component.type === 'images' && component.content.images"
         :data="component.content.images"
       />
       <CrystallizeComponentsVideos
