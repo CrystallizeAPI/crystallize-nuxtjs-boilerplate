@@ -1,7 +1,7 @@
 import { QUERY_FOLDER } from './query'
 import { simplyFetchFromGraph } from "../../lib/graph";
 
-export async function getFolderData({
+export async function getData({
   query = QUERY_FOLDER,
   asPath,
   language

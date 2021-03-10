@@ -1,7 +1,7 @@
 import { simplyFetchFromGraph } from "../../lib/graph";
 import { QUERY_PRODUCT } from "./query";
 
-export async function getProductData({
+export async function getData({
   query = QUERY_PRODUCT,
   asPath,
   language

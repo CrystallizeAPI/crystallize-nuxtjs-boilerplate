@@ -39,7 +39,7 @@
 
 <script>
 import toText from "@crystallize/content-transformer/toText";
-import { getFolderData } from "./get-folder-data";
+import { getData as getFolderData } from "./get-data";
 import {
   getFolderTitle,
   getFolderDescription,

@@ -73,7 +73,7 @@
 
 <script>
 import toText from "@crystallize/content-transformer/toText";
-import { getData as getDocumentData } from "./get-document-data";
+import { getData as getDocumentData } from "./get-data";
 import {
   getDocumentTitle,
   getHumanReadableDate,
