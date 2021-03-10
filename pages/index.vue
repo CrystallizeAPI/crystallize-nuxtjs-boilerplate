@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { getFolderData } from "../page-components/Folder/get-folder-data";
+import { getData as getFolderData } from "../page-components/Folder/get-data";
 import {
   getFolderGrids,
   getFolderStackableContent,
