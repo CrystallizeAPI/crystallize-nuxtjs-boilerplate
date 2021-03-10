@@ -39,36 +39,38 @@
         </PageHeader>
       </Container>
 
-      <main class="document__main">
-        <div>
-          <div v-if="images" class="document__pre-article-images">
-            <CrystallizeComponentsImages :data="images.content.images" />
-          </div>
-          <!--
+      <Container>
+        <main class="document__main">
+          <div>
+            <div v-if="images" class="document__pre-article-images">
+              <CrystallizeComponentsImages :data="images.content.images" />
+            </div>
+            <!--
             The article component does overwrite styles in order to
             make the document/article look the same after using
             CrystallizeComponents
             -->
-          <Article>
-            <CrystallizeComponents :components="[body]" />
-          </Article>
-        </div>
+            <Article>
+              <CrystallizeComponents :components="[body]" />
+            </Article>
+          </div>
 
-        <div>
-          <Aside
-            v-if="featuredItems"
-            :title="Featured"
-            :items="featuredItems"
-            :isSticky="!relatedItems"
-          />
-          <Aside
-            v-if="relatedItems"
-            :title="Related"
-            :items="relatedItems"
-            :isSticky="true"
-          />
-        </div>
-      </main>
+          <div>
+            <Aside
+              v-if="featuredItems"
+              :title="Featured"
+              :items="featuredItems"
+              :isSticky="!relatedItems"
+            />
+            <Aside
+              v-if="relatedItems"
+              :title="Related"
+              :items="relatedItems"
+              :isSticky="true"
+            />
+          </div>
+        </main>
+      </Container>
     </FetchLoader>
   </div>
 </template>
