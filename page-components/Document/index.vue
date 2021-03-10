@@ -1,41 +1,43 @@
 <template>
   <div class="document">
     <FetchLoader :state="$fetchState">
-      <PageHeader :title="title" :description="headerDescription">
-        <template v-slot:preHeader>
-          <div class="document__header-pretitle">
-            <TopicsList v-if="topics" :data="topics" :isUnderlined="true" />
-            <time
-              v-if="publishedAtHumanReadable"
-              :dateTime="publishedAtDateISO"
-              class="document__published-at"
-            >
-              {{ publishedAtHumanReadable }}
-            </time>
-          </div>
-        </template>
+      <Container>
+        <PageHeader :title="title" :description="headerDescription">
+          <template v-slot:preHeader>
+            <div class="document__header-pretitle">
+              <TopicsList v-if="topics" :data="topics" :isUnderlined="true" />
+              <time
+                v-if="publishedAtHumanReadable"
+                :dateTime="publishedAtDateISO"
+                class="document__published-at"
+              >
+                {{ publishedAtHumanReadable }}
+              </time>
+            </div>
+          </template>
 
-        <template v-slot:postHeader>
-          <div class="document__socials">
-            <IconButton
-              screenReaderText="share on Twitter"
-              iconSrc="/icons/twitter.svg"
-            />
-            <IconButton
-              screenReaderText="share on Facebok"
-              iconSrc="/icons/facebook.svg"
-            />
-            <IconButton
-              screenReaderText="share on Pinterest"
-              iconSrc="/icons/pinterest.svg"
-            />
-            <IconButton
-              screenReaderText="share on Linkedin"
-              iconSrc="/icons/linkedin.svg"
-            />
-          </div>
-        </template>
-      </PageHeader>
+          <template v-slot:postHeader>
+            <div class="document__socials">
+              <IconButton
+                screenReaderText="share on Twitter"
+                iconSrc="/icons/twitter.svg"
+              />
+              <IconButton
+                screenReaderText="share on Facebok"
+                iconSrc="/icons/facebook.svg"
+              />
+              <IconButton
+                screenReaderText="share on Pinterest"
+                iconSrc="/icons/pinterest.svg"
+              />
+              <IconButton
+                screenReaderText="share on Linkedin"
+                iconSrc="/icons/linkedin.svg"
+              />
+            </div>
+          </template>
+        </PageHeader>
+      </Container>
 
       <main class="document__main">
         <div>

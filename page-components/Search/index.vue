@@ -1,6 +1,9 @@
 <template>
   <FetchLoader :state="$fetchState">
-    <PageHeader :title="title" :description="headerDescription" />
+    <Container>
+      <PageHeader :title="title" :description="headerDescription" />
+      <CrystallizeCatalogueItems v-if="items" :items="items" />
+    </Container>
   </FetchLoader>
 </template>
 
@@ -8,15 +11,17 @@
 import toText from "@crystallize/content-transformer/toText";
 import { getData as getSearchData } from "./get-data";
 import { urlToSpec } from "../../lib/search";
+import { getSearchTitle } from "./utils";
 
 export default {
   data() {
     return {
       title: null,
       headerDescription: null,
+      items: null,
+      catalogue: null,
       stacks: null,
       spec: null,
-      data: null,
       totalResults: null,
     };
   },
@@ -32,15 +37,21 @@ export default {
       language: locale.crystallizeCatalogueLanguage,
       searchSpec: { type: "PRODUCT", ...urlToSpec({ asPath }, locale) },
     });
-    console.log({ search, catalogue, language });
 
-    /**
-     * As default, we get EVERYTHING for this folder
-     * You probably want to cherry pick the fields in
-     * the query here to improve performance
-     */
-    this.title = "harcoded title for search";
-    this.subFolders = null;
+    this.data = search;
+    this.title = getSearchTitle(catalogue);
+    this.items = this.data.search.edges.map((edge) => edge.node);
+
+    if (catalogue && catalogue.searchPage) {
+      const description = catalogue.components?.find((c) => c.name === "Brief");
+      const stacks = catalogue.searchPage.components?.find(
+        (c) => c.name === "Stackable content"
+      )?.content?.items;
+
+      this.metaDescription = toText(description.content.json);
+      this.headerDescription = description.content.json;
+      this.stacks = stacks;
+    }
   },
   head() {
     if (!this.metaDescription) {
@@ -48,7 +59,7 @@ export default {
     }
 
     return {
-      title: "harcoded title for search",
+      title: getSearchTitle(this.catalogue),
       meta: [
         {
           hid: "description",

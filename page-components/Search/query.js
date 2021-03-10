@@ -1,4 +1,4 @@
-import fragments from '../../lib/graph/fragments';
+import fragments from '/lib/graph/fragments';
 
 export const SEARCH_PAGE_QUERY = `
   query SEARCH_PAGE($language: String!, $path: String, $version: VersionLabel!) {

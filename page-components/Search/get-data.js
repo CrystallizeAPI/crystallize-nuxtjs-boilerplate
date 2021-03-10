@@ -1,5 +1,5 @@
 import { simplyFetchFromSearchGraph, simplyFetchFromGraph } from "../../lib/graph";
-import { CATALOGUE_SEARCH_QUERY } from '../../lib/search';
+import { CATALOGUE_SEARCH_QUERY } from '/lib/search';
 import { SEARCH_PAGE_QUERY } from './query'
 
 function cleanFilterForTotalAggregations(filter) {
@@ -12,7 +12,6 @@ function cleanFilterForTotalAggregations(filter) {
 }
 
 export async function getData({ asPath, preview, language, searchSpec }) {
-  console.log({ CATALOGUE_SEARCH_QUERY })
   const [searchQueryResponse, catalogueQueryResponse] = await Promise.all([
     simplyFetchFromSearchGraph({
       query: CATALOGUE_SEARCH_QUERY,
