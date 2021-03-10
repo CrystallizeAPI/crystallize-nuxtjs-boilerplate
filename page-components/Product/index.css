@@ -1,8 +1,5 @@
 .product-page {
   --distance-to-related-content: 100px;
-  --lateral-padding: var(--viewport-xs-lateral-space);
-  padding-left: var(--lateral-padding);
-  padding-right: var(--lateral-padding);
   display: grid;
   grid-template-columns: 1fr;
   row-gap: 100px;
@@ -50,10 +47,6 @@
 }
 
 @media screen and (min-width: 768px) {
-  .product-page {
-    --lateral-padding: var(--viewport-sm-lateral-space);
-  }
-  
   .product-page__inner {
     display: grid;
     column-gap: 15px;
@@ -76,17 +69,6 @@
 }
 
 @media screen and (min-width: 1024px) {
-  .product-page {
-    --lateral-padding: var(--viewport-md-lateral-space);
-    max-width: var(--viewport-context-extended-max-width);
-    /*
-     * When automatic lateral margins are assigned to an element,
-     * this one is centered on its container.
-     */
-    margin-left: auto;
-    margin-right: auto;
-  }
-
   .product-page__inner {
     column-gap: 50px;
     grid-template-areas: 'content content content content content content content header header header header header';
