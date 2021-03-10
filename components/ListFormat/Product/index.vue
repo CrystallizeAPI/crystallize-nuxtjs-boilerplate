@@ -38,7 +38,10 @@ export default {
     const d = this.data;
     const c = d.components || [];
     const defaultVariant =
-      this.data.matchingVariant || findDefaultVariant(d.variants) || {};
+      this.data.defaultVariant ||
+      this.data.matchingVariant ||
+      findDefaultVariant(d.variants) ||
+      {};
 
     return {
       description: c.find((c) => c.type === "richText")?.content?.json,

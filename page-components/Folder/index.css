@@ -9,13 +9,6 @@
   margin-right: var(--subfolder-list-elements-distance);
 }
 
-.folder__content {
-  --lateral-padding: var(--viewport-xs-lateral-space);
-  margin: 0 auto;
-  padding-left: var(--lateral-padding);
-  padding-right: var(--lateral-padding);
-}
-
 .folder-page__list {
   display: grid;
   grid-template-columns: 1fr;
@@ -51,19 +44,8 @@
     flex-wrap: wrap;
   }
   
-  .folder__content {
-    --lateral-padding: var(--viewport-sm-lateral-space);
-  }
-
   .folder-page__list {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-auto-rows: minmax(300px, auto);
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  .folder__content {
-    --lateral-padding: var(--viewport-md-lateral-space);
-    max-width: var(--viewport-context-extended-max-width);
   }
 }

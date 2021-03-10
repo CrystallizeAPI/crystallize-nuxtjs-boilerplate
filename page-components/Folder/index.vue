@@ -1,20 +1,22 @@
 <template>
   <FetchLoader :state="$fetchState">
-    <PageHeader :title="title" :description="headerDescription">
-      <template v-slot:postHeader>
-        <div v-if="subFolders" class="folder__subfolder-list">
-          <NuxtLink
-            v-for="subFolder in subFolders"
-            :to="subFolder.path"
-            :key="subFolder.name"
-            style="display: flex"
-          >
-            <Tag>{{ subFolder.name }}</Tag>
-          </NuxtLink>
-        </div>
-      </template>
-    </PageHeader>
-    <div class="folder__content">
+    <Container>
+      <PageHeader :title="title" :description="headerDescription">
+        <template v-slot:postHeader>
+          <div v-if="subFolders" class="folder__subfolder-list">
+            <NuxtLink
+              v-for="subFolder in subFolders"
+              :to="subFolder.path"
+              :key="subFolder.name"
+              style="display: flex"
+            >
+              <Tag>{{ subFolder.name }}</Tag>
+            </NuxtLink>
+          </div>
+        </template>
+      </PageHeader>
+    </Container>
+    <Container>
       <CrystallizeComponents :components="[body]" />
       <CrystallizeGrid v-if="grid" :grid="grid" />
       <CrystallizeStackable :stacks="stackableContent" />
@@ -33,7 +35,7 @@
         v-if="nonFolderItems"
         :items="nonFolderItems"
       /> -->
-    </div>
+    </Container>
   </FetchLoader>
 </template>
 
