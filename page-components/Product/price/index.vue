@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import getRelativePriceVariants from "./getRelativePriceVariants";
+import { getRelativePriceVariants } from "/lib/pricing";
 export default {
   props: {
     variant: {

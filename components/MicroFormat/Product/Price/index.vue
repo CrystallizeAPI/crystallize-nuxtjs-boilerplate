@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import getRelativePriceVariants from "./getRelativePriceVariants";
+import { getRelativePriceVariants } from "../../../../lib/pricing";
 export default {
   props: {
     variant: {
@@ -51,7 +51,7 @@ export default {
   },
   methods: {
     getPriceVariant: function ({ variant, locale }) {
-      return variant.priceVariants.find(
+      return variant?.priceVariants?.find(
         (p) => p.identifier === locale.crystallizePriceVariant
       );
     },
