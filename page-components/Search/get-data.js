@@ -1,7 +1,21 @@
+import { simplyFetchFromSearchGraph, simplyFetchFromGraph } from "../../lib/graph";
+import { CATALOGUE_SEARCH_QUERY } from '../../lib/search';
+import { SEARCH_PAGE_QUERY } from './query'
+
+function cleanFilterForTotalAggregations(filter) {
+  const newFilter = filter
+
+  delete newFilter.productVariants.priceRange;
+  delete newFilter.productVariants.attributes;
+
+  return newFilter
+}
+
 export async function getData({ asPath, preview, language, searchSpec }) {
+  console.log({ CATALOGUE_SEARCH_QUERY })
   const [searchQueryResponse, catalogueQueryResponse] = await Promise.all([
     simplyFetchFromSearchGraph({
-      query: SEARCH_QUERY,
+      query: CATALOGUE_SEARCH_QUERY,
       variables: {
         ...searchSpec,
         aggregationsFilter: cleanFilterForTotalAggregations(searchSpec.filter)
@@ -9,7 +23,7 @@ export async function getData({ asPath, preview, language, searchSpec }) {
     }),
     asPath
       ? simplyFetchFromGraph({
-        query,
+        query: SEARCH_PAGE_QUERY,
         variables: {
           path: asPath,
           language,
