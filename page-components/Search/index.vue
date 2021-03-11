@@ -56,8 +56,10 @@ export default {
         (c) => c.name === "Stackable content"
       )?.content?.items;
 
-      this.metaDescription = toText(description.content.json);
-      this.headerDescription = description.content.json;
+      if (description) {
+        this.metaDescription = toText(description.content.json);
+        this.headerDescription = description.content.json;
+      }
       this.stacks = stacks;
     }
   },

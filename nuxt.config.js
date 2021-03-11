@@ -1,17 +1,41 @@
 import { getAllCatalogueItems } from "./lib/graph";
 
-function getComponentPathForRoute({ type }) {
+const RENDERS = {
+  product: {
+    path: 'page-components/Product/index.vue'
+  },
+  folder: {
+    path: 'page-components/Folder/index.vue'
+  },
+  document: {
+    path: 'page-components/Document/index.vue'
+  },
+  search: {
+    path: 'page-components/Search/index.vue'
+  },
+}
+
+function getComponentPathForRoute({ type, children }) {
+  if (children && childrenIsMostlyProducts(children)) {
+    return RENDERS.search.path;
+  }
+
   switch (type) {
     case "product": {
-      return "page-components/Product/index.vue";
+      return RENDERS.product.path;
     }
     case "document": {
-      return "page-components/Document/index.vue";
+      return RENDERS.document.path;
     }
     default: {
-      return "page-components/Folder/index.vue";
+      return RENDERS.folder.path;
     }
   }
+}
+
+function childrenIsMostlyProducts(children) {
+  const productsCount = children?.filter((c) => c.type === 'product').length;
+  return productsCount > children.length / 2;
 }
 
 import appConfig from "./app.config.json";
@@ -56,7 +80,7 @@ export default {
           routes.push({
             name: path,
             path,
-            component: resolve(__dirname, getComponentPathForRoute({ type })),
+            component: resolve(__dirname, getComponentPathForRoute({ type, children })),
           });
         }
         if (children) {
