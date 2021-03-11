@@ -2,7 +2,9 @@
   <FetchLoader :state="$fetchState">
     <Container>
       <PageHeader :title="title" :description="headerDescription" />
-      <CrystallizeCatalogueItems v-if="items" :items="items" />
+      <main>
+        <CrystallizeCatalogueItems v-if="items" :items="items" />
+      </main>
     </Container>
   </FetchLoader>
 </template>
