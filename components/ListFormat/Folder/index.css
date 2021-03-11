@@ -14,6 +14,7 @@
    * and sliders that have different heights.
    */
   height: 100%;
+  justify-content: center;
   min-height: var(--grid-row-height);
   padding: 1em 1.5em;
 }
