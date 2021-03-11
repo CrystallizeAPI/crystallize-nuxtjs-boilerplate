@@ -1,8 +1,11 @@
 <template>
   <FetchLoader :state="$fetchState">
-    <Container>
+    <Container class="search-page">
       <PageHeader :title="title" :description="headerDescription" />
       <main>
+        <span v-if="items" class="search-page__counter">
+          Found {{ items.length }} matching results
+        </span>
         <CrystallizeCatalogueItems v-if="items" :items="items" />
       </main>
     </Container>
@@ -31,13 +34,16 @@ export default {
     const { route } = this.$nuxt.context;
     const { locales, locale: code } = this.$i18n;
     const locale = locales.find((l) => l.locale === code) || locales[0];
-
     const asPath = route.path;
-    const { search, catalogue, language } = await getSearchData({
+    const {
+      query: { catalogue: catalogueFromQuery, ...rest },
+    } = route;
+
+    const { search, catalogue } = await getSearchData({
       asPath,
       preview: null,
       language: locale.crystallizeCatalogueLanguage,
-      searchSpec: { type: "PRODUCT", ...urlToSpec({ asPath }, locale) },
+      searchSpec: { ...urlToSpec({ query: rest, asPath }, locale) },
     });
 
     this.data = search;

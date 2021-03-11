@@ -2,22 +2,26 @@ import { simplyFetchFromSearchGraph, simplyFetchFromGraph } from "../../lib/grap
 import { CATALOGUE_SEARCH_QUERY } from '/lib/search';
 import { SEARCH_PAGE_QUERY } from './query'
 
-function cleanFilterForTotalAggregations(filter) {
-  const newFilter = filter
-
-  delete newFilter.productVariants.priceRange;
-  delete newFilter.productVariants.attributes;
-
-  return newFilter
-}
-
-export async function getData({ asPath, preview, language, searchSpec }) {
+export async function getData({
+  asPath,
+  preview,
+  language,
+  searchSpec,
+  aggregationsFilter
+}) {
+  console.log({
+    ...searchSpec,
+    aggregationsFilter
+  })
   const [searchQueryResponse, catalogueQueryResponse] = await Promise.all([
     simplyFetchFromSearchGraph({
       query: CATALOGUE_SEARCH_QUERY,
       variables: {
-        ...searchSpec,
-        aggregationsFilter: cleanFilterForTotalAggregations(searchSpec.filter)
+        first: searchSpec.first,
+        orderBy: searchSpec.orderBy,
+        filter: searchSpec.filter,
+        include: searchSpec.include,
+        language: language,
       }
     }),
     asPath
