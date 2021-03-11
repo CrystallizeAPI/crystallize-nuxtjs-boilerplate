@@ -76,6 +76,15 @@
   --screen-md: 1280px;
   --screen-sm: 1024px;
   --screen-xs: 767px;
+
+  /*
+   * Product listformat
+   */
+  --listformat-product-height-xl: 500px;
+  --listformat-product-height-lg: 580px;
+  --listformat-product-height-md: 500px;
+  --listformat-product-height-sm: 600px;
+  --listformat-product-height-xs: 400px;
 }
 
 html {
