@@ -51,25 +51,22 @@
 }
 
 .search__form {
-  --padding-lateral: var(--viewport-xs-lateral-space);
   --search-input-lateral-padding: 35px;
   --distance-from-top-of-viewport: 75px;
   padding-top: var(--distance-from-top-of-viewport);
   padding-bottom: 1rem;
   background-color: white;
   min-height: 200px;
-  padding-left: var(--padding-lateral);
-  padding-right: var(--padding-lateral);
 }
 
 /*
- * Container to give some inner spacing
- */
+* Container to give some inner spacing
+*/
 .search__form-inner {
   padding-top: 2rem;
   padding-bottom: 1rem;
-  border-top: 1px solid var(--color-box-background);
   max-width: var(--viewport-context-extended-max-width);
+  border-top: 1px solid var(--color-box-background);
 }
 
 /*
@@ -114,17 +111,16 @@
   border: 1px solid var(--color-text-sub);
   font-size: var(--font-size-m);
   outline: none;
-  padding: 12px var(--search-input-lateral-padding);
+  /*
+   * We make the padding-right the double, because when using a
+   * input[role='search'], an x is added to clear the search term,
+   * and we make that be visible and not to be covered by the submit button
+   */
+  padding: 12px calc(var(--search-input-lateral-padding) * 1.75) 12px var(--search-input-lateral-padding);
   width: 100%;
 }
 
 @media screen and (min-width: 768px) {
-  .search__form {
-    /*
-     * Space to be below the top bar
-     */
-  }
-
   .search__form-inner {
     --padding-lateral: var(--viewport-sm-lateral-space);
   }
@@ -133,7 +129,6 @@
 
 @media screen and (min-width: 1024px) {
   .search__form-inner {
-    --padding-lateral: var(--viewport-md-lateral-space);
     margin: 0 auto;
     max-width: 600px;
   }

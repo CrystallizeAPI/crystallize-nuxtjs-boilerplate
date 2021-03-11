@@ -12,14 +12,14 @@
     />
     <div
       class="search__view"
-      :class="isSearchViewOpened ? 'search__view--opened' : ''"
+      :class="isSearchFormVisible ? 'search__view--opened' : ''"
     >
       <!--
         We use aria-hidden to avoid screen readers to read content
         that is only for persentational purposes.
       -->
       <div
-        v-if="isSearchViewOpened"
+        v-if="isSearchFormVisible"
         class="search__overlay"
         aria-hidden="true"
       />
@@ -31,11 +31,11 @@
       </div>
       <form
         class="search__form"
-        v-on:submit.prevent="handleSubmit"
+        v-on:submit="onSearchSubmit"
         aria-label="search"
         role="search"
       >
-        <div class="search__form-inner">
+        <Container class="search__form-inner">
           <label class="search__label" for="site-search">Find things</label>
           <div class="search__input-wrapper">
             <input
@@ -44,40 +44,75 @@
               class="search__input"
               type="search"
               placeholder="Find things"
+              v-model="searchTerm"
               v-on:keyup.esc="closeSearch"
-              v-on:keyup.enter="handleSubmit"
               tabindex="0"
             />
             <button class="search__submit" aria-label="submit search">➔</button>
           </div>
-        </div>
+        </Container>
       </form>
     </div>
   </div>
 </template>
 
 <script>
+const SEARCH_STATUS = {
+  searching: "searching",
+  idle: "idle",
+  fetched: "fetched",
+};
 export default {
   data: function () {
     return {
-      isSearchViewOpened: false,
+      status: SEARCH_STATUS.idle,
+      searchTerm: "",
+      isSearchFormVisible: false,
     };
   },
   methods: {
-    toggleSearch: function (event) {
-      const isOpen = !this.isSearchViewOpened;
-      this.isSearchViewOpened = isOpen;
+    /*
+     * Toggle the Search form
+     */
+    toggleSearch: function () {
+      const isOpen = !this.isSearchFormVisible;
+      this.isSearchFormVisible = isOpen;
       if (isOpen) {
         this.$refs.search__input.focus();
       }
     },
-    handleSubmit: function (event) {
-      alert(
-        "The form has been submitted. Still need to implement the SERVICE API :)"
-      );
+    resetSearchTerm: function () {
+      this.searchTerm = "";
     },
-    closeSearch: function (event) {
+    closeSearch: function () {
       this.toggleSearch();
+    },
+    onSearchSubmit: function (e) {
+      e.preventDefault();
+      this.showSearchOnSearchPage();
+    },
+    showSearchOnSearchPage: function () {
+      if (this.searchTerm && this.searchTerm.length > 0) {
+        this.closeSearch();
+        /*
+         * We store the current searchTerm value to search for it later on.
+         */
+        const searchTerm = this.searchTerm;
+        /*
+         * We reset the searchTerm so the next time we open
+         * the search modal, the input will be clear.
+         */
+        this.resetSearchTerm();
+        this.$router.push({
+          path: "search",
+          query: { searchTerm },
+        });
+      }
+    },
+  },
+  watch: {
+    searchTerm: function (newSearchTerm) {
+      this.status = SEARCH_STATUS.searching;
     },
   },
 };
