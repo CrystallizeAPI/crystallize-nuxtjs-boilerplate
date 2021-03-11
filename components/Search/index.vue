@@ -81,30 +81,30 @@ export default {
         this.$refs.search__input.focus();
       }
     },
-    resetSearchTerm: function () {
-      this.searchTerm = "";
-    },
     closeSearch: function () {
       this.toggleSearch();
     },
+    resetSearchTerm: function () {
+      this.searchTerm = "";
+    },
     onSearchSubmit: function (e) {
       e.preventDefault();
-      this.showSearchOnSearchPage();
+      this.searchOnSearchPage({ term: this.searchTerm });
     },
-    showSearchOnSearchPage: function () {
-      if (this.searchTerm && this.searchTerm.length > 0) {
+    searchOnSearchPage: function ({ searchTerm }) {
+      if (searchTerm && searchTerm.length > 0) {
         this.closeSearch();
-        /*
-         * We store the current searchTerm value to search for it later on.
-         */
-        const searchTerm = this.searchTerm;
         /*
          * We reset the searchTerm so the next time we open
          * the search modal, the input will be clear.
+         *
+         * @TODO: if we are on currently on /search, the URL is updated but the lifecycle
+         * looks like it's not triggered because the data is not loaded according to
+         * the saerchTerm used in the latest search
          */
         this.resetSearchTerm();
         this.$router.push({
-          path: "search",
+          path: "/search",
           query: { searchTerm },
         });
       }
