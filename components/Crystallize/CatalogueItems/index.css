@@ -3,7 +3,7 @@
   display: grid;
   grid-auto-rows: var(--listformat-product-height-lg);
   column-gap: var(--column-gap);
-  grid-gap: calc(var(--column-gap) * 2);
+  row-gap: calc(var(--column-gap) * 2);
   grid-template-columns: 1fr;
   list-style: none;
 }
