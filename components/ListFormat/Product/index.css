@@ -45,6 +45,7 @@
 }
 
 .list-format-product__media {
+  height: 100%;
   margin-bottom: var(--distance-between-text-and-media);
 }
 

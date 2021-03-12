@@ -63,6 +63,9 @@ export default {
       this.stacks = stacks;
     }
   },
+  watch: {
+    
+  },
   head() {
     if (!this.metaDescription) {
       console.warn("this.metaDescription is missing for search");

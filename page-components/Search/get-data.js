@@ -9,10 +9,6 @@ export async function getData({
   searchSpec,
   aggregationsFilter
 }) {
-  console.log({
-    ...searchSpec,
-    aggregationsFilter
-  })
   const [searchQueryResponse, catalogueQueryResponse] = await Promise.all([
     simplyFetchFromSearchGraph({
       query: CATALOGUE_SEARCH_QUERY,
