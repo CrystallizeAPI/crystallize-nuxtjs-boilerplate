@@ -1,0 +1,91 @@
+.facets {}
+
+/* 
+ * Button that toggles the facets displayer
+ */
+button.facets__button {
+  --icon-size: 30px;
+  align-items: center;
+  appearance: none;
+  background-color: var(--color-background);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: var(--font-family-main);
+  font-size: var(--font-size-m);
+  font-weight: 600;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  display: inline-flex
+}
+
+button.facets__button img {
+  border: none;
+  width: var(--icon-size);
+  height: var(--icon-size);
+  margin-left: 0.5rem;
+}
+
+button.facets__button:hover {
+
+}
+
+.facets__displayer {
+  display: none;
+}
+
+.facets__displayer.facets__displayer--is-open {
+  display: block;
+}
+
+/*
+ * Button shown only on small resolutions
+ * that closes the facets full screen modal
+ */
+.facets__displayer-close {
+  bottom: 15px;
+  display: block;
+  position: fixed;
+  right: 15px;
+  z-index: 1;
+}
+
+.facets__displayer-close-butto {
+  font-size: var(--font-size-m);
+}
+
+@media screen and (max-width: 1023px) {
+  .facets__displayer {
+    background: #fff;
+    bottom: 0;
+    height: calc(var(--vh) * 100);
+    left: 0;
+    overflow-y: auto;
+    padding: 50px 15px 85px;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .facets__displayer {
+    display: none;
+    margin-top: 15px;
+   }
+
+  .facets__displayer.facets__displayer--is-open {
+    display: grid;
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+    padding: 0;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(2,1fr);
+  }
+
+  .facets__displayer-close {
+    display: none;
+  }
+}

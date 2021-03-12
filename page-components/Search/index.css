@@ -1,3 +1,10 @@
+.search-page__actions {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  position: relative;
+}
+
 .search-page__counter {
   color: #000;
   font-weight: 600;

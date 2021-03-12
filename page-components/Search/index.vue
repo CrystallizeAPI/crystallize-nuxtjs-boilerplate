@@ -3,7 +3,10 @@
     <Container class="search-page">
       <PageHeader :title="title" :description="headerDescription" />
       <main>
-        <span v-if="items" class="search-page__counter">
+        <div class="search-page__actions">
+          <Facets :totalResults="items.length" />
+        </div>
+        <span v-if="items.length > 0" class="search-page__counter">
           Found {{ items.length }} matching results
         </span>
         <CrystallizeCatalogueItems v-if="items" :items="items" />
@@ -19,11 +22,11 @@ import { urlToSpec } from "../../lib/search";
 import { getSearchTitle } from "./utils";
 
 export default {
-  data() {
+  data: function () {
     return {
       title: null,
       headerDescription: null,
-      items: null,
+      items: [],
       catalogue: null,
       stacks: null,
       spec: null,
@@ -63,9 +66,7 @@ export default {
       this.stacks = stacks;
     }
   },
-  watch: {
-    
-  },
+  watch: {},
   head() {
     if (!this.metaDescription) {
       console.warn("this.metaDescription is missing for search");
