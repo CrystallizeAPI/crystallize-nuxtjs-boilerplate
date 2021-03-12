@@ -39,6 +39,10 @@
           >
             <label class="search__label" for="site-search">Find things</label>
             <div class="search__input-wrapper">
+              <Spinner
+                v-if="status === 'searching'"
+                class="search__input-spinner"
+              />
               <input
                 id="site-search"
                 ref="search__input"
@@ -55,12 +59,13 @@
             </div>
           </form>
           <!-- sugestions from the form -->
-          <div class="search__suggestions" v-if="itemsRecommended">
+          <div class="search__suggestions" v-if="itemsSuggested">
             <h3 class="search__suggestions-title">suggestions</h3>
             <ul class="search__suggestions-list">
               <li
+                @click="handleClickOnSearchSuggestionItem"
                 class="search__suggestions-list-element"
-                v-for="edge in itemsRecommended"
+                v-for="edge in itemsSuggested"
               >
                 <NuxtLink
                   class="search__suggestions-list-element-link"
@@ -93,7 +98,7 @@ export default {
       status: SEARCH_STATUS.idle,
       searchTerm: "",
       isSearchFormVisible: false,
-      itemsRecommended: null,
+      itemsSuggested: null,
     };
   },
   methods: {
@@ -110,8 +115,16 @@ export default {
     closeSearch: function () {
       this.toggleSearch();
     },
-    resetSearchTerm: function () {
+    resetForm: function () {
       this.searchTerm = "";
+      this.deleteSearchSuggestions();
+    },
+    deleteSearchSuggestions: function () {
+      this.itemsSuggested = null;
+    },
+    handleClickOnSearchSuggestionItem: function () {
+      this.closeSearch();
+      this.resetForm();
     },
     onSearchSubmit: function (e) {
       e.preventDefault();
@@ -121,10 +134,10 @@ export default {
       if (searchTerm && searchTerm.length > 0) {
         this.closeSearch();
         /*
-         * We reset the searchTerm so the next time we open
+         * We reset the form so the next time we open
          * the search modal, the input will be clear.
          */
-        this.resetSearchTerm();
+        this.resetForm();
         if (this.$router.path === "/search") {
           /*
            * @TODO: if we are on currently on /search, the URL is updated but the lifecycle
@@ -143,7 +156,7 @@ export default {
         }
       }
     },
-    retrieveSearchRecommendations: async function ({ searchTerm }) {
+    retrieveSearchSuggestions: async function ({ searchTerm }) {
       const { locales, locale: code } = this.$i18n;
       const locale = locales.find((l) => l.locale === code) || locales[0];
       const language = locale.crystallizeCatalogueLanguage;
@@ -157,17 +170,24 @@ export default {
   },
   watch: {
     /*
-     * We don't need to get the new value of searchTerm as the paramter received by
+     * We don't need to get the new value of searchTerm as the parameter received by
      * by the function because we're using a model. Models are always updated,
      * but we use the watch as a way to know when it happens and execute side effects.
      */
     searchTerm: function () {
+      if (this.searchTerm === "") {
+        /*
+         * If the search term is empty, we remove the items reco
+         */
+        this.deleteSearchSuggestions();
+        return;
+      }
+
       this.status = SEARCH_STATUS.searching;
-      this.retrieveSearchRecommendations({ searchTerm: this.searchTerm }).then(
+      this.retrieveSearchSuggestions({ searchTerm: this.searchTerm }).then(
         ({ data }) => {
-          const itemsRecommended = data.search.edges;
-          this.itemsRecommended = itemsRecommended;
-          console.log(this.itemsRecommended);
+          const itemsSuggested = data.search.edges;
+          this.itemsSuggested = itemsSuggested;
           this.status = SEARCH_STATUS.fetched;
         }
       );
