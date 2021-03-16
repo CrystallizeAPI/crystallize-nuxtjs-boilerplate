@@ -1,4 +1,6 @@
-.facets {}
+.facets {
+  width: 100%;
+}
 
 /* 
  * Button that toggles the facets displayer
@@ -19,6 +21,9 @@ button.facets__button {
   display: inline-flex
 }
 
+/*
+ * Icon of the facets button
+ */
 button.facets__button img {
   border: none;
   width: var(--icon-size);
@@ -26,10 +31,9 @@ button.facets__button img {
   margin-left: 0.5rem;
 }
 
-button.facets__button:hover {
-
-}
-
+/*
+ * Displays the different facets in the viewport
+ */
 .facets__displayer {
   display: none;
 }
@@ -50,8 +54,8 @@ button.facets__button:hover {
   z-index: 1;
 }
 
-.facets__displayer-close-butto {
-  font-size: var(--font-size-m);
+.facets__displayer-close-button {
+  font-size: var(--font-size-s);
 }
 
 @media screen and (max-width: 1023px) {
