@@ -12,3 +12,16 @@
   margin-bottom: 10px;
   font-size: 1rem;
 }
+
+@media screen and (min-width: 768px) {
+  /*
+   * We force the element to be position absolute,
+   * so for resolutions wider than 768px when the facets
+   * are shown, they can fill up 100% of the viewport
+   */
+  .search-page__actions-right {
+    position: absolute;
+    right: 0;
+    top: 15px;
+  }
+}

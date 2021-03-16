@@ -5,6 +5,11 @@
       <main>
         <div class="search-page__actions">
           <Facets :totalResults="items.length" />
+          <OrderBy
+            class="search-page__actions-right"
+            orderBy="spec.orderBy"
+            @on-change="captureOnchange"
+          />
         </div>
         <span v-if="items.length > 0" class="search-page__counter">
           Found {{ items.length }} matching results
@@ -52,9 +57,12 @@ export default {
     this.data = search;
     this.title = getSearchTitle(catalogue);
     this.items = this.data.search.edges.map((edge) => edge.node);
+    this.spec = urlToSpec({ query: route.query, asPath }, locale);
 
     if (catalogue && catalogue.searchPage) {
-      const description = catalogue.components?.find((c) => c.name === "Brief");
+      const description = catalogue.searchPage.components?.find(
+        (c) => c.name === "Brief"
+      );
       const stacks = catalogue.searchPage.components?.find(
         (c) => c.name === "Stackable content"
       )?.content?.items;
@@ -66,7 +74,11 @@ export default {
       this.stacks = stacks;
     }
   },
-  watch: {},
+  methods: {
+    captureOnchange: function ({ value }) {
+      console.log(value);
+    },
+  },
   head() {
     if (!this.metaDescription) {
       console.warn("this.metaDescription is missing for search");
