@@ -1,0 +1,11 @@
+.facets__action {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 250ms;
+  cursor: pointer;
+}
+
+.facets__action:hover {
+  visibility: visible;
+  opacity: 1;
+}
