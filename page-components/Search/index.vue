@@ -275,16 +275,12 @@ export default {
         aggregationsFilter: cleanFilterForTotalAggregations(searchSpec.filter),
       });
 
-      const { ordeBy, filter } = urlToSpec(
-        { query: route.query, asPath },
-        locale
-      );
       this.items = search.search.edges.map((edge) => edge.node);
       const orderByActive = orderByOptions.find(
-        (option) => option.value === orderBy
+        (option) => option.value === searchSpec.orderBy
       );
       this.orderBy = orderByActive;
-      this.filter = filter;
+      this.filter = searchSpec.filter;
     },
   },
 };
