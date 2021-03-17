@@ -32,6 +32,9 @@ export async function getData({
       : {}
   ]);
 
+  /* 
+   * We haven't got any response from the Search API
+   */
   if (!searchQueryResponse.data) {
     return {
       search: null,
@@ -46,10 +49,7 @@ export async function getData({
   } = searchQueryResponse.data;
 
   return {
-    search: {
-      search,
-      aggregations
-    },
+    search: { search, aggregations },
     catalogue: catalogueQueryResponse.data || null,
     language
   };
