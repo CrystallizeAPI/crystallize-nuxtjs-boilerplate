@@ -30,13 +30,6 @@
 <script>
 import { orderByOptions } from "/lib/search";
 
-function getOrderByOptionByFieldAndDirection({ field, direction }) {
-  return orderByOptions.find((opt) => {
-    console.log({ opt, field, direction });
-    return opt.field === field && field.direction === direction;
-  });
-}
-
 export default {
   props: {
     orderBy: {
