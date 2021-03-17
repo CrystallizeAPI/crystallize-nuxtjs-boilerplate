@@ -108,9 +108,6 @@ export default {
       return queryWithoutRouteInfo;
     },
     handleChangeOrderBy: function ({ optionSelected }) {
-      const { route } = this.$nuxt.context;
-      const { path: asPath } = route;
-
       const currentQuery = this.getCurrentQuery();
       if (optionSelected.isDefault) {
         /*
@@ -120,17 +117,28 @@ export default {
          */
 
         const { orderby, ...restQuery } = currentQuery;
-        this.$router.replace({ path: asPath, query: restQuery });
+        this.updateSearchURLForQuery(restQuery);
         return;
       }
 
-      this.$router.replace({
-        path: asPath,
-        query: {
-          ...currentQuery,
-          orderby: optionSelected.value,
-        },
+      this.updateSearchURLForQuery({
+        ...currentQuery,
+        orderby: optionSelected.value,
       });
+    },
+    updateSearchURLForQuery: function (query = {}) {
+      const { catalogue, ...queryWithoutRouteInfo } = query;
+      /*
+       * We use URLSearchParams because it will deal with the codification
+       * and the query strings that have more than one value for a key.
+       */
+      const queryAsString =
+        new URLSearchParams(queryWithoutRouteInfo).toString() || "";
+      const { route } = this.$nuxt.context;
+      const { path } = route;
+      const newPath = queryAsString ? `?${queryAsString}` : path;
+
+      this.$router.replace({ path: newPath });
     },
     handleFacetAttributeChange: function ({ attribute, value, isChecked }) {
       // Create a copy of the attributes for inmutability purposes.
@@ -156,7 +164,6 @@ export default {
       // We remove the values that are empty arrays
       const newAttrsFiltered = attrs.filter(({ values }) => values.length > 0);
 
-      const { route } = this.$nuxt.context;
       const currentQuery = this.getCurrentQuery();
 
       // Check if the new query will need attributes
@@ -165,7 +172,7 @@ export default {
 
       if (!hasToIncludeAttributeInQuery) {
         const { attrs, queryWithoutAttr } = currentQuery;
-        this.$router.replace({ path: route.path, query: queryWithoutAttr });
+        this.updateSearchURLForQuery(queryWithoutAttr);
         return;
       }
 
@@ -179,29 +186,30 @@ export default {
        * character is not parsed. Even though it works, that's not the same
        * behavior as the NextJS boilerplate.
        */
-      this.$router.replace({
-        path: route.path,
-        query: { ...currentQuery, attrs: newQueryAttributes },
-      });
+      const newQuery = { ...currentQuery, attrs: newQueryAttributes };
+      this.updateSearchURLForQuery(newQuery);
     },
     /*
      * Reset a single facet
      */
     resetAttributeFacet: function ({ attribute }) {
-      const { route } = this.$nuxt.context;
+      /*
+       * @TODO: getCurrentQuery() is always one step behind because it
+       * uses the URL as source of truth. For most of the use cases it's
+       * not a problem, but when we want to reset a facet, it is because
+       * it has the old state.
+       */
       const currentQuery = this.getCurrentQuery();
       const {
         attrs: attributesInCurrentQuery,
         queryWithoutAttributes,
       } = currentQuery;
+
       /*
        * If the attributes key on the query object, is not an array, we just remove it.
        */
       if (!Array.isArray(attributesInCurrentQuery)) {
-        this.$router.replace({
-          path: route.path,
-          query: queryWithoutAttributes,
-        });
+        this.updateSearchURLForQuery(queryWithoutAttributes);
         return;
       }
 
@@ -223,18 +231,15 @@ export default {
         ...queryWithoutAttributes,
         attrs: attributesInCurrentQuery,
       };
-      this.$router.replace({
-        path: route.path,
-        query: queryWithAttributesReset,
-      });
+
+      this.updateSearchURLForQuery(queryWithAttributesReset);
     },
     /*
      * Reset the Price Facet
      */
     resetPriceFacet: function (e) {
       const { min, max, ...queryWithPriceReset } = this.getCurrentQuery();
-      const { route } = this.$nuxt.context;
-      this.$router.replace({ path: route.path, query: queryWithPriceReset });
+      this.updateSearchURLForQuery(queryWithPriceReset);
     },
   },
   head() {
@@ -255,7 +260,7 @@ export default {
   },
   watch: {
     /*
-     * We fetch again for ne w items and update the orderBy and the filters.
+     * We fetch again for new items and update the orderBy and the filters.
      */
     "$route.query": async function () {
       const { route } = this.$nuxt.context;

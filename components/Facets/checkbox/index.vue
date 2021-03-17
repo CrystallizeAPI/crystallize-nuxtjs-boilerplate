@@ -1,6 +1,6 @@
 <template>
   <div class="facet-checkbox">
-    <label class="facet-checkbox__label">
+    <label class="facet-checkbox__label" :aria-label="value">
       <span class="facet-checkbox__checkbox-wrapper">
         <input
           class="facet-checkbox__checkbox"
@@ -29,7 +29,6 @@ export default {
     isChecked: {
       type: Boolean,
       required: true,
-      default: false,
     },
   },
   methods: {
