@@ -18,6 +18,7 @@ export async function getData({
         filter: searchSpec.filter,
         include: searchSpec.include,
         language: language,
+        aggregationsFilter
       }
     }),
     asPath

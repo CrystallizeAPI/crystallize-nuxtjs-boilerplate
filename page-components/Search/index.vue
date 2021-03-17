@@ -31,7 +31,7 @@
 import toText from "@crystallize/content-transformer/toText";
 import { getData as getSearchData } from "./get-data";
 import { urlToSpec } from "../../lib/search";
-import { getSearchTitle } from "./utils";
+import { getSearchTitle, cleanFilterForTotalAggregations } from "./utils";
 import { orderByOptions } from "/lib/search";
 
 function singleAttrToQuery(attr) {
@@ -53,7 +53,7 @@ export default {
       totalResults: null,
     };
   },
-  async fetch() {
+  fetch: async function () {
     const { route } = this.$nuxt.context;
     const { locales, locale: code } = this.$i18n;
     const locale = locales.find((l) => l.locale === code) || locales[0];
@@ -66,11 +66,13 @@ export default {
       query: { catalogue: catalogueFromQuery, ...rest },
     } = route;
 
+    const searchSpec = { ...urlToSpec({ query: rest, asPath }, locale) };
     const { search, catalogue } = await getSearchData({
       asPath,
       preview: null,
       language: locale.crystallizeCatalogueLanguage,
-      searchSpec: { ...urlToSpec({ query: rest, asPath }, locale) },
+      searchSpec,
+      aggregationsFilter: cleanFilterForTotalAggregations(searchSpec.filter),
     });
 
     this.title = getSearchTitle(catalogue);
@@ -253,7 +255,7 @@ export default {
   },
   watch: {
     /*
-     * We fetch again for new items and update the orderBy and the filters.
+     * We fetch again for ne w items and update the orderBy and the filters.
      */
     "$route.query": async function () {
       const { route } = this.$nuxt.context;
@@ -264,11 +266,13 @@ export default {
         query: { catalogue: catalogueFromQuery, ...rest },
       } = route;
 
+      const searchSpec = { ...urlToSpec({ query: rest, asPath }, locale) };
       const { search } = await getSearchData({
         asPath,
         preview: null,
         language: locale.crystallizeCatalogueLanguage,
-        searchSpec: { ...urlToSpec({ query: rest, asPath }, locale) },
+        searchSpec: searchSpec,
+        aggregationsFilter: cleanFilterForTotalAggregations(searchSpec.filter),
       });
 
       const { ordeBy, filter } = urlToSpec(
