@@ -32,6 +32,7 @@ import toText from "@crystallize/content-transformer/toText";
 import { getData as getSearchData } from "./get-data";
 import { urlToSpec } from "../../lib/search";
 import { getSearchTitle } from "./utils";
+import { orderByOptions } from "/lib/search";
 
 function singleAttrToQuery(attr) {
   return `${attr.attribute}:${attr.values.join(",")}`;
@@ -64,8 +65,6 @@ export default {
     const {
       query: { catalogue: catalogueFromQuery, ...rest },
     } = route;
-
-    console.log(rest);
 
     const { search, catalogue } = await getSearchData({
       asPath,
@@ -117,6 +116,7 @@ export default {
          * we remove any existing orderBy value, so we make sure
          * no value is provided in the query object
          */
+
         const { orderby, ...restQuery } = currentQuery;
         this.$router.replace({ path: asPath, query: restQuery });
         return;
@@ -167,13 +167,16 @@ export default {
         return;
       }
 
-      console.log(newAttrsFiltered);
-
       let newQueryAttributes = newAttrsFiltered.map(singleAttrToQuery);
       if (newQueryAttributes.length === 1) {
         newQueryAttributes = newQueryAttributes[0];
       }
 
+      /*
+       * @TODO: If there are more than 2 attributes, between elements the ","
+       * character is not parsed. Even though it works, that's not the same
+       * behavior as the NextJS boilerplate.
+       */
       this.$router.replace({
         path: route.path,
         query: { ...currentQuery, attrs: newQueryAttributes },
@@ -260,7 +263,6 @@ export default {
       const {
         query: { catalogue: catalogueFromQuery, ...rest },
       } = route;
-      console.log(rest);
 
       const { search } = await getSearchData({
         asPath,
@@ -268,12 +270,16 @@ export default {
         language: locale.crystallizeCatalogueLanguage,
         searchSpec: { ...urlToSpec({ query: rest, asPath }, locale) },
       });
+
       const { ordeBy, filter } = urlToSpec(
         { query: route.query, asPath },
         locale
       );
       this.items = search.search.edges.map((edge) => edge.node);
-      this.orderBy = ordeBy;
+      const orderByActive = orderByOptions.find(
+        (option) => option.value === orderBy
+      );
+      this.orderBy = orderByActive;
       this.filter = filter;
     },
   },
