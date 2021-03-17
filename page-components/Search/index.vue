@@ -4,7 +4,12 @@
       <PageHeader :title="title" :description="headerDescription" />
       <main>
         <div class="search-page__actions">
-          <Facets :totalResults="items.length" />
+          <Facets
+            :totalResults="items.length"
+            :aggregations="aggregations"
+            @reset-attibute-facet="resetAttributeFacet"
+            @reset-price-facet="resetPriceFacet"
+          />
           <OrderBy
             class="search-page__actions-right"
             :orderBy="orderBy"
@@ -36,6 +41,7 @@ export default {
       catalogue: null,
       stacks: null,
       orderBy: {},
+      aggregations: {},
       totalResults: null,
     };
   },
@@ -44,6 +50,7 @@ export default {
     const { locales, locale: code } = this.$i18n;
     const locale = locales.find((l) => l.locale === code) || locales[0];
     const asPath = route.path;
+    const spec = urlToSpec({ query: route.query, asPath }, locale);
     const {
       query: { catalogue: catalogueFromQuery, ...rest },
     } = route;
@@ -54,10 +61,11 @@ export default {
       language: locale.crystallizeCatalogueLanguage,
       searchSpec: { ...urlToSpec({ query: rest, asPath }, locale) },
     });
-    const spec = urlToSpec({ query: route.query, asPath }, locale);
+
     this.title = getSearchTitle(catalogue);
     this.items = search.search.edges.map((edge) => edge.node);
     this.orderBy = spec.orderBy;
+    this.aggregations = search.aggregations;
 
     if (catalogue && catalogue.searchPage) {
       const description = catalogue.searchPage.components?.find(
@@ -106,6 +114,12 @@ export default {
         path: asPath,
         query: { ...currentQuery, orderby: optionSelected.value },
       });
+    },
+    resetAttributeFacet: function (e) {
+      console.log(e);
+    },
+    resetPriceFacet: function (e) {
+      console.log(e);
     },
   },
   head() {
