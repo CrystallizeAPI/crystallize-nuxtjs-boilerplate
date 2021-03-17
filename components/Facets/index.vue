@@ -17,12 +17,12 @@
     >
       <FacetGroup title="Price">
         <template v-slot:action>
-          <FaceGroupAction @click="$emit('reset-price-facet')"
-            >Reset</FaceGroupAction
-          >
+          <FaceGroupAction @click="$emit('reset-price-facet')">
+            Reset
+          </FaceGroupAction>
         </template>
         <template v-slot:children>
-          here goes a nice price slider similar to NextJS boilerplate
+          Here goes a nice price slider similar to NextJS boilerplate
         </template>
       </FacetGroup>
 
@@ -140,9 +140,10 @@ export default {
     openFacets: function () {
       this.isOpen = true;
     },
+    /*
+     * Checks if a value for an attribute is checked or not.
+     */
     isAttributeValueChecked: function ({ attribute, value }) {
-      console.log({ attributes: this.filter?.productVariants?.attributes });
-      console.log({ value });
       return Boolean(
         this.filter?.productVariants?.attributes?.some(
           (attr) => attr.attribute === attribute && attr.values.includes(value)
