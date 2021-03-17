@@ -7,8 +7,8 @@
           <Facets :totalResults="items.length" />
           <OrderBy
             class="search-page__actions-right"
-            orderBy="spec.orderBy"
-            @on-change="captureOnchange"
+            :orderBy="orderBy"
+            @on-change="handleOrderByChange"
           />
         </div>
         <span v-if="items.length > 0" class="search-page__counter">
@@ -27,6 +27,7 @@ import { urlToSpec } from "../../lib/search";
 import { getSearchTitle } from "./utils";
 
 export default {
+  watchQuery: true,
   data: function () {
     return {
       title: null,
@@ -34,7 +35,7 @@ export default {
       items: [],
       catalogue: null,
       stacks: null,
-      spec: null,
+      orderBy: {},
       totalResults: null,
     };
   },
@@ -53,11 +54,10 @@ export default {
       language: locale.crystallizeCatalogueLanguage,
       searchSpec: { ...urlToSpec({ query: rest, asPath }, locale) },
     });
-
-    this.data = search;
+    const spec = urlToSpec({ query: route.query, asPath }, locale);
     this.title = getSearchTitle(catalogue);
-    this.items = this.data.search.edges.map((edge) => edge.node);
-    this.spec = urlToSpec({ query: route.query, asPath }, locale);
+    this.items = search.search.edges.map((edge) => edge.node);
+    this.orderBy = spec.orderBy;
 
     if (catalogue && catalogue.searchPage) {
       const description = catalogue.searchPage.components?.find(
@@ -68,15 +68,44 @@ export default {
       )?.content?.items;
 
       if (description) {
-        this.metaDescription = toText(description.content.json);
-        this.headerDescription = description.content.json;
+        this.metaDescription = toText(description?.content?.json);
+        this.headerDescription = description?.content?.json;
       }
       this.stacks = stacks;
     }
   },
   methods: {
-    captureOnchange: function ({ value }) {
-      console.log(value);
+    getCurrentQuery: function () {
+      const { route } = this.$nuxt.context;
+      const { query } = route;
+      /*
+       * We need to extract the [...catalogue] query params
+       * in order to get a clean set of query params to work with
+       */
+      const { catalogue, ...queryWithoutRouteInfo } = query;
+      return queryWithoutRouteInfo;
+    },
+    handleOrderByChange: function ({ optionSelected }) {
+      const { route } = this.$nuxt.context;
+      const { path: asPath } = route;
+
+      // cache in a variable the execution of this.getCurrentQuery
+      const currentQuery = this.getCurrentQuery();
+      if (optionSelected.isDefault) {
+        /*
+         * If the selected "orderBy" option is the default,
+         * we remove any existing orderBy value, so we make sure
+         * no value is provided in the query object
+         */
+        const { orderby, ...restQuery } = currentQuery;
+        this.$router.replace({ path: asPath, query: restQuery });
+        return;
+      }
+
+      this.$router.replace({
+        path: asPath,
+        query: { ...currentQuery, orderby: optionSelected.value },
+      });
     },
   },
   head() {
@@ -94,6 +123,30 @@ export default {
         },
       ],
     };
+  },
+  watch: {
+    /*
+     * We fetch again for new items and update the orderBy and the filters.
+     */
+    "$route.query": async function () {
+      const { route } = this.$nuxt.context;
+      const { locales, locale: code } = this.$i18n;
+      const locale = locales.find((l) => l.locale === code) || locales[0];
+      const asPath = route.path;
+      const {
+        query: { catalogue: catalogueFromQuery, ...rest },
+      } = route;
+
+      const { search } = await getSearchData({
+        asPath,
+        preview: null,
+        language: locale.crystallizeCatalogueLanguage,
+        searchSpec: { ...urlToSpec({ query: rest, asPath }, locale) },
+      });
+      const { ordeBy } = urlToSpec({ query: route.query, asPath }, locale);
+      this.items = search.search.edges.map((edge) => edge.node);
+      this.orderBy = ordeBy;
+    },
   },
 };
 </script>

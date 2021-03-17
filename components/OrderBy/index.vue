@@ -30,6 +30,13 @@
 <script>
 import { orderByOptions } from "/lib/search";
 
+function getOrderByOptionByFieldAndDirection({ field, direction }) {
+  return orderByOptions.find((opt) => {
+    console.log({ opt, field, direction });
+    return opt.field === field && field.direction === direction;
+  });
+}
+
 export default {
   props: {
     orderBy: {
@@ -40,24 +47,53 @@ export default {
   data: function () {
     return {
       orderByOptions,
-      selectedValue: this.orderby?.value,
     };
   },
   methods: {
     handleChange: function (e) {
-      const optionSelected = e.target.value;
-      const eventPayload = { value: optionSelected };
-      this.$emit("on-change", eventPayload);
+      const valueSelected = e.target.value;
+      const optionSelected = this.orderByOptions.find(
+        ({ value }) => value === valueSelected
+      );
+
+      const valueDefaultOption = this.orderByOptions[0].value;
+      const isDefaultOption = valueDefaultOption === optionSelected.value;
+
+      if (optionSelected) {
+        /*
+         * We pass the value as an object so we can attach
+         * more information to the event in case need.
+         */
+        const eventPayload = {
+          optionSelected: { ...optionSelected, isDefault: isDefaultOption },
+        };
+        this.$emit("on-change", eventPayload);
+      }
     },
     isSelectedOption: function (orderByOption, index) {
-      /*
-       * If there is no orderBy value provided and it's the first element
-       */
-      if ((!this.orderBy || !this.orderBy.value) && index === 0) {
+      const isOrderByNullish = !this.orderBy;
+      const isFirstOption = index === 0;
+
+      if (isOrderByNullish && isFirstOption) {
         return true;
       }
 
-      return orderByOption.value === this.orderBy.value;
+      if (isOrderByNullish && !isFirstOption) {
+        return false;
+      }
+
+      /*
+       * We look for an orderBy option that matches the field and direction
+       * passed as prop, so we can compare its value to determine if an option
+       * is selected or not.
+       */
+      const orderBy = orderByOptions.find(
+        (opt) =>
+          opt.field === this.orderBy.field &&
+          opt.direction === this.orderBy.direction
+      );
+
+      return orderByOption.value === orderBy?.value;
     },
   },
 };
