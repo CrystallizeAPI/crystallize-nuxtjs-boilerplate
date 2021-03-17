@@ -5,15 +5,17 @@
       <main>
         <div class="search-page__actions">
           <Facets
+            :filter="filter"
             :totalResults="items.length"
             :aggregations="aggregations"
-            @reset-attibute-facet="resetAttributeFacet"
+            @on-change-attribute-facet="handleFacetAttributeChange"
+            @reset-attribute-facet="resetAttributeFacet"
             @reset-price-facet="resetPriceFacet"
           />
           <OrderBy
             class="search-page__actions-right"
             :orderBy="orderBy"
-            @on-change="handleOrderByChange"
+            @on-change="handleChangeOrderBy"
           />
         </div>
         <span v-if="items.length > 0" class="search-page__counter">
@@ -31,6 +33,10 @@ import { getData as getSearchData } from "./get-data";
 import { urlToSpec } from "../../lib/search";
 import { getSearchTitle } from "./utils";
 
+function singleAttrToQuery(attr) {
+  return `${attr.attribute}:${attr.values.join(",")}`;
+}
+
 export default {
   watchQuery: true,
   data: function () {
@@ -42,6 +48,7 @@ export default {
       stacks: null,
       orderBy: {},
       aggregations: {},
+      filter: null,
       totalResults: null,
     };
   },
@@ -50,10 +57,15 @@ export default {
     const { locales, locale: code } = this.$i18n;
     const locale = locales.find((l) => l.locale === code) || locales[0];
     const asPath = route.path;
-    const spec = urlToSpec({ query: route.query, asPath }, locale);
+    const { orderBy, filter } = urlToSpec(
+      { query: route.query, asPath },
+      locale
+    );
     const {
       query: { catalogue: catalogueFromQuery, ...rest },
     } = route;
+
+    console.log(rest);
 
     const { search, catalogue } = await getSearchData({
       asPath,
@@ -64,7 +76,8 @@ export default {
 
     this.title = getSearchTitle(catalogue);
     this.items = search.search.edges.map((edge) => edge.node);
-    this.orderBy = spec.orderBy;
+    this.orderBy = orderBy;
+    this.filter = filter;
     this.aggregations = search.aggregations;
 
     if (catalogue && catalogue.searchPage) {
@@ -93,11 +106,10 @@ export default {
       const { catalogue, ...queryWithoutRouteInfo } = query;
       return queryWithoutRouteInfo;
     },
-    handleOrderByChange: function ({ optionSelected }) {
+    handleChangeOrderBy: function ({ optionSelected }) {
       const { route } = this.$nuxt.context;
       const { path: asPath } = route;
 
-      // cache in a variable the execution of this.getCurrentQuery
       const currentQuery = this.getCurrentQuery();
       if (optionSelected.isDefault) {
         /*
@@ -112,14 +124,112 @@ export default {
 
       this.$router.replace({
         path: asPath,
-        query: { ...currentQuery, orderby: optionSelected.value },
+        query: {
+          ...currentQuery,
+          orderby: optionSelected.value,
+        },
       });
     },
-    resetAttributeFacet: function (e) {
-      console.log(e);
+    handleFacetAttributeChange: function ({ attribute, value, isChecked }) {
+      // Create a copy of the attributes for inmutability purposes.
+      const attrs = [...(this.filter?.productVariants?.attributes || [])];
+
+      // We look for the attribute that has changed.
+      const existingAttr = attrs.find((attr) => attr.attribute === attribute);
+
+      if (!existingAttr) {
+        // If there's no existing element, we create a new enty for that attribute
+        attrs.push({ attribute, values: [value] });
+      } else {
+        /*
+         * If the element has been CHECKED, we add it into the current
+         * collection of values for that attribute.
+         * If the element been UNCHECKED, we remove it from the current collection.
+         */
+        isChecked
+          ? existingAttr.values.push(value)
+          : existingAttr.values.splice(existingAttr.values.indexOf(value), 1);
+      }
+
+      // We remove the values that are empty arrays
+      const newAttrsFiltered = attrs.filter(({ values }) => values.length > 0);
+
+      const { route } = this.$nuxt.context;
+      const currentQuery = this.getCurrentQuery();
+
+      // Check if the new query will need attributes
+      const hasToIncludeAttributeInQuery =
+        newAttrsFiltered && newAttrsFiltered.length > 0;
+
+      if (!hasToIncludeAttributeInQuery) {
+        const { attrs, queryWithoutAttr } = currentQuery;
+        this.$router.replace({ path: route.path, query: queryWithoutAttr });
+        return;
+      }
+
+      console.log(newAttrsFiltered);
+
+      let newQueryAttributes = newAttrsFiltered.map(singleAttrToQuery);
+      if (newQueryAttributes.length === 1) {
+        newQueryAttributes = newQueryAttributes[0];
+      }
+
+      this.$router.replace({
+        path: route.path,
+        query: { ...currentQuery, attrs: newQueryAttributes },
+      });
     },
+    /*
+     * Reset a single facet
+     */
+    resetAttributeFacet: function ({ attribute }) {
+      const { route } = this.$nuxt.context;
+      const currentQuery = this.getCurrentQuery();
+      const {
+        attrs: attributesInCurrentQuery,
+        queryWithoutAttributes,
+      } = currentQuery;
+      /*
+       * If the attributes key on the query object, is not an array, we just remove it.
+       */
+      if (!Array.isArray(attributesInCurrentQuery)) {
+        this.$router.replace({
+          path: route.path,
+          query: queryWithoutAttributes,
+        });
+        return;
+      }
+
+      /*
+       * In case of being an array, we'll remove the matching attribute
+       * from the attributes we currently have in the query object
+       */
+      const index = attributesInCurrentQuery.findIndex((a) =>
+        a.startsWith(`${attribute}:`)
+      );
+      attributesInCurrentQuery.splice(index, 1);
+
+      /*
+       * We create a new query with the partial of the currentQuery that
+       * we got from extracting the attributes, and the attributes we got after
+       * removing the attribute we had to reset.
+       */
+      const queryWithAttributesReset = {
+        ...queryWithoutAttributes,
+        attrs: attributesInCurrentQuery,
+      };
+      this.$router.replace({
+        path: route.path,
+        query: queryWithAttributesReset,
+      });
+    },
+    /*
+     * Reset the Price Facet
+     */
     resetPriceFacet: function (e) {
-      console.log(e);
+      const { min, max, ...queryWithPriceReset } = this.getCurrentQuery();
+      const { route } = this.$nuxt.context;
+      this.$router.replace({ path: route.path, query: queryWithPriceReset });
     },
   },
   head() {
@@ -150,6 +260,7 @@ export default {
       const {
         query: { catalogue: catalogueFromQuery, ...rest },
       } = route;
+      console.log(rest);
 
       const { search } = await getSearchData({
         asPath,
@@ -157,9 +268,13 @@ export default {
         language: locale.crystallizeCatalogueLanguage,
         searchSpec: { ...urlToSpec({ query: rest, asPath }, locale) },
       });
-      const { ordeBy } = urlToSpec({ query: route.query, asPath }, locale);
+      const { ordeBy, filter } = urlToSpec(
+        { query: route.query, asPath },
+        locale
+      );
       this.items = search.search.edges.map((edge) => edge.node);
       this.orderBy = ordeBy;
+      this.filter = filter;
     },
   },
 };

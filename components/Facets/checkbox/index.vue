@@ -6,7 +6,7 @@
           class="facet-checkbox__checkbox"
           type="checkbox"
           :checked="isChecked"
-          @change="$emit('on-change')"
+          @change="(event) => handleCheckboxChange(event, { value })"
         />
         {{ value }}
       </span>
@@ -30,6 +30,12 @@ export default {
       type: Boolean,
       required: true,
       default: false,
+    },
+  },
+  methods: {
+    handleCheckboxChange: function (event, { value }) {
+      const isChecked = event.target.checked;
+      this.$emit("on-change", { value, isChecked });
     },
   },
 };

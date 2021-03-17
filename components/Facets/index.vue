@@ -5,7 +5,10 @@
       so we don't have to deal with specificity issues
       that can only be solved with !important.
       -->
-    <ButtonOpenFacets @click="toggleFacets">
+    <ButtonOpenFacets
+      @click="toggleFacets"
+      :aria-label="isOpen ? 'Close filters' : 'Open filters'"
+    >
       {{ this.isOpen ? "Close" : "Filter" }}
     </ButtonOpenFacets>
     <div
@@ -47,7 +50,20 @@
                 class="facets__attribute"
                 :value="attrGroupValue.value"
                 :count="attrGroupValue.count"
-                @on-change="handleFacetCheckboxChange"
+                :isChecked="
+                  isAttributeValueChecked({
+                    attribute: attrGroup.attribute,
+                    value: attrGroupValue.value,
+                  })
+                "
+                @on-change="
+                  ({ value, isChecked }) =>
+                    $emit('on-change-attribute-facet', {
+                      attribute: attrGroup.attribute,
+                      value,
+                      isChecked,
+                    })
+                "
               />
             </div>
           </template>
@@ -124,13 +140,14 @@ export default {
     openFacets: function () {
       this.isOpen = true;
     },
-    resetPriceFacet: function () {},
-    resetAttributeFacet: function ({ attribute }) {
-      console.log({ name, attribute });
-    },
-    isAttributeValueChecked: function ({ name, value }) {},
-    handleFacetCheckboxChange: function () {
-      console.log("changed");
+    isAttributeValueChecked: function ({ attribute, value }) {
+      console.log({ attributes: this.filter?.productVariants?.attributes });
+      console.log({ value });
+      return Boolean(
+        this.filter?.productVariants?.attributes?.some(
+          (attr) => attr.attribute === attribute && attr.values.includes(value)
+        )
+      );
     },
   },
 };

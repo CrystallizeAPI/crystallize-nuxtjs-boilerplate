@@ -7,7 +7,6 @@
   <Button
     @click="$emit('click')"
     class="facets__button"
-    :aria-label="isOpen ? 'Close filters' : 'Open filters'"
     :style="{
       '--color-background': 'white',
       '--color-text': 'var(--color-primary-action-content)',
