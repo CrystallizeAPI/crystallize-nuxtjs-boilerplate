@@ -22,6 +22,11 @@
           Found {{ items.length }} matching results
         </span>
         <CrystallizeCatalogueItems v-if="items" :items="items" />
+        <Pagination
+          @pagination-change="handleChangeNavigation"
+          :hasPreviousPage="pagination.hasPreviousPage"
+          :hasNextPage="pagination.hasNextPage"
+        />
       </main>
     </Container>
   </FetchLoader>
@@ -33,6 +38,7 @@ import { getData as getSearchData } from "./get-data";
 import { urlToSpec } from "../../lib/search";
 import { getSearchTitle, cleanFilterForTotalAggregations } from "./utils";
 import { orderByOptions } from "/lib/search";
+import { PAGINATION_DIRECTION } from "../../components/Pagination/utils";
 
 function singleAttrToQuery(attr) {
   return `${attr.attribute}:${attr.values.join(",")}`;
@@ -51,6 +57,12 @@ export default {
       aggregations: {},
       filter: null,
       totalResults: null,
+      pagination: {
+        hasPreviousPage: null,
+        hasNextPage: null,
+        startCursor: null,
+        endCursor: null,
+      },
     };
   },
   fetch: async function () {
@@ -76,10 +88,16 @@ export default {
     });
 
     this.title = getSearchTitle(catalogue);
-    this.items = search.search.edges.map((edge) => edge.node);
-    this.orderBy = orderBy;
     this.filter = filter;
     this.aggregations = search.aggregations;
+    this.orderBy = orderBy;
+    this.items = search.search.edges.map((edge) => edge.node);
+    this.pagination = {
+      hasPreviousPage: search.search.pageInfo.hasPreviousPage,
+      hasNextPage: search.search.pageInfo.hasNextPage,
+      startCursor: search.search.pageInfo.startCursor,
+      endCursor: search.search.pageInfo.endCursor,
+    };
 
     if (catalogue && catalogue.searchPage) {
       const description = catalogue.searchPage.components?.find(
@@ -240,6 +258,26 @@ export default {
     resetPriceFacet: function (e) {
       const { min, max, ...queryWithPriceReset } = this.getCurrentQuery();
       this.updateSearchURLForQuery(queryWithPriceReset);
+    },
+    /*
+     * when someone clicks on previous/next page
+     */
+    handleChangeNavigation: function ({ direction }) {
+      if (direction === PAGINATION_DIRECTION.previous) {
+        return this.updateSearchURLForQuery({
+          ...this.getCurrentQuery(),
+          before: this.pagination.startCursor,
+        });
+      }
+
+      if (direction === PAGINATION_DIRECTION.next) {
+        return this.updateSearchURLForQuery({
+          ...this.getCurrentQuery(),
+          after: this.pagination.endCursor,
+        });
+      }
+
+      throw new Error("Pagination direction not supported");
     },
   },
   head() {
