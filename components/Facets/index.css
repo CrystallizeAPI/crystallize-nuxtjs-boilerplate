@@ -49,6 +49,12 @@
     width: 100%;
     z-index: 999;
   }
+
+  .facets__displayer > *:not(:first-child) {
+    margin-top: 2rem;
+    border-top: 1px solid var(--color-box-background);
+    padding-top: 30px;
+  }
 }
 
 @media screen and (min-width: 1024px) {
