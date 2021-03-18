@@ -18,7 +18,9 @@ export async function getData({
         filter: searchSpec.filter,
         include: searchSpec.include,
         language: language,
-        aggregationsFilter
+        aggregationsFilter,
+        after: searchSpec.after,
+        before: searchSpec.before
       }
     }),
     asPath
