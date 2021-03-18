@@ -22,7 +22,7 @@
           </FaceGroupAction>
         </template>
         <template v-slot:children>
-          Here goes a nice price slider similar to NextJS boilerplate
+          <FacetPrice />
         </template>
       </FacetGroup>
 
@@ -88,6 +88,7 @@ import ButtonOpenFacets from "./toggle-facets";
 import FacetGroup from "./group";
 import FaceGroupAction from "./action";
 import FacetCheckbox from "./checkbox";
+import FacetPrice from "./price";
 
 function getAttributeGroups({ variantAttributes = [] }) {
   const groups = [];
@@ -108,6 +109,7 @@ export default {
     FacetGroup,
     FaceGroupAction,
     FacetCheckbox,
+    FacetPrice,
   },
   props: {
     totalResults: {
