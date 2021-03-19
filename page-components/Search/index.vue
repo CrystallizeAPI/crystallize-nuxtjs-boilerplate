@@ -24,6 +24,7 @@
         </span>
         <CrystallizeCatalogueItems v-if="items" :items="items" />
         <Pagination
+          v-if="items.length > 0"
           @pagination-change="handleChangeNavigation"
           :hasPreviousPage="pagination.hasPreviousPage"
           :hasNextPage="pagination.hasNextPage"
@@ -284,14 +285,14 @@ export default {
     handleFacetPriceChange: function ({ min, max }) {
       const { price } = this.aggregations;
 
-      let priceQueryPartial = {};
-      if (min !== price.min) {
-        priceQueryPartial.min = min.toString();
-      }
-
-      if (max !== price.max) {
-        priceQueryPartial.max = max.toString();
-      }
+      /*
+       * We only add 'min' or 'max' in case its value its diferent to
+       * the limit of the priceRange, that's why the spread operator "...".
+       */
+      let priceQueryPartial = {
+        ...(min !== price.min && { min }),
+        ...(max !== price.max && { max }),
+      };
 
       /*
        * JSON.stringify converts a JSON into a string.
@@ -302,10 +303,13 @@ export default {
        */
       if (JSON.stringify(priceQueryPartial) !== "{}") {
         /*
-         *
+         * We remove the "min" and "max" from the current query, because we
+         * don't know its permutation. (Is there only min? only max? we have both?).
+         * So we extract both values and add them with "priceQueryPartial".
          */
+        const { min, max, ...queryWithoutPrice } = this.getCurrentQuery();
         this.updateSearchURLForQuery({
-          ...this.getCurrentQuery(),
+          ...queryWithoutPrice,
           ...priceQueryPartial,
         });
       }
