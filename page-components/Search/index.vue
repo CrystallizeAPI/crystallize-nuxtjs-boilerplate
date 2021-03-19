@@ -6,9 +6,10 @@
         <div class="search-page__actions">
           <Facets
             :filter="filter"
-            :totalResults="items.length"
+            :totalResults="totalResults"
             :aggregations="aggregations"
             @on-change-attribute-facet="handleFacetAttributeChange"
+            @on-price-change="handleFacetPriceChange"
             @reset-attribute-facet="resetAttributeFacet"
             @reset-price-facet="resetPriceFacet"
           />
@@ -18,8 +19,8 @@
             @on-change="handleChangeOrderBy"
           />
         </div>
-        <span v-if="items.length > 0" class="search-page__counter">
-          Found {{ items.length }} matching results
+        <span v-if="totalResults" class="search-page__counter">
+          Found {{ this.totalResults }} matching results
         </span>
         <CrystallizeCatalogueItems v-if="items" :items="items" />
         <Pagination
@@ -90,6 +91,7 @@ export default {
     this.title = getSearchTitle(catalogue);
     this.filter = filter;
     this.aggregations = search.aggregations;
+    this.totalResults = search.search.aggregations.totalResults;
     this.orderBy = orderBy;
     this.items = search.search.edges.map((edge) => edge.node);
     this.pagination = {
@@ -279,6 +281,35 @@ export default {
 
       throw new Error("Pagination direction not supported");
     },
+    handleFacetPriceChange: function ({ min, max }) {
+      const { price } = this.aggregations;
+
+      let priceQueryPartial = {};
+      if (min !== price.min) {
+        priceQueryPartial.min = min.toString();
+      }
+
+      if (max !== price.max) {
+        priceQueryPartial.max = max.toString();
+      }
+
+      /*
+       * JSON.stringify converts a JSON into a string.
+       * FYI: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify
+       *
+       * So, if the result of JSON.stringify() is not an empty object,
+       * it means that either has "min", "max", or both values
+       */
+      if (JSON.stringify(priceQueryPartial) !== "{}") {
+        /*
+         *
+         */
+        this.updateSearchURLForQuery({
+          ...this.getCurrentQuery(),
+          ...priceQueryPartial,
+        });
+      }
+    },
   },
   head() {
     if (!this.metaDescription) {
@@ -319,6 +350,7 @@ export default {
       });
 
       this.items = search.search.edges.map((edge) => edge.node);
+      this.totalResults = search.search.aggregations.totalResults;
       const orderByActive = orderByOptions.find(
         (option) => option.value === searchSpec.orderBy
       );
