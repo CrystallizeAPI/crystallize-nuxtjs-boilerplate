@@ -22,7 +22,12 @@
           </FaceGroupAction>
         </template>
         <template v-slot:children>
-          <FacetPrice />
+          <FacetPrice
+            :min="aggregations.price.min"
+            :max="aggregations.price.max"
+            :value="facetPriceValue"
+            @on-price-change="(params) => $emit('on-price-change', params)"
+          />
         </template>
       </FacetGroup>
 
@@ -127,9 +132,16 @@ export default {
     },
   },
   data: function () {
+    const { priceRange } = this.filter.productVariants;
+
     return {
       isOpen: false,
       attributeGroupAggregations: getAttributeGroups(this.aggregations),
+      facetPriceValue: {
+        min: this.aggregations.price.min,
+        max: this.aggregations.price.max,
+        ...priceRange,
+      },
     };
   },
   methods: {
