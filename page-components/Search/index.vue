@@ -346,7 +346,7 @@ export default {
       } = route;
 
       const searchSpec = { ...urlToSpec({ query: rest, asPath }, locale) };
-      const { search } = await getSearchData({
+      const { search, catalogue } = await getSearchData({
         asPath,
         preview: null,
         language: locale.crystallizeCatalogueLanguage,
@@ -354,6 +354,7 @@ export default {
         aggregationsFilter: cleanFilterForTotalAggregations(searchSpec.filter),
       });
 
+      this.title = getSearchTitle(catalogue);
       this.items = search.search.edges.map((edge) => edge.node);
       this.totalResults = search.search.aggregations.totalResults;
       const orderByActive = orderByOptions.find(
@@ -361,6 +362,7 @@ export default {
           direction === searchSpec.orderBy.direction &&
           field === searchSpec.orderBy.field
       );
+      this.aggregations = search.aggregations;
       this.orderBy = orderByActive;
       this.filter = searchSpec.filter;
     },
