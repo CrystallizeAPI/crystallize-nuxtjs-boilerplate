@@ -9,7 +9,7 @@
             :totalResults="totalResults"
             :aggregations="aggregations"
             @on-change-attribute-facet="handleFacetAttributeChange"
-            @on-price-change="handleFacetPriceChange"
+            @on-price-change="handlePriceChange"
             @reset-attribute-facet="resetAttributeFacet"
             @reset-price-facet="resetPriceFacet"
           />
@@ -47,7 +47,6 @@ function singleAttrToQuery(attr) {
 }
 
 export default {
-  watchQuery: true,
   data: function () {
     return {
       title: null,
@@ -283,7 +282,7 @@ export default {
 
       throw new Error("Pagination direction not supported");
     },
-    handleFacetPriceChange: function ({ min, max }) {
+    handlePriceChange: function ({ min, max }) {
       const { price } = this.aggregations;
 
       /*
@@ -350,21 +349,27 @@ export default {
         asPath,
         preview: null,
         language: locale.crystallizeCatalogueLanguage,
-        searchSpec: searchSpec,
+        searchSpec,
         aggregationsFilter: cleanFilterForTotalAggregations(searchSpec.filter),
       });
+
+      /*
+       * We search for the orderBy option that matches the directiona and field
+       * If none option is found, we assign the default.
+       */
+      const orderByActive =
+        orderByOptions.find(
+          ({ direction, field }) =>
+            direction === searchSpec.orderBy.direction &&
+            field === searchSpec.orderBy.field
+        ) || orderByOptions[0];
 
       this.title = getSearchTitle(catalogue);
       this.items = search.search.edges.map((edge) => edge.node);
       this.totalResults = search.search.aggregations.totalResults;
-      const orderByActive = orderByOptions.find(
-        ({ direction, field }) =>
-          direction === searchSpec.orderBy.direction &&
-          field === searchSpec.orderBy.field
-      );
-      this.aggregations = search.aggregations;
-      this.orderBy = orderByActive;
       this.filter = searchSpec.filter;
+      this.orderBy = orderByActive;
+      this.aggregations = search.aggregations;
     },
   },
 };

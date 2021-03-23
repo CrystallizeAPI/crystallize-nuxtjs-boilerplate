@@ -22,6 +22,10 @@
           </FaceGroupAction>
         </template>
         <template v-slot:children>
+          <!--
+            @TODO: If we modify first the max field, everything goes OK.
+            If we modify the min price first, the components gets buggy
+          -->
           <FacetPrice
             :min="aggregations.price.min"
             :max="aggregations.price.max"
@@ -163,6 +167,29 @@ export default {
           (attr) => attr.attribute === attribute && attr.values.includes(value)
         )
       );
+    },
+  },
+  watch: {
+    filter: {
+      deep: true,
+      handler: function (newfilter) {
+        const { priceRange } = newfilter.productVariants;
+        this.facetPriceValue = {
+          min: this.aggregations.price.min,
+          max: this.aggregations.price.max,
+          ...priceRange,
+        };
+      },
+    },
+    aggregations: {
+      deep: true,
+      handler: function (newAggregations) {
+        this.facetPriceValue = {
+          min: newAggregations.price.min,
+          max: newAggregations.price.max,
+          ...this.filter.productVariants.priceRange,
+        };
+      },
     },
   },
 };

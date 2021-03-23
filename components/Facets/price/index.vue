@@ -4,14 +4,14 @@
       <input
         class="facet-price__input"
         type="number"
-        :value="currentValue.min"
+        :value="this.value.min"
         @change="handleMinPriceChange"
         aria-label="minimum price"
       />
       <input
         class="facet-price__input"
         type="number"
-        :value="currentValue.max"
+        :value="this.value.max"
         @change="handleMaxPriceChange"
         aria-label="maximum price"
       />
@@ -21,14 +21,6 @@
 
 <script>
 export default {
-  data: function () {
-    return {
-      currentValue: {
-        min: this.value.min,
-        max: this.value.max,
-      },
-    };
-  },
   props: {
     min: {
       type: Number,
@@ -49,17 +41,13 @@ export default {
     },
     handleMinPriceChange: function (event) {
       const min = this.parseValue(event.target.value);
-      const max =
-        this.currentValue.max > min ? this.currentValue.max : this.max;
-      this.currentValue = { min, max };
+      const max = this.value?.max > min ? this.value?.max : this.max;
 
       this.$emit("on-price-change", { min, max });
     },
     handleMaxPriceChange: function (event) {
       const max = this.parseValue(event.target.value);
-      const min =
-        this.currentValue.min < max ? this.currentValue.min : this.min;
-      this.currentValue = { min, max };
+      const min = this.value?.min < max ? this.value?.min : this.min;
 
       this.$emit("on-price-change", { min, max });
     },
