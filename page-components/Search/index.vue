@@ -357,7 +357,9 @@ export default {
       this.items = search.search.edges.map((edge) => edge.node);
       this.totalResults = search.search.aggregations.totalResults;
       const orderByActive = orderByOptions.find(
-        (option) => option.value === searchSpec.orderBy
+        ({ direction, field }) =>
+          direction === searchSpec.orderBy.direction &&
+          field === searchSpec.orderBy.field
       );
       this.orderBy = orderByActive;
       this.filter = searchSpec.filter;
