@@ -257,13 +257,14 @@ export default {
     },
     /*
      * Reset the Price Facet
+     * @TODO: When a price is reseted, the component gets buggy.
      */
     resetPriceFacet: function (e) {
       const { min, max, ...queryWithPriceReset } = this.getCurrentQuery();
       this.updateSearchURLForQuery(queryWithPriceReset);
     },
     /*
-     * when someone clicks on previous/next page
+     * When someone clicks on previous/next page
      */
     handleChangeNavigation: function ({ direction }) {
       if (direction === PAGINATION_DIRECTION.previous) {
