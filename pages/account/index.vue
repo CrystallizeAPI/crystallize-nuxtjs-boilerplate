@@ -8,7 +8,7 @@
       <template v-if="!user.isLoggedIn">
         <h1 class="account-page-title">Login</h1>
         <div class="account-page__form-wrapper">
-          <form class="account-page__form">
+          <form v-on:submit.prevent="onLoginSubmit" class="account-page__form">
             <h4 class="account-page__form-title">
               Enter your email address and we’ll send a magic login link to your
               inbox.
@@ -18,9 +18,13 @@
                 type="email"
                 placeholder="Email"
                 class="account-page__input"
+                v-model="inputEmail"
               />
               <Button class="account-page__submit" alignment="center">
-                Send me a magic link
+                <template v-if="isLoading">
+                  <Spinner />
+                </template>
+                <template v-if="!isLoading">Send me a magic link</template>
               </Button>
             </div>
           </form>
@@ -32,6 +36,23 @@
 
 <script>
 export default {
+  data: function () {
+    return {
+      isLoading: false,
+      hasErrors: false,
+      inputEmail: "",
+    };
+  },
+  methods: {
+    onLoginSubmit: function (event) {
+      this.isLoading = true;
+      console.log("executed");
+      console.log(this.$store);
+      setTimeout(() => {
+        this.isLoading = false;
+      }, 2000);
+    },
+  },
   computed: {
     user: function () {
       return this.$store.state.authentication;
