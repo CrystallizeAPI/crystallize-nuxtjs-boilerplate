@@ -12,8 +12,8 @@
         <template v-slot:actions>
           <div class="layout__actions">
             <IconButton
-              to="/login"
-              screenReaderText="login"
+              to="/account"
+              screenReaderText="User area"
               iconSrc="/icons/user.svg"
             />
             <Search />
