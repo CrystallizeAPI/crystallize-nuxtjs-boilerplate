@@ -1,8 +1,6 @@
 <template>
-  <button class="button" @click="$emit('click')">
-    <span class="button__inner">
-      <slot></slot>
-    </span>
+  <button :class="dynamicClass" @click="$emit('click')">
+    <slot></slot>
   </button>
 </template>
 
@@ -12,6 +10,21 @@ export default {
     type: {
       type: String,
       default: null,
+    },
+    alignment: {
+      type: String,
+      required: false,
+      default: "left",
+    },
+  },
+  computed: {
+    dynamicClass: function () {
+      const baseClass = "button";
+      const classes = [baseClass];
+
+      classes.push(`${baseClass}--${this.alignment}`);
+
+      return classes.join(" ");
     },
   },
 };

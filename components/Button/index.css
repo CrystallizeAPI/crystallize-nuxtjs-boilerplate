@@ -4,25 +4,27 @@
   --color-background-hover: var(--color-text-main);
   --color-text-hover: white;
 
-  display: inline-flex;
-  border-radius: 2px;
+  align-items: center;
   appearance: none;
-  cursor: pointer;
-  text-decoration: none;
-  padding: 16px 25px;
+  background-color: var(--color-background);
+  border-radius: 4px;
   border: 2px solid var(--color-text);
   color: var(--color-text);
-  background-color: var(--color-background);
-}
-
-.button__inner {
+  cursor: pointer;
+  display: inline-flex;
   flex: 1 1 auto;
   font-weight: 600;
-  text-align: center;
+  padding: 16px 25px;
   position: relative;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
+  text-decoration: none;
+}
+
+.button.button--left {
+  justify-content: flex-start;
+}
+
+.button.button--center {
+  justify-content: center;
 }
 
 .button:not(:disabled):hover{
@@ -45,7 +47,7 @@
   cursor: default;
 }
 
-.button:disabled .button__inner {
+.button:disabled {
   background-color: #aaa;
   color: #333;
 }
