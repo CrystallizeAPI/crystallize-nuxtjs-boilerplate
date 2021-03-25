@@ -12,6 +12,15 @@
 
 <script>
 export default {
+  middleware({ store, redirect }) {
+    /*
+     * Users that haven't logged in, are redirected to the login page
+     * before the page is rendered, so the users doesn't see any flash.
+     */
+    if (!store.state.authentication.isLoggedIn) {
+      redirect("/login");
+    }
+  },
   computed: {
     user: function () {
       return this.$store.state.authentication.user;
