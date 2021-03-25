@@ -1,11 +1,11 @@
 <template>
   <div class="login-page">
     <Container>
-      <template v-if="user.isLoggedIn">
+      <template v-if="isLoggedIn">
         <h1 class="login-page-title">Welcome {{ user.email }}</h1>
         <p class="login-page__form-subtitle">You are logged in</p>
       </template>
-      <template v-if="!user.isLoggedIn">
+      <template v-if="!isLoggedIn">
         <h1 class="login-page-title">Login</h1>
         <form v-on:submit.prevent="onLoginSubmit" class="login-page__form">
           <h4 class="login-page__form-title">
@@ -52,6 +52,11 @@ export default {
   async middleware({ store, redirect }) {
     /*
      * We redirect logged in users that are trying to visit "/login" to "/account".
+     *
+     * Take into account that the login page will be rendered if the user
+     * is server loading the login page, (for example, going directly to YOUR_DOMAIN/login).
+     * This behavior is expected because since the store would not have been
+     * updated at that point, "isLoggedIn" will equal false.t.
      */
     if (store.state.authentication.isLoggedIn) {
       redirect("/account");
@@ -78,7 +83,10 @@ export default {
   },
   computed: {
     user: function () {
-      return this.$store.state.authentication;
+      return this.$store.state.authentication.user;
+    },
+    isLoggedIn: function () {
+      return this.$store.state.authentication.isLoggedIn;
     },
   },
 };
