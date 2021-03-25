@@ -43,6 +43,20 @@ export default {
       message: null,
     };
   },
+  /*
+   * Middlewares are functions that are executed before rendering a page.
+   * It's useful in order to check for certain things such as the store.
+   *
+   * To learn more about middleware visit https://nuxtjs.org/docs/2.x/directory-structure/middleware/
+   */
+  async middleware({ store, redirect }) {
+    /*
+     * We redirect logged in users that are trying to visit "/login" to "/account".
+     */
+    if (store.state.authentication.isLoggedIn) {
+      redirect("/account");
+    }
+  },
   methods: {
     onLoginSubmit: function () {
       this.isLoading = true;
