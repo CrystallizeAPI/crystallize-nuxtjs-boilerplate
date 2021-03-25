@@ -17,7 +17,6 @@ export default {
       return this.$store.state.authentication.user;
     },
     logoutLink: function () {
-      console.log(this.$store.state.authentication.logoutLink);
       return this.$store.state.authentication.logoutLink;
     },
   },
