@@ -1,0 +1,88 @@
+.login-page {}
+
+.login-page-title {
+  font-size: var(--font-size-xxl);
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.login-page__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--color-box-background);
+  padding: 3rem 1.5rem;
+}
+
+.login-page__form-title {
+  margin: 0 auto;
+  max-width: 400px;
+  font-size: var(--font-size-s);
+  text-align: center;
+  margin-bottom: 2rem;
+  line-height: 1.35;
+}
+
+.login-page__form-subtitle {
+  font-size: var(--font-size-xl);
+  text-align: center;
+}
+
+.login-page__form-displayer {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-page__input {
+  min-height: 55px;
+  padding: 0.5rem 1rem;
+  border: none;
+}
+
+.login-page__submit {
+  --distance-to-input: 1rem;
+  margin-top: var(--distance-to-input);
+  /*
+   * Important so when the spinner is passed down as children
+   * of this button, it keeps its width.
+   */
+  min-width: 200px;
+}
+
+.login-page__message {
+  margin-top: 2rem;
+  text-align: center;
+  margin-bottom: 0;
+
+}
+
+@media screen and (min-width: 768px) {
+  .login-page__form {
+    padding-left: 3rem;
+    padding-right: 3rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .login-page__form-wrapper {
+  }
+
+  .login-page__form-displayer {
+    flex-direction: row;
+  }
+
+  .login-page__input {
+    /*
+     * Make the input fill most of the space
+     */
+    flex-grow: 1;
+  }
+
+  .login-page__submit {
+    --distance-to-input: 0;
+    /*
+     * Make the button shrink
+     */
+    flex-grow: 0 !important;
+  }
+}

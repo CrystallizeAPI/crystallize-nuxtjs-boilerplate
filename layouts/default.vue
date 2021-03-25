@@ -30,9 +30,66 @@
 <script>
 import { simplyFetchFromGraph } from "../lib/graph";
 
+import { serviceApi } from "/lib/service-api";
+
+function getCurrentSession() {
+  return serviceApi({
+    query: `
+        {
+          user {
+            isLoggedIn
+            logoutLink
+            email
+          }
+        }
+      `,
+  });
+}
+
+/**
+ * Specify where the user should land after logging out
+ * ?redirect=http://example.com
+ */
+function generateURLWithRedirect({ url, redirectToPath }) {
+  const _url = new URL(url);
+  const uri = `${location.protocol}//${location.host}`;
+  _url.searchParams.append(
+    "redirect",
+    encodeURIComponent(`${uri}${redirectToPath}`)
+  );
+
+  return _url;
+}
+
+async function retrieveCurrentAuthenticationStatus() {
+  const response = await getCurrentSession();
+  const {
+    user: { email, isLoggedIn, logoutLink },
+  } = response.data;
+
+  console.log(logoutLink);
+
+  const urlWithRedirect = generateURLWithRedirect({
+    url: logoutLink,
+    redirectToPath: "/",
+  });
+
+  const user = isLoggedIn ? { email } : null;
+  return {
+    user,
+    logoutLink: urlWithRedirect,
+  };
+}
+
 export default {
   data() {
     return { navItems: [] };
+  },
+  async mounted() {
+    const { user, logoutLink } = await retrieveCurrentAuthenticationStatus();
+    if (user) {
+      this.$store.dispatch("authentication/login", { user, logoutLink });
+    }
   },
   async fetch() {
     const { locales, locale: code } = this.$i18n;
