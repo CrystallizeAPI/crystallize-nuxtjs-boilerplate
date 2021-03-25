@@ -4,7 +4,7 @@
 
 <script>
 import videojs from "video.js";
-import "dashjs";
+// import "dashjs";
 import "videojs-contrib-dash";
 import "video.js/dist/video-js.css";
 
