@@ -35,10 +35,6 @@
 
 <script>
 export default {
-  async mounted() {
-    // const user = await checkAuth();
-    console.log("mounted in account");
-  },
   data: function () {
     return {
       isLoading: false,

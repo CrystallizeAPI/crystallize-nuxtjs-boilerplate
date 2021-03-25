@@ -67,8 +67,6 @@ async function retrieveCurrentAuthenticationStatus() {
     user: { email, isLoggedIn, logoutLink },
   } = response.data;
 
-  console.log(logoutLink);
-
   const urlWithRedirect = generateURLWithRedirect({
     url: logoutLink,
     redirectToPath: "/",
