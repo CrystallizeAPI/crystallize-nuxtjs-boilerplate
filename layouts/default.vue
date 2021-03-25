@@ -12,7 +12,7 @@
         <template v-slot:actions>
           <div class="layout__actions">
             <IconButton
-              to="/account"
+              :to="linkUserArea"
               screenReaderText="User area"
               iconSrc="/icons/user.svg"
             />
@@ -88,6 +88,19 @@ export default {
     if (user) {
       this.$store.dispatch("authentication/login", { user, logoutLink });
     }
+  },
+  computed: {
+    linkUserArea: function () {
+      const { isLoggedIn } = this.$store.state.authentication;
+      /*
+       * We provide the most relevant URL to have the best user experience
+       * that depends on the user authentication.
+       *
+       * For identified users, the URL provided is "/account"
+       * For anonymous users, the URL provided is "/login"
+       */
+      return isLoggedIn ? "/account" : "/login";
+    },
   },
   async fetch() {
     const { locales, locale: code } = this.$i18n;
