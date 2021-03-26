@@ -2,7 +2,7 @@
   <div class="pagination">
     <button
       class="pagination__button"
-      aria-label="Navigate to previous page"
+      :aria-label="$t('search.navigation.previous')"
       @click="$emit('pagination-change', { direction: directions.previous })"
       :aria-hidden="!hasPreviousPage"
       :disabled="!hasPreviousPage"
@@ -11,7 +11,7 @@
     </button>
     <button
       class="pagination__button"
-      aria-label="Navigate to next page"
+      :aria-label="$t('search.navigation.next')"
       @click="$emit('pagination-change', { direction: directions.next })"
       :aria-hidden="!hasNextPage"
       :disabled="!hasNextPage"

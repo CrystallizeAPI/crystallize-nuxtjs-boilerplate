@@ -103,6 +103,10 @@ export default {
       "STOCK_ASC": "Stock ascending",
       "STOCK_DESC": "Stock descending"
     },
+    "navigation": {
+      "previous": "Navigate to previous page",
+      "next": "Navigate to next page"
+    },
     "filter": "Filter",
     "working": "working fine",
     "facets": {
