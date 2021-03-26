@@ -2,28 +2,33 @@
   <div class="login-page">
     <Container>
       <template v-if="isLoggedIn">
-        <h1 class="login-page-title">Welcome {{ user.email }}</h1>
-        <p class="login-page__form-subtitle">You are logged in</p>
+        <h1 class="login-page-title">
+          {{ $t("customer.welcome", { name: user.email }) }}
+        </h1>
+        <p class="login-page__form-subtitle">
+          {{ $t("customer.login.loggedIn") }}
+        </p>
       </template>
       <template v-if="!isLoggedIn">
-        <h1 class="login-page-title">Login</h1>
+        <h1 class="login-page-title">{{ $t("customer.login.title") }}</h1>
         <form v-on:submit.prevent="onLoginSubmit" class="login-page__form">
           <h4 class="login-page__form-title">
-            Enter your email address and we’ll send a magic login link to your
-            inbox.
+            {{ $t("customer.login.instructions") }}
           </h4>
           <div class="login-page__form-displayer">
             <input
               type="email"
-              placeholder="Email"
+              :placeholder="$t('customer.email')"
               class="login-page__input"
               v-model="inputEmail"
             />
             <Button class="login-page__submit" alignment="center">
               <template v-if="isLoading">
-                <Spinner />
+                <Spinner aria-hidden="true" />
               </template>
-              <template v-if="!isLoading">Send me a magic link</template>
+              <template v-if="!isLoading">
+                {{ $t("customer.login.sendMagicLink") }}
+              </template>
             </Button>
           </div>
           <p v-if="message" class="login-page__message">{{ message }}</p>
