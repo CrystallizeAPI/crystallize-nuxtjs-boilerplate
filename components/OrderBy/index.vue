@@ -22,7 +22,7 @@
             STOCK_DESC: 'Stock descending'
           }
       -->
-      {{ option.value }}
+      {{ $t(`search.order.${option.value}`) }}
     </option>
   </select>
 </template>
