@@ -6,7 +6,7 @@
         :video="video"
         :autoplay="autoplay"
       />
-      <div v-else>Loading...</div>
+      <div v-else>{{ $t("common.loading") }}...</div>
     </div>
   </div>
 </template>

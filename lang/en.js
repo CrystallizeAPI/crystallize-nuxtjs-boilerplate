@@ -51,6 +51,7 @@ export default {
       "submit": "Submit search"
     },
     "ecomBy": "eCommerce by",
+    "loading": "loading",
     "loadingVideo": "Loading video",
     "slider": {
       "previous": "See the previous item",
