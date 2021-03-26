@@ -11,17 +11,6 @@
       :v-key="option.value"
       :value="option.value"
     >
-      <!--
-      @TODO: add translations so we have have this:
-        order: {
-            ITEM_NAME_ASC: 'Name ascending',
-            ITEM_NAME_DESC: 'Name descending',
-            PRICE_ASC: 'Price ascending',
-            PRICE_DESC: 'Price descending',
-            STOCK_ASC: 'Stock ascending',
-            STOCK_DESC: 'Stock descending'
-          }
-      -->
       {{ $t(`search.order.${option.value}`) }}
     </option>
   </select>
