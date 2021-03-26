@@ -2,10 +2,14 @@
   <div class="account-page">
     <Container>
       <template v-if="user">
-        <h1 class="account-page__title">Hi {{ user.email }}</h1>
-        <a class="account-page__logout" :href="logoutLink.href">Logout</a>
+        <h1 class="account-page__title">
+          {{ $t("customer.welcome", { name: user.email }) }}
+        </h1>
+        <a class="account-page__logout" :href="logoutLink.href">
+          {{ $t("customer.logout") }}
+        </a>
       </template>
-      <p v-else>you are not logged in</p>
+      <p v-else>{{ $t("customer.login.notLoggedIn") }}</p>
     </Container>
   </div>
 </template>
