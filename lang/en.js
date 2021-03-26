@@ -2,10 +2,10 @@ export default {
   basket: {
     "title": "Basket",
     "loading": "Hold on. Getting your basket...",
-    "removeItem": "Remove {{name}} from basket",
+    "removeItem": "Remove {name} from basket",
     "empty": "Your basket is empty",
     "empty_inCheckout": "You have no items in your basket",
-    "remainingUntilFreeShipping": "Add another {{amount, currency}} to your order for free shipping.",
+    "remainingUntilFreeShipping": "Add another {amount, currency} to your order for free shipping.",
     "totalPrice": "Total price",
     "discount": "Discount",
     "totalPriceAfterDiscount": "Total after discount",
@@ -15,7 +15,7 @@ export default {
     "goToCheckout": "Go to checkout",
     "vouchers": {
       "title": "Voucher",
-      "invalidCode": "The voucher {{code}} couldn\"t be applied",
+      "invalidCode": "The voucher {code} couldn\"t be applied",
       "inputPlaceholder": "Got a voucher code?",
       "applyCode": "Apply",
       "remove": "Remove voucher"
@@ -26,28 +26,28 @@ export default {
     "payNow": "Pay now",
     "choosePaymentMethod": "Choose payment method",
     "noPaymentProvidersConfigured": "No payment providers are configured",
-    "paymentProviderNotConfigured": "Payment provider {{name}} is not configured",
-    "paymentProviderLogoAlt": "Logo for {{name}}",
+    "paymentProviderNotConfigured": "Payment provider {name} is not configured",
+    "paymentProviderLogoAlt": "Logo for {name}",
     "confirmingCardPayment": "Please wait your card details are confirmed...",
     "loadingPaymentGateway": "Initialising payment gateway...",
-    "loadingPaymentGatewayFailed": "Oh no. Could not load the {{name}} payment gateway",
+    "loadingPaymentGatewayFailed": "Oh no. Could not load the {name} payment gateway",
     "confirmation": {
       "title": "Order confirmation",
       "shortStatus": "Your order has been confirmed.",
-      "shortStatus_withEmail": "Your order has been confirmed. A copy of your order has been sent to {{email}}"
+      "shortStatus_withEmail": "Your order has been confirmed. A copy of your order has been sent to {email}"
     }
   },
   common: {
     "frontpage": "Home",
-    "price": "{{value, currency}}",
-    "tax": "TAX: {{value, currency}}",
+    "price": "{value, currency}",
+    "tax": "TAX: {value, currency}",
     "close": "Close",
     "menu": "Menu",
     "search": {
       "placeholder": "Find things",
       "label": "Search",
-      "foundResults": "Found {{count}} matching result",
-      "foundResults_plural": "Found {{count}} matching results"
+      "foundResults": "Found {count} matching result",
+      "foundResults_plural": "Found {count} matching results"
     },
     "ecomBy": "eCommerce by",
     "loadingVideo": "Loading video",
@@ -88,7 +88,7 @@ export default {
     "relatedProduct_plural": "You might also be interested in",
     "addToBasket": "Add to Basket",
     "buy": "BUY",
-    "stock": "{{stockCount}} in stock",
+    "stock": "{stockCount} in stock",
     "outOfStock": "Out of stock"
   },
   search: {
@@ -102,9 +102,12 @@ export default {
       "STOCK_DESC": "Stock descending"
     },
     "filter": "Filter",
+    "working": "working fine",
     "facets": {
-      "viewNResults": "Show {{count}} result",
-      "viewNResults_plural": "Show {{count}} results",
+      "close": "Close filters",
+      "open": "Open filters",
+      "viewNResults": "Show {count} result",
+      "viewNResults_plural": "Show {count} results",
       "reset": "Reset",
       "price": {
         "title": "Price",
