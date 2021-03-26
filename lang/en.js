@@ -96,7 +96,13 @@ export default {
     "addToBasket": "Add to Basket",
     "buy": "BUY",
     "stock": "{stockCount} in stock",
-    "outOfStock": "Out of stock"
+    "outOfStock": "Out of stock",
+    "price": {
+      "withDiscountApplied": "Price with the discount applied",
+      "percentage": "discount percentage",
+      "original": "original price",
+      "label": "price"
+    }
   },
   search: {
     "orderTitle": "Order by",

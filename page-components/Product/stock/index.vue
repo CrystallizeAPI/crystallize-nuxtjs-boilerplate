@@ -6,21 +6,25 @@
       width="20"
       height="20"
       alt=""
+      aria-hidden="true"
     />
 
     <div v-if="!stock || stock === 0" class="document__stock-display">
-      Out of stock
+      {{ $t("product.outOfStock") }}
     </div>
     <div
       v-else-if="stock && stock > 1 && stock <= stockLimit"
       class="document__stock-display"
     >
-      {{ stock }} in stock
+      {{ $t("product.stock", { stockCount: stock }) }}
     </div>
-    <div v-else class="document__stock-display">{{ stockLimit }}+ in stock</div>
+    <div v-else class="document__stock-display">
+      {{ $t("product.stock", { stockCount: `${stockLimit}+` }) }}
+    </div>
     <div
       class="document__stock-color-indicator"
       :style="{ background: stockColor }"
+      aria-hidden="true"
     />
   </div>
 </template>

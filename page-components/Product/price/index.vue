@@ -8,14 +8,24 @@
       v-if="discountPrice || discountPercentage"
       class="product__price-inner"
     >
-      <strong class="product__price-current">{{ discountPrice }}</strong>
+      <strong
+        class="product__price-current"
+        :aria-label="$t('product.price.withDiscountApplied')"
+      >
+        {{ discountPrice }}
+      </strong>
       <div class="product__price-discount-details">
-        <span v-if="discountPrice" class="product__price-discount-amount">
+        <span
+          v-if="discountPrice"
+          class="product__price-discount-amount"
+          :aria-label="$t('product.price.original')"
+        >
           {{ defaultPrice }}
         </span>
         <span
           v-if="discountPercentage"
           class="product__price-discount-percentage"
+          :aria-label="$t('product.price.percentage')"
         >
           - {{ discountPercentage }}%
         </span>
@@ -23,7 +33,12 @@
     </div>
     <!-- This is printed if there is no discount -->
     <div v-else class="product__price-inner">
-      <strong class="product__price-current">{{ defaultPrice }}</strong>
+      <strong
+        class="product__price-current"
+        aria-label="$t('product.price.price')"
+      >
+        {{ defaultPrice }}
+      </strong>
     </div>
   </div>
 </template>
