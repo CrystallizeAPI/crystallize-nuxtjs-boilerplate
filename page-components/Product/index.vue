@@ -12,7 +12,6 @@
                 <CrystallizeComponents :components="summary" />
               </div>
               <TopicsList v-if="topics" :data="topics" :isUnderlined="false" />
-              <!-- @todo: add images to the variant buttons -->
               <VariantSelector
                 :selected-variant="selectedVariant"
                 :variants="product.variants"
