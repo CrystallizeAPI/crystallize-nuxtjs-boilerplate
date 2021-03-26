@@ -34,10 +34,12 @@
           <form
             class="search__form-inner"
             v-on:submit="onSearchSubmit"
-            aria-label="search"
+            :aria-label="$t('common.search.label')"
             role="search"
           >
-            <label class="search__label" for="site-search">Find things</label>
+            <label class="search__label" for="site-search">
+              {{ $t("common.search.placeholder") }}
+            </label>
             <div class="search__input-wrapper">
               <Spinner
                 v-if="status === 'searching'"
@@ -48,12 +50,15 @@
                 ref="search__input"
                 class="search__input"
                 type="search"
-                placeholder="Find things"
+                :placeholder="$t('common.search.placeholder')"
                 v-model="searchTerm"
                 v-on:keyup.esc="closeSearch"
                 tabindex="0"
               />
-              <button class="search__submit" aria-label="submit search">
+              <button
+                class="search__submit"
+                :aria-label="$t('common.search.submit')"
+              >
                 ➔
               </button>
             </div>

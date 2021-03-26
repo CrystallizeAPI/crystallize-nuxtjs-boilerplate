@@ -47,7 +47,8 @@ export default {
       "placeholder": "Find things",
       "label": "Search",
       "foundResults": "Found {count} matching result",
-      "foundResults_plural": "Found {count} matching results"
+      "foundResults_plural": "Found {count} matching results",
+      "submit": "Submit search"
     },
     "ecomBy": "eCommerce by",
     "loadingVideo": "Loading video",
@@ -108,7 +109,6 @@ export default {
       "next": "Navigate to next page"
     },
     "filter": "Filter",
-    "working": "working fine",
     "facets": {
       "close": "Close filters",
       "open": "Open filters",
