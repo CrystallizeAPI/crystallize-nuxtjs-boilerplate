@@ -17,7 +17,7 @@
       class="facets__displayer"
       :class="isOpen ? 'facets__displayer--is-open' : ''"
     >
-      <FacetGroup title="Price">
+      <FacetGroup :title="$t('search.facets.price.title')">
         <template v-slot:action>
           <FaceGroupAction @click="$emit('reset-price-facet')">
             {{ $t("search.facets.reset") }}
