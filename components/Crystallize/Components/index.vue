@@ -6,7 +6,11 @@
         :data="component.content"
       />
       <CrystallizeComponentsRichText
-        v-else-if="component.type === 'richText'"
+        v-else-if="
+          component.type === 'richText' &&
+          component.content &&
+          component.content.json
+        "
         :data="component.content"
       />
       <CrystallizeComponentsParagraphCollection

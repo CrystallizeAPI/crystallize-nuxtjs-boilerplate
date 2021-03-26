@@ -4,7 +4,7 @@
       <div :key="index" class="paragraph">
         <h3 v-if="paragraph.title">{{ paragraph.title.text }}</h3>
         <CrystallizeContentTransformer
-          v-if="paragraph.body"
+          v-if="paragraph.body && paragraph.body.json"
           :data="paragraph.body.json"
         />
 
