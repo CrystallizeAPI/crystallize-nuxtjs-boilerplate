@@ -57,7 +57,11 @@ export default {
       "next": "See the next item"
     },
     "waiting": "Please wait",
-    "errorWhenFetching": "An error occured when getting data for the page"
+    "errorWhenFetching": "An error occured when getting data for the page",
+    "spinner": {
+      "title": 'Circle loading spinner',
+      "desc": 'Image of a partial circle indicating "loading"',
+    }
   },
   customer: {
     "welcome": "Hi {name}",

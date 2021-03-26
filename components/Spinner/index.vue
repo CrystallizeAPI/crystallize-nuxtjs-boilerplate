@@ -6,8 +6,8 @@
     aria-labelledby="title desc"
     viewBox="0 0 32 32"
   >
-    <title id="title">Circle loading spinner</title>
-    <desc id="desc">Image of a partial circle indicating "loading"</desc>
+    <title id="title">{{ $t("common.spinner.title") }}</title>
+    <desc id="desc">{{ $t("common.spinner.desc") }}</desc>
     <circle
       role="presentation"
       cx="16"
