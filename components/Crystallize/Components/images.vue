@@ -1,14 +1,12 @@
 <template>
   <div class="crystallize-components-images">
     <template v-for="image in data">
-      <!-- <div class="crystallize-components-images__image-wrapper"> -->
       <CrystallizeImage
         :key="image.url"
         :image="image"
         class="crystallize-components-images__image"
         :class="getImageDynamicClasses(image)"
       />
-      <!-- </div> -->
     </template>
   </div>
 </template>
