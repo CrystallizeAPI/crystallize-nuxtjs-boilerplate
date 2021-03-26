@@ -3,22 +3,24 @@
     <Container>
       <template v-if="isLoggedIn">
         <h1 class="login-page-title">
-          {{ $t("customer.welcome", { name: user.email }) }}
+          {{ $t("common.welcome", { name: user.email }) }}
         </h1>
         <p class="login-page__form-subtitle">
-          {{ $t("customer.login.loggedIn") }}
+          {{ $t("customer.authentication.login.loggedIn") }}
         </p>
       </template>
       <template v-if="!isLoggedIn">
-        <h1 class="login-page-title">{{ $t("customer.login.title") }}</h1>
+        <h1 class="login-page-title">
+          {{ $t("authentication.login.title") }}
+        </h1>
         <form v-on:submit.prevent="onLoginSubmit" class="login-page__form">
           <h4 class="login-page__form-title">
-            {{ $t("customer.login.instructions") }}
+            {{ $t("authentication.login.instructions") }}
           </h4>
           <div class="login-page__form-displayer">
             <input
               type="email"
-              :placeholder="$t('customer.email')"
+              :placeholder="$t('common.email')"
               class="login-page__input"
               v-model="inputEmail"
             />
@@ -27,7 +29,7 @@
                 <Spinner aria-hidden="true" />
               </template>
               <template v-if="!isLoading">
-                {{ $t("customer.login.sendMagicLink") }}
+                {{ $t("authentication.login.cta") }}
               </template>
             </Button>
           </div>

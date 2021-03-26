@@ -4,11 +4,9 @@ export default {
     "loading": "Espera. Estamos actualizando tu cesta...",
     "removeItem": "eliminar {{name}} de tu cesta",
     "empty": "Tu cesta está vacía",
-    "empty_inCheckout": "No tienes objetos en tu cesta",
     "remainingUntilFreeShipping": "Añade otra {{amount, currency}} a tu pedido para tener envío gratuito.",
     "totalPrice": "Precio total",
     "discount": "Descuento",
-    "totalPriceAfterDiscount": "Total con descuento realizado",
     "shippingPrice": "Envio",
     "tax": "[Tax]",
     "totalToPay": "A pagar",
@@ -28,13 +26,11 @@ export default {
     "noPaymentProvidersConfigured": "No hay proveedores de pago configurados",
     "paymentProviderNotConfigured": "El proveedor de pagos {{name}} no está configurado",
     "paymentProviderLogoAlt": "Logo de {{name}}",
-    "confirmingCardPayment": "Porfavor espera a que los datos de la tarjeta se validen...",
     "loadingPaymentGateway": "Inicializando pasarela de pago...",
     "loadingPaymentGatewayFailed": "Oh no. No pudimos cargar la pasarela de pago de {{name}}",
     "confirmation": {
       "title": "Confirmación de pedido",
       "shortStatus": "Tu pedido se ha confirmado.",
-      "shortStatus_withEmail": "Tu pedido se ha confirmado. Se ha enviado una copia a {{email}}"
     }
   },
   common: {
@@ -54,7 +50,7 @@ export default {
       "placeholder": "[Find things]",
       "label": "Buscar",
       "foundResults": "Hemos encontrado {{count}} resultado de búsqueda",
-      "foundResults_plural": "Hemos encontrado {{count}} resultados de búsqueda"
+      "foundResults": "Hemos encontrado {{count}} resultados de búsqueda"
     }
   },
   customer: {

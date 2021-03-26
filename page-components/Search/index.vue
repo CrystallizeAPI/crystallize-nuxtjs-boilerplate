@@ -21,7 +21,7 @@
         </div>
         <span v-if="totalResults" class="search-page__counter">
           {{
-            $t("common.search.foundResults_plural", {
+            $t("common.search.foundResults", {
               count: this.totalResults,
             })
           }}

@@ -4,11 +4,9 @@ export default {
     "loading": "Περίμενε. Φορτώνουμε το καλάθι σου...",
     "removeItem": "Αφαίρεσε {{name}} από το καλάθι",
     "empty": "Το καλάθι σου είναι άδειο",
-    "empty_inCheckout": "Δεν έχεις προϊόντα στο καλάθι",
     "remainingUntilFreeShipping": "Πρόσθεσε {{amount, currency}} στην παραγγελία σου για δωρεάν μεταφορικά.",
     "totalPrice": "Συνολική τιμή",
     "discount": "Έκπτωση",
-    "totalPriceAfterDiscount": "Τελική τιμή μετά την έκπτωση",
     "shippingPrice": "Μεταφορικά",
     "tax": "ΦΠΑ",
     "totalToPay": "Αξία",
@@ -28,13 +26,11 @@ export default {
     "noPaymentProvidersConfigured": "Κανένας τρόπος πληρωμής δεν έχει διαμορφωθεί",
     "paymentProviderNotConfigured": "Ο πάροχος πληρωμών {{name}} δεν έχει διαμορφωθεί",
     "paymentProviderLogoAlt": "Λογότυπο για {{name}}",
-    "confirmingCardPayment": "Please wait your card details are confirmed...",
     "loadingPaymentGateway": "Αρχικοποίηση τρόπου πληρωμής...",
     "loadingPaymentGatewayFailed": "Ωχ, φαίνεται πως δεν μπορούσαμε να αρχικοποιήσουμε τον τρόπο πληρωμής: {{name}}",
     "confirmation": {
       "title": "Επιβεβαίωση παραγγελίας",
       "shortStatus": "Η παραγγελία σας έχει επιβεβαιωθεί.",
-      "shortStatus_withEmail": "Η παραγγελία σας έχει επιβεβαιωθεί. Ένα αντίγραφο έχει αποσταλεί στη διεύθυνση: {{email}}"
     }
   },
   common: {
@@ -47,7 +43,7 @@ export default {
       "label": "Αναζήτηση",
       "placeholder": "[Find things]",
       "foundResults": "[Found {{count}} matching result]",
-      "foundResults_plural": "[Found {{count}} matching results]"
+      "foundResults": "[Found {{count}} matching results]"
     },
     "ecomBy": "Ηλεκτρονικό κατάστημα από",
     "loadingVideo": "Το βίνετο φορτώνει",

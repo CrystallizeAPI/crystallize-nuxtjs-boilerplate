@@ -3,13 +3,13 @@
     <Container>
       <template v-if="user">
         <h1 class="account-page__title">
-          {{ $t("customer.welcome", { name: user.email }) }}
+          {{ $t("common.welcome", { name: user.email }) }}
         </h1>
         <a class="account-page__logout" :href="logoutLink.href">
-          {{ $t("customer.logout") }}
+          {{ $t("authentication.logout") }}
         </a>
       </template>
-      <p v-else>{{ $t("customer.login.notLoggedIn") }}</p>
+      <p v-else>{{ $t("authentication.notLoggedIn") }}</p>
     </Container>
   </div>
 </template>

@@ -4,11 +4,9 @@ export default {
     "loading": "Vennligst vent. Henter din handlekurv...",
     "removeItem": "Fjern {{name}} fra handlekurven",
     "empty": "Handlekurven din er tom",
-    "empty_inCheckout": "Du har ikke lagt til noe i handlekurven enda.",
     "remainingUntilFreeShipping": "Kjøp for {{amount, currency}} ekstra for å oppnå gratis frakt",
     "totalPrice": "Totalt",
     "discount": "Rabatt",
-    "totalPriceAfterDiscount": "Totalt etter rabatt",
     "shippingPrice": "Frakt",
     "tax": "Moms",
     "totalToPay": "Til betaling",
@@ -28,13 +26,11 @@ export default {
     "noPaymentProvidersConfigured": "Ingen betalingstjenester er konfigurert",
     "paymentProviderNotConfigured": "Betalingstjenesten {{name}} er ikke konfigurert",
     "paymentProviderLogoAlt": "Logo for {{name}}",
-    "confirmingCardPayment": "Please wait your card details are confirmed...",
     "loadingPaymentGateway": "Laster betalingstjenesten...",
     "loadingPaymentGatewayFailed": "Oisann. Betalingstjenesten {{name}} kan ikke lastes akkurat nå",
     "confirmation": {
       "title": "Ordrebekreftelse",
       "shortStatus": "Din ordre er bekreftet",
-      "shortStatus_withEmail": "Din ordre er bekreftet. En kopi av ordren er send til {{email}}"
     }
   },
   common: {
@@ -47,7 +43,7 @@ export default {
       "placeholder": "Søk etter ting",
       "label": "Søk",
       "foundResults": "Fant {{count}} resultat",
-      "foundResults_plural": "Fant {{count}} resultater"
+      "foundResults": "Fant {{count}} resultater"
     },
     "ecomBy": "Nettbutikk av",
     "loadingVideo": "Laster video",
