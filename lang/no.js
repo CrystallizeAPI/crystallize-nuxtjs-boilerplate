@@ -97,7 +97,6 @@ export default {
     "filter": "Filtrer",
     "facets": {
       "viewNResults": "Vis {{count}} resultat",
-      "viewNResults_plural": "Vis {{count}} resultater",
       "reset": "Tilbakestill",
       "price": {
         "title": "Pris",

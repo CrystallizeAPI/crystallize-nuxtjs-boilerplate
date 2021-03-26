@@ -84,7 +84,7 @@
       <footer class="facets__displayer-close">
         <Button @click="closeFacets" class="facets__displayer-close-button">
           {{
-            $t("search.facets.viewNResults_plural", {
+            $t("search.facets.viewNResults", {
               count: this.totalResults,
             })
           }}

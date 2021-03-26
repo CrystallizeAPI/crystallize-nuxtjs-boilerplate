@@ -98,7 +98,6 @@ export default {
     "filter": "Filtrar",
     "facets": {
       "viewNResults": "Mostrar {{count}} resultado",
-      "viewNResults_plural": "Mostrar {{count}} resultados",
       "reset": "Reiniciar",
       "price": {
         "title": "Precio",

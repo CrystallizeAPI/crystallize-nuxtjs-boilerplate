@@ -117,7 +117,6 @@ export default {
       "close": "Close filters",
       "open": "Open filters",
       "reset": "Reset",
-      "viewNResults_plural": "Show {count} results",
       "viewNResults": "Show {count} result",
       "price": {
         "title": "Price",
