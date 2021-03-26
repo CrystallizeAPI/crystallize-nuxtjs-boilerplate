@@ -20,7 +20,11 @@
           />
         </div>
         <span v-if="totalResults" class="search-page__counter">
-          Found {{ this.totalResults }} matching results
+          {{
+            $t("common.search.foundResults_plural", {
+              count: this.totalResults,
+            })
+          }}
         </span>
         <CrystallizeCatalogueItems v-if="items" :items="items" />
         <Pagination

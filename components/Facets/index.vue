@@ -7,9 +7,11 @@
       -->
     <ButtonOpenFacets
       @click="toggleFacets"
-      :aria-label="isOpen ? 'Close filters' : 'Open filters'"
+      :aria-label="
+        isOpen ? $t('search.facets.close') : $t('search.facets.open')
+      "
     >
-      {{ this.isOpen ? "Close" : "Filter" }}
+      {{ isOpen ? $t("common.close") : $t("search.filter") }}
     </ButtonOpenFacets>
     <div
       class="facets__displayer"
@@ -18,7 +20,7 @@
       <FacetGroup title="Price">
         <template v-slot:action>
           <FaceGroupAction @click="$emit('reset-price-facet')">
-            Reset
+            {{ $t("search.facets.reset") }}
           </FaceGroupAction>
         </template>
         <template v-slot:children>
@@ -48,7 +50,7 @@
                 })
               "
             >
-              Reset
+              {{ $t("search.facets.reset") }}
             </FaceGroupAction>
           </template>
           <template v-slot:children>
@@ -82,9 +84,9 @@
       <footer class="facets__displayer-close">
         <Button @click="closeFacets" class="facets__displayer-close-button">
           {{
-            this.totalResults > 0
-              ? `Show ${totalResults} results`
-              : "show results"
+            $t("search.facets.viewNResults_plural", {
+              count: this.totalResults,
+            })
           }}
         </Button>
       </footer>
