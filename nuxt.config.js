@@ -40,7 +40,7 @@ function childrenIsMostlyProducts(children) {
 
 import appConfig from "./app.config.json";
 
-const locale = appConfig.locale || {
+const defaultLocale = appConfig.locale || {
   locale: "en",
   displayName: "English - US",
   appLanguage: "en-US",
@@ -89,7 +89,7 @@ export default {
       }
 
       const allCatalogueItems = await getAllCatalogueItems(
-        locale.crystallizeCatalogueLanguage
+        defaultLocale.crystallizeCatalogueLanguage
       );
 
       allCatalogueItems.forEach(handleItem);
@@ -136,17 +136,17 @@ export default {
     seo: true,
     lazy: true,
     langDir: "lang/",
-    defaultLocale: locale.locale,
+    defaultLocale: defaultLocale.locale,
     locales: [
       {
-        code: locale.locale,
-        iso: locale.appLanguage,
-        file: `${locale.appLanguage}.js`,
-        ...locale,
+        code: defaultLocale.locale,
+        iso: defaultLocale.appLanguage,
+        file: `${defaultLocale.locale}.js`,
+        ...defaultLocale,
       },
     ],
     vueI18n: {
-      fallbackLocale: locale.locale,
+      fallbackLocale: defaultLocale.locale,
     },
     numberFormats: {
       "en-US": {
