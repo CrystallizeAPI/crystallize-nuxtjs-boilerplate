@@ -2,7 +2,7 @@
   <select
     class="order-by"
     v-on:change="handleChange"
-    aria-label="Order by"
+    :aria-label="$t('search.orderTitle')"
     name="order_by"
   >
     <option

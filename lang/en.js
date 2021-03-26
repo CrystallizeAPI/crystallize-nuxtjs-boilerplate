@@ -38,11 +38,11 @@ export default {
     }
   },
   common: {
+    "close": "Close",
     "frontpage": "Home",
+    "menu": "Menu",
     "price": "{value, currency}",
     "tax": "TAX: {value, currency}",
-    "close": "Close",
-    "menu": "Menu",
     "search": {
       "placeholder": "Find things",
       "label": "Search",
@@ -54,7 +54,9 @@ export default {
     "slider": {
       "previous": "See the previous item",
       "next": "See the next item"
-    }
+    },
+    "waiting": "Please wait",
+    "errorWhenFetching": "An error occured when getting data for the page"
   },
   customer: {
     "welcome": "Hi {name}",

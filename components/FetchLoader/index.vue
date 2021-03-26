@@ -2,10 +2,10 @@
   <div>
     <div v-if="state.pending" class="fetch-loader">
       <Spinner />
-      Please wait...
+      {{ $t("waiting") }}
     </div>
     <div v-else-if="state.error" class="fetch-loader">
-      An error occured when getting data for the page
+      {{ $t("errorWhenFetching") }}
     </div>
     <slot v-else></slot>
   </div>

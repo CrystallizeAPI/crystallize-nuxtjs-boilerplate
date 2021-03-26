@@ -12,7 +12,7 @@
       </NuxtLink>
     </div>
     <footer class="navlist">
-      <h5>Menu</h5>
+      <h5>{{ $t("common.menu") }}</h5>
       <li v-for="child of navItems" :key="child.path" class="nav-list-item">
         <NuxtLink :to="child.path">
           {{ child.name }}
@@ -20,7 +20,7 @@
       </li>
     </footer>
     <div class="powered">
-      <p>eCommerce by</p>
+      <p>{{ $t("common.ecomBy") }}</p>
       <a href="https://crystallize.com" aria-label="crystallize.com">
         <img
           src="/logo-crystallize.svg"
