@@ -8,6 +8,8 @@ const CART_STATUS = {
   SERVER_BASKET_IS_STALE: 'server-basket-is-stale'
 }
 
+const EMPTY_CART = []
+
 export const initialState = {
   status: CART_STATUS.NOT_HYDRATED,
   /**
@@ -21,7 +23,7 @@ export const initialState = {
      *  - priceVariantIdentifier
      *  - quantity
      */
-    cart: [],
+    cart: EMPTY_CART,
     voucherCode: null,
 
     /**
@@ -46,6 +48,61 @@ export const initialState = {
 };
 
 export const state = () => initialState
+
+export const getters = {
+  totalWithoutDiscounts: (state) => {
+    const cart = (state.serverBasket?.cart || EMPTY_CART)
+      .map(withLocalState)
+      .filter(Boolean);
+
+    return cart
+      .filter(p => !isVoucherProduct(p))
+      .reduce(
+        (acc, curr) => {
+          return {
+            gross: acc.gross + curr.price.gross,
+            net: acc.net + curr.price.net,
+            quantity: acc.quantity + curr.quantity
+          };
+        },
+        {
+          gross: 0,
+          quantity: 0
+        }
+      );
+  },
+}
+
+function isVoucherProduct(product) {
+  return product.sku.startsWith('--voucher--')
+}
+
+/* 
+ * We add to the non-voucher products the quantity (from the client-side state).
+ */
+function withLocalState(item) {
+  // Exclude voucher codes
+  if (isVoucherProduct(item)) {
+    return item;
+  }
+
+  const clientBasketCartItem = clientBasket.cart.find(
+    (c) => c.sku === item.sku
+  );
+
+  /**
+   * Don't show the cart item if it is not in
+   * the client cache.
+   **/
+  if (!clientBasketCartItem) {
+    return null;
+  }
+
+  return {
+    ...item,
+    quantity: clientBasketCartItem.quantity
+  };
+}
 
 export const actions = {
   addItem(context, payload) {

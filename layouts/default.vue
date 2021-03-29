@@ -17,7 +17,7 @@
               iconSrc="/icons/user.svg"
             />
             <Search />
-            <IconButton screenReaderText="basket" iconSrc="/icons/basket.svg" />
+            <BasketButton />
           </div>
         </template>
       </LayoutHeader>

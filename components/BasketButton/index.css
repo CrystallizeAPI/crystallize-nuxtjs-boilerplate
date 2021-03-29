@@ -1,0 +1,21 @@
+.basket-button {
+  position: relative;
+}
+
+.basket-button__badge {
+  font-size: var(--font-size-xs);
+  width: 20px;
+  height: 20px;
+  background-color: black;
+  color: white;
+  border-radius: 99px;
+  position: absolute;
+  top: 0;
+  right: -5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  border: 3px solid white;
+  padding: 10px;
+}
