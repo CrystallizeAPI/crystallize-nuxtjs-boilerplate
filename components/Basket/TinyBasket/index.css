@@ -1,0 +1,40 @@
+.basket-tiny {
+  background: var(--color-main-background);
+  display: flex;
+  flex-direction: column;
+  /*
+   * We make it expand to fill all the space available
+   */
+  flex: 1;
+  height: 100%;
+  max-height: 100vh;
+  padding: var(--padding-l) var(--padding-m) var(--padding-xs) var(--padding-m);
+  position: relative;
+  z-index: 15;
+}
+
+.basket-tiny__title {
+  flex: 0 0 auto;
+  margin-top: 0;
+  margin-bottom: var(--padding-xs);
+}
+
+.basket-tiny__content{
+  flex: 1 1 auto;
+  overflow-y: auto;
+}
+
+.basket-tiny__footer {
+  margin-top: 20px;
+  flex: 0 0 auto;
+}
+
+.basket-tiny__link-to-checkout {
+  border: 2px solid var(--color-text-main);
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 10px 20px;
+  text-align: center;
+  width: 100%;
+}

@@ -7,7 +7,7 @@
     <div v-else>
       <LayoutWithAsideView>
         <template v-slot:view-to-toggle>
-          <div>aside content</div>
+          <TinyBasket />
         </template>
         <template>
           <LayoutHeader>
@@ -36,7 +36,7 @@
 
 <script>
 import { simplyFetchFromGraph } from "../lib/graph";
-
+import TinyBasket from "../components/Basket/TinyBasket";
 import { serviceApi } from "/lib/service-api";
 
 function getCurrentSession() {
@@ -87,6 +87,7 @@ async function retrieveCurrentAuthenticationStatus() {
 }
 
 export default {
+  components: { TinyBasket },
   data() {
     return { navItems: [] };
   },
