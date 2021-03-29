@@ -19,7 +19,7 @@
               />
               <div class="product-page__pricing-details">
                 <Price :variant="selectedVariant" />
-                <BuyButton />
+                <BuyButton @click="handleBuyItem" />
               </div>
               <Stock v-if="selectedVariant" :stock="selectedVariant.stock" />
             </div>
@@ -162,6 +162,10 @@ export default {
     onSelectedVariantChange(variant) {
       this.selectedVariant = variant;
       this.images = variant.images;
+    },
+    handleBuyItem() {
+      console.log("working");
+      // @todo: dispatch addItemToCart action
     },
   },
 };
