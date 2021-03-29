@@ -19,7 +19,7 @@
   margin-bottom: var(--padding-xs);
 }
 
-.basket-tiny__content{
+.basket-tiny__content {
   flex: 1 1 auto;
   overflow-y: auto;
 }
@@ -37,4 +37,15 @@
   padding: 10px 20px;
   text-align: center;
   width: 100%;
+}
+
+.basket-tiny__link-to-checkout[disabled] {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.basket-tiny__link-to-checkout:hover:not([disabled]) {
+  background: var(--color-text-main);
+  color: var(--color-main-background);
+  text-decoration: none;
 }

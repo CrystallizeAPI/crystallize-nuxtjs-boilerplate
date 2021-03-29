@@ -1,11 +1,14 @@
 <template>
   <div class="basket-tiny">
     <h4 class="basket-tiny__title">[Basket]</h4>
-    <div class="basket-tiny__content">
-      content
-    </div>
+    <div class="basket-tiny__content">content</div>
     <footer class="basket-tiny__footer">
-      <NuxtLink class="basket-tiny__link-to-checkout" disabled to="/checkout">
+      <NuxtLink
+        class="basket-tiny__link-to-checkout"
+        :disabled="!isLinkToCheckoutActive"
+        :event="isLinkToCheckoutActive ? 'click' : ''"
+        to="/checkout"
+      >
         Go to checkout
       </NuxtLink>
     </footer>
