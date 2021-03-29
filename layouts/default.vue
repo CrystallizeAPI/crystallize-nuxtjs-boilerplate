@@ -5,24 +5,31 @@
       Oh no! There was an error fetching the data in layouts/default.vue
     </p>
     <div v-else>
-      <LayoutHeader>
-        <template v-slot:navigation>
-          <LayoutNavigation :nav-items="navItems" />
+      <LayoutWithAsideView>
+        <template v-slot:view-to-toggle>
+          <div>aside content</div>
         </template>
-        <template v-slot:actions>
-          <div class="layout__actions">
-            <IconButton
-              :to="linkUserArea"
-              screenReaderText="User area"
-              iconSrc="/icons/user.svg"
-            />
-            <Search />
-            <BasketButton />
-          </div>
+        <template>
+          <LayoutHeader>
+            <template v-slot:navigation>
+              <LayoutNavigation :nav-items="navItems" />
+            </template>
+            <template v-slot:actions>
+              <div class="layout__actions">
+                <IconButton
+                  :to="linkUserArea"
+                  screenReaderText="User area"
+                  iconSrc="/icons/user.svg"
+                />
+                <Search />
+                <BasketButton />
+              </div>
+            </template>
+          </LayoutHeader>
+          <nuxt />
+          <LayoutFooter :nav-items="navItems" />
         </template>
-      </LayoutHeader>
-      <nuxt />
-      <LayoutFooter :nav-items="navItems" />
+      </LayoutWithAsideView>
     </div>
   </div>
 </template>
