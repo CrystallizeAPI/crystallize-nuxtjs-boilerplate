@@ -107,7 +107,6 @@ function withLocalState(item) {
 export const actions = {
   addItem(context, payload) {
     console.log('added item')
-    console.log(context, payload)
   }
 }
 

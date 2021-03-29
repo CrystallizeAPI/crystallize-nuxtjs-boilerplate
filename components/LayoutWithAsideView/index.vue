@@ -1,5 +1,6 @@
 <template>
   <div :class="moduleStyles">
+    <!-- The <div> is used to capture the clicks outside the view toggled -->
     <div
       v-if="isAsideShow"
       class="layout-with-aside-view__overlay"

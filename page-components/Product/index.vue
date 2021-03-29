@@ -164,7 +164,6 @@ export default {
       this.images = variant.images;
     },
     handleBuyItem() {
-      console.log("working");
       // @todo: dispatch addItemToCart action
     },
   },

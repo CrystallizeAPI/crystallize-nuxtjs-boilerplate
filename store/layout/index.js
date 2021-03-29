@@ -19,7 +19,6 @@ export const actions = {
     context.commit('hideAside')
   },
   toggleAside(context) {
-    console.log(context.state)
     const { isAsideShown } = context.state
     isAsideShown
       ? context.commit('hideAside')
