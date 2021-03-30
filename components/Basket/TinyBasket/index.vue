@@ -1,6 +1,8 @@
 <template>
   <div class="basket-tiny">
-    <h4 class="basket-tiny__title">[Basket]</h4>
+    <h4 class="basket-tiny__title">
+      {{ $t("basket.title") }}
+    </h4>
     <div class="basket-tiny__content">content</div>
     <footer class="basket-tiny__footer">
       <NuxtLink
@@ -9,7 +11,7 @@
         :event="isLinkToCheckoutActive ? 'click' : ''"
         to="/checkout"
       >
-        Go to checkout
+        {{ $t("basket.goToCheckout") }}
       </NuxtLink>
     </footer>
   </div>
