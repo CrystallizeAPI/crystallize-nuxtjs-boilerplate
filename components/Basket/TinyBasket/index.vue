@@ -21,7 +21,9 @@
 export default {
   computed: {
     isLinkToCheckoutActive: function () {
-      return this.$store.getters["cart/totalWithoutDiscounts"].quantity > 0;
+      return (
+        this.$store.getters["basket/totalItemsWithoutDiscount"].quantity > 0
+      );
     },
   },
 };

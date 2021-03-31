@@ -19,7 +19,10 @@
               />
               <div class="product-page__pricing-details">
                 <Price :variant="selectedVariant" />
-                <BuyButton @click="handleBuyItem" />
+                <BuyButton
+                  :isLoading="isItemBeingAddedToCart"
+                  @click="handleBuyItem"
+                />
               </div>
               <Stock v-if="selectedVariant" :stock="selectedVariant.stock" />
             </div>
@@ -88,6 +91,7 @@ export default {
       selectedVariant: null,
       specs: null,
       relatedProducts: null,
+      isItemBeingAddedToCart: false,
     };
   },
   async fetch() {
@@ -164,7 +168,40 @@ export default {
       this.images = variant.images;
     },
     handleBuyItem() {
-      // @todo: dispatch addItemToCart action
+      /*
+       * We indicate that the item is being added to the cart
+       * so we can show a spinner and increase the user experience
+       */
+      this.isItemBeingAddedToCart = true;
+      const { locales, locale: code } = this.$i18n;
+      const locale = locales.find((l) => l.locale === code) || locales[0];
+
+      const { getRelativePriceVariants } = require("/lib/pricing");
+      const variantPricing = getRelativePriceVariants({
+        variant: this.selectedVariant,
+        locale,
+      });
+      const variantDiscountPrice = variantPricing?.discountPrice;
+      const variantDefaultPrice = variantPricing?.defaultPrice;
+
+      this.$store
+        .dispatch("basket/addItem", {
+          sku: this.selectedVariant.sku,
+          path: this.product.path,
+          priceVariantIdentifier: variantDiscountPrice
+            ? variantDiscountPrice.identifier
+            : variantDefaultPrice.identifier || locale.crystallizePriceVariant,
+        })
+        .finally(() => {
+          /*
+           * Independently if we could add the item or not,
+           * we will stop showing the spinner. Also, we add a delay so the
+           * spinner can be visualize for a small period of time.
+           */
+          setTimeout(() => {
+            this.isItemBeingAddedToCart = false;
+          }, 250);
+        });
     },
   },
 };

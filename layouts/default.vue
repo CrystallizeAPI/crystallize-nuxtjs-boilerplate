@@ -5,100 +5,52 @@
       Oh no! There was an error fetching the data in layouts/default.vue
     </p>
     <div v-else>
-      <LayoutWithAsideView>
-        <template v-slot:view-to-toggle>
-          <TinyBasket />
-        </template>
-        <template>
-          <LayoutHeader>
-            <template v-slot:navigation>
-              <LayoutNavigation :nav-items="navItems" />
+      <AuthenticationProvider>
+        <BasketProvider>
+          <LayoutWithAsideView>
+            <template v-slot:view-to-toggle>
+              <TinyBasket v-slot:view-to-toggle />
             </template>
-            <template v-slot:actions>
-              <div class="layout__actions">
-                <IconButton
-                  :to="linkUserArea"
-                  screenReaderText="User area"
-                  iconSrc="/icons/user.svg"
-                />
-                <Search />
-                <BasketButton />
-              </div>
+            <template>
+              <LayoutHeader>
+                <template v-slot:navigation>
+                  <LayoutNavigation :nav-items="navItems" />
+                </template>
+                <template v-slot:actions>
+                  <div class="layout__actions">
+                    <IconButton
+                      :to="linkUserArea"
+                      screenReaderText="User area"
+                      iconSrc="/icons/user.svg"
+                    />
+                    <Search />
+                    <BasketButton />
+                  </div>
+                </template>
+              </LayoutHeader>
+              <nuxt />
+              <LayoutFooter :nav-items="navItems" />
             </template>
-          </LayoutHeader>
-          <nuxt />
-          <LayoutFooter :nav-items="navItems" />
-        </template>
-      </LayoutWithAsideView>
+          </LayoutWithAsideView>
+        </BasketProvider>
+      </AuthenticationProvider>
     </div>
   </div>
 </template>
 
 <script>
+import AuthenticationProvider from "../providers/Authentication";
+import BasketProvider from "../providers/Basket";
 import { simplyFetchFromGraph } from "../lib/graph";
 import TinyBasket from "../components/Basket/TinyBasket";
-import { serviceApi } from "/lib/service-api";
-
-function getCurrentSession() {
-  return serviceApi({
-    query: `
-        {
-          user {
-            isLoggedIn
-            logoutLink
-            email
-          }
-        }
-      `,
-  });
-}
-
-/**
- * Specify where the user should land after logging out
- * ?redirect=http://example.com
- */
-function generateURLWithRedirect({ url, redirectToPath }) {
-  const _url = new URL(url);
-  const uri = `${location.protocol}//${location.host}`;
-  _url.searchParams.append(
-    "redirect",
-    encodeURIComponent(`${uri}${redirectToPath}`)
-  );
-
-  return _url;
-}
-
-async function retrieveCurrentAuthenticationStatus() {
-  const response = await getCurrentSession();
-  const {
-    user: { email, isLoggedIn, logoutLink },
-  } = response.data;
-
-  const urlWithRedirect = generateURLWithRedirect({
-    url: logoutLink,
-    redirectToPath: "/",
-  });
-
-  const user = isLoggedIn ? { email } : null;
-  return {
-    user,
-    logoutLink: urlWithRedirect,
-  };
-}
 
 export default {
-  components: { TinyBasket },
+  components: { AuthenticationProvider, BasketProvider, TinyBasket },
   data() {
     return { navItems: [] };
   },
-  async mounted() {
-    const { user, logoutLink } = await retrieveCurrentAuthenticationStatus();
-    if (user) {
-      this.$store.dispatch("authentication/login", { user, logoutLink });
-    }
-  },
   computed: {
-    linkUserArea: function () {
+    linkUserArea() {
       const { isLoggedIn } = this.$store.state.authentication;
       /*
        * We provide the most relevant URL to have the best user experience

@@ -13,7 +13,9 @@
 export default {
   computed: {
     cartItems: function () {
-      return this.$store.getters["cart/totalWithoutDiscounts"].quantity || 0;
+      return (
+        this.$store.getters["basket/totalItemsWithoutDiscount"].quantity || 0
+      );
     },
   },
   methods: {
