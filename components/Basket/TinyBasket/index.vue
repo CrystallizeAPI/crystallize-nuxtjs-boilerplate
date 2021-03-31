@@ -3,7 +3,7 @@
     <h4 class="basket-tiny__title">
       {{ $t("basket.title") }}
     </h4>
-    <div class="basket-tiny__content">content</div>
+    <div class="basket-tiny__content">{{ this.cart.length }}</div>
     <footer class="basket-tiny__footer">
       <NuxtLink
         class="basket-tiny__link-to-checkout"
@@ -24,6 +24,9 @@ export default {
       return (
         this.$store.getters["basket/totalItemsWithoutDiscount"].quantity > 0
       );
+    },
+    cart: function () {
+      return this.$store.state.basket.serverBasket?.cart || [];
     },
   },
 };

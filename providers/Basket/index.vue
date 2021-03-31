@@ -8,11 +8,9 @@
 export default {
   async mounted() {
     /**
-     * Basket logic when the application is loaded for first time
+     * When the applicattion is mounted, we must populate the store.
      */
-    this.$store
-      .dispatch("basket/updateBasket")
-      .then(() => console.log("after loadBasket finished"));
+    this.$store.dispatch("basket/updateBasket");
   },
 };
 </script>

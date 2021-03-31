@@ -5,13 +5,13 @@ export function isVoucherProduct(product) {
 /* 
  * We add to the non-voucher products the quantity (from the client-side state).
  */
-export function withLocalState(item) {
+export function withLocalState(cart, item) {
   // Exclude voucher codes
   if (isVoucherProduct(item)) {
     return item;
   }
 
-  const clientBasketCartItem = clientBasket.cart.find(
+  const clientBasketCartItem = cart.find(
     (c) => c.sku === item.sku
   );
 
@@ -35,7 +35,7 @@ export function clientCartItemForAPI({ sku, path, quantity, priceVariantIdentifi
 
 export function getTotalItemsWithoutDiscount(cart) {
   const totalItemsWithoutDiscount = cart
-    .map(withLocalState)
+    .map(cartItem => withLocalState(cart, cartItem))
     .filter(Boolean)
     .filter((p) => !isVoucherProduct(p))
     .reduce(

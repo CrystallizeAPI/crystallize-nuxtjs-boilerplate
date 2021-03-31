@@ -58,8 +58,9 @@ export const state = () => ({
  */
 export const getters = {
   totalItemsWithoutDiscount: (state) => {
-    const cart = (state.serverBasket?.cart || EMPTY_CART)
-      .map(withLocalState)
+    const serverCart = state.serverBasket?.cart || EMPTY_CART
+    const cart = serverCart
+      .map(cartItem => withLocalState(serverCart, cartItem))
       .filter(Boolean);
 
     return cart
@@ -92,7 +93,7 @@ export const getters = {
 }
 
 export const mutations = {
-  actionOnCartItem(state, { actionName, product }) {
+  actionOnCartItem(state, { action, product }) {
     /**
      * For inmutability purposes, we will modify a copy of the current state.
      * Once we've finished, we'll assign this draft state to the original.
@@ -101,12 +102,12 @@ export const mutations = {
 
     const { sku, path } = product
     if (!sku || !path) {
-      throw new Error(`Please provide "sku" and "path" for ${actionName}`);
+      throw new Error(`Please provide "sku" and "path" for ${action}`);
     }
 
     const itemIndex = currentState.clientBasket.cart.findIndex((i) => i.sku === sku);
     const isItemAlreadyInCart = itemIndex !== -1
-    const hasToDecrementOrRemoveItem = !['remove-item', 'decrement-item'].includes(actionName)
+    const hasToDecrementOrRemoveItem = !['remove-item', 'decrement-item'].includes(action)
 
     if (!isItemAlreadyInCart) {
       if (hasToDecrementOrRemoveItem) {
@@ -124,13 +125,13 @@ export const mutations = {
     /**
      * At this point, we know already that the item is not in the cart.
      */
-    if (actionName === 'remove-item') {
+    if (action === 'remove-item') {
       currentState.clientBasket.cart.splice(itemIndex, 1);
     }
-    if (actionName === 'decrement-item') {
+    if (action === 'decrement-item') {
       currentState.clientBasket.cart[itemIndex].quantity -= 1;
     }
-    if (actionName === 'increment-item' || actionName === 'add-item') {
+    if (action === 'increment-item' || action === 'add-item') {
       currentState.clientBasket.cart[itemIndex].quantity += 1;
     }
 
@@ -139,11 +140,7 @@ export const mutations = {
   },
 
   setServerBasket(state, { serverBasket }) {
-    const currentState = { ...state }
-
-    currentState.serverBasket = serverBasket
-
-    state = currentState
+    state.serverBasket = serverBasket
   }
 }
 
@@ -162,16 +159,16 @@ const actionWithSideEffect = fn => (context, payload) => {
 
 export const actions = {
   addItem: actionWithSideEffect((context, product) => {
-    context.commit('actionOnCartItem', { actionName: 'add-item', product });
+    context.commit('actionOnCartItem', { action: 'add-item', product });
   }),
   removeItem: actionWithSideEffect((context, product) => {
-    context.commit('actionOnCartItem', { actionName: 'remove-item', product });
+    context.commit('actionOnCartItem', { action: 'remove-item', product });
   }),
   incrementItem: actionWithSideEffect((context, product) => {
-    context.commit('actionOnCartItem', { actionName: 'increment-item', product });
+    context.commit('actionOnCartItem', { action: 'increment-item', product });
   }),
   decrementItem: actionWithSideEffect((context, product) => {
-    context.commit('actionOnCartItem', { actionName: 'decrement-item', product });
+    context.commit('actionOnCartItem', { action: 'decrement-item', product });
   }),
   updateBasket(context) {
     const { locales, locale: localeCode } = this.$i18n;
