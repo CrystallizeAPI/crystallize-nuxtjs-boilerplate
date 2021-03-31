@@ -1,16 +1,7 @@
 .layout-with-aside-view {
   --aside-width: 300px;
-  position: relative;
-  transition: left 300ms cubic-bezier(0.41,0.03,0,0.96);
-  will-change: left;
-  left: -300px;
-  left: 0;
 }
 
-.layout-with-aside-view,
-.layout-with-aside-view__aside {
-  transition: right 300ms cubic-bezier(0.41,0.03,0,0.96);
-}
 
 .layout-with-aside-view__overlay {
   height: 100vh;
@@ -36,10 +27,14 @@
   width: var(--aside-width);
   will-change: right;
   z-index: 1;
+  transition: right 300ms cubic-bezier(0.41,0.03,0,0.96);
 }
 
 .layout-with-aside-view__content {
+  position: relative;
   z-index: 2;
+  will-change: left;
+  transition: left 300ms cubic-bezier(0.41,0.03,0,0.96);
 }
 
 .layout-with-aside-view.layout-with-aside-view--is-expanded {
@@ -53,8 +48,6 @@
   right: 0;
 }
 
-.layout-with-aside-view.layout-with-aside-view--is-expanded {
+.layout-with-aside-view.layout-with-aside-view--is-expanded .layout-with-aside-view__content {
   left: calc(var(--aside-width) * -1);
-  position: fixed;
-  top: 0;
 }
