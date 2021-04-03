@@ -58,9 +58,8 @@ export const state = () => ({
  */
 export const getters = {
   totalItemsWithoutDiscount: (state) => {
-    const serverCart = state.serverBasket?.cart || EMPTY_CART
-    const cart = serverCart
-      .map(cartItem => withLocalState(serverCart, cartItem))
+    const cart = (state.serverBasket?.cart || EMPTY_CART)
+      .map(cartItem => withLocalState(state.clientBasket.cart, cartItem))
       .filter(Boolean);
 
     return cart
@@ -92,32 +91,29 @@ export const getters = {
   }
 }
 
+/**
+ * Vue's and Vuex's reactivity system relies on observing mutations to objects and arrays.
+ */
 export const mutations = {
   actionOnCartItem(state, { action, product }) {
-    /**
-     * For inmutability purposes, we will modify a copy of the current state.
-     * Once we've finished, we'll assign this draft state to the original.
-     */
-    const currentState = { ...state }
-
     const { sku, path } = product
     if (!sku || !path) {
       throw new Error(`Please provide "sku" and "path" for ${action}`);
     }
 
-    const itemIndex = currentState.clientBasket.cart.findIndex((i) => i.sku === sku);
+    const itemIndex = state.clientBasket.cart.findIndex((i) => i.sku === sku);
     const isItemAlreadyInCart = itemIndex !== -1
     const hasToDecrementOrRemoveItem = !['remove-item', 'decrement-item'].includes(action)
 
     if (!isItemAlreadyInCart) {
       if (hasToDecrementOrRemoveItem) {
-        currentState.clientBasket.cart.push({
+        state.clientBasket.cart.push({
           sku,
           path,
           priceVariantIdentifier: product.priceVariantIdentifier || 'default',
           quantity: 1
         });
-        currentState.status = 'server-basket-is-stale';
+        state.status = 'server-basket-is-stale';
         return
       }
     }
@@ -126,20 +122,22 @@ export const mutations = {
      * At this point, we know already that the item is not in the cart.
      */
     if (action === 'remove-item') {
-      currentState.clientBasket.cart.splice(itemIndex, 1);
+      state.clientBasket.cart.splice(itemIndex, 1);
     }
     if (action === 'decrement-item') {
-      currentState.clientBasket.cart[itemIndex].quantity -= 1;
+      state.clientBasket.cart[itemIndex].quantity -= 1;
     }
     if (action === 'increment-item' || action === 'add-item') {
-      currentState.clientBasket.cart[itemIndex].quantity += 1;
+      state.clientBasket.cart[itemIndex].quantity += 1;
     }
 
-    currentState.status = 'server-basket-is-stale';
-    state = currentState
+    state.status = 'server-basket-is-stale';
   },
 
   setServerBasket(state, { serverBasket }) {
+    /**
+     * I don't know why, if we create a copy of state to make state 
+     */
     state.serverBasket = serverBasket
   }
 }
