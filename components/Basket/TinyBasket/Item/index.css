@@ -1,0 +1,54 @@
+.tiny-basket-item {
+  column-gap: 10px;
+  display: grid;
+  grid-template-columns: 1fr 2fr 0.5fr;
+  padding: 15px 0;
+  /**
+   * Required because some elements are placed absolutely to this element.
+   */
+  position: relative;
+}
+
+.tiny-basket-item__info {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+}
+
+.tiny-basket-item__name {
+  text-transform: uppercase;
+  line-height: 1.15;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--color-text-main);
+}
+
+.tiny-basket-item__price {
+  margin-top: 10px;
+  font-size: var(--font-size-xs);
+}
+
+/*
+ * Actions that modify the Basket Item
+ */
+.tiny-basket-item__actions {
+  --distance-between-actions: 7px;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.tiny-basket-item__quantity-modifier {
+  padding: 7px;
+  margin: 0;
+  display: inline-flex;
+  justify-content: center;
+}
+
+.tiny-basket-item__quantity {
+  text-align: center;
+  margin-top: var(--distance-between-actions);
+  margin-bottom: var(--distance-between-actions);
+}
