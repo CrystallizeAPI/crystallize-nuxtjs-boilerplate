@@ -37,6 +37,14 @@
 
 <script>
 export default {
+  data() {
+    return {
+      product: {
+        sku: this.sku,
+        path: this.path,
+      },
+    };
+  },
   computed: {
     priceFormatted() {
       const { locales, locale: code } = this.$i18n;
@@ -54,7 +62,15 @@ export default {
     },
   },
   props: {
+    sku: {
+      type: String,
+      required: true,
+    },
     name: {
+      type: String,
+      required: true,
+    },
+    path: {
       type: String,
       required: true,
     },
@@ -74,13 +90,22 @@ export default {
   },
   methods: {
     handleIncreaseQuantity() {
-      console.log("handleIncreaseQuantity");
+      this.$store.dispatch("basket/incrementItem", {
+        sku: this.sku,
+        path: this.path,
+      });
     },
     handleDecreaseQuantity() {
-      console.log("handleDecreaseQuantity");
+      this.$store.dispatch("basket/decrementItem", {
+        sku: this.sku,
+        path: this.path,
+      });
     },
     handleRemoveQuantity() {
-      console.log("handleRemoveQuantity");
+      this.$store.dispatch("basket/removeItem", {
+        sku: this.sku,
+        path: this.path,
+      });
     },
   },
 };

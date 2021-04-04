@@ -43,8 +43,8 @@
  * Actions that modify the Basket Item
  */
 .tiny-basket-item__actions {
-  --distance-between-actions: 7px;
-  --lateral-space-action-button: 7px;
+  --distance-between-actions: 3px;
+  margin-top: 15px;
 
   display: flex;
   flex-direction: column;
@@ -52,8 +52,7 @@
 }
 
 .tiny-basket-item__quantity-modifier {
-  padding-top: 7px;
-  padding-bottom: 7px;
+  padding: 5px 0;
   margin: 0;
   display: inline-flex;
   justify-content: center;

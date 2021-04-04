@@ -8,6 +8,8 @@
       <ul class="tiny-basket__list" v-else v-for="item in cart">
         <li class="tiny-basket__list-item" :key="item.sku">
           <BasketItem
+            :sku="item.sku"
+            :path="item.path"
             :name="item.name"
             :image="item.images[0]"
             :quantity="item.quantity"
