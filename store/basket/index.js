@@ -103,10 +103,10 @@ export const mutations = {
 
     const itemIndex = state.clientBasket.cart.findIndex((i) => i.sku === sku);
     const isItemAlreadyInCart = itemIndex !== -1
-    const hasToDecrementOrRemoveItem = !['remove-item', 'decrement-item'].includes(action)
+    const hasToDecrementOrRemoveItem = ['remove-item', 'decrement-item'].includes(action)
 
     if (!isItemAlreadyInCart) {
-      if (hasToDecrementOrRemoveItem) {
+      if (!hasToDecrementOrRemoveItem) {
         state.clientBasket.cart.push({
           sku,
           path,
@@ -119,16 +119,22 @@ export const mutations = {
     }
 
     /**
-     * At this point, we know already that the item is not in the cart.
+     * At this point, we know already that the item is in the cart.
      */
-    if (action === 'remove-item') {
-      state.clientBasket.cart.splice(itemIndex, 1);
-    }
-    if (action === 'decrement-item') {
-      state.clientBasket.cart[itemIndex].quantity -= 1;
-    }
     if (action === 'increment-item' || action === 'add-item') {
       state.clientBasket.cart[itemIndex].quantity += 1;
+    }
+
+    const hasOnlyOneItemOfTypeInCart = state.clientBasket.cart[itemIndex].quantity === 1
+    /**
+     * We remove the item from the cart if:
+     * - The action is "remove-item"
+     * - The action is "derement-item" but the quantity equals 1.
+     */
+    if (action === 'remove-item' || (action === 'decrement-item' && hasOnlyOneItemOfTypeInCart)) {
+      state.clientBasket.cart.splice(itemIndex, 1);
+    } else if (action === 'decrement-item') {
+      state.clientBasket.cart[itemIndex].quantity -= 1;
     }
 
     state.status = 'server-basket-is-stale';

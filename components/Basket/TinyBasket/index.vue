@@ -43,7 +43,6 @@ export default {
       );
     },
     cart() {
-      console.log(this.$store.state.basket.serverBasket?.cart);
       return this.$store.state.basket.serverBasket?.cart || [];
     },
   },
