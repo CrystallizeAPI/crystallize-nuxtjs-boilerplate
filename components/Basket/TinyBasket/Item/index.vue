@@ -10,6 +10,7 @@
     </div>
     <div class="tiny-basket-item__actions">
       <button
+        @click="handleIncreaseQuantity"
         class="tiny-basket-item__quantity-modifier"
         :aria-label="`Increment quantity by 1 of ${name}`"
       >
@@ -17,12 +18,19 @@
       </button>
       <span class="tiny-basket-item__quantity">{{ quantity }}</span>
       <button
+        @click="handleDecreaseQuantity"
         class="tiny-basket-item__quantity-modifier"
         :aria-label="`Decrement quantity by 1 of ${name}`"
       >
         -
       </button>
-      <!-- <button>R</button> -->
+      <button
+        @click="handleRemoveQuantity"
+        class="tiny-basket-item__quantity-modifier tiny-basket-item__quantity-modifier--remove"
+        :aria-label="`Remove the item ${name} from the basket`"
+      >
+        x
+      </button>
     </div>
   </article>
 </template>
@@ -62,6 +70,17 @@ export default {
       type: Number,
       default: 0,
       required: true,
+    },
+  },
+  methods: {
+    handleIncreaseQuantity() {
+      console.log("handleIncreaseQuantity");
+    },
+    handleDecreaseQuantity() {
+      console.log("handleDecreaseQuantity");
+    },
+    handleRemoveQuantity() {
+      console.log("handleRemoveQuantity");
     },
   },
 };

@@ -9,6 +9,10 @@
   position: relative;
 }
 
+.tiny-basket-item:hover .tiny-basket-item__quantity-modifier.tiny-basket-item__quantity-modifier--remove {
+  display: block;
+}
+
 .tiny-basket-item__media >>> img {
   object-fit: contain;
   height: 100%;
@@ -40,6 +44,7 @@
  */
 .tiny-basket-item__actions {
   --distance-between-actions: 7px;
+  --lateral-space-action-button: 7px;
 
   display: flex;
   flex-direction: column;
@@ -47,7 +52,8 @@
 }
 
 .tiny-basket-item__quantity-modifier {
-  padding: 7px;
+  padding-top: 7px;
+  padding-bottom: 7px;
   margin: 0;
   display: inline-flex;
   justify-content: center;
@@ -57,4 +63,14 @@
   text-align: center;
   margin-top: var(--distance-between-actions);
   margin-bottom: var(--distance-between-actions);
+}
+
+.tiny-basket-item__quantity-modifier.tiny-basket-item__quantity-modifier--remove {
+  position: absolute;
+  top: 0;
+  right: 5px;
+  /*
+   * Visibility: hidden makes the element not be rendered in the accessibility tree.
+   */
+   display: none;
 }
