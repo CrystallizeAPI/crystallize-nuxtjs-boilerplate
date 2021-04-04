@@ -192,15 +192,24 @@ export default {
             ? variantDiscountPrice.identifier
             : variantDefaultPrice.identifier || locale.crystallizePriceVariant,
         })
-        .finally(() => {
-          /*
-           * Independently if we could add the item or not,
-           * we will stop showing the spinner. Also, we add a delay so the
-           * spinner can be visualize for a small period of time.
+        .then(() => {
+          const TIME_TO_SHOW_SPINNER = 250;
+          const TIME_TO_ADD_ITEM_TO_CART = 250;
+          /**
+           * We add a delay so the spinner can be visualize for a small period of time.
            */
           setTimeout(() => {
             this.isItemBeingAddedToCart = false;
-          }, 250);
+            setTimeout(() => {
+              this.$store.dispatch("layout/showAside");
+            }, TIME_TO_ADD_ITEM_TO_CART);
+          }, TIME_TO_SHOW_SPINNER);
+        })
+        .catch(() => {
+          /**
+           * If it failed, we make the spinner disappear too.
+           */
+          this.isItemBeingAddedToCart = false;
         });
     },
   },
