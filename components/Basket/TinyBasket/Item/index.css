@@ -9,6 +9,12 @@
   position: relative;
 }
 
+.tiny-basket-item__media >>> img {
+  object-fit: contain;
+  height: 100%;
+  border: none;
+}
+
 .tiny-basket-item__info {
   display: flex;
   flex-direction: column;
@@ -34,7 +40,7 @@
  */
 .tiny-basket-item__actions {
   --distance-between-actions: 7px;
-  
+
   display: flex;
   flex-direction: column;
   align-items: stretch;

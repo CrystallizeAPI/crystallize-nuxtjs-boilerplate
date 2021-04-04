@@ -9,6 +9,7 @@
         <li class="tiny-basket__list-item" :key="item.sku">
           <BasketItem
             :name="item.name"
+            :image="item.images[0]"
             :quantity="item.quantity"
             :price="item.price"
           />

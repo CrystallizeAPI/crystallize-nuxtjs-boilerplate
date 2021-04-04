@@ -1,6 +1,6 @@
 <template>
   <article class="tiny-basket-item">
-    <figure class="tiny-basket-item__media"></figure>
+    <CrystallizeImage :image="image" class="tiny-basket-item__media" />
     <div class="tiny-basket-item__info">
       <h5 class="tiny-basket-item__name">
         {{ name }}
@@ -41,6 +41,10 @@ export default {
   props: {
     name: {
       type: String,
+      required: true,
+    },
+    image: {
+      type: Object,
       required: true,
     },
     price: {
