@@ -31,11 +31,18 @@
 export default {
   computed: {
     priceFormatted() {
-      if (!this.price.gross || this.price.gross === 0) {
+      const { locales, locale: code } = this.$i18n;
+      const locale = locales.find((l) => l.locale === code) || locales[0];
+
+      const { gross, currency } = this.price;
+      if (!gross || gross === 0) {
         return `FREE`;
       }
 
-      return `${this.price.currency} ${this.price.gross}`;
+      return new Intl.NumberFormat(locale, {
+        style: "currency",
+        currency,
+      }).format(gross);
     },
   },
   props: {
