@@ -10,7 +10,9 @@ export default {
     /**
      * When the applicattion is mounted, we must populate the store.
      */
-    this.$store.dispatch("basket/updateBasket");
+    this.$store.dispatch("basket/loadBasket").then(() => {
+      this.$store.dispatch("basket/updateServerBasket");
+    });
   },
 };
 </script>

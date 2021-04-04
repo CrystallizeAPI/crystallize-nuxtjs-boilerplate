@@ -15,7 +15,7 @@ const BASKET_STATUS = {
 
 const EMPTY_CART = []
 
-export const state = () => ({
+const BASKET_INITIAL_STATE = {
   status: BASKET_STATUS.NOT_HYDRATED,
   /**
    * A simplistic basket which gets stored on client side
@@ -50,7 +50,9 @@ export const state = () => ({
 
   // The basket cart item to draw attention to
   attentionCartItem: {}
-});
+}
+
+export const state = () => BASKET_INITIAL_STATE;
 
 /**
  * Getters are used to avoid logic duplication that depends on the state
@@ -113,7 +115,7 @@ export const mutations = {
           priceVariantIdentifier: product.priceVariantIdentifier || 'default',
           quantity: 1
         });
-        state.status = 'server-basket-is-stale';
+        state.status = BASKET_STATUS.SERVER_BASKET_IS_STALE;
         return
       }
     }
@@ -137,14 +139,22 @@ export const mutations = {
       state.clientBasket.cart[itemIndex].quantity -= 1;
     }
 
-    state.status = 'server-basket-is-stale';
+    state.status = BASKET_STATUS.SERVER_BASKET_IS_STALE;
   },
 
   setServerBasket(state, { serverBasket }) {
-    /**
-     * I don't know why, if we create a copy of state to make state 
-     */
     state.serverBasket = serverBasket
+  },
+  updateBasketFromCache(state, { clientBasketCached }) {
+    if (clientBasketCached.cart) {
+      state.clientBasket = clientBasketCached || BASKET_INITIAL_STATE
+
+      if (!state.clientBasket.cart) {
+        state.clientBasket.cart = BASKET_INITIAL_STATE.clientBasket.cart
+      }
+    }
+
+    state.status = BASKET_STATUS.SERVER_BASKET_IS_STALE
   }
 }
 
@@ -158,7 +168,7 @@ const actionWithSideEffect = fn => (context, payload) => {
     ...context.state.clientBasket,
     cart: context.state.clientBasket.cart.map(clientCartItemForAPI)
   });
-  context.dispatch('updateBasket')
+  context.dispatch('updateServerBasket')
 }
 
 export const actions = {
@@ -174,7 +184,14 @@ export const actions = {
   decrementItem: actionWithSideEffect((context, product) => {
     context.commit('actionOnCartItem', { action: 'decrement-item', product });
   }),
-  updateBasket(context) {
+  async loadBasket(context) {
+    const { state, commit } = context
+    if (state.status === BASKET_STATUS.NOT_HYDRATED) {
+      const clientBasketCached = await retrieveFromCache();
+      commit('updateBasketFromCache', { clientBasketCached })
+    }
+  },
+  updateServerBasket(context) {
     const { locales, locale: localeCode } = this.$i18n;
     const locale = locales.find((l) => l.locale === localeCode) || locales[0];
     const { iso, file, code, ...localeForBasketModel } = locale;
@@ -189,6 +206,6 @@ export const actions = {
         context.commit('setServerBasket', { serverBasket: data.basket })
       }
     })
-  }
+  },
 }
 
