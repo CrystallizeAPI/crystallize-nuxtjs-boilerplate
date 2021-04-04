@@ -201,6 +201,7 @@ export default {
           setTimeout(() => {
             this.isItemBeingAddedToCart = false;
             setTimeout(() => {
+              // @todo: pending to add animation for item drawAttentionToItem
               this.$store.dispatch("layout/showAside");
             }, TIME_TO_ADD_ITEM_TO_CART);
           }, TIME_TO_SHOW_SPINNER);
