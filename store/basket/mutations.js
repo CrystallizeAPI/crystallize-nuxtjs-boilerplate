@@ -63,6 +63,10 @@ export default {
 
     state.status = BASKET_STATUS.SERVER_BASKET_IS_STALE;
   },
+
+  draAttentionToItem(state, { sku }) {
+    state.attentionCartItem = { time: Date.now(), sku };
+  }
 }
 
 

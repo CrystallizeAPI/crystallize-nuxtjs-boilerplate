@@ -1,5 +1,5 @@
 <template>
-  <article class="tiny-basket-item">
+  <article :class="dynamicBasketItemClasses">
     <CrystallizeImage :image="image" class="tiny-basket-item__media" />
     <div class="tiny-basket-item__info">
       <h5 class="tiny-basket-item__name">
@@ -46,6 +46,17 @@ export default {
     };
   },
   computed: {
+    dynamicBasketItemClasses() {
+      const baseClass = "tiny-basket-item";
+      /*
+       * We must draw attention to this item
+       */
+      if (this.$store.state.basket.attentionCartItem.sku === this.sku) {
+        return `${baseClass} ${baseClass}--recently-added`;
+      }
+
+      return baseClass;
+    },
     priceFormatted() {
       const { locales, locale: code } = this.$i18n;
       const locale = locales.find((l) => l.locale === code) || locales[0];

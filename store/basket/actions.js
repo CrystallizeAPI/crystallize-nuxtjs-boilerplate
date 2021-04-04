@@ -59,4 +59,16 @@ export default {
   decrementItem: actionWithSideEffect((context, product) => {
     context.commit('actionOnCartItem', { action: 'decrement-item', product });
   }),
+
+  drawAttentionToItem(context, { sku }) {
+    context.commit('draAttentionToItem', { sku })
+    /**
+     * If we're using Vuex modules feature, to dispatch actions from another module
+     * we need to provide a configuration with a root:true flag.
+     * 
+     * FYI: https://vuex.vuejs.org/guide/modules.html#namespacing
+     */
+    const configToDispatchActionsFromAnotherModule = { root: true }
+    context.dispatch("layout/showAside", {}, configToDispatchActionsFromAnotherModule);
+  }
 }

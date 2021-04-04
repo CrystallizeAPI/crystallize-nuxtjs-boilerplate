@@ -202,7 +202,9 @@ export default {
             this.isItemBeingAddedToCart = false;
             setTimeout(() => {
               // @todo: pending to add animation for item drawAttentionToItem
-              this.$store.dispatch("layout/showAside");
+              this.$store.dispatch("basket/drawAttentionToItem", {
+                sku: this.selectedVariant.sku,
+              });
             }, TIME_TO_ADD_ITEM_TO_CART);
           }, TIME_TO_SHOW_SPINNER);
         })
