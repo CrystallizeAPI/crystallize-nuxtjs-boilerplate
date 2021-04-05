@@ -5,7 +5,15 @@
       <h5 class="tiny-basket-item__name">
         {{ name }}
       </h5>
-      <!-- <div class="tiny-basket-item__topics">render list</div> -->
+      <ul v-if="attributes" class="tiny-basket-item__topics">
+        <li
+          v-for="attr in attributes"
+          :key="attr.attribute"
+          class="tiny-basket-item__topics-element"
+        >
+          {{ attr.value }}
+        </li>
+      </ul>
       <div class="tiny-basket-item__price">{{ priceFormatted }}</div>
     </div>
     <div class="tiny-basket-item__actions">
@@ -95,6 +103,10 @@ export default {
       type: Number,
       default: 0,
       required: true,
+    },
+    attributes: {
+      type: Array,
+      required: false,
     },
   },
   methods: {

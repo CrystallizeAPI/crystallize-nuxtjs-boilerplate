@@ -1,6 +1,9 @@
 .tiny-basket-item {
   column-gap: 10px;
   display: grid;
+  /**
+   * We assume that what is displayed is: MEDIA - INFO - ACTIONS
+   */
   grid-template-columns: 1fr 2fr 0.5fr;
   padding: 15px 0;
   /**
@@ -23,7 +26,7 @@
   border: none;
 }
 
-.tiny-basket-item__info {
+.tiny-basket-item__info {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -38,8 +41,29 @@
   color: var(--color-text-sub);
 }
 
+.tiny-basket-item__topics {
+  padding: 0;
+  margin-top: 0.25rem;
+  margin-bottom: 0;
+  display: flex;
+}
+
+.tiny-basket-item__topics-element {
+  border-radius: 0.2rem;
+  border: 0;
+  color: var(--color-main-background);
+  font-size: var(--font-size-xs);
+  margin-bottom: 0.2rem;
+  margin-right: 0.2rem;
+  padding: 0.25rem 0.5rem;
+  text-transform: capitalize;
+  background: var(--color-text-main);
+  list-style: none;
+  margin-left: 0;
+}
+
 .tiny-basket-item__price {
-  margin-top: 10px;
+  margin-top: 5px;
   font-size: var(--font-size-xs);
 }
 
@@ -48,7 +72,7 @@
  */
 .tiny-basket-item__actions {
   --distance-between-actions: 3px;
-  margin-top: 15px;
+  margin-top: 0px;
 
   display: flex;
   flex-direction: column;
@@ -71,7 +95,11 @@
 .tiny-basket-item__quantity-modifier.tiny-basket-item__quantity-modifier--remove {
   position: absolute;
   top: 0;
-  right: 5px;
+  /**
+   * 11px is a magic number that makes the "remove item" button look aligned
+   * visually with the other actions.
+   */
+  right: 11px;
   /*
    * Visibility: hidden makes the element not be rendered in the accessibility tree.
    */

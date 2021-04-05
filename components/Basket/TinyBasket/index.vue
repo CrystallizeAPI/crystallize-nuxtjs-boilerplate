@@ -15,6 +15,7 @@
             :image="item.images[0]"
             :quantity="item.quantity"
             :price="item.price"
+            :attributes="item.attributes"
           />
         </li>
       </ul>
