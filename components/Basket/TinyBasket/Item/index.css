@@ -35,7 +35,7 @@
   line-height: 1.15;
   font-size: var(--font-size-xs);
   font-weight: 600;
-  color: var(--color-text-main);
+  color: var(--color-text-sub);
 }
 
 .tiny-basket-item__price {
