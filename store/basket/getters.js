@@ -15,9 +15,10 @@ export default {
       .filter(p => !isVoucherProduct(p))
       .reduce(
         (acc, curr) => {
+          console.log
           return {
-            gross: acc.gross + curr.price.gross,
-            net: acc.net + curr.price.net,
+            gross: acc.gross + (curr.price.gross * curr.quantity),
+            net: acc.net + (curr.price.net * curr.quantity),
             quantity: acc.quantity + curr.quantity
           };
         },

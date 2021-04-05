@@ -5,9 +5,10 @@
     </h4>
     <div class="tiny-basket__content">
       <span v-if="cart.length === 0">{{ $t("basket.empty") }}</span>
-      <ul class="tiny-basket__list" v-else v-for="item in cart">
-        <li class="tiny-basket__list-item" :key="item.sku">
+      <ul class="tiny-basket__list" v-else>
+        <li class="tiny-basket__list-item" v-for="item in cart">
           <BasketItem
+            :key="item.sku"
             :sku="item.sku"
             :path="item.path"
             :name="item.name"
@@ -18,18 +19,12 @@
         </li>
       </ul>
       <div class="tiny-basket__payment-details">
-        <div class="tiny-basket__payment-total">
-          <span>{{ $t("basket.totalPrice") }}</span>
-          <span>1000</span>
-        </div>
-        <div class="tiny-basket__payment-tax">
-          <span>{{ $t("basket.tax") }}</span>
-          <span>1000</span>
-        </div>
-        <div class="tiny-basket__payment-to-pay">
-          <span>{{ $t("basket.totalToPay") }}</span>
-          <span>1000</span>
-        </div>
+        <PaymentInfo :label="$t('basket.totalPrice')" :amount="totalPrice" />
+        <PaymentInfo :label="$t('basket.tax')" :amount="taxAmount" />
+        <PaymentInfo
+          :label="$t('basket.totalToPay')"
+          :amount="totalAmountToPay"
+        />
       </div>
     </div>
     <footer class="tiny-basket__footer">
@@ -47,9 +42,11 @@
 
 <script>
 import BasketItem from "./Item";
+import PaymentInfo from "./PaymentInfo";
+import { formatCurrency } from "/lib/pricing";
 
 export default {
-  components: { BasketItem },
+  components: { BasketItem, PaymentInfo },
   computed: {
     isLinkToCheckoutActive() {
       return (
@@ -58,6 +55,41 @@ export default {
     },
     cart() {
       return this.$store.state.basket.serverBasket?.cart || [];
+    },
+    totalPrice() {
+      const currency = this.$store.state.basket.serverBasket?.total.currency;
+      console.log(this.$store.getters["basket/totalItemsWithoutDiscount"]);
+      return this.formatPrice({
+        amount: this.$store.getters["basket/totalItemsWithoutDiscount"].gross,
+        currency,
+      });
+    },
+    taxAmount() {
+      const total = this.$store.state.basket.serverBasket?.total || {};
+      const taxAmount = total.gross - total.net;
+      const currency = this.$store.state.basket.serverBasket?.total.currency;
+
+      return this.formatPrice({
+        amount: parseInt(taxAmount * 100, 10) / 100,
+        currency,
+      });
+    },
+    totalAmountToPay() {
+      const total = this.$store.state.basket.serverBasket?.total || {};
+      const currency = this.$store.state.basket.serverBasket?.total.currency;
+
+      return this.formatPrice({
+        amount: total.gross,
+        currency,
+      });
+    },
+  },
+  methods: {
+    formatPrice({ amount, currency = "EUR" }) {
+      const { locales, locale: code } = this.$i18n;
+      const locale = locales.find((l) => l.locale === code) || locales[0];
+
+      return formatCurrency({ amount, currency, locale });
     },
   },
 };
