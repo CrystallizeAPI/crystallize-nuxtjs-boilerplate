@@ -45,6 +45,7 @@
 import BasketItem from "./Item";
 import PaymentInfo from "./PaymentInfo";
 import { formatCurrency } from "/lib/pricing";
+import { BASKET_STATUS } from "/store/basket/state";
 
 export default {
   components: { BasketItem, PaymentInfo },
@@ -55,8 +56,9 @@ export default {
       );
     },
     isLoading() {
-      console.log(this.$store.state.basket.status);
-      return this.$store.state.basket.status === "server-basket-is-stale";
+      return (
+        this.$store.state.basket.status === BASKET_STATUS.SERVER_BASKET_IS_STALE
+      );
     },
     cart() {
       return this.$store.state.basket.serverBasket?.cart || [];
