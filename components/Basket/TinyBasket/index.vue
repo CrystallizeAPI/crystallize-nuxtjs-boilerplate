@@ -17,6 +17,20 @@
           />
         </li>
       </ul>
+      <div class="tiny-basket__payment-details">
+        <div class="tiny-basket__payment-total">
+          <span>{{ $t("basket.totalPrice") }}</span>
+          <span>1000</span>
+        </div>
+        <div class="tiny-basket__payment-tax">
+          <span>{{ $t("basket.tax") }}</span>
+          <span>1000</span>
+        </div>
+        <div class="tiny-basket__payment-to-pay">
+          <span>{{ $t("basket.totalToPay") }}</span>
+          <span>1000</span>
+        </div>
+      </div>
     </div>
     <footer class="tiny-basket__footer">
       <NuxtLink

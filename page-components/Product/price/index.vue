@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import { getRelativePriceVariants } from "/lib/pricing";
+import { getRelativePriceVariants, formatCurrency } from "/lib/pricing";
 export default {
   props: {
     variant: {
@@ -96,22 +96,16 @@ export default {
       const { currency } = priceVariant;
 
       return {
-        defaultPrice: this.formatPrice({
+        defaultPrice: formatCurrency({
           locale,
           amount: defaultPrice.price,
           currency,
         }),
         discountPrice:
           discountPrice &&
-          this.formatPrice({ locale, amount: discountPrice.price, currency }),
+          formatCurrency({ locale, amount: discountPrice.price, currency }),
         discountPercentage,
       };
-    },
-    formatPrice: function ({ locale, amount, currency }) {
-      return new Intl.NumberFormat(locale, {
-        style: "currency",
-        currency,
-      }).format(amount);
     },
   },
 };

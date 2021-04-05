@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import { formatCurrency } from "/lib/pricing";
 export default {
   data() {
     return {
@@ -66,10 +67,7 @@ export default {
         return `FREE`;
       }
 
-      return new Intl.NumberFormat(locale, {
-        style: "currency",
-        currency,
-      }).format(gross);
+      return formatCurrency({ currency, amount: gross, locale });
     },
   },
   props: {
