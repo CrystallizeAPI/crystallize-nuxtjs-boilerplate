@@ -73,6 +73,7 @@ import {
   isRelatedProductsComponent,
   COMPONENT_NAMES_TO_EXTRACT_FROM_COMPONENTS,
 } from "./utils";
+import { lockScroll } from "/lib/layout";
 
 export default {
   components: {
@@ -193,6 +194,8 @@ export default {
             : variantDefaultPrice.identifier || locale.crystallizePriceVariant,
         })
         .then(() => {
+          lockScroll();
+
           const TIME_TO_SHOW_SPINNER = 250;
           const TIME_TO_ADD_ITEM_TO_CART = 250;
           /**

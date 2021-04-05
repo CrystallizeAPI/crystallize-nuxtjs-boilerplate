@@ -17,6 +17,8 @@
 </template>
 
 <script>
+import { unlockScroll } from "/lib/layout";
+
 export default {
   computed: {
     isAsideShow() {
@@ -34,6 +36,7 @@ export default {
   },
   methods: {
     handleOverlayClick() {
+      unlockScroll();
       this.$store.dispatch("layout/hideAside");
     },
   },

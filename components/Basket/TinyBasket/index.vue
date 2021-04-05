@@ -66,7 +66,6 @@ export default {
     },
     totalPrice() {
       const currency = this.$store.state.basket.serverBasket?.total.currency;
-      console.log(this.$store.getters["basket/totalItemsWithoutDiscount"]);
       return this.formatPrice({
         amount: this.$store.getters["basket/totalItemsWithoutDiscount"].gross,
         currency,

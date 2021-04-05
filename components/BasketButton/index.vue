@@ -10,6 +10,8 @@
 </template>
 
 <script>
+import { lockScroll, unlockScroll } from "/lib/layout";
+
 export default {
   computed: {
     cartItems: function () {
@@ -20,7 +22,9 @@ export default {
   },
   methods: {
     toggleAside() {
-      this.$store.dispatch("layout/toggleAside");
+      this.$store.dispatch("layout/toggleAside").then(() => {
+        this.$store.state.layout.isAsideShown ? lockScroll() : unlockScroll();
+      });
     },
   },
 };
