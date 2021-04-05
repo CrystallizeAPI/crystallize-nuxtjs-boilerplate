@@ -1,0 +1,8 @@
+.checkout-page__section-title {
+  border-bottom: 1px solid #dfdfdf;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 0;
+  padding-bottom: 20px;
+  text-transform: uppercase;
+}

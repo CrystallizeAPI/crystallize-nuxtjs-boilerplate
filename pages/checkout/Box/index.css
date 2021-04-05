@@ -1,0 +1,12 @@
+.checkout-page__box {
+  background: var(--color-box-background);
+  margin-bottom: 25px;
+  padding: var(--padding-l) var(--padding-xs);
+  width: 100%;
+}
+
+@media screen and  (min-width: 1024px) {
+  .checkout-page__box {
+    padding: var(--padding-l) var(--padding-xl);
+  }
+}
