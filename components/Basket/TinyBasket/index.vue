@@ -18,7 +18,8 @@
           />
         </li>
       </ul>
-      <div class="tiny-basket__payment-details">
+      <Spinner v-if="isLoading" />
+      <div v-else class="tiny-basket__payment-details">
         <PaymentInfo :label="$t('basket.totalPrice')" :amount="totalPrice" />
         <PaymentInfo :label="$t('basket.tax')" :amount="taxAmount" />
         <PaymentInfo
@@ -52,6 +53,10 @@ export default {
       return (
         this.$store.getters["basket/totalItemsWithoutDiscount"].quantity > 0
       );
+    },
+    isLoading() {
+      console.log(this.$store.state.basket.status);
+      return this.$store.state.basket.status === "server-basket-is-stale";
     },
     cart() {
       return this.$store.state.basket.serverBasket?.cart || [];

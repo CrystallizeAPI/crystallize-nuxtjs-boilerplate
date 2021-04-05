@@ -17,6 +17,7 @@ export default {
 
   setServerBasket(state, { serverBasket }) {
     state.serverBasket = serverBasket
+    state.status = BASKET_STATUS.READY
   },
 
   actionOnCartItem(state, { action, product }) {
