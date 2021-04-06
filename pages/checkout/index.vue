@@ -52,7 +52,9 @@
       </Box>
       <Box>
         <Section :title="$t('basket.title')">
-          <div class="checkout-page__cart">content goes here</div>
+          <div class="checkout-page__cart">
+            <Basket />
+          </div>
         </Section>
       </Box>
     </Container>
@@ -61,10 +63,11 @@
 <script>
 import Section from "./Section";
 import Box from "./Box";
+import Basket from "./Basket";
 import { BASKET_STATUS } from "/store/basket/state";
 
 export default {
-  components: { Section, Box },
+  components: { Section, Box, Basket },
   computed: {
     isLoading() {
       return this.$store.state.basket.status === BASKET_STATUS.NOT_HYDRATED;

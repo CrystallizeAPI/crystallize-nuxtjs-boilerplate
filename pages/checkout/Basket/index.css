@@ -1,0 +1,43 @@
+.tiny-basket {
+  background: var(--color-main-background);
+  display: flex;
+  flex-direction: column;
+  /*
+   * We make it expand to fill all the space available
+   */
+  /* flex: 1; */
+  flex: 1 1 auto;
+  height: 100%;
+  max-height: 100vh;
+  padding: var(--padding-l) var(--padding-m) var(--padding-xs) var(--padding-m);
+  /* position: relative; */
+  /* z-index: 15; */
+  
+  justify-content: space-between;
+  overflow-y: auto;
+}
+
+.tiny-basket__title {
+  flex: 0 0 auto;
+  margin-top: 0;
+  margin-bottom: var(--padding-xs);
+}
+
+/**
+ * We display the items in column format and separate them, so the payment
+ * summary is displayed at the bottom of the cart.
+ */
+.tiny-basket__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.tiny-basket__list,
+.tiny-basket__list-item {
+  margin: 0;
+  padding: 0;
+}
+
+.tiny-basket__list-item {
+  list-style: none;
+}
