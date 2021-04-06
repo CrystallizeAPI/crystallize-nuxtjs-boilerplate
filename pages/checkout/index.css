@@ -48,10 +48,6 @@
   border-bottom: 1px solid #b7e2e4;
 }
 
-.checkout-page__form-input:invalid {
-  border-bottom: 1px solid var(--color-error);
-}
-
 .checkout-page__form-input[value=''] {
   border-bottom: 1px solid var(--color-box-background);
 }
