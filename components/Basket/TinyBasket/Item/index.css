@@ -72,7 +72,7 @@
  */
 .tiny-basket-item__actions {
   --distance-between-actions: 3px;
-  margin-top: 0px;
+  margin-top: 5px;
 
   display: flex;
   flex-direction: column;
