@@ -1,6 +1,6 @@
 <template>
   <div class="checkout-page">
-    <Container>
+    <Container class="checkout-page__inner">
       <Box>
         <Section :title="$t('checkout.title')">
           <div class="checkout-page__form">

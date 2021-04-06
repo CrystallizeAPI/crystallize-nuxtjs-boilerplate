@@ -1,3 +1,9 @@
+.checkout-page__inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 1rem;
+}
+
 .checkout-page__form-row {
   display: flex;
 }
@@ -48,4 +54,10 @@
 
 .checkout-page__form-input[value=''] {
   border-bottom: 1px solid var(--color-box-background);
+}
+
+@media screen and (min-width: 768px) {
+  .checkout-page__inner {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
