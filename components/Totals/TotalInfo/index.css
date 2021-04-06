@@ -1,12 +1,12 @@
 /**
  * Each payment information row in the tiny basket
  */
- .tiny-basket-payment-info {
+ .total-info {
   display: flex;
   justify-content: space-between;
   margin-top: 0.5rem;
 }
 
-.tiny-basket-payment-info__amount {
+.total-info__info__amount {
   font-weight: bold;
 }

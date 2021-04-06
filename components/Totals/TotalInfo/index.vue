@@ -1,7 +1,7 @@
 <template>
-  <div class="tiny-basket-payment-info">
+  <div class="total-info">
     <span>{{ label }}:</span>
-    <span class="tiny-basket-payment-info__amount">{{ amount }}</span>
+    <span class="total-info__amount">{{ amount }}</span>
   </div>
 </template>
 

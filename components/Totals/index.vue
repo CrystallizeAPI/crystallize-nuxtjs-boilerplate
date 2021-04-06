@@ -1,60 +1,26 @@
 <template>
-  <div class="tiny-basket">
-    <h4 class="tiny-basket__title">
-      {{ $t("basket.title") }}
-    </h4>
-    <div class="tiny-basket__content">
-      <span v-if="cart.length === 0">{{ $t("basket.empty") }}</span>
-      <ul class="tiny-basket__list" v-else>
-        <li class="tiny-basket__list-item" v-for="item in cart">
-          <BasketItem
-            :key="item.sku"
-            :sku="item.sku"
-            :path="item.path"
-            :name="item.name"
-            :image="item.images[0]"
-            :quantity="item.quantity"
-            :price="item.price"
-            :attributes="item.attributes"
-          />
-        </li>
-      </ul>
-      <Totals />
+  <div>
+    <Spinner v-if="isLoading" />
+    <div v-else>
+      <TotalInfo :label="$t('basket.totalPrice')" :amount="totalPrice" />
+      <TotalInfo :label="$t('basket.tax')" :amount="taxAmount" />
+      <TotalInfo :label="$t('basket.totalToPay')" :amount="totalAmountToPay" />
     </div>
-    <footer class="tiny-basket__footer">
-      <NuxtLink
-        class="tiny-basket__link-to-checkout"
-        :disabled="!isLinkToCheckoutActive"
-        :event="isLinkToCheckoutActive ? 'click' : ''"
-        to="/checkout"
-      >
-        {{ $t("basket.goToCheckout") }}
-      </NuxtLink>
-    </footer>
   </div>
 </template>
 
 <script>
-import BasketItem from "./Item";
-import Totals from "../../Totals";
+import TotalInfo from "./TotalInfo";
 import { formatCurrency } from "/lib/pricing";
 import { BASKET_STATUS } from "/store/basket/state";
 
 export default {
-  components: { BasketItem, Totals },
+  components: { TotalInfo },
   computed: {
-    isLinkToCheckoutActive() {
-      return (
-        this.$store.getters["basket/totalItemsWithoutDiscount"].quantity > 0
-      );
-    },
     isLoading() {
       return (
         this.$store.state.basket.status === BASKET_STATUS.SERVER_BASKET_IS_STALE
       );
-    },
-    cart() {
-      return this.$store.state.basket.serverBasket?.cart || [];
     },
     totalPrice() {
       const currency = this.$store.state.basket.serverBasket?.total.currency;
@@ -93,5 +59,3 @@ export default {
   },
 };
 </script>
-
-<style scoped src='./index.css'></style>
