@@ -1,3 +1,7 @@
+.checkout-page__section + .checkout-page__section {
+  margin-top: var(--padding-l);
+}
+
 .checkout-page__section-title {
   border-bottom: 1px solid #dfdfdf;
   font-size: 16px;

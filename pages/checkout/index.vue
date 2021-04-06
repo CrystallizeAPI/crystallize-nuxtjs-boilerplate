@@ -3,7 +3,48 @@
     <Container>
       <Box>
         <Section :title="$t('checkout.title')">
-          <div class="checkout-page__form">content goes here</div>
+          <div class="checkout-page__form">
+            <div class="checkout-page__form-row">
+              <div class="checkout-page__form-input-group">
+                <label class="checkout-page__form-label">
+                  {{ $t("common.firstName") }}
+                </label>
+                <input
+                  type="text"
+                  class="checkout-page__form-input"
+                  name="firstname"
+                  value=""
+                  required
+                />
+              </div>
+              <div class="checkout-page__form-input-group">
+                <label class="checkout-page__form-label">
+                  {{ $t("common.lastName") }}
+                </label>
+                <input
+                  type="text"
+                  class="checkout-page__form-input"
+                  name="lastname"
+                  value=""
+                  required
+                />
+              </div>
+            </div>
+            <div class="checkout-page__form-row">
+              <div class="checkout-page__form-input-group">
+                <label class="checkout-page__form-label">
+                  {{ $t("common.email") }}
+                </label>
+                <input
+                  type="email"
+                  class="checkout-page__form-input"
+                  name="email"
+                  value=""
+                  required
+                />
+              </div>
+            </div>
+          </div>
         </Section>
         <Section :title="$t('checkout.choosePaymentMethod')">
           <div class="checkout-page__payment-providers">content goes here</div>
