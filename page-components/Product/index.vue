@@ -3,7 +3,7 @@
     <Container>
       <main class="product-page">
         <div class="product-page__inner">
-          <!-- @todo: try to use the PageHeader component, had issues with the description -->
+          <!-- @TODO: Tried to use the PageHeader component, but had issues with the description value -->
           <header class="product-page__header">
             <div class="product-page__header-inner">
               <h1 class="product-page__title">{{ product.name }}</h1>
@@ -204,7 +204,6 @@ export default {
           setTimeout(() => {
             this.isItemBeingAddedToCart = false;
             setTimeout(() => {
-              // @todo: pending to add animation for item drawAttentionToItem
               this.$store.dispatch("basket/drawAttentionToItem", {
                 sku: this.selectedVariant.sku,
               });

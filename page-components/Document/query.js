@@ -12,7 +12,7 @@ query DOCUMENT_PAGE($path: String!, $language: String!) {
 ${fragments}
 `
 /*
- * @todo: make the same query than nextjs boilerplate work
+ * @TODO: make the same query than nextjs boilerplate work
  */
 // export const QUERY_DOCUMENT = `
 //   query DOCUMENT_DOCUMENT($language: String!, $path: String, $version: VersionLabel! ) {

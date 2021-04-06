@@ -112,9 +112,6 @@
   position: relative;
 }
 
-/*
- * @todo: styles not applied
- */
 .banner.banner--withOverlay .banner__media >>> img {
   position: relative;
   height: 100%;

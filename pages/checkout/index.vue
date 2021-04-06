@@ -48,7 +48,7 @@
         </Section>
         <Section :title="$t('checkout.choosePaymentMethod')">
           <div class="checkout-page__payment-providers">
-            <!-- @todo: Add payment providers dynamically -->
+            <!-- @TODO: Add payment providers dynamically -->
             Payment providers go here
           </div>
         </Section>

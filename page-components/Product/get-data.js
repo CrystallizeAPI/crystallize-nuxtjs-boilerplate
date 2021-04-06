@@ -11,7 +11,7 @@ export async function getData({
     variables: {
       path: asPath,
       language,
-      version: 'published' // @todo: still have to work on this
+      version: 'published' // @TODO: still have to work on the version parameter
     },
   });
 }

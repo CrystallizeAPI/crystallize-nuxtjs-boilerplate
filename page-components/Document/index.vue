@@ -116,7 +116,7 @@ export default {
     const { data } = await getDocumentData({
       asPath: route.path,
       language: locale.crystallizeCatalogueLanguage,
-      // preview: true,// @todo: read that from a context
+      // preview: true, // @TODO: read that from a context
     });
 
     const { document } = data;
@@ -137,7 +137,7 @@ export default {
     this.body = body;
     this.images = document.components?.find((c) => c.name === "Image");
     this.featuredItems = featured?.content?.items;
-    // @todo: why topics are not returned? a _normalized error is thrown
+    // @TODO: why topics are not returned? a _normalized error is thrown
     this.topics = topics;
 
     if (document.publishedAt) {

@@ -31,7 +31,7 @@
 }
 
 /*
- * @todo: the component doesn't render a blockquote. It renders a span
+ * @TODO: the component doesn't render a blockquote. It renders a span
  */
 .article >>> blockquote {
   align-items: center;

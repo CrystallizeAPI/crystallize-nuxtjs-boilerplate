@@ -144,21 +144,13 @@ export default {
          */
         this.resetForm();
         if (this.$router.path === "/search") {
-          /*
-           * @TODO: if we are on currently on /search, the URL is updated but the lifecycle
-           * looks like it's not triggered because the data is not loaded according to
-           * the saerchTerm used in the latest search
-           */
-          this.$router.replace({
-            path: "/search",
-            query: { searchTerm },
-          });
-        } else {
-          this.$router.push({
+          return this.$router.replace({
             path: "/search",
             query: { searchTerm },
           });
         }
+
+        this.$router.push({ path: "/search", query: { searchTerm } });
       }
     },
     retrieveSearchSuggestions: async function ({ searchTerm }) {
