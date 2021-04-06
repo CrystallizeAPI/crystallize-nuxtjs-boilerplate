@@ -1,4 +1,9 @@
-.checkout-page__section + .checkout-page__section {
+.checkout-page__section {
+  display: flex;
+  flex-direction: column;
+ }
+ 
+ .checkout-page__section + .checkout-page__section {
   margin-top: var(--padding-l);
 }
 

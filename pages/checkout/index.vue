@@ -47,13 +47,18 @@
           </div>
         </Section>
         <Section :title="$t('checkout.choosePaymentMethod')">
-          <div class="checkout-page__payment-providers">content goes here</div>
+          <div class="checkout-page__payment-providers">
+            <!-- @todo: Add payment providers dynamically -->
+            Payment providers go here
+          </div>
         </Section>
       </Box>
       <Box>
-        <Section :title="$t('basket.title')">
-          <div class="checkout-page__cart">
-            <Basket />
+        <!-- The height: 100% is required in order to place to total at the bottom -->
+        <Section :title="$t('basket.title')" :style="{ height: '100%' }">
+          <div class="checkout-page__basket">
+            <Cart />
+            <Totals />
           </div>
         </Section>
       </Box>
@@ -63,11 +68,12 @@
 <script>
 import Section from "./Section";
 import Box from "./Box";
-import Basket from "./Basket";
+import Cart from "./Cart";
+import Totals from "../../components/Totals";
 import { BASKET_STATUS } from "/store/basket/state";
 
 export default {
-  components: { Section, Box, Basket },
+  components: { Section, Box, Cart, Totals },
   computed: {
     isLoading() {
       return this.$store.state.basket.status === BASKET_STATUS.NOT_HYDRATED;
