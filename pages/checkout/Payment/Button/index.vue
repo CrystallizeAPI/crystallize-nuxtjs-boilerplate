@@ -35,7 +35,7 @@ export default {
       const baseClass = "payment-button";
 
       let classes = [baseClass];
-      this.isSelected = classes.push(`${baseClass}--is-selected`);
+      this.isSelected && classes.push(`${baseClass}--is-selected`);
 
       return classes.join(" ");
     },

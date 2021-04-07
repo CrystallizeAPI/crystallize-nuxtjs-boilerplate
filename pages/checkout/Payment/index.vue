@@ -58,10 +58,12 @@
           we know for sure that it's the Stripe one.
         -->
         <Button
+          v-else
           name="stripe"
           src="/stripe-logo.png"
           hexColor="#6773E6"
-          @click="handleSelectPaymentProvider"
+          :isSelected="selectedPaymentProvider === 'stripe'"
+          @click="() => handleSelectPaymentProvider('stripe')"
         />
       </div>
     </Section>
@@ -82,6 +84,7 @@ export default {
       firstName: "",
       lastName: "",
       email: "",
+      selectedPaymentProvider: null,
       isPaymentProvidersLoading: true,
       paymentProvidersEnabled: [],
     };
@@ -100,8 +103,9 @@ export default {
     );
   },
   methods: {
-    handleSelectPaymentProvider() {
-      console.log("working");
+    handleSelectPaymentProvider(name) {
+      this.selectedPaymentProvider = "stripe";
+      console.log(name);
     },
   },
 };
