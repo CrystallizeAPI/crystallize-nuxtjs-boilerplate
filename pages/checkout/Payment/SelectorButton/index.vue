@@ -5,7 +5,7 @@
     @click="$emit('click')"
     :style="{ backgroundColor: hexColor }"
   >
-    <img class="payment-button__logo" :src="src" :alt="name" />
+    <img class="payment-selector__logo" :src="src" :alt="name" />
   </button>
 </template>
 
@@ -27,12 +27,11 @@ export default {
     isSelected: {
       type: Boolean,
       required: true,
-      default: false,
     },
   },
   computed: {
     dynamicButtonClasses() {
-      const baseClass = "payment-button";
+      const baseClass = "payment-selector";
 
       let classes = [baseClass];
       this.isSelected && classes.push(`${baseClass}--is-selected`);

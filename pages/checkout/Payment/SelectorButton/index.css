@@ -1,4 +1,4 @@
-.payment-button {
+.payment-selector {
   border-radius: 10px;
   font-size: var(--font-size-m);
   height: 80px;
@@ -9,11 +9,11 @@
   padding: 0.5rem;
 }
 
-.payment-button--is-selected {
+.payment-selector--is-selected {
   opacity: 1;
 }
 
-.payment-button__logo {
+.payment-selector__logo {
   display: block;
   margin: 0 auto;
   max-height: 25px;

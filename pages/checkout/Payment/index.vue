@@ -57,14 +57,12 @@
           Since we only did integrate with Stripe paymentProvidersEnabled.length > 0,
           we know for sure that it's the Stripe one.
         -->
-        <Button
+        <StripeSelector
           v-else
-          name="stripe"
-          src="/stripe-logo.png"
-          hexColor="#6773E6"
           :isSelected="selectedPaymentProvider === 'stripe'"
-          @click="() => handleSelectPaymentProvider('stripe')"
+          @on-payment-provider-change="handleSelectPaymentProvider"
         />
+        <StripePayment v-if="selectedPaymentProvider === 'stripe'" />
       </div>
     </Section>
   </div>
@@ -73,12 +71,13 @@
 <script>
 import { serviceApi } from "/lib/service-api";
 import Section from "../Section";
-import Button from "./Button";
+import StripeSelector from "./Providers/Stripe/selector";
+import StripePayment from "./Providers/Stripe/payment";
 import { QUERY_GET_PAYMENT_PROVIDERS } from "./query-get-payment-providers";
 import { retrieveEnabledPaymentProviders } from "./utils";
 
 export default {
-  components: { Section, Button },
+  components: { Section, StripeSelector, StripePayment },
   data() {
     return {
       firstName: "",
@@ -103,9 +102,8 @@ export default {
     );
   },
   methods: {
-    handleSelectPaymentProvider(name) {
-      this.selectedPaymentProvider = "stripe";
-      console.log(name);
+    handleSelectPaymentProvider({ name }) {
+      this.selectedPaymentProvider = name;
     },
   },
 };
