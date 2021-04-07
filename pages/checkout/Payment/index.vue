@@ -49,10 +49,20 @@
     </Section>
     <Section :title="$t('checkout.choosePaymentMethod')">
       <div class="checkout-page__payment__providers">
-        <!-- @TODO: Add payment providers dynamically -->
-        <div v-for="provider in paymentProvidersEnabled">
-          {{ provider }}
+        <Spinner v-if="isPaymentProvidersLoading" />
+        <div v-else-if="paymentProvidersEnabled.length === 0">
+          {{ $t("checkout.noPaymentProvidersConfigured") }}
         </div>
+        <!--
+          Since we only did integrate with Stripe paymentProvidersEnabled.length > 0,
+          we know for sure that it's the Stripe one.
+        -->
+        <Button
+          name="stripe"
+          src="/stripe-logo.png"
+          hexColor="#6773E6"
+          @click="handleSelectPaymentProvider"
+        />
       </div>
     </Section>
   </div>
@@ -61,16 +71,18 @@
 <script>
 import { serviceApi } from "/lib/service-api";
 import Section from "../Section";
+import Button from "./Button";
 import { QUERY_GET_PAYMENT_PROVIDERS } from "./query-get-payment-providers";
 import { retrieveEnabledPaymentProviders } from "./utils";
 
 export default {
-  components: { Section },
+  components: { Section, Button },
   data() {
     return {
       firstName: "",
       lastName: "",
       email: "",
+      isPaymentProvidersLoading: true,
       paymentProvidersEnabled: [],
     };
   },
@@ -82,9 +94,15 @@ export default {
       query: QUERY_GET_PAYMENT_PROVIDERS,
     });
 
+    this.isPaymentProvidersLoading = false;
     this.paymentProvidersEnabled = retrieveEnabledPaymentProviders(
       paymentProvidersResponse.data.paymentProviders
     );
+  },
+  methods: {
+    handleSelectPaymentProvider() {
+      console.log("working");
+    },
   },
 };
 </script>
