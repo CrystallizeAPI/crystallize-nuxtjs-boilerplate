@@ -1,6 +1,15 @@
 <template>
   <div>
-    <div v-if="isStripeLoaded">stripe is loaded</div>
+    <div v-if="isMounted && isStripeLoaded">
+      <StripeCardElement
+        v-if="isStripeLoaded"
+        :pk="publishableKey"
+        @token="handleStripeToken"
+      />
+      <button @click="handlePayment" type="button">
+        {{ $t("checkout.payNow") }}
+      </button>
+    </div>
     <div v-else>stripe is NOT loaded</div>
   </div>
 </template>
@@ -33,6 +42,14 @@ export default {
   },
   mounted() {
     this.isMounted = true;
+  },
+  methods: {
+    handleStripeToken(token) {
+      console.log(token);
+    },
+    handlePayment() {
+      alert("pay");
+    },
   },
   head() {
     return {

@@ -4,7 +4,7 @@
     src="/stripe-logo.png"
     hexColor="#6773E6"
     :isSelected="isSelected"
-    @click="$emit('on-payment-provider-change', { name: 'stripe' })"
+    @click="$emit('click')"
   />
 </template>
 

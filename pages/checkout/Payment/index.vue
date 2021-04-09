@@ -61,6 +61,7 @@
           v-else
           :isSelected="selectedPaymentProvider === 'stripe'"
           @on-payment-provider-change="handleSelectPaymentProvider"
+          @click="() => handleSelectPaymentProvider({ name: 'stripe' })"
         />
         <StripePayment v-if="selectedPaymentProvider === 'stripe'" />
       </div>
