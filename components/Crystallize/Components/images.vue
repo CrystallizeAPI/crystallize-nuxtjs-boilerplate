@@ -31,8 +31,10 @@ export default {
     },
     isPortraitImage: function (image) {
       const { variants = [] } = image;
+      const height = (variants && variants[0]?.height) || undefined;
+      const width = (variants && variants[0]?.width) || undefined;
 
-      return variants[0].height >= variants[0]?.width;
+      return height >= width;
     },
   },
 };
