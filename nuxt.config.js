@@ -50,8 +50,10 @@ const defaultLocale = appConfig.locale || {
 
 export default {
   env: {
+    // @TODO: document that all env varaibles must be mapped in nuxt.config.js
     // Expose CRYSTALLIZE_TENANT_IDENTIFIER to the client side script
     CRYSTALLIZE_TENANT_IDENTIFIER: process.env.CRYSTALLIZE_TENANT_IDENTIFIER,
+    SERVICE_API_URL: process.env.SERVICE_API_URL,
   },
   components: true, // NuxtJS will import automatically yor components
   server: {
