@@ -18,9 +18,5 @@
   margin: 0 auto;
   max-height: 25px;
   max-width: 100px;
-  /**
-   * @todo: remove global styles of adding border to all images.
-   * We need to overwrite some global styles
-   */
   border: none;
 }
