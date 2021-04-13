@@ -28,7 +28,10 @@
         :event="isLinkToCheckoutActive ? 'click' : ''"
         to="/checkout"
       >
-        {{ $t("basket.goToCheckout") }}
+        <!-- Click events passed to the NuxtLink component won't work -->
+        <span @click="closeAside">
+          {{ $t("basket.goToCheckout") }}
+        </span>
       </NuxtLink>
     </footer>
   </div>
@@ -38,6 +41,7 @@
 import BasketItem from "./Item";
 import Totals from "../../Totals";
 import { formatCurrency } from "/lib/pricing";
+import { unlockScroll } from "/lib/layout";
 import { BASKET_STATUS } from "/store/basket/state";
 
 export default {
@@ -89,6 +93,11 @@ export default {
       const locale = locales.find((l) => l.locale === code) || locales[0];
 
       return formatCurrency({ amount, currency, locale });
+    },
+    closeAside() {
+      this.$store.dispatch("layout/hideAside").then(() => {
+        unlockScroll();
+      });
     },
   },
 };
