@@ -128,9 +128,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [
-    { src: '~/plugins/stripe-card-element.js', mode: 'client' }
-  ],
+  plugins: [],
   /*
    ** Nuxt.js modules
    */

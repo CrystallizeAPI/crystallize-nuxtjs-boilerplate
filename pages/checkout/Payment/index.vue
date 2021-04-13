@@ -63,7 +63,9 @@
           @on-payment-provider-change="handleSelectPaymentProvider"
           @click="() => handleSelectPaymentProvider({ name: 'stripe' })"
         />
-        <StripePayment v-if="selectedPaymentProvider === 'stripe'" />
+        <client-only>
+          <StripePayment v-if="selectedPaymentProvider === 'stripe'" />
+        </client-only>
       </div>
     </Section>
   </div>
@@ -80,10 +82,38 @@ import { retrieveEnabledPaymentProviders } from "./utils";
 export default {
   components: { Section, StripeSelector, StripePayment },
   data() {
+    /**
+     * The checkout model shared between all the payment providers
+     * It contains everything needed to make a purchase and complete
+     * an order
+     */
+    const initialFirstName = "";
+    const initialLastName = "";
+    const initialEmail = "";
+    const checkoutModel = {
+      basketModel: this.$store.state.basket,
+      customer: {
+        firstName: initialFirstName,
+        lastName: initialLastName,
+        addresses: [
+          {
+            type: "billing",
+            email: initialEmail || null,
+          },
+        ],
+      },
+      confirmationURL: this.getURL(
+        `/confirmation/{crystallizeOrderId}?emptyBasket`
+      ),
+      checkoutURL: this.getURL(`/checkout`),
+      termsURL: this.getURL(`/terms`),
+    };
+
     return {
-      firstName: "",
-      lastName: "",
-      email: "",
+      firstName: initialFirstName,
+      lastName: initialLastName,
+      email: initialEmail,
+      checkoutModel,
       selectedPaymentProvider: null,
       isPaymentProvidersLoading: true,
       paymentProvidersEnabled: [],
@@ -102,9 +132,44 @@ export default {
       paymentProvidersResponse.data.paymentProviders
     );
   },
+  watch: {
+    /**
+     * When the model of firstName changes
+     */
+    firstName(newValue) {
+      this.checkoutModel.customer.firstName = newValue;
+      console.log(this.checkoutModel);
+    },
+    /**
+     * When the model of lastName changes
+     */
+    lastName(newValue) {
+      this.checkoutModel.customer.lastName = newValue;
+      console.log(this.checkoutModel);
+    },
+    /**
+     * When the model of email changes
+     */
+    email(newValue) {
+      this.checkoutModel.customer.addresses[0].email = newValue;
+      console.log(this.checkoutModel);
+    },
+  },
   methods: {
     handleSelectPaymentProvider({ name }) {
       this.selectedPaymentProvider = name;
+    },
+    getURL(path) {
+      const isServer = typeof window === "undefined";
+      if (isServer) {
+        return "";
+      }
+
+      /**
+       * For now, we assume that we only use English.
+       * To add multilingual support, we must concat the locale to the URL
+       */
+      return `${location.protocol}//${location.host}${path}`;
     },
   },
 };
