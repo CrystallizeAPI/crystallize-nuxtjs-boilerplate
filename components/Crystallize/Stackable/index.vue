@@ -19,7 +19,26 @@
         <CrystallizeCatalogueSlider :items="getItemsFromStack(stack)" />
       </Collection>
 
-      <!-- @TODO: Collection This can be a grid collection or item collection -->
+      <Collection
+        v-if="stack.shape.name === 'Collection'"
+        :title="getCollectionTitle(stack)"
+        :description="getCollectionDescription(stack)"
+      >
+        <template>
+          <CrystallizeCatalogueSlider
+            v-if="getChoiceComponentName(stack) === 'Items'"
+            :items="getItemsFromStack(stack)"
+          />
+
+          <div
+            v-else-if="getChoiceComponentName(stack) === 'Grid'"
+            v-for="grid in getGridsFromStack(stack)"
+            :key="grid.name"
+          >
+            <CrystallizeGrid :grid="grid" />
+          </div>
+        </template>
+      </Collection>
 
       <CrystallizeBanner v-if="stack.shape.id === 'banner'" :data="stack" />
     </div>
@@ -28,6 +47,10 @@
 
 <script>
 export default {
+  data() {
+    console.log(this.stacks);
+    return {};
+  },
   props: {
     stacks: {
       type: Array,
@@ -48,6 +71,18 @@ export default {
     },
     getItemsFromStack: function (stack) {
       return stack.components?.find((c) => c.name === "Items")?.content?.items;
+    },
+    getChoiceComponentName: function (stack) {
+      const choiceComponent = stack?.components?.find(
+        (c) => c.name === "Content"
+      );
+
+      if (choiceComponent) {
+        /**
+         * choice.name can be either "Grid" or "Items"
+         */
+        return choiceComponent?.content?.selectedComponent;
+      }
     },
   },
 };
