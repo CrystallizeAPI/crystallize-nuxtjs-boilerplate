@@ -1,0 +1,52 @@
+.catalogue-slider__button {
+  position: absolute;
+  z-index: 99;
+  background: var(--color-text-main);
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+  height: 80px;
+  width: 80px;
+  top: 50%;
+  font-size: 25px;
+  color: #fff;
+  opacity: 0;
+  transition: transform 150ms, opacity 150ms;
+  display: none;
+}
+
+/**
+ * Default styles for the Previous button
+ */
+ .catalogue-slider__button.catalogue-slider__button--previous {
+  transform: translate(-50%, -60%) scale(-0.5, 0.5);
+  left: 0;
+}
+/**
+ * Styles for the Previous button when its displayed
+ */
+ .catalogue-slider__button.catalogue-slider__button--previous.catalogue-slider__button--is-displayed {
+  transform: translate(-50%, -60%) scale(-1, 1);
+  opacity: 1;
+}
+
+/**
+ * Default styles for the Next button
+ */
+ .catalogue-slider__button.catalogue-slider__button--next {
+  right: 0;
+  transform: translate(50%, -60%) scale(0.5);
+}
+/**
+ * Styles for the Next button when its displayed
+ */
+ .catalogue-slider__button.catalogue-slider__button--next.catalogue-slider__button--is-displayed {
+  transform: translate(50%, -60%) scale(1);
+  opacity: 1;
+}
+
+@media screen and (min-width: 1024px) {
+  .catalogue-slider__button {
+    display: block;
+  }
+}
+
