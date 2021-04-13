@@ -1,18 +1,18 @@
-.outer {
+.footer__inner {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  max-width: var(--viewport-context-extended-max-width);
   margin: 50px auto;
   border-top: 2px solid var(--color-box-background);
-  padding: 50px 50px;
+  padding-top: 50px;
+  padding-bottom: 50px;
   justify-content: space-between;
 }
 
-.logo img {
+.footer__logo {
   width: 70px;
 }
 
-.powered {
+.footer__powered {
   width: 100%;
   display: block;
   display: flex;
@@ -21,15 +21,15 @@
   font-weight: 600;
 }
 
-.powered p {
+.footer__powered p {
   margin: 0;
 }
 
-.powered img {
+.footer__powered img {
   width: 120px;
 }
 
-.navlist {
+.footer__navlist {
   list-style: none;
   font-weight: 500;
   font-size: 1rem;
@@ -37,11 +37,11 @@
   margin: 0 0 0 auto;
 }
 
-.navlist li {
+.footer__navlist-item {
   line-height: 1.5rem;
 }
 
-.navlist h5 {
+.footer__navlist h5 {
   font-size: 0.7rem;
   font-weight: 400;
   margin-bottom: 10px;
