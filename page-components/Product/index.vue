@@ -51,7 +51,7 @@
             v-if="relatedProducts"
             title="You might also be interested in"
           >
-            <CrystallizeCatalogueItems :items="relatedProducts" />
+            <CrystallizeCatalogueSlider :items="relatedProducts" />
           </Collection>
         </aside>
       </main>
