@@ -58,13 +58,13 @@
           <div>
             <Aside
               v-if="featuredItems"
-              :title="Featured"
+              title="Featured"
               :items="featuredItems"
               :isSticky="!relatedItems"
             />
             <Aside
               v-if="relatedItems"
-              :title="Related"
+              title="Related"
               :items="relatedItems"
               :isSticky="true"
             />
