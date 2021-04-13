@@ -30,9 +30,6 @@
   margin-bottom: 0.5rem;
 }
 
-/*
- * @TODO: the component doesn't render a blockquote. It renders a span
- */
 .article >>> blockquote {
   align-items: center;
   color: var(--color-text-main);
