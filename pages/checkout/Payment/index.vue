@@ -138,21 +138,18 @@ export default {
      */
     firstName(newValue) {
       this.checkoutModel.customer.firstName = newValue;
-      console.log(this.checkoutModel);
     },
     /**
      * When the model of lastName changes
      */
     lastName(newValue) {
       this.checkoutModel.customer.lastName = newValue;
-      console.log(this.checkoutModel);
     },
     /**
      * When the model of email changes
      */
     email(newValue) {
       this.checkoutModel.customer.addresses[0].email = newValue;
-      console.log(this.checkoutModel);
     },
   },
   methods: {

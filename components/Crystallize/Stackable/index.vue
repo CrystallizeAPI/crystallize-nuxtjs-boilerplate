@@ -47,10 +47,6 @@
 
 <script>
 export default {
-  data() {
-    console.log(this.stacks);
-    return {};
-  },
   props: {
     stacks: {
       type: Array,
