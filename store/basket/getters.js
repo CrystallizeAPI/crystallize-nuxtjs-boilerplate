@@ -36,8 +36,6 @@ export default {
     return {
       locale,
       cart: getters.clientCart,
-      crystallizeOrderId: state.clientBasket.crystallizeOrderId,
-      klarnaOrderId: state.clientBasket.klarnaOrderId,
     };
   }
 }

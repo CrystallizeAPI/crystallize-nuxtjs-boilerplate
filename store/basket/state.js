@@ -23,19 +23,6 @@ export const BASKET_INITIAL_STATE = {
      */
     cart: [],
     voucherCode: null,
-
-    /**
-     * In some cases we create an order in Crystallize before
-     * the checkout is completed. Currently, this is done for
-     * Klarna and Vipps payments
-     */
-    crystallizeOrderId: null,
-
-    /**
-     * Track unfinished Klarna order
-     * Only used if you're doing Klarna payments
-     */
-    klarnaOrderId: null
   },
 
   // The validated basket sent back from the Service API
