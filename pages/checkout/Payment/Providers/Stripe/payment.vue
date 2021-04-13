@@ -1,28 +1,29 @@
 <template>
   <div>
-    <div v-if="isMounted && isStripeLoaded">
-      <StripeCardElement
-        v-if="isStripeLoaded"
+    <template v-if="publishableKey">
+      <StripeElementCard
+        ref="stripeCardRef"
         :pk="publishableKey"
         @token="handleStripeToken"
       />
-      <button @click="handlePayment" type="button">
+      <Button @click="handleSubmit" alignment="center" type="button">
         {{ $t("checkout.payNow") }}
-      </button>
-    </div>
-    <div v-else>stripe is NOT loaded</div>
+      </Button>
+    </template>
+    <Spinner v-else />
   </div>
 </template>
 
 <script>
 import { serviceApi } from "/lib/service-api";
+import { StripeElementCard } from "@vue-stripe/vue-stripe";
 
 export default {
+  components: { StripeElementCard },
   data() {
     return {
+      status: "idle",
       publishableKey: null,
-      isMounted: false,
-      isStripeLoaded: false,
     };
   },
   async beforeCreate() {
@@ -40,30 +41,16 @@ export default {
 
     this.publishableKey = data.paymentProviders.stripe.config.publishableKey;
   },
-  mounted() {
-    this.isMounted = true;
-  },
   methods: {
     handleStripeToken(token) {
-      console.log(token);
+      // 1. Confirm Card Payment
+      // 2. If payment intent succeeded, do "mutation confirmStripeOrder"
+      // 3. Redirect to /confirmation/{crystallizeOrderId}?emptyBasket
     },
-    handlePayment() {
-      alert("pay");
+    handleSubmit() {
+      this.status = "confirming";
+      this.$refs.stripeCardRef.submit();
     },
-  },
-  head() {
-    return {
-      script: [
-        {
-          hid: "stripe",
-          src: "https://js.stripe.com/v3/",
-          defer: true,
-          callback: () => {
-            this.isStripeLoaded = true;
-          },
-        },
-      ],
-    };
   },
 };
 </script>
