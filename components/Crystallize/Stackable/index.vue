@@ -11,13 +11,12 @@
         </div>
       </Collection>
 
-      <!-- @TODO: Item Collection -->
       <Collection
         v-if="stack.shape.id === 'item-collection'"
         :title="getCollectionTitle(stack)"
         :description="getCollectionDescription(stack)"
       >
-        <CrystallizeCatalogueItems :items="getItemsFromStack(stack)" />
+        <CrystallizeCatalogueSlider :items="getItemsFromStack(stack)" />
       </Collection>
 
       <!-- @TODO: Collection This can be a grid collection or item collection -->
