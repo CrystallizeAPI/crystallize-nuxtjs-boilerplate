@@ -1,22 +1,22 @@
 <template>
   <article class="cart-item">
-    <CrystallizeImage :image="image" class="cart-item__media" />
+    <CrystallizeImage v-if="image" :image="image" class="cart-item__media" />
     <div class="cart-item__info">
-      <h5 class="cart-item__name">{{ name }}</h5>
-      <ul v-if="attributes" class="cart-item__topics">
+      <h5 class="cart-item__name">{{ item.name }}</h5>
+      <ul v-if="item.attributes" class="cart-item__topics">
         <li
-          v-for="attr in attributes"
+          v-for="attr in item.attributes"
           :key="attr.attribute"
           class="cart-item__topics-element"
         >
           {{ attr.value }}
         </li>
       </ul>
-      <p v-else>{{ this.sku }}</p>
+      <p v-else>{{ this.item.sku }}</p>
     </div>
     <div class="cart-item__amount">
       <span class="cart-item__quantity">
-        {{ this.quantity }} x {{ totalAmountPerItem }}
+        {{ this.item.quantity }} x {{ totalAmountPerItem }}
       </span>
       <span class="cart-item__price">{{ priceFormatted }}</span>
     </div>
@@ -27,11 +27,17 @@
 import { formatCurrency } from "/lib/pricing";
 export default {
   data() {
+    const image =
+      this.item.images && this.item.images.length > 0
+        ? this.item.images[0]
+        : null;
+
     return {
       product: {
-        sku: this.sku,
-        path: this.path,
+        sku: this.item.sku,
+        path: this.item.path,
       },
+      image,
     };
   },
   computed: {
@@ -39,7 +45,7 @@ export default {
       const { locales, locale: code } = this.$i18n;
       const locale = locales.find((l) => l.locale === code) || locales[0];
 
-      const { gross, currency } = this.price;
+      const { gross, currency } = this.item.price || {};
       const amount = gross * this.quantity;
       if (!gross || gross === 0) {
         return `FREE`;
@@ -51,7 +57,7 @@ export default {
       const { locales, locale: code } = this.$i18n;
       const locale = locales.find((l) => l.locale === code) || locales[0];
 
-      const { gross, currency } = this.price;
+      const { gross, currency } = this.item.price || {};
       if (!gross || gross === 0) {
         return `FREE`;
       }
@@ -60,34 +66,10 @@ export default {
     },
   },
   props: {
-    sku: {
-      type: String,
-      required: true,
-    },
-    name: {
-      type: String,
-      required: true,
-    },
-    path: {
-      type: String,
-      required: true,
-    },
-    image: {
+    item: {
       type: Object,
       required: true,
-    },
-    price: {
-      type: Object,
-      required: true,
-    },
-    quantity: {
-      type: Number,
-      default: 0,
-      required: true,
-    },
-    attributes: {
-      type: Array,
-      required: false,
+      default: {},
     },
   },
 };
