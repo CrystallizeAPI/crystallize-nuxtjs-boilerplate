@@ -12,6 +12,7 @@
               <TinyBasket v-slot:view-to-toggle />
             </template>
             <template>
+              <PreviewBar v-if="isPreviewMode" />
               <LayoutHeader>
                 <template v-slot:navigation>
                   <LayoutNavigation :nav-items="navItems" />
@@ -47,7 +48,10 @@ import TinyBasket from "../components/Basket/TinyBasket";
 export default {
   components: { AuthenticationProvider, BasketProvider, TinyBasket },
   data() {
-    return { navItems: [] };
+    return {
+      isPreviewMode: this.$route.query.preview,
+      navItems: [],
+    };
   },
   computed: {
     linkUserArea() {

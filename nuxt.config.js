@@ -49,6 +49,20 @@ const defaultLocale = appConfig.locale || {
 };
 
 export default {
+  /**
+   * target: "server" is default configuration for NuxtJS.
+   * Whoever, we want to point out that we can edit this.
+   * 
+   * We've included the NuxtJS preview mode functionality in this boilerplate
+   * that is ONLY available if you use "target: 'static'".
+   * You'll see a bar on the top that indicates that you're in the preview mode.
+   * For your information: https://nuxtjs.org/docs/2.x/features/live-preview#passing-data-to-enablepreview.
+   * 
+   * Also, no matter the target configuration you're using, if you add '?preview=true'
+   * to any page, you'll fetch a draft version from Crystallize of that resource,
+   * and the peview bar will be shown as well.
+   */
+  target: 'server',
   env: {
     /**
      * IMPORTANT: In order to work with env variables, you must map them explicitly
@@ -132,7 +146,9 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: [
+    { src: '~/plugins/preview.client.js', mode: "client" }
+  ],
   /*
    ** Nuxt.js modules
    */
