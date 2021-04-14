@@ -116,7 +116,7 @@ export default {
     const { data } = await getDocumentData({
       asPath: route.path,
       language: locale.crystallizeCatalogueLanguage,
-      // preview: true, // @TODO: read that from a context
+      preview: this.$route.query.preview,
     });
 
     const { document } = data;

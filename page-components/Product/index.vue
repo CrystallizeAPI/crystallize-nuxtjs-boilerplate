@@ -109,6 +109,7 @@ export default {
     const { data } = await getProductData({
       asPath: route.path,
       language: locale.crystallizeCatalogueLanguage,
+      preview: this.$route.query.preview,
     });
 
     const { product } = data;

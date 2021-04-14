@@ -77,6 +77,7 @@ export default {
     const response = await getFolderData({
       asPath: route.path,
       language: locale.crystallizeCatalogueLanguage,
+      preview: this.$route.query.preview,
     });
 
     const { folder } = response.data;

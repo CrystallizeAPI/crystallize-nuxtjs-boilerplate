@@ -86,7 +86,7 @@ export default {
     const searchSpec = { ...urlToSpec({ query: rest, asPath }, locale) };
     const { search, catalogue } = await getSearchData({
       asPath,
-      preview: null,
+      preview: this.$route.query.preview,
       language: locale.crystallizeCatalogueLanguage,
       searchSpec,
       aggregationsFilter: cleanFilterForTotalAggregations(searchSpec.filter),
@@ -351,7 +351,7 @@ export default {
       const searchSpec = { ...urlToSpec({ query: rest, asPath }, locale) };
       const { search, catalogue } = await getSearchData({
         asPath,
-        preview: null,
+        preview: this.$route.query.preview,
         language: locale.crystallizeCatalogueLanguage,
         searchSpec,
         aggregationsFilter: cleanFilterForTotalAggregations(searchSpec.filter),

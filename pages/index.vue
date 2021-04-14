@@ -28,6 +28,7 @@ export default {
     const { data } = await getFolderData({
       asPath: "/frontpage-2021",
       language: locale.crystallizeCatalogueLanguage,
+      preview: this.$route.query.preview,
     });
 
     const { folder } = data;
