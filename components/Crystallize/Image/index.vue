@@ -70,10 +70,11 @@ export default {
   },
   data() {
     const image = this.image;
-    const { variants: vars = [], caption } = image;
+    const { variants, caption } = image;
+    const vars = Boolean(variants) ? variants : [];
     // Separate the image variants by their respective types
-    const std = vars.filter((v) => v.url && !v.url.endsWith(".webp"));
-    const webp = vars.filter((v) => v.url && v.url.endsWith(".webp"));
+    const std = vars?.filter((v) => v.url && !v.url.endsWith(".webp"));
+    const webp = vars?.filter((v) => v.url && v.url.endsWith(".webp"));
     const srcSet = std.map(this.getVariantSrc).join(", ");
     const srcSetWebp = webp.map(this.getVariantSrc).join(", ");
     const captionString = caption?.html?.[0] || caption?.plainText?.[0] || "";
