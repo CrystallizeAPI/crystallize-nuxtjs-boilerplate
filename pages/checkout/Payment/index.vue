@@ -76,8 +76,35 @@ import { serviceApi } from "/lib/service-api";
 import Section from "../Section";
 import StripeSelector from "./Providers/Stripe/selector";
 import StripePayment from "./Providers/Stripe/payment";
-import { QUERY_GET_PAYMENT_PROVIDERS } from "./query-get-payment-providers";
-import { retrieveEnabledPaymentProviders } from "./utils";
+
+/**
+ * Retrieves what payment providers have been enabled.
+ *
+ * We did the Stripe integration as an example, but feel free to add more
+ * integrations such as vipps, klarna, etc.
+ *
+ * If you want to add more payment providers, feel free to remove the hardcoded
+ * code, and uncomment the code below.
+ */
+export function retrieveEnabledPaymentProviders(paymentProvidersConfig) {
+  return paymentProvidersConfig.stripe.enabled ? ["stripe"] : [];
+
+  /**
+   * Uncomment the following for multiple payment provider integrations.
+   */
+  // const paymentProvidersNames = Object.keys(paymentProvidersConfig);
+
+  // let paymentProvidersEnabled = [];
+  // paymentProvidersNames.forEach((provider) => {
+  //   /**
+  //    * If the provider is enabled, we add it to the "paymentProvidersEnabled"
+  //    */
+  //   paymentProvidersConfig[provider].enabled &&
+  //     paymentProvidersEnabled.push(paymentProvidersConfig[provider]);
+  // });
+
+  // return paymentProvidersEnabled;
+}
 
 export default {
   components: { Section, StripeSelector, StripePayment },
@@ -124,7 +151,24 @@ export default {
    */
   async beforeCreate() {
     const paymentProvidersResponse = await serviceApi({
-      query: QUERY_GET_PAYMENT_PROVIDERS,
+      query: `
+      {
+        paymentProviders {
+          stripe {
+            enabled
+          }
+          klarna {
+            enabled
+          }
+          mollie {
+            enabled
+          }
+          vipps {
+            enabled
+          }
+        }
+      }
+    `,
     });
 
     this.isPaymentProvidersLoading = false;

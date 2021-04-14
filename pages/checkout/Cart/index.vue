@@ -1,7 +1,7 @@
 <template>
   <div class="cart">
     <span v-if="cart.length === 0">{{ $t("basket.empty") }}</span>
-    <ul class="cart__list" v-else-if="cart.length > 1">
+    <ul class="cart__list" v-else>
       <li class="cart__item" v-for="item in cart">
         <CartItem :key="item.sku" :item="item" />
       </li>
