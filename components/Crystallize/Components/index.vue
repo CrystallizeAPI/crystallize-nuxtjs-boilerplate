@@ -26,7 +26,11 @@
         :data="component.content"
       />
       <CrystallizeComponentsPropertiesTable
-        v-else-if="component.type === 'propertiesTable'"
+        v-else-if="
+          component.type === 'propertiesTable' &&
+          component.content !== null &&
+          component.content.sections
+        "
         :data="component.content"
       />
     </div>
