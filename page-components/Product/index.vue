@@ -20,7 +20,10 @@
                   @on-change="onSelectedVariantChange"
                 />
                 <div class="product-page__pricing-details">
-                  <Price :variant="selectedVariant" />
+                  <Price
+                    v-if="selectedVariant.priceVariants"
+                    :variant="selectedVariant"
+                  />
                   <BuyButton
                     :isLoading="isItemBeingAddedToCart"
                     @click="handleBuyItem"
@@ -145,6 +148,17 @@ export default {
       this.relatedProducts = components.find(
         isRelatedProductsComponent
       )?.content?.items;
+    }
+  },
+  /**
+   * If the path of the product starts with /vouchers it means that is a product
+   * that acts as a voucher. They cannot be added to the cart, and the resulting
+   * render it's almost an empty page. Because of this, we redirect the user
+   * to the home page.
+   */
+  middleware({ redirect, route }) {
+    if (route.path.startsWith("/vouchers")) {
+      redirect("/");
     }
   },
   head() {
