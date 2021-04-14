@@ -7,17 +7,18 @@
   --distance-between-slides: 0.5rem;
 
   position: relative;
+  width: 100%;
+  max-width: 100%;
 }
 
 .catalogue-slider__items {
-  position: relative;
-  margin-top: 45px;
   display: flex;
+  margin-bottom: 0;
   overflow-x: scroll;
-  scroll-snap-type: x mandatory;
+  padding-bottom: var(--padding-l);
+  position: relative;
   scroll-padding: 0%;
-  padding-bottom: 60px;
-  margin-bottom: 60px;
+  scroll-snap-type: x mandatory;
 }
 
 .catalogue-slider__items::-webkit-scrollbar-track {
@@ -48,6 +49,10 @@
   padding-left: var(--distance-between-slides);
 }
 
+.catalogue-slider__item >>> img {
+  height: 100%;
+  object-fit: cover;
+}
 .catalogue-slider__item.catalogue-slider__item--document {
   width: 85%;
   min-width: 85%;
@@ -55,8 +60,8 @@
 }
 
 .catalogue-slider__item.catalogue-slider__item--product {
-  min-width: 45%;
-  width: 45%;
+  min-width: 70%;
+  width: 70%;
   height: var(--listformat-product-height-xs);
 }
 
@@ -65,13 +70,13 @@
  * Styles for mobile-only
  */
 @media screen and (max-width: 499px) {
-  .catalogue-slider {
-    padding-bottom: 30px;
+  .catalogue-slider__items {
+    /**
+     * The width of the slider for small resolutions is fixed because
+     * the content was overlfowing the screen and everything was broken if so.
+     */
+     padding-bottom: var(--padding-m);
     scroll-padding: 25px;
-  }
-
-  .catalogue-slider > *:first-child {
-    margin-left: 25px;
   }
 
   .catalogue-slider__items::-webkit-scrollbar-track {

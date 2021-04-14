@@ -3,30 +3,33 @@
     <Container>
       <main class="product-page">
         <div class="product-page__inner">
-          <!-- @TODO: Tried to use the PageHeader component, but had issues with the description value -->
-          <header class="product-page__header">
-            <div class="product-page__header-inner">
-              <h1 class="product-page__title">{{ product.name }}</h1>
-
-              <div class="product-page__summary">
-                <CrystallizeComponents :components="summary" />
-              </div>
-              <TopicsList v-if="topics" :data="topics" :isUnderlined="false" />
-              <VariantSelector
-                :selected-variant="selectedVariant"
-                :variants="product.variants"
-                @on-change="onSelectedVariantChange"
-              />
-              <div class="product-page__pricing-details">
-                <Price :variant="selectedVariant" />
-                <BuyButton
-                  :isLoading="isItemBeingAddedToCart"
-                  @click="handleBuyItem"
+          <PageHeader class="product-page__header" :title="product.name">
+            <template v-slot:postHeader>
+              <div class="product-page__header-inner">
+                <div class="product-page__summary">
+                  <CrystallizeComponents :components="summary" />
+                </div>
+                <TopicsList
+                  v-if="topics"
+                  :data="topics"
+                  :isUnderlined="false"
                 />
+                <VariantSelector
+                  :selected-variant="selectedVariant"
+                  :variants="product.variants"
+                  @on-change="onSelectedVariantChange"
+                />
+                <div class="product-page__pricing-details">
+                  <Price :variant="selectedVariant" />
+                  <BuyButton
+                    :isLoading="isItemBeingAddedToCart"
+                    @click="handleBuyItem"
+                  />
+                </div>
+                <Stock v-if="selectedVariant" :stock="selectedVariant.stock" />
               </div>
-              <Stock v-if="selectedVariant" :stock="selectedVariant.stock" />
-            </div>
-          </header>
+            </template>
+          </PageHeader>
 
           <!--
           The article component does overwrite styles in order to

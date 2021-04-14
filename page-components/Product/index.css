@@ -1,8 +1,13 @@
 .product-page {
   --distance-to-related-content: 100px;
-  display: grid;
-  grid-template-columns: 1fr;
-  row-gap: 100px;
+  /**
+   * We use display:flex, rather than display:grid, because if we have scrollable
+   * elements inside the layout, the design gets broken.
+   *
+   * Remember that we're using the CrystallizeCatalogueSlider that includes a scroll.
+   */
+  display: flex;
+  flex-direction: column;
 }
 
 .product-page__title {
@@ -42,7 +47,7 @@
   padding: 20px 0;
 }
 
-.product-page__related-content {
+.product-page__related-content {
   margin-top: var(--distance-to-related-content);
 }
 
