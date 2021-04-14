@@ -28,20 +28,18 @@ export default {
   methods: {
     toggleNavBar() {
       this.open = !this.open;
-      this.open
-        ? this.lockDocumentScroll()
-        : this.unlockDocumentScroll();
+      this.open ? this.lockDocumentScroll() : this.unlockDocumentScroll();
     },
     hideNavBar() {
       this.open = false;
-      this.unlockDocumentScroll()
+      this.unlockDocumentScroll();
     },
     lockDocumentScroll() {
       document.body.style.overflow = "hidden";
     },
     unlockDocumentScroll() {
       document.body.style.overflow = "auto";
-    }
+    },
   },
 };
 </script>
