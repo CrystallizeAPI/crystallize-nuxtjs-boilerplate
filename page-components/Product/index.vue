@@ -122,7 +122,6 @@ export default {
 
     this.product = product;
     const { components = [], variants = [], topics } = product;
-    // @TODO: In some products the error "Cannot read property 'filter' of null" is thrown
     if (components && components.length) {
       const descriptionComponent = components.find(isDescriptionComponent);
       if (descriptionComponent?.content?.json) {
