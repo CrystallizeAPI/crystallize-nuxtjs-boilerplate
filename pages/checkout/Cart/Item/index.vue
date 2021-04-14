@@ -46,7 +46,8 @@ export default {
       const locale = locales.find((l) => l.locale === code) || locales[0];
 
       const { gross, currency } = this.item.price || {};
-      const amount = gross * this.quantity;
+      const amount = gross * this.item.quantity;
+
       if (!gross || gross === 0) {
         return `FREE`;
       }
