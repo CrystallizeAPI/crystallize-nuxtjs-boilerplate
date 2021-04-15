@@ -72,10 +72,12 @@ export default {
      */
     CRYSTALLIZE_TENANT_IDENTIFIER: process.env.CRYSTALLIZE_TENANT_IDENTIFIER,
     SERVICE_API_URL: process.env.SERVICE_API_URL,
+    // Used to generate the hreflang attributes for SEO purposes
+    YOUR_DOMAIN: process.env.YOUR_DOMAIN
   },
   components: true, // NuxtJS will import automatically yor components
   server: {
-    port: 8000 // default: 3000
+    port: process.env.PORT // default port is 3000
   },
   router: {
     async extendRoutes(routes, resolve) {

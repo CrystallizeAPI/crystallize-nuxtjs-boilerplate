@@ -66,6 +66,24 @@ export default {
       return isLoggedIn ? "/account" : "/login";
     },
   },
+  head() {
+    const { locales, locale: code } = this.$i18n;
+    const locale = locales.find((l) => l.locale === code) || locales[0];
+
+    return {
+      link: [this.retrieveAttributesHreflang(locale.appLanguage)],
+    };
+  },
+  methods: {
+    retrieveAttributesHreflang(languageCountryLocale) {
+      // hreflang has the format language-country (en-US, en-UK).
+      return {
+        rel: "alternate",
+        hreflang: languageCountryLocale,
+        href: `https://${process.env.YOUR_DOMAIN}${this.$route.path}`,
+      };
+    },
+  },
   async fetch() {
     const { locales, locale: code } = this.$i18n;
     const locale = locales.find((l) => l.locale === code) || locales[0];
