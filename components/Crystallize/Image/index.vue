@@ -141,12 +141,11 @@ export default {
         }, vars[0]);
       }
 
-      console.log(this.alt || image.altText || "");
       const altText = this.alt || image.altText || "";
 
       return {
         altText,
-        role: altText === "" ? "presentation" : "img",
+        role: Boolean(altText) ? "img" : "presentation",
         originalFileExtension,
         srcSetWebp,
         srcSet,
