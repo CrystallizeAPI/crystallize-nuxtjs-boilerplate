@@ -59,12 +59,12 @@
     grid-template-areas: 'content content content content content content  . header header header header header';
   }
 
-  .product-page__header{
+  .product-page__header {
     grid-area: header;
   }
 
   .product-page__header-inner {
-    position: sticky;
+    position: sticky !important;
     top: 50px;
   }
   

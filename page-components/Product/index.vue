@@ -3,9 +3,12 @@
     <Container>
       <main class="product-page">
         <div class="product-page__inner">
-          <PageHeader class="product-page__header" :title="product.name">
-            <template v-slot:postHeader>
-              <div class="product-page__header-inner">
+          <div class="product-page__header">
+            <PageHeader
+              class="product-page__header-inner"
+              :title="product.name"
+            >
+              <template v-slot:postHeader>
                 <div class="product-page__summary">
                   <CrystallizeComponents :components="summary" />
                 </div>
@@ -30,9 +33,9 @@
                   />
                 </div>
                 <Stock v-if="selectedVariant" :stock="selectedVariant.stock" />
-              </div>
-            </template>
-          </PageHeader>
+              </template>
+            </PageHeader>
+          </div>
 
           <!--
           The article component does overwrite styles in order to
