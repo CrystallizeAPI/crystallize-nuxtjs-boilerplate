@@ -1,112 +1,14 @@
 .crystallize-components-images {
-  --grid-element-separation: 5px;
-  display: grid;
-  grid-template-columns: repeat(var(--grid-images-columns-count), 1fr);
-  grid-gap: var(--grid-element-separation);
-}
-     
-
-/*
- * only children -> 100% no matter if is portrait or landscape
- * if there are more children than 1
- *   -> if the first element it's landscape, with 100%
- *   -> if the last element has no siblings on the same row, width 100%
- *   -> the rest, width 50%;
- */
-
-/*
- * We use ">>>" instead of ">" because it's how vuejs understands
- * that we want to modify a child component
- *
- * FYI: https://vue-loader.vuejs.org/guide/scoped-css.html#mixing-local-and-global-styles
- */
-
- .crystallize-components-images__image,
- .crystallize-components-images__image >>> picture,
- .crystallize-components-images__image >>> img {
-   display: block;
- }
-
- .crystallize-components-images__image >>> picture,
- .crystallize-components-images__image >>> img {
-   height: 100%;
- }
- 
- .crystallize-components-images__image {
-   margin-bottom: 0;
- }
- 
-.crystallize-components-images__image >>> img {
-  width: 100%;
-  object-fit: cover;
-}
-
-/*
- * :only-child targets an element without any siblings
- * It does the same as `:first-child:last-child` and `:nth-child(1):nth-last-child(1)`
- * but with lower specifity, which reduces css accidental complexity.
- *
- * FYI: https://developer.mozilla.org/en-US/docs/Web/CSS/:only-child
- */
-.crystallize-components-images__image:only-child {
-  /*
-   * We force the first element to fill the first row.
-   * If you modify the grid structure by adding columns,
-   * make sure to update the line below.
-   *
-   * To make the first element fill the hole row do the following:
-   * grid-column-end: span NUMBER_OF_COLUMNS;
-   */
-  grid-column: span var(--grid-images-columns-count);
-}
-
-/*
- * Landscape images fill all the row
- */
-.crystallize-components-images__image:not(.crystallize-components-images__image--is-portait) {
-  grid-column: span var(--grid-images-columns-count);
-}
-
-/*
- * Landscape images fill all the row
- */
-.crystallize-components-images__image:not(.crystallize-components-images__image--is-portait) {
-  grid-column: span var(--grid-images-columns-count);
-}
-
-/*
-   * Landscape images fill all the row
-   */
-   .crystallize-components-images__image:not(.crystallize-components-images__image--is-portait) + .crystallize-components-images__image.crystallize-components-images__image--is-portait {
-    grid-column: span var(--grid-images-columns-count);
-  }
-
-@media (min-width: 768px) {
-  .crystallize-components-images {
-    --grid-images-columns-count: 2;
-    /*
-     * We create a grid with equal columns based on
-     * the custom property "--grid-images-columns-count"
-     */
-    grid-template-columns: repeat(var(--grid-images-columns-count), 1fr);
-  }
-}
-
-/*
- * Styles of the NextJS boilerplate
- * but they don't work :/
- */
-
- /* .crystallize-components-images {
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 100px;
 }
+
 .crystallize-components-images >>> picture {
   min-height: 300px;
 }
 
-.crystallize-components-images >>> picture:nth-child(3n) {
+.crystallize-components-images *:nth-child(3n) {
   grid-column-start: span 2;
 }
 
@@ -117,12 +19,31 @@
   object-fit: cover;
 }
 
+/**
+ * Wrapper of the image
+ */
 .crystallize-components-images__image-wrapper {
   border: 4px solid #fff;
   width: 50%;
   max-width: 100%;
   flex-grow: 1;
   position: relative;
+}
+
+/**
+ * Wrapper of a portrait image
+ */
+.crystallize-components-images__image-wrapper.crystallize-components-images__image-wrapper--is-portrait {
+  width: 33.333%;
+  max-width: 50%;
+}
+
+/**
+ * When the wrapper it's the only child, we force the img to fill the available space
+ */
+.crystallize-components-images__image-wrapper:only-child {
+  width: 100% !important;
+  max-width: 100%;
 }
 
 .crystallize-components-images__image-wrapper >>> figure {
@@ -134,18 +55,16 @@
   overflow: hidden;
   width: 100%;
   height: 100%;
-}
-.crystallize-components-images__image-wrapper.crystallize-components-images__image-wrapper--is-portrair {
-  width: 33.333%;
-  max-width: 50%;
+  border: 1px solid #dfdfdf;
 }
 
 .crystallize-components-images__image-wrapper:first-child {
   width: 100%;
 }
 
+
 @media screen and (max-width: 499px) {
   .crystallize-components-images >>> picture {
     min-height: 100px;
   }
-} */
+}
