@@ -2,7 +2,7 @@
   <Container>
     <div class="footer__inner">
       <div>
-        <NuxtLink to="/">
+        <NuxtLink to="/" aria-label="crystallize.com">
           <img
             class="footer__logo"
             src="/logo-shop.svg"
