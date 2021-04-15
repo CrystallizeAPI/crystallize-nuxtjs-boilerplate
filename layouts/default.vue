@@ -71,7 +71,13 @@ export default {
     const locale = locales.find((l) => l.locale === code) || locales[0];
 
     return {
-      link: [this.retrieveAttributesHreflang(locale.appLanguage)],
+      link: [
+        {
+          rel: "canonical",
+          href: `${process.env.SITE_URL}${this.$route.path}`,
+        },
+        this.retrieveAttributesHreflang(locale.appLanguage),
+      ],
     };
   },
   methods: {
