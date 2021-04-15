@@ -15,15 +15,17 @@
       </div>
       <footer class="footer__navlist">
         <h5>{{ $t("common.menu") }}</h5>
-        <li
-          v-for="child of navItems"
-          :key="child.path"
-          class="footer__navlist-item"
-        >
-          <NuxtLink :to="child.path">
-            {{ child.name }}
-          </NuxtLink>
-        </li>
+        <ul class="footer__navlist-list" v-if="navItems">
+          <li
+            v-for="child of navItems"
+            :key="child.path"
+            class="footer__navlist-item"
+          >
+            <NuxtLink :to="child.path">
+              {{ child.name }}
+            </NuxtLink>
+          </li>
+        </ul>
       </footer>
       <div class="footer__powered">
         <p>{{ $t("common.ecomBy") }}</p>
