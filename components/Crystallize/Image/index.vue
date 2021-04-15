@@ -16,6 +16,7 @@
       <img
         :src="src"
         :alt="altText"
+        :role="role"
         :sizes="sizes"
         :width="width || bigWidth"
         :height="height || bigHeight"
@@ -71,6 +72,7 @@ export default {
   data() {
     const {
       altText,
+      role,
       originalFileExtension,
       srcSetWebp,
       srcSet,
@@ -82,6 +84,7 @@ export default {
 
     return {
       altText,
+      role,
       originalFileExtension,
       srcSetWebp,
       srcSet,
@@ -138,8 +141,12 @@ export default {
         }, vars[0]);
       }
 
+      console.log(this.alt || image.altText || "");
+      const altText = this.alt || image.altText || "";
+
       return {
-        altText: this.alt || image.altText,
+        altText,
+        role: altText === "" ? "presentation" : "img",
         originalFileExtension,
         srcSetWebp,
         srcSet,
@@ -154,6 +161,7 @@ export default {
     image(newImage) {
       const {
         altText,
+        role,
         originalFileExtension,
         srcSetWebp,
         srcSet,
@@ -164,6 +172,7 @@ export default {
       } = this.getImageData(newImage);
 
       this.altText = altText;
+      this.role = role;
       this.originalFileExtension = originalFileExtension;
       this.srcSetWebp = srcSetWebp;
       this.srcSet = srcSet;
