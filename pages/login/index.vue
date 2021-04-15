@@ -61,7 +61,7 @@ export default {
      * We redirect logged in users that are trying to visit "/login" to "/account".
      *
      * Take into account that the login page will be rendered if the user
-     * is server loading the login page, (for example, going directly to YOUR_DOMAIN/login).
+     * is server loading the login page, (for example, going directly to SITE_URL/login).
      * This behavior is expected because since the store would not have been
      * updated at that point, "isLoggedIn" will equal false.t.
      */

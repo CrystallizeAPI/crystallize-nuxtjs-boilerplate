@@ -80,7 +80,7 @@ export default {
       return {
         rel: "alternate",
         hreflang: languageCountryLocale,
-        href: `https://${process.env.YOUR_DOMAIN}${this.$route.path}`,
+        href: `${process.env.SITE_URL}${this.$route.path}`,
       };
     },
   },

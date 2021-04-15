@@ -73,7 +73,7 @@ export default {
     CRYSTALLIZE_TENANT_IDENTIFIER: process.env.CRYSTALLIZE_TENANT_IDENTIFIER,
     SERVICE_API_URL: process.env.SERVICE_API_URL,
     // Used to generate the hreflang attributes for SEO purposes
-    YOUR_DOMAIN: process.env.YOUR_DOMAIN
+    SITE_URL: process.env.SITE_URL
   },
   components: true, // NuxtJS will import automatically yor components
   server: {
