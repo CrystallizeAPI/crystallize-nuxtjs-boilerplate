@@ -2,6 +2,7 @@
   <FetchLoader :state="$fetchState">
     <Container class="search-page">
       <PageHeader :title="title" :description="headerDescription" />
+      <CrystallizeStackable :stacks="stacks" />
       <main>
         <div class="search-page__actions">
           <Facets
