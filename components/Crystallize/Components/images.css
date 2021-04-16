@@ -1,0 +1,70 @@
+.crystallize-components-images {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 100px;
+}
+
+.crystallize-components-images >>> picture {
+  min-height: 300px;
+}
+
+.crystallize-components-images *:nth-child(3n) {
+  grid-column-start: span 2;
+}
+
+.crystallize-components-images >>> img {
+  display: block;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+/**
+ * Wrapper of the image
+ */
+.crystallize-components-images__image-wrapper {
+  border: 4px solid #fff;
+  width: 50%;
+  max-width: 100%;
+  flex-grow: 1;
+  position: relative;
+}
+
+/**
+ * Wrapper of a portrait image
+ */
+.crystallize-components-images__image-wrapper.crystallize-components-images__image-wrapper--is-portrait {
+  width: 33.333%;
+  max-width: 50%;
+}
+
+/**
+ * When the wrapper it's the only child, we force the img to fill the available space
+ */
+.crystallize-components-images__image-wrapper:only-child {
+  width: 100% !important;
+  max-width: 100%;
+}
+
+.crystallize-components-images__image-wrapper >>> figure {
+  height: 100%;
+}
+
+.crystallize-components-images__image-wrapper >>> img {
+  object-fit: cover;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  border: 1px solid #dfdfdf;
+}
+
+.crystallize-components-images__image-wrapper:first-child {
+  width: 100%;
+}
+
+
+@media screen and (max-width: 499px) {
+  .crystallize-components-images >>> picture {
+    min-height: 100px;
+  }
+}

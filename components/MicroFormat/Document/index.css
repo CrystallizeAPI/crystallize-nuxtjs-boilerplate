@@ -1,0 +1,80 @@
+.micro-format-document {
+  --image-size: 90px;
+  --distance-between-text-and-media: 1rem;
+  --distance-to-topics : 7px;
+  --media-height: 120px;
+  
+  /*
+   * The `<article>` tag added for semantic purposes needs to be 100% height too
+   */
+  height: 100%;
+}
+
+/*
+ * If you remove this element, all the styles contained in this selector
+ * will have to be added to `.micro-format-document`
+ */
+.micro-format-document__inner {
+  display: grid;
+  column-gap: 0.75rem;
+  grid-template-columns: var(--image-size) 1fr;
+  grid-template-areas: "media info";
+  position: relative;
+  /*
+   * Make sure that the elements fills the hole height of its container
+   * This is usefull because this element can be placed in grids
+   * and sliders that have different heights.
+   */
+  height: 100%;
+}
+
+.micro-format-document:hover {
+  text-decoration: none;
+}
+
+.micro-format-document__info {
+  grid-area: info;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+}
+
+.micro-format-document__title {
+  font-size: var(--font-size-m);
+  color: var(--color-text-main);
+  margin: 0;
+  font-weight: 600;
+  font-family: var(--font-family-main);
+  /*
+   * The distance is assigned as margin-top because the flex content
+   * is reversed by the `flex-direction: column-reverse;` rule.
+   */
+  margin: var(--distance-to-topics) 0 0 0;
+}
+
+.micro-format-document__media {
+  grid-area: media;
+  height: var(--media-height);
+}
+
+.micro-format-document__media figure {
+  margin-bottom: 0;
+}
+
+@media screen and (min-width: 1024px) {
+  .micro-format-document__media {
+    position: relative;
+    width: 100%;
+  }
+
+  .micro-format-document__media >>> video,
+  .micro-format-document__media >>> img {
+    display: block;
+    /* If you want to contain your images, change object-fit to `contain` */
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+}

@@ -1,0 +1,22 @@
+.grid {
+  --grid-row-height: 500px;
+
+  display: grid;
+  column-gap: 0.5em;
+  row-gap: 1em;
+}
+
+@media (max-width: 767px) {
+  .grid {
+    display: block !important;
+    grid-auto-rows: var(--grid-row-height);
+  }
+
+  /*
+   * We add a separation between elements because grid-gap, column-gap,
+   * and row-gap don't work because the container doesn't have display: grid.
+   */
+  .grid > * {
+    margin-bottom: 1.5rem;
+  }
+}

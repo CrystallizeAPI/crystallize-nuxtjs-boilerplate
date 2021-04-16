@@ -1,0 +1,68 @@
+.tiny-basket {
+  background: var(--color-main-background);
+  display: flex;
+  flex-direction: column;
+  /*
+   * We make it expand to fill all the space available
+   */
+  flex: 1;
+  height: 100%;
+  max-height: 100vh;
+  padding: var(--padding-l) var(--padding-m) var(--padding-xs) var(--padding-m);
+  position: relative;
+  z-index: 15;
+}
+
+.tiny-basket__title {
+  flex: 0 0 auto;
+  margin-top: 0;
+  margin-bottom: var(--padding-xs);
+}
+
+/**
+ * We display the items in column format and separate them, so the payment
+ * summary is displayed at the bottom of the cart.
+ */
+.tiny-basket__content {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  justify-content: space-between;
+  overflow-y: auto;
+}
+
+.tiny-basket__list,
+.tiny-basket__list-item {
+  margin: 0;
+  padding: 0;
+}
+
+.tiny-basket__list-item {
+  list-style: none;
+}
+
+.tiny-basket__footer {
+  margin-top: 20px;
+  flex: 0 0 auto;
+}
+
+.tiny-basket__link-to-checkout {
+  border: 2px solid var(--color-text-main);
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 10px 20px;
+  text-align: center;
+  width: 100%;
+}
+
+.tiny-basket__link-to-checkout[disabled] {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.tiny-basket__link-to-checkout:hover:not([disabled]) {
+  background: var(--color-text-main);
+  color: var(--color-main-background);
+  text-decoration: none;
+}

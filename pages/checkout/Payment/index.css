@@ -1,0 +1,48 @@
+.payment__row {
+  display: flex;
+}
+
+.payment__row:not(:first-child) {
+  margin-top: 0.5rem;
+}
+
+.payment__input-group {
+  flex-grow: 1;
+}
+
+/*
+ * We target the second input group of the same row
+ */
+.payment__row > *:nth-child(2) {
+  margin-left: 0.75rem;
+}
+
+.payment__label {
+  display: block;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  margin-bottom: 0.15rem;
+  padding-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.payment__input {
+  background: var(--color-main-background);
+  border-bottom: 1px solid var(--color-box-background);
+  border: none;
+  color: var(--color-text-sub);
+  font-size: var(--font-size-s);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  padding: 15px 10px;
+  transition: border 0.2s ease-in-out;
+  width: 100%;
+}
+
+.payment__input:valid {
+  border-bottom: 1px solid #b7e2e4;
+}
+
+.payment__input[value=''] {
+  border-bottom: 1px solid var(--color-box-background);
+}

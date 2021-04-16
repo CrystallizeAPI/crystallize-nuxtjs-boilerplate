@@ -1,0 +1,20 @@
+.container {
+  --padding-lateral: var(--viewport-xs-lateral-space);
+  padding-left: var(--padding-lateral);
+  padding-right: var(--padding-lateral);
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    --padding-lateral: var(--viewport-sm-lateral-space);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .container {
+    --padding-lateral: var(--viewport-md-lateral-space);
+    max-width: var(--viewport-context-extended-max-width);
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

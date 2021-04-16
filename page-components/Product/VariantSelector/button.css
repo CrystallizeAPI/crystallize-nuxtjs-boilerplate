@@ -1,0 +1,30 @@
+.variant-selector__button {
+  align-items: flex-end;
+  border: 1px solid #dfdfdf;
+  display: flex;
+  flex-wrap: wrap;
+  font-weight: bold;
+  justify-content: center;
+  padding: 10px 0;
+  position: relative;
+  text-transform: capitalize;
+  width: 25%;
+}
+
+.variant-selector__button >>> img {
+  border: none;
+}
+
+.variant-selector__button.variant-selector__button--is-selected {
+  border: 1px solid #000;
+}
+
+.variant-selector__button:not(.variant-selector__button--has-image):after {
+  background-color: rgba(1,1,1,0.05);
+  bottom: 0;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}

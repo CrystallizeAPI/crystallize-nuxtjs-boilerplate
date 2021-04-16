@@ -1,0 +1,28 @@
+/* 
+ * Button that toggles the facets displayer
+ */
+.facets__button {
+  --icon-size: 30px;
+  align-items: center;
+  appearance: none;
+  background-color: var(--color-background);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: var(--font-family-main);
+  font-size: var(--font-size-m);
+  font-weight: 600;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  display: inline-flex
+}
+
+/*
+ * Icon of the facets button
+ */
+.facets__button img {
+  border: none;
+  width: var(--icon-size);
+  height: var(--icon-size);
+  margin-left: 0.5rem;
+}

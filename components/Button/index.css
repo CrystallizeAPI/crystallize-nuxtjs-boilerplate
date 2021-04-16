@@ -1,0 +1,53 @@
+.button {
+  --color-background: var(--color-primary-action);
+  --color-text: var(--color-primary-action-darkes);
+  --color-background-hover: var(--color-text-main);
+  --color-text-hover: white;
+
+  align-items: center;
+  appearance: none;
+  background-color: var(--color-background);
+  border-radius: 4px;
+  border: 2px solid var(--color-text);
+  color: var(--color-text);
+  cursor: pointer;
+  display: inline-flex;
+  flex: 1 1 auto;
+  font-weight: 600;
+  padding: 16px 25px;
+  position: relative;
+  text-decoration: none;
+}
+
+.button.button--left {
+  justify-content: flex-start;
+}
+
+.button.button--center {
+  justify-content: center;
+}
+
+.button:not(:disabled):hover{
+  color: var(--color-text-hover);
+  background-color: var(--color-background-hover);
+}
+
+.button.secondary {
+  background-color: var(--color-text-main);
+  color: var(--color-main-background);
+}
+
+.button.secondary:not(:disabled):hover {
+  background-color: transparent;
+  border-color: transparent;
+  color: inherit;
+}
+
+.button:disabled {
+  cursor: default;
+}
+
+.button:disabled {
+  background-color: #aaa;
+  color: #333;
+}

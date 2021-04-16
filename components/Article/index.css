@@ -1,0 +1,78 @@
+.article {}
+
+/*
+ * Overwrite styles for inner components and nodes
+ */
+ .article img {
+  width: 100%;
+  max-width: 100%;
+}
+
+.article >>> p,
+.article >>> li,
+.article >>> h1,
+.article >>> h2,
+.article >>> h3,
+.article >>> h4,
+.article >>> h5,
+.article >>> h6,
+.article >>> blockquote,
+.article >>> tr {
+  margin-left: var(--viewport-xs-lateral-space);
+  margin-right: var(--viewport-xs-lateral-space);
+}
+
+.article >>> ul {
+  padding-left: var(--viewport-xs-lateral-space);
+}
+
+.article >>> li {
+  margin-bottom: 0.5rem;
+}
+
+.article >>> blockquote {
+  align-items: center;
+  color: var(--color-text-main);
+  display: flex;
+  font-size: var(--font-size-l);
+  font-style: italic;
+  line-height: 140%;
+  margin-top: var(--padding-xl);
+  margin-bottom: var(--padding-xl);
+  position: relative;
+  padding-left: var(--viewport-sm-lateral-space);
+}
+
+.article >>> blockquote:empty {
+  display: none;
+}
+
+.article >>> blockquote:after {
+  content: open-quote;
+  font-size: 4rem;
+  left: 0;
+  position: absolute;
+  top: 20px;
+}
+
+
+@media screen and (min-width: 1024px) {
+  .article >>> p,
+  .article >>> li,
+  .article >>> h1,
+  .article >>> h2,
+  .article >>> h3,
+  .article >>> h4,
+  .article >>> h5,
+  .article >>> h6,
+  .article >>> blockquote,
+  .article >>> tr {
+    margin-left: var(--viewport-sm-lateral-space);
+    margin-right: var(--viewport-sm-lateral-space);
+  }
+
+  .article >>> figcaption p {
+    margin-left: var(--viewport-xs-lateral-space);
+    margin-right: var(--viewport-xs-lateral-space);
+  }
+}

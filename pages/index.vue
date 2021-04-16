@@ -1,49 +1,39 @@
 <template>
-  <Outer>
+  <div class="home-page">
     <FetchLoader :state="$fetchState">
       <CrystallizeGrid v-if="grid" :grid="grid" />
-      <div v-else class="no-grids">No grids to show on the frontpage</div>
+      <CrystallizeStackable :stacks="stackableContent" />
     </FetchLoader>
-  </Outer>
+  </div>
 </template>
 
 <script>
-import { simplyFetchFromGraph } from "../lib/graph";
-import fragments from "../lib/graph/fragments";
+import { getData as getFolderData } from "../page-components/Folder/get-data";
+import {
+  getFolderGrids,
+  getFolderStackableContent,
+} from "../page-components/Folder/utils";
 
 export default {
   data() {
     return {
       grid: null,
+      stackableContent: null,
     };
   },
   async fetch() {
     const { locales, locale: code } = this.$i18n;
     const locale = locales.find((l) => l.locale === code) || locales[0];
 
-    const { data } = await simplyFetchFromGraph({
-      query: `
-        query FRONTPAGE($language: String!, $path: String!) {
-          frontpage: catalogue(path: $path, language: $language) {
-            ...item
-            ...product
-          }
-        }
-
-        ${fragments}
-      `,
-      variables: {
-        path: "/web-frontpage",
-        language: locale.crystallizeCatalogueLanguage,
-      },
+    const { data } = await getFolderData({
+      asPath: "/frontpage-2021",
+      language: locale.crystallizeCatalogueLanguage,
+      preview: this.$route.query.preview,
     });
 
-    // Extract the grid that we want to show
-    const grid = data.frontpage?.components?.find(
-      (c) => c.type === "gridRelations"
-    )?.content?.grids?.[0];
-
-    this.grid = grid;
+    const { folder } = data;
+    this.grid = getFolderGrids(folder);
+    this.stackableContent = getFolderStackableContent(folder);
   },
   head() {
     return {
@@ -60,9 +50,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.no-grids {
-  padding: 50px;
-  text-align: center;
-}
-</style>
+<style scoped src='./index.css'></style>

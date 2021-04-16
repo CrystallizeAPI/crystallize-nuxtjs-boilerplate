@@ -1,0 +1,64 @@
+.price {
+  font-size: 0.9rem;
+  display: inline-block;
+  color: var(--color-price);
+  margin-top: 5px;
+}
+
+.price__old-price {
+  color: var(--color-text-sub);
+  position: relative;
+  font-size: 0.8rem;
+
+  /*
+   * The css properties below are applied because
+   * the "old price" will be always shown along with
+   * the new price (price with discount applied)
+   */
+  margin-left: 0.5rem;
+}
+
+.price__old-price:after {
+  position: absolute;
+  content: "";
+  top: 50%;
+  bottom: 50%;
+  height: 1px;
+  background-color: var(--color-text-sub);
+  width: 100%;
+  left: 0;
+  right: 0;
+}
+
+/*
+ * When the price has discount, 2 elements are shown.
+ * - First, the new price with the discount applied
+ * - Second, the original price crossed with a line
+ */
+.price__details {
+  display: flex;
+  align-items: center;
+}
+
+/*
+ * The discountPrice it's always shown in the <strong> tag
+ * because it's the price that matters
+ */
+.price.price--with-discount strong {
+  color: var(--color-price-discount);
+}
+
+
+/*
+ * Take into account that its parent must implement
+ * the position: relative; css rule in order to be placed
+ * in the upper-right corner of this one.
+ */
+.price__discount-percentage {
+  --vertical-distance-from-top-of-parent: 0.75rem;
+  --lateral-distance-from-top-of-parent: 0;
+  position: absolute;
+  top: var(--vertical-distance-from-top-of-parent);
+  right: var(--lateral-distance-from-top-of-parent);
+  z-index: 1;
+}

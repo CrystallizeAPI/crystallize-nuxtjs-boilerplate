@@ -1,0 +1,38 @@
+.button-close {
+  --menu-line-border-radius: 2px;
+  --menu-line-height: 3px;
+  --menu-line-horizontal-distance: 8px;
+  --menu-line-vertical-distance: 9px;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  display: block;
+  width: 50px;
+  height: 50px;
+  border-radius: 4px;
+  position: relative;
+}
+
+.button-close:hover {
+  background: #efefef;
+}
+
+.button-close:before,
+.button-close:after {
+  border-radius: 4px;
+  position: absolute;
+  right: 10px;
+  width: 30px;
+  height: 3px;
+  background: black;
+  content: '';
+  transition: all 0.1s ease-in-out;
+}
+
+.button-close::before {
+  transform: rotate(-45deg);
+}
+
+.button-close::after{
+  transform: rotate(45deg);
+}

@@ -1,0 +1,7 @@
+.account-page {}
+
+.account-page-title {
+  font-size: var(--font-size-xxl);
+  text-align: center;
+  margin-bottom: 50px;
+}

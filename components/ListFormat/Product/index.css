@@ -1,0 +1,75 @@
+.list-format-product {
+  --border-color: var(--color-box-background);
+  --distance-between-text-and-media: 0.75em;
+  
+  /*
+   * The `<article>` tag added for semantic purposes needs to be 100% height too
+   */
+  height: 100%;
+}
+
+/*
+ * If you remove this element, all the styles contained in this selector
+ * will have to be added to `.list-format-product`
+ */
+.list-format-product__inner {
+  display: flex;
+  /*
+   * We use `column-reverse` instead of `column` because
+   * to us, it makes more sense semantically to have in the DOM
+   * first the name of the product and its price, and then the image.
+   */
+  flex-direction: column-reverse;
+  position: relative;
+  /*
+   * Make sure that the elements fills the hole height of its container
+   * This is usefull because this element can be placed in grids
+   * and sliders that have different heights.
+   */
+  height: 100%;
+}
+
+.list-format-product:hover {
+  text-decoration: none;
+}
+
+.list-format-product__info {
+  z-index: 1;
+}
+
+.list-format-product__title {
+  font-size: var(--font-size-s);
+  color: var(--color-text-main);
+  margin: 0;
+  font-weight: 600;
+}
+
+.list-format-product__media {
+  height: 100%;
+  margin-bottom: var(--distance-between-text-and-media);
+  background: #efefef;
+}
+
+@media screen and (min-width: 768px) {
+  .list-format-product__media {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+  }
+
+  .list-format-product__media >>> video,
+  .list-format-product__media >>> img {
+    display: block;
+    /* If you want to contain your images, change object-fit to `contain` */
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .list-format-product__media >>> img {
+    max-height: initial;
+  }
+}

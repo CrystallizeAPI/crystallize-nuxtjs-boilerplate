@@ -1,0 +1,15 @@
+.paragraphs {
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 36px;
+  color: var(--color-text-main);
+}
+
+.paragraph:not(:last-child) {
+  margin-bottom: var(--content-padding);
+}
+
+.paragraphs-media {
+  margin-bottom: 5rem;
+}

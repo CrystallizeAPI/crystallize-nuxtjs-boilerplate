@@ -1,0 +1,106 @@
+.product-page {
+  --distance-to-related-content: 100px;
+  /**
+   * We use display:flex, rather than display:grid, because if we have scrollable
+   * elements inside the layout, the design gets broken.
+   *
+   * Remember that we're using the CrystallizeCatalogueSlider that includes a scroll.
+   */
+  display: flex;
+  flex-direction: column;
+}
+
+.product-page__title {
+  font-size: var(--font-size-xl);
+  color: var(--color-text-main);
+  max-width: var(--font-max-width);
+  margin-bottom: 15px;
+}
+
+.product-page__summary {
+  color: var(--color-text-main);
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 36px;
+  margin-top: 10px;
+  max-width: var(--font-max-width);
+}
+
+/* Overwrite styles for p from global.css */
+.product-page__summary >>> p {
+  margin-bottom: 1em;
+}
+
+.product-page__pricing-details {
+  align-items: center;
+  border-bottom: 1px solid #cecece;
+  border-top: 1px solid #cecece;
+  display: flex;
+  flex-direction: column;
+  padding: 15px 0 15px;
+}
+
+.product-page__specs {
+  display: block;
+  margin-top: 15px;
+  padding: 20px 0;
+}
+
+.product-page__related-content {
+  margin-top: var(--distance-to-related-content);
+}
+
+@media screen and (min-width: 768px) {
+  .product-page__inner {
+    display: grid;
+    column-gap: 15px;
+    grid-template-columns: repeat(12,1fr);
+    grid-template-areas: 'content content content content content content  . header header header header header';
+  }
+
+  .product-page__header {
+    grid-area: header;
+  }
+
+  .product-page__header-inner {
+    position: sticky !important;
+    top: 50px;
+  }
+  
+  .product-page__organic-content{
+    grid-area: content;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .product-page__inner {
+    column-gap: 50px;
+    grid-template-areas: 'content content content content content content content header header header header header';
+  }
+
+  /*
+   * Styles for showing the price next to the buy button
+   */
+ .product-page__pricing-details {
+    margin-bottom: 0;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+ }
+
+ /*
+  * We add some separation between the first and the second child
+  * of the `.product-page__pricing-details` element, instead of adding
+  * it to the Price component so we keep each component layout agnostic.
+  */
+ .product-page__pricing-details *:first-child {
+   margin-right: 25px;
+ }
+}
+
+@media screen and (min-width: 1600px) {
+  .product-page__inner {
+    column-gap: 100px;
+  }
+}

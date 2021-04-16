@@ -1,0 +1,32 @@
+.list-format-folder {
+  --border-color: var(--color-box-background);
+  --background-color: var(--color-primary-action);
+  --color: var(--color-primary-action-darkest);
+
+  align-items: center;
+  background: var(--background-color);
+  border: 1px solid var(--border-color);
+  color: var(--color);
+  display: flex;
+  /*
+   * Make sure that the elements fills the hole height of its container
+   * This is usefull because this element can be placed in grids
+   * and sliders that have different heights.
+   */
+  height: 100%;
+  justify-content: center;
+  min-height: var(--grid-row-height);
+  padding: 1em 1.5em;
+}
+
+.list-format-folder:hover {
+  text-decoration: none;
+}
+
+.list-format-folder__title {
+  color: var(--color);
+  font-size: var(--font-size-l);
+  font-weight: 600;
+  margin: 0;
+  text-align: center;
+}

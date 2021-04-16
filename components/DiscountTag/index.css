@@ -1,0 +1,9 @@
+.discount-tag {
+  background-color: var(--color-price-discount);
+  color: white;
+  padding: 0.15rem 0.5rem;
+  min-width: 35px;
+  box-sizing: border-box;
+  font-weight: 600;
+  font-size: 0.75rem;
+}

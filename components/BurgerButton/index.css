@@ -1,0 +1,77 @@
+button {
+  --menu-line-height: 3px;
+  --menu-line-border-radius: 2px;
+  --menu-line-vertical-distance: 9px;
+  --menu-line-horizontal-distance: 8px;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  height: 30px;
+  padding-left: 0;
+  padding-right: 0;
+  position: relative;
+  width: 30px !important;
+  z-index: var(--z-index-burger-button);
+}
+
+.lines {
+  background: var(--color-text-main);
+  border-radius: var(--menu-line-border-radius);
+  height: var(--menu-line-height);
+  transition: all 0.2s ease-out;
+  width: 100%;
+  position: relative;
+}
+
+.lines.open {
+  background: transparent;
+}
+
+.lines::before,
+.lines::after {
+  background: var(--color-text-main);
+  border-radius: var(--menu-line-border-radius);
+  content: "";
+  height: var(--menu-line-height);
+  position: absolute;
+  transform: rotate(0deg);
+  transition: all 0.2s ease-out;
+}
+
+.lines::before {
+  left: 0;
+  top: calc(var(--menu-line-vertical-distance) * -1);
+  width: 100%;
+}
+
+.lines::after {
+  left: var(--menu-line-horizontal-distance);
+  top: var(--menu-line-vertical-distance);
+  width: calc(100% - var(--menu-line-horizontal-distance));
+}
+
+.lines.open::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.lines.open::after {
+  left: 0px;
+  top: 0;
+  transform: rotate(-45deg);
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  button {
+    --menu-line-vertical-distance: 10px;
+    --menu-line-horizontal-distance: 10px;
+  }
+}
+
+
+@media (min-width: 1024px) {
+  button {
+    display: none;
+  }
+}

@@ -1,0 +1,51 @@
+.folder__subfolder-list {
+  --subfolder-list-elements-distance: 0.5em;
+  display: flex;
+  overflow-x: auto;
+}
+
+.folder__subfolder-list > * {
+  margin-bottom: var(--subfolder-list-elements-distance);
+  margin-right: var(--subfolder-list-elements-distance);
+}
+
+.folder-page__list {
+  display: grid;
+  grid-template-columns: 1fr;
+  /*
+   * In case of not loading the media, "grid-auto-rows" will create enough space
+   * in order to display the item correctly with the alternative text
+   */
+  grid-auto-rows: minmax(250px, auto);
+  list-style: none;
+  grid-gap: 5px;
+}
+
+.folder-page__list,
+.folder-page__list-item {
+  padding: 0;
+  margin: 0;
+}
+
+.folder-page__list-item >>> img {
+  border: none !important;
+}
+
+.folder-page__list-item.folder-page__list-item--product {
+  grid-column-end: span 1;
+}
+
+.folder-page__list-item.folder-page__list-item--document {
+  grid-column-end: span 2;
+}
+
+@media screen and (min-width: 768px) {
+  .folder__subfolder-list {
+    flex-wrap: wrap;
+  }
+  
+  .folder-page__list {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-auto-rows: minmax(300px, auto);
+  }
+}

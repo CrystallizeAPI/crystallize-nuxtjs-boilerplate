@@ -1,0 +1,65 @@
+.document__header-pretitle {
+  margin-bottom: 1rem;
+}
+
+.document__published-at {
+  font-size: var(--font-size-s);
+}
+
+.document__socials {
+  display: flex;
+}
+
+.document__socials > * {
+  margin-right: 1rem;
+}
+
+.document__pre-article-images {
+  margin-bottom: var(--padding-xl);
+}
+
+/*
+ * We overwrite the styled of the images grid.
+ * We want the first element always to fill all the columns
+ */
+  .document__pre-article-images >>> .crystallize-components-images__image:first-child {
+  /*
+   * --grid-images-columns-count it's been declared in global.css
+   */
+  grid-column: span 2;
+}
+
+@media screen and (min-width: 1024px) {
+  .document__socials {
+    flex-direction: column;
+    position: absolute;
+    left: -4rem;
+    top: -0.5rem;
+  }
+
+  .document__socials > * {
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
+  
+  .document__main {
+    display: grid;
+    grid-template-columns: minmax(600px, 1000px) 1fr;
+    grid-gap: 50px;
+  }
+
+  .document__main:first-child {
+    grid-area: article;
+  }
+
+  .document__main:second-child {
+    grid-area: sidebar;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .document__main {
+    grid-template-columns: minmax(600px,1000px) minmax(300px,1fr);
+    grid-gap: 100px;
+  }
+}

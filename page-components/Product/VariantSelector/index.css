@@ -1,0 +1,17 @@
+.variant-selector {
+  margin: 30px 0;
+}
+
+.variant-selector__attribute:not(:first-child) {
+  margin-top: 1.5rem;
+}
+
+.variant-selector__title {
+  color: var(--color-text-main);
+  font-size: var(--font-size-s);
+  margin-bottom: 10px;
+}
+
+.variant-selector__button-list {
+  display: flex;
+}

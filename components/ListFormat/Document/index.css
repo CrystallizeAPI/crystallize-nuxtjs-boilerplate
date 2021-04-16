@@ -1,0 +1,107 @@
+.list-format-document {
+  --border-color: var(--color-box-background);
+  --background-color: var(--color-primary-action);
+  --color: white;
+
+  background: var(--background-color);
+  border: 1px solid var(--border-color);
+  color: var(--color);
+  display: block;
+  /*
+   * Make sure that the elements fills the hole height of its container
+   * This is usefull because this element can be placed in grids
+   * and sliders that have different heights.
+   */
+  height: 100%;
+  position: relative;
+}
+
+.list-format-document:hover {
+  text-decoration: none;
+}
+
+.list-format-document__info {
+  background: linear-gradient(
+    180deg,
+    rgba(8, 7, 8, 0) 0%,
+    rgba(8, 7, 8, 0.8) 100%
+  );
+  bottom: 0;
+  color: var(--color);
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  height: 50%;
+  justify-content: flex-end;
+  left: 0px;
+  padding-bottom: 2rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+}
+
+.list-format-document__title {
+  color: inherit;
+  font-size: var(--font-size-l);
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 0;
+  width: 100%;
+  line-height: 1.25;
+  text-shadow: 2px 2px 6px black;
+}
+
+.list-format-document__introduction {
+  margin-top: 0.5em;
+  text-shadow: 2px 2px 6px black;
+}
+
+/*
+ * Overwrite of the <p> styles
+ */
+.list-format-document__introduction >>> p {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: inherit;
+  line-height: 1.8;
+  font-size: var(--font-size-s);
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.list-format-document__media {
+  display: block;
+  height: 100%;
+  width: 100%;
+  margin-bottom: 0;
+  flex: 0 0 auto;
+}
+
+/* 
+ * Overwrite <img> and <video> behavior
+ */
+.list-format-document__media .video-js {
+  flex: 0 0 auto;
+  width: 100%;
+  height: 100%;
+}
+
+.list-format-document__media picture {
+  height: 100%;
+  width: 100%;
+  display: block;
+}
+
+.list-format-document__media >>> img,
+.list-format-document__media >>> video {
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}

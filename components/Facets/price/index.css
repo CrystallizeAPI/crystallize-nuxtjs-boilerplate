@@ -1,0 +1,14 @@
+.facet-price__inputs {
+  width: 100%;
+  display: flex;
+}
+
+.facet-price__input {
+  background: white;
+  border: 1px solid #000;
+  padding: 8px 15px;
+  /*
+   * This makes the input fill the space available
+   */
+  flex-grow: 1;
+}

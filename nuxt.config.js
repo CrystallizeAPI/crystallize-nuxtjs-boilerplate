@@ -1,22 +1,46 @@
-import { getCatalogueItems } from "./lib/graph";
+import { getAllCatalogueItems } from "./lib/graph";
 
-function getComponentForPath({ type }) {
+const RENDERS = {
+  product: {
+    path: 'page-components/Product/index.vue'
+  },
+  folder: {
+    path: 'page-components/Folder/index.vue'
+  },
+  document: {
+    path: 'page-components/Document/index.vue'
+  },
+  search: {
+    path: 'page-components/Search/index.vue'
+  },
+}
+
+function getComponentPathForRoute({ type, children }) {
+  if (children && childrenIsMostlyProducts(children)) {
+    return RENDERS.search.path;
+  }
+
   switch (type) {
     case "product": {
-      return "page-components/Product/index.vue";
+      return RENDERS.product.path;
     }
     case "document": {
-      return "page-components/Document.vue";
+      return RENDERS.document.path;
     }
     default: {
-      return "page-components/Folder.vue";
+      return RENDERS.folder.path;
     }
   }
 }
 
+function childrenIsMostlyProducts(children) {
+  const productsCount = children?.filter((c) => c.type === 'product').length;
+  return productsCount > children.length / 2;
+}
+
 import appConfig from "./app.config.json";
 
-const locale = appConfig.locale || {
+const defaultLocale = appConfig.locale || {
   locale: "en",
   displayName: "English - US",
   appLanguage: "en-US",
@@ -25,19 +49,60 @@ const locale = appConfig.locale || {
 };
 
 export default {
+  /**
+   * target: "server" is default configuration for NuxtJS.
+   * Whoever, we want to point out that we can edit this.
+   * 
+   * We've included the NuxtJS preview mode functionality in this boilerplate
+   * that is ONLY available if you use "target: 'static'".
+   * You'll see a bar on the top that indicates that you're in the preview mode.
+   * For your information: https://nuxtjs.org/docs/2.x/features/live-preview#passing-data-to-enablepreview.
+   * 
+   * Also, no matter the target configuration you're using, if you add '?preview=true'
+   * to any page, you'll fetch a draft version from Crystallize of that resource,
+   * and the peview bar will be shown as well.
+   */
+  target: 'server',
   env: {
-    // Expose CRYSTALLIZE_TENANT_IDENTIFIER to the client side script
+    /**
+     * IMPORTANT: In order to work with env variables, you must map them explicitly
+     * or NuxtJS will not expose them to your code, and in consequence, they will be undefined.
+     * 
+     * For more information: https://nuxtjs.org/docs/2.x/configuration-glossary/configuration-env/
+     */
     CRYSTALLIZE_TENANT_IDENTIFIER: process.env.CRYSTALLIZE_TENANT_IDENTIFIER,
+    SERVICE_API_URL: process.env.SERVICE_API_URL,
+    // Used to generate the hreflang attributes for SEO purposes
+    SITE_URL: process.env.SITE_URL
   },
-  components: true,
+  components: true, // NuxtJS will import automatically yor components
+  server: {
+    port: process.env.PORT // default port is 3000
+  },
   router: {
     async extendRoutes(routes, resolve) {
+      /*
+       * We extend the router to dynamically indicate at build time
+       * what /page-component we want to be rendered for each route.
+       * 
+       * We query all items from the catalogue, and iterate them.
+       * For each result, we get it's /page-component depending on the type.
+       */
       function handleItem({ path, name = "", type, children }) {
-        if (path !== "/index" && !name.startsWith("_")) {
+        const isHomePage = path === "/index"
+        // Assets aer used to create content such as banners and grids
+        const isCrystallizeAssets = name.startsWith("_")
+
+        /*
+         * The home page has its explicit render.
+         * Assets cannot be rendered as a page.
+         * Because of this, we omit these cases.
+         */
+        if (!isHomePage && !isCrystallizeAssets) {
           routes.push({
             name: path,
             path,
-            component: resolve(__dirname, getComponentForPath({ type })),
+            component: resolve(__dirname, getComponentPathForRoute({ type, children })),
           });
         }
         if (children) {
@@ -45,8 +110,8 @@ export default {
         }
       }
 
-      const allCatalogueItems = await getCatalogueItems(
-        locale.crystallizeCatalogueLanguage
+      const allCatalogueItems = await getAllCatalogueItems(
+        defaultLocale.crystallizeCatalogueLanguage
       );
 
       allCatalogueItems.forEach(handleItem);
@@ -83,7 +148,9 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: [
+    { src: '~/plugins/preview.client.js', mode: "client" }
+  ],
   /*
    ** Nuxt.js modules
    */
@@ -93,17 +160,17 @@ export default {
     seo: true,
     lazy: true,
     langDir: "lang/",
-    defaultLocale: locale.locale,
+    defaultLocale: defaultLocale.locale,
     locales: [
       {
-        code: locale.locale,
-        iso: locale.appLanguage,
-        file: `${locale.appLanguage}.js`,
-        ...locale,
+        code: defaultLocale.locale,
+        iso: defaultLocale.appLanguage,
+        file: `${defaultLocale.locale}.js`,
+        ...defaultLocale,
       },
     ],
     vueI18n: {
-      fallbackLocale: locale.locale,
+      fallbackLocale: defaultLocale.locale,
     },
     numberFormats: {
       "en-US": {

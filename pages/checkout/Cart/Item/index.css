@@ -1,0 +1,78 @@
+.cart-item {
+  column-gap: 20px;
+  display: grid;
+  /**
+   * We assume that what is displayed is: MEDIA - INFO - ACTIONS
+   */
+  grid-template-columns: 1fr 2fr 2fr;
+  padding: 15px 0;
+  /**
+   * Required because some elements are placed absolutely to this element.
+   */
+  position: relative;
+}
+
+.cart-item__media >>> img {
+  object-fit: contain;
+  height: 100%;
+  border: none;
+}
+
+.cart-item__info {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+}
+
+.cart-item__name {
+  text-transform: uppercase;
+  line-height: 1.15;
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  color: var(--color-text-sub);
+}
+
+.cart-item__topics {
+  padding: 0;
+  margin-top: 0.25rem;
+  margin-bottom: 0;
+  display: flex;
+}
+
+.cart-item__topics-element {
+  border-radius: 0.2rem;
+  border: 0;
+  color: var(--color-main-background);
+  font-size: var(--font-size-xs);
+  margin-bottom: 0.2rem;
+  margin-right: 0.2rem;
+  padding: 0.15rem 0.35rem;
+  text-transform: capitalize;
+  background: var(--color-text-main);
+  list-style: none;
+  margin-left: 0;
+}
+
+.cart-item__amount {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/**
+ * The price and the quantity are aligned to the right
+ */
+.cart-item__quantity,
+.cart-item__price {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cart-item__quantity {
+  font-size: var(--font-size-xs);
+}
+.cart-item__price {
+  font-size: var(--font-size-m);
+  font-weight: 600;
+}

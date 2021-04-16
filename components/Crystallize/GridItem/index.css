@@ -1,0 +1,14 @@
+a {
+  text-decoration: none;
+  display: block;
+}
+
+@media (min-width: 768px) {
+  a {
+    display: flex;
+  }
+}
+
+.grid-item__inner :hover {
+  text-decoration: none;
+}

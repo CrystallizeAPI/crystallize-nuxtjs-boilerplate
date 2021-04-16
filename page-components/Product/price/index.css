@@ -1,0 +1,71 @@
+.product__price {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.product__price-inner {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.product__price-current {
+  --color: var(--color-text-sub);
+  align-items: center;
+  color: var(--color);
+  display: flex;
+  flex-direction: column;
+  font-size: var(--font-size-xl);
+}
+
+.product__price-discount-details {
+  display: flex;
+  /*
+   * Space from the discount details to the current price;
+   */
+  margin-top: 0.25rem;
+}
+
+.product__price-discount-amount {
+  color: var(--color-text-sub);
+  font-size: 0.8rem;
+  position: relative;
+
+  /*
+   * The css properties below are applied because
+   * the "old price" will be always shown along with
+   * the new price (price with discount applied)
+   */
+  margin-right: 0.75rem;
+}
+
+/*
+ * Styles to cross the price
+ */
+.product__price-discount-amount:after {
+  position: absolute;
+  content: "";
+  top: 50%;
+  bottom: 50%;
+  height: 1px;
+  background-color: var(--color-text-sub);
+  width: 100%;
+  left: 0;
+  right: 0;
+}
+
+.product__price-discount-percentage {
+  color: var(--color-price-discount);
+  font-size: var(--font-size-s);
+  font-weight: 600;
+}
+
+.product__price.product__price--with-discount .product__price-current {
+  --color: var(--color-price-discount);
+}
+
+@media screen and (min-width: 1024px) {
+  .product__price-inner {
+    align-items: flex-start;
+  }
+}

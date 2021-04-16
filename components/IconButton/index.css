@@ -1,0 +1,28 @@
+.icon-button {
+  --size-mobile: 45px;
+  --size-desktop: 50px;
+  align-items: center;
+  background-color: transparent;
+  border-radius: 3px;
+  box-sizing: border-box;
+  display: inline-flex;
+  height: var(--size-mobile);
+  padding: 0.15rem;
+  width: var(--size-mobile);
+}
+
+.icon-button:hover {
+  background-color: var(--color-box-background);
+}
+
+.icon-button img {
+  width: 100%;
+  border: none;
+}
+
+@media screen and (min-width: 768px) {
+  .icon-button {
+    height: var(--size-desktop);
+    width: var(--size-desktop);
+  }
+}

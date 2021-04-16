@@ -1,0 +1,29 @@
+.pagination {
+  --button-size: 50px;
+  display: fleX;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.pagination__button {
+  background: transparent;
+  border: 2px solid #000;
+  color: var(--color-text-main);
+  cursor: pointer;
+  font-size: var(--font-size-s);
+  font-weight: 600;
+  height: var(--button-size);
+  padding: 10px;
+  text-transform: uppercase;
+  width: var(--button-size);
+}
+
+.pagination__button:hover,
+.pagination__button:focus {
+  background-color: var(--color-box-background);
+}
+
+.pagination__button:disabled {
+  opacity: 0;
+  visibility: hidden;
+}

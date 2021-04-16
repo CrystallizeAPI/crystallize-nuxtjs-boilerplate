@@ -1,0 +1,34 @@
+/*
+ * Space between many <Aside> components
+ */
+.document__aside:not(:first-child){
+  margin-top: 3rem;
+}
+
+.document__aside-title {
+  font-size: var(--font-size-m);
+  margin-top: 0;
+}
+
+.document__aside-list {
+  --space-between-grid-elements: 10px;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  row-gap: var(--space-between-grid-elements);
+  grid-template-columns: 1fr;
+}
+
+.document__aside-list-element {
+  list-style: none;
+  padding-bottom: calc(var(--space-between-grid-elements));
+  margin-left: 0;
+  border-bottom: 1px solid var(--color-box-background);
+}
+
+@media screen and (min-width: 1024px) {
+  .document__aside.document__aside--sticky {
+    position: sticky;
+    top: 50px;
+  }
+}

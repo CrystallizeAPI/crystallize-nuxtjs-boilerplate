@@ -1,0 +1,17 @@
+.checkout-page__section {
+  display: flex;
+  flex-direction: column;
+ }
+ 
+ .checkout-page__section + .checkout-page__section {
+  margin-top: var(--padding-l);
+}
+
+.checkout-page__section-title {
+  border-bottom: 1px solid #dfdfdf;
+  font-size: var(--font-size-s);
+  font-weight: 600;
+  margin-top: 0;
+  padding-bottom: var(--padding-xs);
+  text-transform: uppercase;
+}

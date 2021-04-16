@@ -1,0 +1,98 @@
+.nav {
+  --nav-vertical-space-mobile: 7em;
+  
+  background-color: #fafafa;
+  display: flex;
+  height: 100%;
+  left: 0;
+  min-height: 100vh;
+  padding: var(--nav-vertical-space-mobile) 2em;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.nav.nav--open {
+  display: block;
+}
+
+@media screen and (max-width: 1023px) {
+  .nav {
+    display: none;
+    z-index: var(--z-index-topbar);
+  }
+
+  .nav:not(.nav--open) {
+    display: none;
+  }
+
+  .nav--open {
+    display: block;
+  }
+}
+
+.nav__list {  
+  margin-top: 30px;
+  display: inline-block;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav__item {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.nav__item a {
+  color: black;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  padding: 0.5em;
+  transition: all 100ms;
+}
+
+
+@media screen and (min-width: 768px) {
+  .nav__item a {
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .nav {
+    display: flex;
+    top: initial;
+    left: initial;
+    position: relative;
+    background-color: transparent;
+    min-height: auto;
+    padding: 0;
+  }
+
+  /* For large devices we want the navigation to be always shown */
+  .nav,
+  .nav.nav--open,
+  .nav:not(.nav--open) {
+    display: flex;
+  }
+
+  .nav__item {
+    display: inline-block;
+  }
+
+  .nav__item:not(:first-child) {
+    margin-left: 0.5em;
+  }
+
+  .nav__item a {
+    font-size: 1.125em;
+  }
+}
+

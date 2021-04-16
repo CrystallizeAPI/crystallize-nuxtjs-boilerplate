@@ -1,59 +1,107 @@
 <template>
   <FetchLoader :state="$fetchState">
-    <Outer>
-      <div class="top section">
-        <div class="main-info">
-          <h1 class="name">{{ product.name }}</h1>
-          <div class="summary">
-            <CrystallizeItemComponents :components="summary" />
+    <Container>
+      <main class="product-page">
+        <div class="product-page__inner">
+          <div class="product-page__header">
+            <PageHeader
+              class="product-page__header-inner"
+              :title="product.name"
+            >
+              <template v-slot:postHeader>
+                <div class="product-page__summary">
+                  <CrystallizeComponents :components="summary" />
+                </div>
+                <TopicsList
+                  v-if="topics"
+                  :data="topics"
+                  :isUnderlined="false"
+                />
+                <VariantSelector
+                  :selected-variant="selectedVariant"
+                  :variants="product.variants"
+                  @on-change="onSelectedVariantChange"
+                />
+                <div class="product-page__pricing-details">
+                  <Price
+                    v-if="selectedVariant.priceVariants"
+                    :variant="selectedVariant"
+                  />
+                  <BuyButton
+                    :isLoading="isItemBeingAddedToCart"
+                    @click="handleBuyItem"
+                  />
+                </div>
+                <Stock v-if="selectedVariant" :stock="selectedVariant.stock" />
+              </template>
+            </PageHeader>
           </div>
-          <VariantSelector
-            :selected-variant="selectedVariant"
-            :variants="product.variants"
-            @on-change="onSelectedVariantChange"
-          />
 
-          <div v-if="selectedVariant" class="price-wrap">
-            <Price :variant="selectedVariant" />
+          <!--
+          The article component does overwrite styles in order to
+          make the document/article look the same after using
+          CrystallizeComponents
+          -->
+          <div class="product-page__organic-content">
+            <div v-if="images" class="product-page__pre-article-images">
+              <CrystallizeComponentsImages :data="images" />
+            </div>
+            <Article>
+              <div class="product-page__specs">
+                <CrystallizeComponents :components="specs" />
+              </div>
+              <CrystallizeComponents :components="components" />
+            </Article>
           </div>
         </div>
-        <div class="media">
-          <CrystallizeImage :image="image" />
-        </div>
-      </div>
-      <div class="product-secondary-info">
-        <div class="section">
-          <CrystallizeItemComponents :components="components" />
-        </div>
-        <div class="section properties">
-          <CrystallizeItemComponents :components="specs" />
-        </div>
-      </div>
-    </Outer>
+
+        <aside class="product-page__related-content">
+          <Collection
+            v-if="relatedProducts"
+            title="You might also be interested in"
+          >
+            <CrystallizeCatalogueSlider :items="relatedProducts" />
+          </Collection>
+        </aside>
+      </main>
+    </Container>
   </FetchLoader>
 </template>
 
 <script>
 import toText from "@crystallize/content-transformer/toText";
-
-import { simplyFetchFromGraph } from "../../lib/graph";
-import fragments from "../../lib/graph/fragments";
-
-import VariantSelector from "./variant-selector";
+import { getData as getProductData } from "./get-data";
+import VariantSelector from "./VariantSelector/index";
+import Price from "./price/index";
+import BuyButton from "./buy/index";
+import Stock from "./stock/index";
+import {
+  isSumaryComponent,
+  isDescriptionComponent,
+  isSpecsComponent,
+  isRelatedProductsComponent,
+  COMPONENT_NAMES_TO_EXTRACT_FROM_COMPONENTS,
+} from "./utils";
+import { lockScroll } from "/lib/layout";
 
 export default {
   components: {
     VariantSelector,
+    Price,
+    BuyButton,
+    Stock,
   },
   data() {
     return {
       product: {},
       components: [],
-      image: null,
-      description: null,
+      images: null,
       summary: null,
+      topics: null,
       selectedVariant: null,
       specs: null,
+      relatedProducts: null,
+      isItemBeingAddedToCart: false,
     };
   },
   async fetch() {
@@ -62,58 +110,62 @@ export default {
     const locale = locales.find((l) => l.locale === code) || locales[0];
 
     /**
-     * Get EVERYTHING for this product
-     * You probably want to cherry pick the fields in
-     * the query here to improve performance
+     * As default, we get EVERYTHING for this product.
+     * To change the behavior, you can modify:
+     * 1- Modify the ./query.js file
+     * 2- Pass a new query as parameter
      */
-    const response = await simplyFetchFromGraph({
-      query: `
-        query PRODUCT_PAGE($path: String!, $language: String!) {
-          product: catalogue (path: $path, language: $language) {
-            ...item
-            ...product
-          }
-        }
-
-        ${fragments}
-      `,
-      variables: {
-        path: route.path,
-        language: locale.crystallizeCatalogueLanguage,
-      },
+    const { data } = await getProductData({
+      asPath: route.path,
+      language: locale.crystallizeCatalogueLanguage,
+      preview: this.$route.query.preview,
     });
 
-    const { product } = response.data;
-
-    // Get a description for the product
-    const richTextComponent = product?.components?.find(
-      (c) => c.type === "richText"
-    );
-    if (richTextComponent?.content?.json) {
-      // Provide a good meta description for this page
-      this.metaDescription = toText(richTextComponent.content.json);
+    const { product } = data;
+    if (!product) {
+      return;
     }
-    this.description = product?.components?.find((c) => c.id === "description");
-
-    // Get the summary
-    this.summary = product?.components?.filter((c) => c.id === "summary");
-
-    // Get the specs
-    this.specs = product?.components?.filter((c) => c.id === "specs");
-
-    // Get the rest of components to show
-    this.components = product?.components?.filter(
-      (c) => !["specs", "summary"].includes(c.id)
-    );
 
     this.product = product;
+    const { components = [], variants = [], topics } = product;
+    if (components && components.length) {
+      const descriptionComponent = components.find(isDescriptionComponent);
+      if (descriptionComponent?.content?.json) {
+        this.metaDescription = toText(descriptionComponent.content.json);
+      }
 
-    this.selectedVariant = product.variants.find((v) => v.isDefault);
+      this.summary = components.filter(isSumaryComponent);
+      this.topics = topics;
+      this.specs = components.filter(isSpecsComponent);
 
-    this.image = this.selectedVariant.images?.[0];
+      /*
+       * Since we will render all the components on the body,
+       * We want to extract the ones we're rendering explicitly
+       * so we don't have duplicated content
+       */
+      this.components = components.filter(
+        (c) => !COMPONENT_NAMES_TO_EXTRACT_FROM_COMPONENTS.includes(c.name)
+      );
+      this.selectedVariant = variants.find((v) => v.isDefault);
+      this.images = this.selectedVariant.images;
+      this.relatedProducts = components.find(
+        isRelatedProductsComponent
+      )?.content?.items;
+    }
+  },
+  /**
+   * If the path of the product starts with /vouchers it means that is a product
+   * that acts as a voucher. They cannot be added to the cart, and the resulting
+   * render it's almost an empty page. Because of this, we redirect the user
+   * to the home page.
+   */
+  middleware({ redirect, route }) {
+    if (route.path.startsWith("/vouchers")) {
+      redirect("/");
+    }
   },
   head() {
-    if (!this.metaDescription && this.product?.name) {
+    if (!this.metaDescription && this.product.name) {
       console.warn(
         "this.metaDescription is missing for product",
         this.product.name
@@ -121,7 +173,7 @@ export default {
     }
 
     return {
-      title: this.product?.name,
+      title: this.product.name,
       meta: [
         {
           hid: "description",
@@ -134,101 +186,59 @@ export default {
   methods: {
     onSelectedVariantChange(variant) {
       this.selectedVariant = variant;
+      this.images = variant.images;
+    },
+    handleBuyItem() {
+      /*
+       * We indicate that the item is being added to the cart
+       * so we can show a spinner and increase the user experience
+       */
+      this.isItemBeingAddedToCart = true;
+      const { locales, locale: code } = this.$i18n;
+      const locale = locales.find((l) => l.locale === code) || locales[0];
+
+      const { getRelativePriceVariants } = require("/lib/pricing");
+      const variantPricing = getRelativePriceVariants({
+        variant: this.selectedVariant,
+        locale,
+      });
+      const variantDiscountPrice = variantPricing?.discountPrice;
+      const variantDefaultPrice = variantPricing?.defaultPrice;
+
+      this.$store
+        .dispatch("basket/addItem", {
+          sku: this.selectedVariant.sku,
+          path: this.product.path,
+          priceVariantIdentifier: variantDiscountPrice
+            ? variantDiscountPrice.identifier
+            : variantDefaultPrice.identifier || locale.crystallizePriceVariant,
+        })
+        .then(() => {
+          lockScroll();
+
+          const TIME_TO_SHOW_SPINNER = 250;
+          const TIME_TO_ADD_ITEM_TO_CART = 250;
+          /**
+           * We add a delay so the spinner can be visualize for a small period of time.
+           */
+          setTimeout(() => {
+            this.isItemBeingAddedToCart = false;
+            setTimeout(() => {
+              this.$store.dispatch("basket/drawAttentionToItem", {
+                sku: this.selectedVariant.sku,
+              });
+            }, TIME_TO_ADD_ITEM_TO_CART);
+          }, TIME_TO_SHOW_SPINNER);
+        })
+        .catch(() => {
+          /**
+           * If it failed, we make the spinner disappear too.
+           */
+          this.isItemBeingAddedToCart = false;
+        });
     },
   },
 };
 </script>
 
-<style scoped>
-.section {
-  background: var(--color-box-background);
-  padding: 25px;
-}
-
-@media (min-width: 1024px) {
-  .section {
-    padding: 50px;
-  }
-}
-
-.top {
-  display: flex;
-  align-items: center;
-  flex-direction: column-reverse;
-  justify-content: center;
-  margin-bottom: 15px;
-}
-
-@media (min-width: 1024px) {
-  .top {
-    flex-direction: row-reverse;
-  }
-}
-
-.main-info {
-}
-
-@media (min-width: 1024px) {
-  .main-info {
-    flex: 0 0 30%;
-    margin: 0 50px;
-  }
-}
-
-h1.name {
-  font-size: 2rem;
-  font-weight: 900;
-  text-transform: uppercase;
-}
-
-.summary {
-  margin: 0px 0px 0.5em;
-  line-height: 1.8;
-}
-
-.media {
-  flex: 1 1 auto;
-  position: relative;
-}
-
-@media (min-width: 1024px) {
-  .media {
-    padding: 3rem;
-  }
-}
-
-.media >>> img {
-  object-fit: contain;
-  max-height: 50vh;
-  width: 100%;
-  height: 100%;
-}
-
-@media (min-width: 1024px) {
-  .media >>> img {
-    max-height: 80vh;
-  }
-}
-
-.product-secondary-info {
-  display: flex;
-  flex-direction: column-reverse;
-  gap: 15px;
-}
-
-@media (min-width: 1024px) {
-  .product-secondary-info {
-    display: grid;
-    grid-template-columns: auto 500px;
-    grid-gap: 15px;
-  }
-}
-
-.price-wrap {
-  padding-top: 45px;
-  border-top: 1px solid rgb(206, 206, 206);
-  color: var(--color-text-sub);
-  font-size: 30px;
-  margin: 20px 20px 20px 0px;
-}
-</style>
+<style scoped src='./index.css'></style>

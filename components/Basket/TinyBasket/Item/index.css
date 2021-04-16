@@ -1,0 +1,128 @@
+.tiny-basket-item {
+  column-gap: 10px;
+  display: grid;
+  /**
+   * We assume that what is displayed is: MEDIA - INFO - ACTIONS
+   */
+  grid-template-columns: 1fr 2fr 0.5fr;
+  padding: 15px 0;
+  /**
+   * Required because some elements are placed absolutely to this element.
+   */
+  position: relative;
+}
+
+.tiny-basket-item.tiny-basket-item--recently-added {
+  animation: drawAttentionToItem 400ms 1;
+}
+
+.tiny-basket-item:hover .tiny-basket-item__quantity-modifier.tiny-basket-item__quantity-modifier--remove {
+  display: block;
+}
+
+.tiny-basket-item__media >>> img {
+  object-fit: contain;
+  height: 100%;
+  border: none;
+}
+
+.tiny-basket-item__info {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+}
+
+.tiny-basket-item__name {
+  text-transform: uppercase;
+  line-height: 1.15;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--color-text-sub);
+}
+
+.tiny-basket-item__topics {
+  padding: 0;
+  margin-top: 0.25rem;
+  margin-bottom: 0;
+  display: flex;
+}
+
+.tiny-basket-item__topics-element {
+  border-radius: 0.2rem;
+  border: 0;
+  color: var(--color-main-background);
+  font-size: var(--font-size-xs);
+  margin-bottom: 0.2rem;
+  margin-right: 0.2rem;
+  padding: 0.25rem 0.5rem;
+  text-transform: capitalize;
+  background: var(--color-text-main);
+  list-style: none;
+  margin-left: 0;
+}
+
+.tiny-basket-item__price {
+  margin-top: 5px;
+  font-size: var(--font-size-xs);
+}
+
+/*
+ * Actions that modify the Basket Item
+ */
+.tiny-basket-item__actions {
+  --distance-between-actions: 3px;
+  margin-top: 5px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.tiny-basket-item__quantity-modifier {
+  padding: 5px 0;
+  margin: 0;
+  display: inline-flex;
+  justify-content: center;
+}
+
+.tiny-basket-item__quantity {
+  text-align: center;
+  margin-top: var(--distance-between-actions);
+  margin-bottom: var(--distance-between-actions);
+}
+
+.tiny-basket-item__quantity-modifier.tiny-basket-item__quantity-modifier--remove {
+  position: absolute;
+  top: 0;
+  /**
+   * 11px is a magic number that makes the "remove item" button look aligned
+   * visually with the other actions.
+   */
+  right: 11px;
+  /*
+   * Visibility: hidden makes the element not be rendered in the accessibility tree.
+   */
+   display: none;
+}
+
+/**
+ * Animation for new basket items (recently added)
+ */
+ @keyframes drawAttentionToItem {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(0.95);
+  }
+  50% {
+    transform: scale(0.97);
+  }
+  75% {
+    transform: scale(0.93);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

@@ -1,0 +1,31 @@
+.search-page {
+  min-height: 100vh;
+}
+
+.search-page__actions {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.search-page__counter {
+  color: #000;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+@media screen and (min-width: 768px) {
+  /*
+   * We force the element to be position absolute,
+   * so for resolutions wider than 768px when the facets
+   * are shown, they can fill up 100% of the viewport
+   */
+  .search-page__actions-right {
+    position: absolute;
+    right: 0;
+    top: 15px;
+  }
+}

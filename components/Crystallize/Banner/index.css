@@ -1,0 +1,204 @@
+.banner {
+  position: relative;
+  border: 1px solid var(--color-box-background);
+  margin-top: 15px;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+}
+
+/* For small resolutions -> vertical (child1 / child2)
+ * They are displayed one above the other one.
+ *
+ * For Tablet and wider resolutions -> horizontal (child1 - child2)
+ * They are displayed one next to each other with a gap between them.
+ */
+.banner__content,
+.banner__media {
+  padding: 2em;
+}
+
+.banner__content {
+  align-items: center;
+  color: var(--font-color-main);
+  display: flex;
+  height: 100%;
+}
+
+.banner__title {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  margin-bottom: 15px;
+  margin-top: 0;
+}
+
+.banner__description >>> p {
+  margin: 0;
+}
+
+.banner__description >>> p,
+.banner__description >>> li {
+  color: var(--color-text-main);
+  font-size: var(--font-size-m);
+  line-height: 1.8;
+  max-width: var(--font-max-width);
+}
+
+.banner__description >>> li {
+  margin-top: 10px;
+}
+
+.banner__cta {
+  background: #000;
+  border-radius: 4px;
+  color: #fff;
+  display: inline-block;
+  font-size: var(--font-size-s);
+  font-weight: 600;
+  margin-top: 15px;
+  padding: 10px 15px;
+}
+
+.banner__media {
+  margin-bottom: 0;
+  height: 100%;
+}
+
+.banner__media >>> img {
+  object-fit: cover;
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .banner {
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    overflow: hidden;
+  }
+
+  .banner__content {
+    max-width: var(--font-max-width);
+    padding: 5em var(--padding-m);
+    flex-direction: row;
+    margin-right: 30px;
+  }
+
+  .banner__media {
+    margin-bottom: 0;
+    max-width: 50%;
+    padding: 0;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .banner__content {
+    padding-left: var(--padding-l);
+    padding-right: var(--padding-l);
+  }
+
+  .banner__media {
+    max-width: 60%;
+  }
+}
+
+/*
+ * Styled for a Banner with the text as overlay
+ * on top of the image.
+ */
+.banner.banner--withOverlay {
+  display: block;
+  padding: 0;
+  position: relative;
+}
+
+.banner.banner--withOverlay .banner__media >>> img {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.banner.banner--withOverlay .banner__content {
+  padding: 1.5em;
+  min-height: 350px;
+  align-items: center;
+  color: var(--font-color-main);
+  display: flex;
+  height: 100%;
+}
+
+/*
+ * All the text must be white
+ */
+.banner.banner--withOverlay .banner__content >>> p,
+.banner.banner--withOverlay .banner__content >>> li,
+.banner.banner--withOverlay .banner__content >>> h1,
+.banner.banner--withOverlay .banner__content >>> h2,
+.banner.banner--withOverlay .banner__content >>> h3,
+.banner.banner--withOverlay .banner__content >>> h4,
+.banner.banner--withOverlay .banner__content >>> h5,
+.banner.banner--withOverlay .banner__content >>> h6 {
+  color: #fff;
+}
+
+.banner.banner--withOverlay .banner__cta {
+  color: #000;
+  background: #fff;
+}
+
+.banner.banner--withOverlay .banner__media {
+  bottom: 0;
+  content: '';
+  left: 0;
+  padding: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -1;
+  max-width: 100%;
+}
+
+.banner.banner--withOverlay .banner__media:after {
+  background: linear-gradient(
+    -90deg,
+    rgba(8, 7, 8, 0) 0%,
+    rgba(8, 7, 8, 0.6) 100%
+  );
+  bottom: 0;
+  content: '';
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.banner.banner--withOverlay .banner__media >>> img {
+  position: relative;
+  height: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .banner.banner--withOverlay .banner__content {
+    max-width: var(--font-max-width);
+    padding: 0 5em;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .banner.banner--withOverlay .banner__content {
+    min-height: 600px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .banner.banner--withOverlay .banner__content {
+    min-height: 700px;
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  .banner.banner--withOverlay .banner__content {
+    min-height: 800px;
+  }
+}

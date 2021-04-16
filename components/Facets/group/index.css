@@ -1,0 +1,29 @@
+.facet-group__header {
+  color: #000;
+  display: flex;
+  font-size: var(--font-size-s);
+  font-weight: 600;
+  justify-content: space-between;
+  margin: 0 0 15px;
+  min-height: 15px;
+  text-transform: capitalize;
+}
+
+.facet-group__title {
+  margin-right: 15px;
+}
+
+/*
+ * Reset button
+ */
+.facet-group:hover >>> button {
+  visibility: visible;
+  opacity: 1;
+}
+
+@media screen and (min-width: 768px) {
+  .facet-group {
+    padding: 2.5rem 2rem;
+    border: 1px solid var(--color-box-background);
+  }
+}

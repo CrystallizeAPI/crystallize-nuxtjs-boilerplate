@@ -1,0 +1,21 @@
+.topics-list {
+  --space-vertical-between-elements: 5px;
+  --space-horizontal-between-elements: 5px;
+  
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.topics-list__element {
+  list-style: none;
+  margin-bottom: var(--space-vertical-between-elements);
+  margin-left: 0;
+  margin-right: var(--space-horizontal-between-elements);
+  padding: 0;
+}
+
+.topics-list.topics-list--is-underlined {
+  --space-vertical-between-elements: 10px;
+  --space-horizontal-between-elements: 20px;
+}

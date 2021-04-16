@@ -1,0 +1,27 @@
+.page-header {
+  --distance-to-next-element: 100px;
+  margin-bottom: var(--distance-to-next-element);
+  position: relative;
+}
+
+.page-header__title {
+  font-size: var(--font-size-xl);
+  color: var(--color-text-main);
+  max-width: var(--font-max-width);
+  margin-bottom: 15px;
+}
+
+.page-header__description {
+  color: var(--color-text-main);
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 36px;
+  margin-top: 10px;
+  max-width: var(--font-max-width);
+}
+
+/* Overwrite styles for p from global.css */
+.page-header__description >>> p {
+  margin-bottom: 1em;
+}

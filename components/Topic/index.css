@@ -1,0 +1,98 @@
+.topic {
+  background-color: white;
+  border-radius: 2px;
+  color: var(--color-text-main);
+  display: inline-block;
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  padding: 6px 8px;
+}
+
+.topic.topic--outlet:not(.topic--is-underlined) {
+  background-color: #ECEAE5;
+  color: #7D7D7C;
+}
+
+.topic.topic--organic:not(.topic--is-underlined) {
+  background-color: #DAF5CB;
+  color: #3F4A38;
+}
+
+.topic.topic--eco-friendly:not(.topic--is-underlined) {
+  background-color: #D0F0EC;
+  color: #4A5554;
+}
+
+.topic.topic--new-arrival:not(.topic--is-underlined) {
+  background-color: #F2BBAD;
+  color: #6D5752;
+}
+
+.topic.topic--livingroom:not(.topic--is-underlined) {
+  background-color: #DCD7EA;
+  color: #63606C;
+}
+
+.topic.topic--bathroom:not(.topic--is-underlined) {
+  background-color: #E2B6C4;
+  color: #7B656C;
+}
+
+.topic.topic--bedroom:not(.topic--is-underlined) {
+  background-color: #FDFAD9;
+  color: #928F79;
+}
+
+.topic.topic--outdoor:not(.topic--is-underlined) {
+  background-color: #C5B3AA;
+  color: #5F524C;
+}
+
+.topic.topic--kitchen:not(.topic--is-underlined) {
+  background-color: #CBCBCD;
+  color: #737373;
+}
+
+.topic.topic--is-underlined {
+  padding: 6px 0;
+  font-size: var(--font-size-s);
+  border-bottom-width: 3px;
+  border-bottom-style: solid;
+  background-color: white;
+}
+
+.topic.topic--is-underlined.topic--outlet {
+  border-bottom-color: #ECEAE5;
+}
+
+.topic.topic--is-underlined.topic--organic {
+  border-bottom-color: #DAF5CB;
+}
+
+.topic.topic--is-underlined.topic--eco-friendly {
+  border-bottom-color: #D0F0EC;
+}
+
+.topic.topic--is-underlined.topic--new-arrival {
+  border-bottom-color: #F2BBAD;
+}
+
+.topic.topic--is-underlined.topic--livingroom {
+  border-bottom-color: #DCD7EA;
+}
+
+.topic.topic--is-underlined.topic--bathroom {
+  border-bottom-color: #E2B6C4;
+}
+
+.topic.topic--is-underlined.topic--bedroom {
+  border-bottom-color: #FDFAD9;
+}
+
+.topic.topic--is-underlined.topic--outdoor {
+  border-bottom-color: #C5B3AA;
+}
+
+.topic.topic--is-underlined.topic--kitchen {
+  border-bottom-color: #CBCBCD;
+}

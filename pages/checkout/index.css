@@ -1,0 +1,23 @@
+.checkout-page__inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 1rem;
+}
+
+/**
+ * We display the items in column format and separate them, so the payment
+ * summary is displayed at the bottom of the cart.
+ */
+ .checkout-page__basket {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  justify-content: space-between;
+  overflow-y: auto;
+}
+
+@media screen and (min-width: 768px) {
+  .checkout-page__inner {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

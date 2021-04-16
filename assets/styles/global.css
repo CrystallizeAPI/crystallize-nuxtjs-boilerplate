@@ -1,21 +1,90 @@
 :root {
+  --font-family-main: "Trebuchet MS", sans-serif;
+
+  /*
+   * Color palette
+   */
   --content-padding: 50px;
   --color-main-background: #fff;
-  --color-text-main: #000;
+  --color-text-main: #080708;
   --color-text-sub: #4c505b;
   --color-box-background: #efefef;
-  --color-price: #d79b59;
+  --color-price: var(--color-text-main);
+  --color-price-discount:#EE6969;
   --color-error: #ef4836;
   --main-bg-color: brown;
-  --max-width: 1600px;
-  --padding-lg: 100px;
-  --padding-md: 75px;
-  --padding-sm: 50px;
-  --padding-xs: 25px;
+
+  /* --color-blockquote: var(--color-text-main); */
+
+  /* --color-primary-action-lightest: #83462a; */
+  /* --color-primary-action-light: #83462a; */
+  --color-primary-action: #FBDCCE;
+  --color-primary-action-dark: #fdd4c2;
+  --color-primary-action-darkest: #462314;
+
+  /*
+   * Font-size
+   */
+  --font-size-xxl: 40px;
+  --font-size-xl: 32px;
+  --font-size-l: 26px;
+  --font-size-m: 20px;
+  --font-size-s: 16px;
+  --font-size-xs: 14px;
+  --font-max-width: 800px;
+
+  /*
+   * Container maximum width
+   */
+  --viewport-content-max-width: 1600px;
+  --viewport-context-extended-max-width: 1800px;
+  
+  /*
+  * Custom Properties to keep in sync and horizontally aligned
+  * all the components in the same viewport
+  */
+  --padding-xxl: 100px;
+  --padding-xl: 75px;
+  --padding-l: 50px;
+  --padding-m: 35px;
+  --padding-xs: 20px;
+  --viewport-xs-lateral-space: var(--padding-xs);
+  --viewport-sm-lateral-space: var(--padding-l);
+  --viewport-md-lateral-space: var(--padding-xxl);
+
+  /*
+   * Grid images
+   */
+  --grid-images-columns-count: 2;
+  
+  /*
+   * Z-index overview
+   */
+   --z-index-topbar: 80;
+   --z-index-search: 90;
+   --z-index-logo: 85;
+   --z-index-burger-button: 85;
+   
+  
+  /* 
+   * The var() function can not be used as property names,
+   * selectors, or anything else besides property values.
+   *
+   * This values are only for documentation purposes.
+   */
   --screen-lg: 1600px;
   --screen-md: 1280px;
   --screen-sm: 1024px;
   --screen-xs: 767px;
+
+  /*
+   * Product listformat
+   */
+  --listformat-product-height-xl: 500px;
+  --listformat-product-height-lg: 580px;
+  --listformat-product-height-md: 500px;
+  --listformat-product-height-sm: 600px;
+  --listformat-product-height-xs: 400px;
 }
 
 html {
@@ -24,12 +93,12 @@ html {
 }
 
 body {
-  margin: 0;
-  font: 16px/1 roboto, sans-serif;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   background: var(--color-main-background);
   color: var(--color-text-sub);
+  font: 14px/1 Helvetica, Arial, Verdana, sans-serif;
+  margin: 0;
 }
 
 *,
@@ -45,7 +114,6 @@ h3,
 h4,
 p,
 blockquote,
-figure,
 ol,
 ul {
   margin: 0 0 2em;
@@ -62,6 +130,9 @@ h4 {
 }
 strong {
   font-weight: bold;
+}
+tr {
+  display: block;
 }
 a,
 button {
@@ -110,10 +181,11 @@ button {
 ::placeholder {
   color: var(--color-text-sub);
 }
+
 img {
   max-width: 100%;
   height: auto;
-  border: 0;
+  border: 1px solid var(--color-box-background);
 }
 
 h1 {
@@ -121,7 +193,6 @@ h1 {
   font-size: 3rem;
   font-family: "Roboto Slab", sans-serif;
   color: var(--color-text-main);
-  text-transform: uppercase;
 }
 
 .h2 {

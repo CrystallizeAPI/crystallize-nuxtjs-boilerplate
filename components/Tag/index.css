@@ -1,0 +1,12 @@
+.tag {
+  background-color: var(--color-primary-action);
+  color: var(--color-primary-action-darkest);
+  font-weight: 600;
+  padding: 0.75em 1em;
+  font-size: var(--font-size-s);
+}
+
+.tag:hover {
+  --background-color: var(--color-primary-action-dark);
+  text-decoration: underline;
+}

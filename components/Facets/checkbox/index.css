@@ -1,0 +1,22 @@
+.facet-checkbox {
+  padding: 4px 0;
+}
+
+.facet-checkbox__label {
+  display: flex;
+  align-items: center;
+  font-size: var(--font-size-s);
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--color-text-sub);
+}
+
+.facet-checkbox__checkbox {
+  margin-right: 5px;
+  border-radius: 0;
+}
+
+.facet-checkbox__counter {
+  font-weight: 600;
+  margin-left: 0.5rem;
+}

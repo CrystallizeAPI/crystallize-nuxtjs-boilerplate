@@ -1,0 +1,9 @@
+.cart__list,
+.cart__item {
+  margin: 0;
+  padding: 0;
+}
+
+.cart__item {
+  list-style: none;
+}

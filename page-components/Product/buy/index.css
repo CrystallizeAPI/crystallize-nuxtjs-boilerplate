@@ -1,0 +1,19 @@
+.product-page__buy {
+  width: 250px;
+  flex: 1 1 auto;
+  font-size: var(--font-size-s);
+  background: var(--color-primary-action);
+  color: var(--color-primary-action-darkest);
+  font-weight: 600;
+  text-decoration: none;
+  text-align: center;
+  padding: 16px 25px;
+  position: relative;
+  border-radius: 4px;
+}
+
+@media screen and (min-width: 1024px) {
+  .product-page__buy {
+    flex-grow: 0;
+  }
+}

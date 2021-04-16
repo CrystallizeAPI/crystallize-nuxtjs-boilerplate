@@ -1,0 +1,27 @@
+.collection__title {
+  font-size: var(--font-size-xl);
+  margin-bottom: 15px;
+}
+
+.collection__description {
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 36px;
+  margin-top: 10px;
+}
+
+.collection__title,
+.collection__description {
+  color: var(--color-text-main);
+  max-width: var(--font-max-width);
+}
+
+/* Overwrite styles for p from global.css */
+.collection__description >>> p {
+  margin-bottom: 0;
+}
+
+.collection__content {
+  margin-top: 2.5rem;
+}

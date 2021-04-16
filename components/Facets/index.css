@@ -1,0 +1,78 @@
+.facets {
+  width: 100%;
+}
+
+/*
+ * Displays the different facets in the viewport
+ */
+.facets__displayer {
+  display: none;
+}
+
+.facets__displayer.facets__displayer--is-open {
+  display: block;
+}
+
+/*
+ * Button shown only on small resolutions
+ * that closes the facets full screen modal
+ */
+.facets__displayer-close {
+  bottom: 15px;
+  display: block;
+  position: fixed;
+  right: 15px;
+  z-index: 1;
+}
+
+.facets__displayer-close-button {
+  font-size: var(--font-size-s);
+}
+
+.facets__attribute-displayer {
+  display: grid;
+  grid-gap: 0.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+@media screen and (max-width: 1023px) {
+  .facets__displayer {
+    background: #fff;
+    bottom: 0;
+    height: calc(var(--vh) * 100);
+    left: 0;
+    overflow-y: auto;
+    padding: 50px 15px 85px;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+  }
+
+  .facets__displayer > *:not(:first-child):not(.facets__displayer-close) {
+    margin-top: 2rem;
+    border-top: 1px solid var(--color-box-background);
+    padding-top: 30px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .facets__displayer {
+    display: none;
+    margin-top: 15px;
+   }
+
+  .facets__displayer.facets__displayer--is-open {
+    display: grid;
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+    padding: 0;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(2,1fr);
+  }
+
+  .facets__displayer-close {
+    display: none;
+  }
+}

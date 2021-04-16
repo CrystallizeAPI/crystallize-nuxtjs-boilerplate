@@ -1,0 +1,53 @@
+.layout-with-aside-view {
+  --aside-width: 300px;
+}
+
+
+.layout-with-aside-view__overlay {
+  height: 100vh;
+  left: calc(var(--aside-width) * -1);
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 3;
+}
+
+.layout-with-aside-view__aside {
+  height: 100vh;
+  overflow-y: auto;
+  position: fixed;
+  /*
+   * We "push" the aside to the right off the screen so we can slide it in
+   *
+   * To create a negative number from a custom property,
+   * we need to use `calc()` and multiply it by "-1".
+   */
+  right: calc(var(--aside-width) * -1);
+  top: 0;
+  width: var(--aside-width);
+  will-change: right;
+  z-index: 1;
+  transition: right 300ms cubic-bezier(0.41,0.03,0,0.96);
+}
+
+.layout-with-aside-view__content {
+  position: relative;
+  z-index: 2;
+  will-change: left;
+  transition: left 300ms cubic-bezier(0.41,0.03,0,0.96);
+}
+
+.layout-with-aside-view.layout-with-aside-view--is-expanded {
+  border: none;
+}
+
+.layout-with-aside-view.layout-with-aside-view--is-expanded .layout-with-aside-view__aside {
+  /*
+   * We make it appear from the right
+   */
+  right: 0;
+}
+
+.layout-with-aside-view.layout-with-aside-view--is-expanded .layout-with-aside-view__content {
+  left: calc(var(--aside-width) * -1);
+}

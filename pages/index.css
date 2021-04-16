@@ -1,0 +1,19 @@
+.home-page {
+  --lateral-padding: var(--viewport-xs-lateral-space);
+  margin: 0 auto;
+  padding-left: var(--lateral-padding);
+  padding-right: var(--lateral-padding);
+}
+
+@media screen and (min-width: 768px) {
+  .home-page {
+    --lateral-padding: var(--viewport-sm-lateral-space);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .home-page {
+    --lateral-padding: var(--viewport-md-lateral-space);
+    max-width: var(--viewport-context-extended-max-width);
+  }
+}
