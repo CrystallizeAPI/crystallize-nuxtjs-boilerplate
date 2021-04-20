@@ -42,7 +42,7 @@
 <script>
 import AuthenticationProvider from "../providers/Authentication";
 import BasketProvider from "../providers/Basket";
-import { simplyFetchFromGraph } from "../lib/graph";
+import { simplyFetchFromGraph } from "/lib/graph";
 import TinyBasket from "../components/Basket/TinyBasket";
 
 export default {

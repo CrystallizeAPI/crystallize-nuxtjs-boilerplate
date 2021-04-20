@@ -1,4 +1,4 @@
-import { serviceApi } from '../lib/service-api'
+import { serviceApi } from '/lib/service-api'
 
 /**
  * Specify where the user should land after logging out

@@ -1,5 +1,5 @@
 import { QUERY_FOLDER } from './query'
-import { simplyFetchFromGraph } from "../../lib/graph";
+import { simplyFetchFromGraph } from "/lib/graph";
 
 export async function getData({
   query = QUERY_FOLDER,

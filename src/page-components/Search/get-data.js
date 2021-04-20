@@ -1,4 +1,4 @@
-import { simplyFetchFromSearchGraph, simplyFetchFromGraph } from "../../lib/graph";
+import { simplyFetchFromSearchGraph, simplyFetchFromGraph } from "/lib/graph";
 import { CATALOGUE_SEARCH_QUERY } from '/lib/search';
 import { SEARCH_PAGE_QUERY } from './query'
 

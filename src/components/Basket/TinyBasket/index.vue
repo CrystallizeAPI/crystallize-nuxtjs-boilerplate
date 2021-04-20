@@ -42,7 +42,7 @@ import BasketItem from "./Item";
 import Totals from "../../Totals";
 import { formatCurrency } from "/lib/pricing";
 import { unlockScroll } from "/lib/layout";
-import { BASKET_STATUS } from "/store/basket/state";
+import { BASKET_STATUS } from "../../../store/basket/state";
 
 export default {
   components: { BasketItem, Totals },

@@ -42,7 +42,7 @@
 <script>
 import toText from "@crystallize/content-transformer/toText";
 import { getData as getSearchData } from "./get-data";
-import { urlToSpec } from "../../lib/search";
+import { urlToSpec } from "/lib/search";
 import { getSearchTitle, cleanFilterForTotalAggregations } from "./utils";
 import { orderByOptions } from "/lib/search";
 import { PAGINATION_DIRECTION } from "../../components/Pagination/utils";

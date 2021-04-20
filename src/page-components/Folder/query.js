@@ -1,4 +1,4 @@
-import fragments from "../../lib/graph/fragments";
+import fragments from "/lib/graph/fragments";
 
 export const QUERY_FOLDER = `
   query FOLDER_PAGE($path: String!, $language: String!) {

@@ -1,4 +1,4 @@
-import { simplyFetchFromGraph } from "../../lib/graph";
+import { simplyFetchFromGraph } from "/lib/graph";
 import { QUERY_PRODUCT } from "./query";
 
 export async function getData({

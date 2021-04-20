@@ -2,16 +2,16 @@ import { getAllCatalogueItems } from "./lib/graph";
 
 const RENDERS = {
   product: {
-    path: 'page-components/Product/index.vue'
+    path: 'src/page-components/Product/index.vue'
   },
   folder: {
-    path: 'page-components/Folder/index.vue'
+    path: 'src/page-components/Folder/index.vue'
   },
   document: {
-    path: 'page-components/Document/index.vue'
+    path: 'src/page-components/Document/index.vue'
   },
   search: {
-    path: 'page-components/Search/index.vue'
+    path: 'src/page-components/Search/index.vue'
   },
 }
 
@@ -75,6 +75,7 @@ export default {
     // Used to generate the hreflang attributes for SEO purposes
     SITE_URL: process.env.SITE_URL
   },
+  srcDir: "src/",
   components: true, // NuxtJS will import automatically yor components
   server: {
     port: process.env.PORT // default port is 3000

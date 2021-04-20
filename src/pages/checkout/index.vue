@@ -23,7 +23,7 @@ import Box from "./Box";
 import Payment from "./Payment";
 import Cart from "./Cart";
 import Totals from "../../components/Totals";
-import { BASKET_STATUS } from "/store/basket/state";
+import { BASKET_STATUS } from "../../store/basket/state";
 
 export default {
   components: { Section, Box, Payment, Cart, Totals },

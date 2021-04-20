@@ -12,7 +12,7 @@
 <script>
 import TotalInfo from "./TotalInfo";
 import { formatCurrency } from "/lib/pricing";
-import { BASKET_STATUS } from "/store/basket/state";
+import { BASKET_STATUS } from "../../store/basket/state";
 
 export default {
   components: { TotalInfo },
