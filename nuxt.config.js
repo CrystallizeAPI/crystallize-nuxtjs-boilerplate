@@ -160,7 +160,7 @@ export default {
   i18n: {
     seo: true,
     lazy: true,
-    langDir: "lang/",
+    langDir: "locales/",
     defaultLocale: defaultLocale.locale,
     locales: [
       {
